@@ -1,0 +1,110 @@
+.main {
+  min-height: 100vh;
+  background: var(--color-canvas);
+  padding-top: 100px;
+  transition: background-color var(--transition);
+}
+
+/* Page header */
+.pageHeader {
+  padding: 48px 0 56px;
+  text-align: center;
+}
+
+.breadcrumb {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  color: var(--color-slate);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.breadcrumb::before {
+  content: '•';
+  color: var(--color-orange-light);
+  font-size: 10px;
+}
+
+.pageTitle {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 500;
+  letter-spacing: -1.28px;
+  color: var(--color-ink);
+  margin-bottom: 16px;
+}
+
+.pageSubtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-slate);
+  max-width: 440px;
+  margin: 0 auto 32px;
+}
+
+/* Filter row */
+.filterRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 18px;
+  background: var(--color-card);
+  border: 1.5px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-slate);
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filterBtn:hover {
+  border-color: var(--color-slate);
+  color: var(--color-ink);
+}
+
+/* Active filter pill */
+.filterActive {
+  background: var(--btn-primary-bg) !important;
+  color: var(--btn-primary-text) !important;
+  border-color: var(--btn-primary-bg) !important;
+}
+
+/* Events grid */
+.eventsSection {
+  padding: 0 0 96px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(3,1fr); } }
+
+.empty {
+  text-align: center;
+  color: var(--color-dust);
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 16px;
+  padding: 64px 0;
+}

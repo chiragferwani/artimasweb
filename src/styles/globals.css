@@ -1,0 +1,415 @@
+/* ============================================================
+   ARTIMAS 26-27 — Dynamic Theme Design System
+   Full Light / Dark Mode Toggle with CSS Variables
+   ============================================================ */
+
+:root {
+  --font: 'Sofia Sans', 'Arial', sans-serif;
+
+  /* Border Radius Scale */
+  --r-sm:   4px;
+  --r-btn:  20px;
+  --r-consent: 24px;
+  --r-hero: 40px;
+  --r-full: 999px;
+  --r-circle: 50%;
+
+  /* Spacing */
+  --space-4:   4px;
+  --space-8:   8px;
+  --space-16:  16px;
+  --space-24:  24px;
+  --space-32:  32px;
+  --space-48:  48px;
+  --space-64:  64px;
+  --space-96:  96px;
+  --space-128: 128px;
+
+  /* Transitions */
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Dark Mode Tokens (Default) ──────────────────────────── */
+:root,
+:root[data-theme="dark"] {
+  /* Surfaces */
+  --color-canvas:   #0A090F; /* deep obsidian dark page canvas */
+  --color-lifted:   #13111C; /* raised section background */
+  --color-card:     #1B1827; /* dark card surface */
+  --color-bone:     #242033; /* accent container background */
+  --color-stadium:  #14121C; /* stadium frame background */
+
+  /* Text & Ink */
+  --color-ink:      #F3F0EE; /* warm off-white primary text */
+  --color-charcoal: #E2DFDA;
+  --color-slate:    #9E9A94; /* muted secondary text */
+  --color-granite:  #B8B4AE;
+  --color-dust:     #524E48; /* whisper / label text */
+
+  /* Accent */
+  --color-orange:        #FF5500;
+  --color-orange-light:  #FF7733;
+  --color-clay:          #D95A1E;
+
+  /* Borders */
+  --color-border:        rgba(255, 255, 255, 0.12);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Button Tokens */
+  --btn-primary-bg:    #F3F0EE;
+  --btn-primary-text:  #0A090F;
+  --btn-primary-hover: #FFFFFF;
+  
+  --btn-secondary-bg:    rgba(255, 255, 255, 0.08);
+  --btn-secondary-text:  #F3F0EE;
+  --btn-secondary-border:rgba(255, 255, 255, 0.18);
+  --btn-secondary-hover: rgba(255, 255, 255, 0.16);
+
+  /* Yuga accents */
+  --satya-primary:  #F5D76E;
+  --treta-primary:  #62C462;
+  --dvapara-primary:#7B9EE8;
+  --kali-primary:   #EE5252;
+
+  /* Shadows */
+  --shadow-nav:    rgba(0,0,0,0.5) 0px 8px 32px 0px;
+  --shadow-card:   rgba(0,0,0,0.4) 0px 20px 48px 0px;
+  --shadow-feature:rgba(0,0,0,0.6) 0px 40px 80px 0px;
+
+  /* Nav specifics */
+  --nav-bg:        rgba(22, 19, 32, 0.85);
+  --nav-border:    rgba(255, 255, 255, 0.12);
+  --nav-cta-bg:    #F3F0EE;
+  --nav-cta-text:  #0A090F;
+
+  /* Footer specifics */
+  --footer-bg:     #050409;
+  --ghost-color:   rgba(255, 255, 255, 0.03);
+}
+
+/* ── Light Mode Tokens ───────────────────────────────────── */
+:root[data-theme="light"] {
+  /* Surfaces */
+  --color-canvas:   #F3F0EE; /* warm putty cream page canvas */
+  --color-lifted:   #FCFBFA; /* lifted cream */
+  --color-card:     #FFFFFF; /* white card surface */
+  --color-bone:     #F4F4F4; /* cool-gray background */
+  --color-stadium:  #141413; /* stadium frame stays deep warm-black */
+
+  /* Text & Ink */
+  --color-ink:      #141413; /* warm near-black primary text */
+  --color-charcoal: #262627;
+  --color-slate:    #696969; /* slate gray secondary text */
+  --color-granite:  #555555;
+  --color-dust:     #A09C96; /* dust taupe text */
+
+  /* Accent */
+  --color-orange:        #CF4500;
+  --color-orange-light:  #F37338;
+  --color-clay:          #9A3A0A;
+
+  /* Borders */
+  --color-border:        rgba(20, 20, 19, 0.12);
+  --color-border-subtle: rgba(20, 20, 19, 0.06);
+
+  /* Button Tokens */
+  --btn-primary-bg:    #141413;
+  --btn-primary-text:  #F3F0EE;
+  --btn-primary-hover: #262627;
+  
+  --btn-secondary-bg:    #FFFFFF;
+  --btn-secondary-text:  #141413;
+  --btn-secondary-border:#141413;
+  --btn-secondary-hover: #F3F0EE;
+
+  /* Yuga accents */
+  --satya-primary:  #9A7A10;
+  --treta-primary:  #2E6B2E;
+  --dvapara-primary:#2B4A8C;
+  --kali-primary:   #8B2020;
+
+  /* Shadows */
+  --shadow-nav:    rgba(0,0,0,0.04) 0px 4px 24px 0px;
+  --shadow-card:   rgba(0,0,0,0.08) 0px 24px 48px 0px;
+  --shadow-feature:rgba(0,0,0,0.25) 0px 70px 110px 0px;
+
+  /* Nav specifics */
+  --nav-bg:        #FFFFFF;
+  --nav-border:    rgba(20, 20, 19, 0.08);
+  --nav-cta-bg:    #141413;
+  --nav-cta-text:  #F3F0EE;
+
+  /* Footer specifics */
+  --footer-bg:     #141413;
+  --ghost-color:   #E8E2DA;
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 450;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  line-height: 1.4;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-canvas); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-dust);
+  border-radius: var(--r-full);
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+h1 {
+  font-family: var(--font);
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 64px;
+  letter-spacing: -1.28px;
+  color: var(--color-ink);
+}
+
+h2 {
+  font-family: var(--font);
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 44px;
+  letter-spacing: -0.72px;
+  color: var(--color-ink);
+}
+
+h3 {
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28.8px;
+  letter-spacing: -0.48px;
+  color: var(--color-ink);
+}
+
+h4 {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18.2px;
+  color: var(--color-ink);
+}
+
+p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22.4px;
+  color: var(--color-ink);
+}
+
+/* ── Selection ───────────────────────────────────────────── */
+::selection {
+  background: rgba(255, 85, 0, 0.3);
+  color: #FFFFFF;
+}
+
+/* ── Links ───────────────────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ── Container ───────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 1023px) { .container { padding: 0 32px; } }
+@media (max-width: 767px)  { .container { padding: 0 24px; } }
+
+/* ── Eyebrow label ───────────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  color: var(--color-slate);
+}
+
+.eyebrow::before {
+  content: '•';
+  color: var(--color-orange-light);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* ── Ghost watermark text ────────────────────────────────── */
+.ghost-text {
+  font-size: clamp(72px, 10vw, 128px);
+  font-weight: 500;
+  letter-spacing: -2.5px;
+  color: var(--ghost-color);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.48px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: 1.5px solid var(--btn-primary-bg);
+  border-radius: var(--r-btn);
+  padding: 12px 24px;
+}
+
+.btn-primary:hover {
+  background: var(--btn-primary-hover);
+  border-color: var(--btn-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: 1.5px solid var(--btn-secondary-border);
+  border-radius: var(--r-btn);
+  padding: 12px 24px;
+}
+
+.btn-secondary:hover {
+  background: var(--btn-secondary-hover);
+  transform: translateY(-1px);
+}
+
+/* ── Cards ───────────────────────────────────────────────── */
+.stadium-frame {
+  border-radius: var(--r-hero);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.card-lifted {
+  background: var(--color-lifted);
+  border-radius: var(--r-hero);
+  padding: var(--space-32);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+/* Yuga tag pills */
+.yuga-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: var(--r-full);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  border: 1.5px solid currentColor;
+  background: transparent;
+}
+
+/* ── Dividers ────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  border: none;
+}
+
+/* ── Circular portrait ───────────────────────────────────── */
+.portrait-circle {
+  border-radius: var(--r-circle);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bone);
+}
+
+/* Satellite CTA */
+.satellite-cta {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-circle);
+  background: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-nav);
+  color: var(--color-canvas);
+  cursor: pointer;
+  border: none;
+  transition: transform var(--transition);
+  z-index: 2;
+}
+
+.satellite-cta:hover { transform: scale(1.08); }
+
+/* ── Grid helpers ────────────────────────────────────────── */
+.grid-2 { display: grid; gap: 24px; grid-template-columns: 1fr; }
+.grid-3 { display: grid; gap: 24px; grid-template-columns: 1fr; }
+.grid-4 { display: grid; gap: 24px; grid-template-columns: 1fr; }
+
+@media (min-width: 640px) {
+  .grid-2 { grid-template-columns: repeat(2,1fr); }
+  .grid-3 { grid-template-columns: repeat(2,1fr); }
+  .grid-4 { grid-template-columns: repeat(2,1fr); }
+}
+@media (min-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(3,1fr); }
+  .grid-4 { grid-template-columns: repeat(4,1fr); }
+}
+
+/* ── Responsive typography ───────────────────────────────── */
+@media (max-width: 1023px) {
+  h1 { font-size: 48px; line-height: 52px; }
+}
+
+@media (max-width: 767px) {
+  h1 { font-size: 36px; line-height: 40px; letter-spacing: -0.72px; }
+  h2 { font-size: 28px; line-height: 34px; }
+  h3 { font-size: 20px; line-height: 24px; }
+}

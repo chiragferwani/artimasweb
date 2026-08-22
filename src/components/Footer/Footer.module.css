@@ -1,0 +1,130 @@
+.footer {
+  background: #050409; /* ultra-dark warm black */
+  color: #FFFFFF;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 48px 64px;
+}
+
+@media (max-width: 1023px) { .inner { padding: 64px 32px 48px; } }
+@media (max-width: 767px)  { .inner { padding: 48px 24px 40px; } }
+
+/* Headline */
+.headlineRow {
+  margin-bottom: 48px;
+}
+
+.headline {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 500;
+  letter-spacing: -0.96px;
+  line-height: 1.1;
+  color: #F3F0EE;
+  max-width: 520px;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  margin: 40px 0;
+}
+
+/* Four-column grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 1023px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+}
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+.col {}
+
+.colHeader {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.56px; /* +4% tracking */
+  text-transform: uppercase;
+  color: #9E9A94;
+  margin-bottom: 20px;
+}
+
+.linkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgba(243,240,238,0.65);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.footerLink:hover {
+  color: #F3F0EE;
+}
+
+.footerLink svg {
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+/* Bottom bar */
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.copyright {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(243,240,238,0.3);
+}
+
+.logoMark {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(243,240,238,0.4);
+}
+
+.logoMark span:first-child {
+  font-size: 16px;
+  color: #FF5500;
+  opacity: 0.8;
+}
+
+.logoWord {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}

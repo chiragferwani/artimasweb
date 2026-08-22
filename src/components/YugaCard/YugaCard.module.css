@@ -1,0 +1,196 @@
+.card {
+  position: relative;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color var(--transition);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-feature);
+  border-color: var(--color-slate);
+}
+
+/* Yuga top accent bar */
+.cardAccent {
+  height: 3px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+  background: var(--yuga-primary, #F5D76E);
+  opacity: 0.8;
+  width: 40px;
+}
+
+/* Icon circle */
+.iconWrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--yuga-bg, var(--color-bone));
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+/* Sanskrit label */
+.sanskrit {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: var(--yuga-primary, #F5D76E);
+  margin-bottom: 4px;
+  opacity: 0.9;
+}
+
+/* Yuga name */
+.yugaName {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.44px;
+  color: var(--color-ink);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+/* Virtue eyebrow */
+.virtue {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-slate);
+  margin-bottom: 16px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  border: none;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-slate);
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+/* Highlights */
+.highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.highlightGroup {}
+
+.highlightTitle {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--yuga-primary, #F5D76E);
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-slate);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.bullet {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--yuga-primary, #F5D76E);
+  flex-shrink: 0;
+  margin-top: 6px;
+  opacity: 0.8;
+}
+
+/* Expand button */
+.expandBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--btn-secondary-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-ink);
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.expandBtn:hover {
+  background: var(--btn-secondary-hover);
+}
+
+/* Expanded section */
+.expandedContent { overflow: hidden; }
+
+.expandedInner {
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.longDesc {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-slate);
+  margin-bottom: 12px;
+}
+
+.motifRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.motifLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--color-dust);
+}
+
+.motifValue {
+  font-size: 13px;
+  color: var(--yuga-primary, #F5D76E);
+}
+
+.extraChars { margin-top: 12px; }

@@ -1,0 +1,376 @@
+.main {
+  min-height: 100vh;
+  background: var(--color-canvas);
+  padding-top: 100px;
+  transition: background-color var(--transition);
+}
+
+/* Hero stadium frame */
+.hero {
+  position: relative;
+  padding: 40px 0 64px;
+}
+
+.heroFrame {
+  position: relative;
+  background: #14121C;
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  padding: 56px 64px;
+  color: #FFFFFF;
+  overflow: hidden;
+  box-shadow: var(--shadow-feature);
+}
+
+@media (max-width: 767px) {
+  .heroFrame {
+    padding: 36px 24px;
+    border-radius: 28px;
+  }
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(255, 119, 51, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  color: rgba(243,240,238,0.8);
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 24px;
+}
+
+.backBtn:hover {
+  background: rgba(255,255,255,0.12);
+  color: #FFFFFF;
+}
+
+.yugaBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 999px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--color-orange-light);
+  margin-bottom: 16px;
+}
+
+.eventTitle {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 500;
+  letter-spacing: -1.28px;
+  color: #FFFFFF;
+  line-height: 1.05;
+  margin-bottom: 12px;
+}
+
+.eventTagline {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(243,240,238,0.6);
+  margin-bottom: 32px;
+}
+
+.metaGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(243,240,238,0.7);
+}
+
+.metaItem svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-orange-light);
+}
+
+.metaLabel {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(243,240,238,0.4);
+  margin-bottom: 2px;
+}
+
+.metaValue {
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+/* Content section */
+.contentSection {
+  padding: 48px 0 96px;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 900px) {
+  .contentGrid { grid-template-columns: 1fr 320px; }
+}
+
+.mainContent {}
+
+.block {
+  margin-bottom: 40px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 36px;
+  box-shadow: var(--shadow-card);
+}
+
+.blockTitle {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.44px;
+  color: var(--color-ink);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.blockText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-slate);
+}
+
+.rulesList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ruleItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--color-slate);
+}
+
+.ruleNum {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-orange-light);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Myth block */
+.mythBlock {
+  display: flex;
+  gap: 16px;
+  padding: 28px;
+  background: var(--color-lifted);
+  border: 1.5px solid var(--color-border);
+  border-radius: 24px;
+}
+
+.mythIcon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.mythLabel {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-orange-light);
+  margin-bottom: 6px;
+}
+
+.mythText {
+  font-size: 15px;
+  color: var(--color-slate);
+  line-height: 22px;
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sideCard {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+}
+
+.sideTitle {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-slate);
+  margin-bottom: 16px;
+}
+
+.regBtnOpen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.2s;
+  text-align: center;
+  border: 1.5px solid var(--btn-primary-bg);
+}
+
+.regBtnOpen:hover {
+  background: var(--btn-primary-hover);
+  border-color: var(--btn-primary-hover);
+}
+
+.regBtnClosed {
+  padding: 12px 20px;
+  background: var(--color-bone);
+  color: var(--color-dust);
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.coordinator {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.coordinator:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.coordName {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: 6px;
+}
+
+.coordContact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.coordLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-slate);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.coordLink:hover {
+  color: var(--color-ink);
+}
+
+.yugaSideCard {
+  background: var(--color-lifted);
+  border: 1.5px solid var(--color-border);
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.yugaSideName {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--color-ink);
+}
+
+.yugaSideDesc {
+  font-size: 14px;
+  color: var(--color-slate);
+  line-height: 20px;
+}
+
+.notFound {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 100px;
+  background: var(--color-canvas);
+}
+
+.backLink {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: underline;
+}

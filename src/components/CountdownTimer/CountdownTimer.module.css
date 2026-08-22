@@ -1,0 +1,53 @@
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 56px;
+}
+
+.value {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.72px;
+  color: #F3F0EE;
+  background: #1B1827;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 8px 12px;
+  min-width: 56px;
+  text-align: center;
+  box-shadow: rgba(0,0,0,0.3) 0px 4px 12px 0px;
+}
+
+.label {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #9E9A94;
+  margin-top: 6px;
+}
+
+.colon {
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 20px;
+  color: #9E9A94;
+  font-weight: 500;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+  animation: blink 1s ease infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
