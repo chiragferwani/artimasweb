@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Lottie } from 'lottie-react';
 import getCloudinaryUrl from '../../utils/cloudinary';
-import orangeFlagAnimation from '../../assets/orangeflag.json';
-import redFlagAnimation from '../../assets/redflag.json';
+import orangeFlagAnimation from '../../animations/orangeflag.json';
+import redFlagAnimation from '../../animations/redflag.json';
 import styles from './ChakravyuhMap.module.css';
 
 const chakraImg = getCloudinaryUrl('src/assets/chakra.png');

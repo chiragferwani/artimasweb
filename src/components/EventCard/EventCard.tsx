@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import { Lottie } from 'lottie-react';
 import type { Event } from '../../data/yugas';
 import { YUGAS } from '../../data/yugas';
-import orangeFlagAnimation from '../../assets/orangeflag.json';
-import redFlagAnimation from '../../assets/redflag.json';
+import orangeFlagAnimation from '../../animations/orangeflag.json';
+import redFlagAnimation from '../../animations/redflag.json';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './EventCard.module.css';
 
