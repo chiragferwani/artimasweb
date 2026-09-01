@@ -4,8 +4,10 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { SwastikChakra } from '../../components/SwastikChakra/SwastikChakra';
-import vishnuImg from '../../assets/vishnu.png';
+import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Sponsors.module.css';
+
+const vishnuImg = getCloudinaryUrl('src/assets/vishnu.png');
 
 const Sponsors: React.FC = () => {
   return (

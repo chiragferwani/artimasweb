@@ -65,7 +65,6 @@
 .heroBg {
   position: absolute;
   inset: 0;
-  background-image: url('../../assets/yuga-hero.jpg');
   background-size: cover;
   background-position: center;
   filter: blur(4px);
@@ -882,7 +881,6 @@
 .ctaBg {
   position: absolute;
   inset: 0;
-  background-image: url('../../assets/shiva.jpg');
   background-size: cover;
   background-position: center;
   filter: blur(4px);
