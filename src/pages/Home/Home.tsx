@@ -1,165 +1,262 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import CountdownTimer from '../../components/CountdownTimer/CountdownTimer';
-import YugaCard from '../../components/YugaCard/YugaCard';
+import { useApp } from '../../context/AppContext';
+import { SwastikChakra } from '../../components/SwastikChakra/SwastikChakra';
+import CurvedLoop from '../../components/CurvedLoop/CurvedLoop';
+import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import EventCard from '../../components/EventCard/EventCard';
-import { YUGAS, YUGA_ORDER, EVENTS } from '../../data/yugas';
+import CountdownTimer from '../../components/CountdownTimer/CountdownTimer';
+import { EVENTS } from '../../data/yugas';
+import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Home.module.css';
 
-const FEST_DATE = new Date('2027-02-15T09:00:00');
+const lightLogo = getCloudinaryUrl('src/assets/light.png');
+const krishnaVideo = getCloudinaryUrl('src/assets/krishnaanimation.mp4');
+const heroVideo = getCloudinaryUrl('src/assets/herovid.mp4');
+const hanumanImg = getCloudinaryUrl('src/assets/hanuman.png');
+const ramImg = getCloudinaryUrl('src/assets/ram.png');
+const divinedevVideo = getCloudinaryUrl('src/assets/divinedev.mp4');
+const divineasurVideo = getCloudinaryUrl('src/assets/divineasur.mp4');
+const ravanVideo = getCloudinaryUrl('src/assets/ravan.mp4');
 
-// Orbital arc SVG between Yuga portraits
-const OrbitalArc: React.FC<{ color?: string }> = ({ color = '#F37338' }) => (
-  <svg
-    className={styles.orbitalArc}
-    viewBox="0 0 400 80"
-    fill="none"
-    preserveAspectRatio="none"
-    aria-hidden="true"
-  >
-    <path
-      d="M 0 60 Q 200 -20 400 60"
-      stroke={color}
-      strokeWidth="1.2"
-      strokeDasharray="6 6"
-      opacity="0.5"
-    />
-  </svg>
-);
+const ARTIMAS_START_DATE = new Date('2026-10-09T09:00:00');
+
+
+
+const playVideo = (video: HTMLVideoElement | null) => {
+  if (!video || !video.isConnected) return;
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
+  const p = video.play();
+  if (p !== undefined) {
+    p.catch((err) => {
+      if (err.name !== 'AbortError') {
+        console.warn('Autoplay error:', err);
+      }
+    });
+  }
+};
+
+const playVideoFromStart = (video: HTMLVideoElement | null) => {
+  if (!video || !video.isConnected) return;
+  try {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.currentTime = 0;
+    const p = video.play();
+    if (p !== undefined) {
+      p.catch((err) => {
+        if (err.name === 'AbortError') {
+          return;
+        }
+        console.warn('Intersection play error:', err);
+        setTimeout(() => {
+          if (video && video.isConnected) {
+            video.muted = true;
+            video.play().catch((playErr) => {
+              if (playErr.name !== 'AbortError') {
+                console.warn('Retry play error:', playErr);
+              }
+            });
+          }
+        }, 150);
+      });
+    }
+  } catch (e) {
+    console.warn('Intersection play exception:', e);
+  }
+};
 
 const Home: React.FC = () => {
+  const { isInitialLoaderDone } = useApp();
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const aboutVideoRef = React.useRef<HTMLVideoElement>(null);
+  const devVideoRef = React.useRef<HTMLVideoElement>(null);
+  const asurVideoRef = React.useRef<HTMLVideoElement>(null);
+  const ravanVideoRef = React.useRef<HTMLVideoElement>(null);
+  const yugaSectionRef = React.useRef<HTMLElement>(null);
+
+  React.useEffect(() => {
+    if (isInitialLoaderDone) {
+      playVideoFromStart(videoRef.current);
+      playVideo(aboutVideoRef.current);
+    }
+  }, [isInitialLoaderDone]);
+
+  React.useEffect(() => {
+    // Play Hero & About video immediately on mount
+    playVideoFromStart(videoRef.current);
+    playVideo(aboutVideoRef.current);
+
+    const handleInteraction = () => {
+      if (videoRef.current && videoRef.current.paused && !videoRef.current.ended) {
+        playVideo(videoRef.current);
+      }
+      if (aboutVideoRef.current && aboutVideoRef.current.paused) {
+        playVideo(aboutVideoRef.current);
+      }
+    };
+
+    window.addEventListener('click', handleInteraction, { once: true });
+    window.addEventListener('touchstart', handleInteraction, { once: true });
+
+    // Trigger divine videos ONLY when user scrolls down into Yuga section
+    let hasPlayedYuga = false;
+    const yugaObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasPlayedYuga) {
+            hasPlayedYuga = true;
+            playVideoFromStart(devVideoRef.current);
+            playVideoFromStart(asurVideoRef.current);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: '100px' }
+    );
+
+    if (yugaSectionRef.current) {
+      yugaObserver.observe(yugaSectionRef.current);
+    }
+
+    // Trigger Ravan video ONLY when user scrolls down into Ravan video
+    let hasPlayedRavan = false;
+    const ravanObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasPlayedRavan) {
+            hasPlayedRavan = true;
+            playVideoFromStart(ravanVideoRef.current);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: '100px' }
+    );
+
+    if (ravanVideoRef.current) {
+      ravanObserver.observe(ravanVideoRef.current);
+    }
+
+    return () => {
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+      yugaObserver.disconnect();
+      ravanObserver.disconnect();
+    };
+  }, []);
+
   return (
     <main className={styles.main}>
 
       {/* ═══════════════════════════════════════
-          HERO — Stadium frame on canvas cream
+          HERO — Video frame
       ═══════════════════════════════════════ */}
       <section className={styles.heroSection}>
         <div className="container">
-          {/* Hero stadium frame */}
+          {/* Hero stadium frame containing autoplay video */}
           <motion.div
             className={styles.heroFrame}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Ghost watermark behind hero */}
-            <div className={styles.ghostWatermark}>ARTIMAS</div>
-
-            {/* Hero content */}
-            <div className={styles.heroContent}>
-              {/* Eyebrow */}
-              <motion.div
-                className="eyebrow"
-                style={{ color: '#F3F0EE', opacity: 0.7 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.7 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-              >
-                AIMSA Presents
-              </motion.div>
-
-              <motion.h1
-                className={styles.heroTitle}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.7, ease: [0.16,1,0.3,1] }}
-              >
-                The Four Yugas
-                <br />
-                <span className={styles.heroTitleAccent}>Converge</span>
-              </motion.h1>
-
-              <motion.p
-                className={styles.heroSubtitle}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.75, duration: 0.6 }}
-              >
-                Artimas 26-27 — where Satyuga, Tretayuga, Dwaparyuga
-                and Kalyuga collide in one cosmic celebration.
-                The flagship fest of AIMSA.
-              </motion.p>
-
-              {/* Yuga pills */}
-              <motion.div
-                className={styles.yugaPills}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9, duration: 0.6 }}
-              >
-                {YUGA_ORDER.map((key) => (
-                  <span key={key} className={styles.yugaPill}>
-                    {YUGAS[key].icon} {YUGAS[key].name}
-                  </span>
-                ))}
-              </motion.div>
-
-              <motion.div
-                className={styles.heroCtas}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.05, duration: 0.6 }}
-              >
-                <Link to="/events" className={styles.heroBtnPrimary}>
-                  Explore Events <ArrowRight size={16} />
-                </Link>
-                <Link to="/legacy" className={styles.heroBtnSecondary}>
-                  The Legacy
-                </Link>
-              </motion.div>
-            </div>
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              className={styles.heroVideo}
+              onLoadedData={() => {
+                if (videoRef.current && videoRef.current.paused && !videoRef.current.ended) {
+                  playVideo(videoRef.current);
+                }
+              }}
+              onCanPlay={() => {
+                if (videoRef.current && videoRef.current.paused && !videoRef.current.ended) {
+                  playVideo(videoRef.current);
+                }
+              }}
+            >
+              <source src={heroVideo} type="video/mp4" />
+            </video>
+            <div className={styles.heroVideoOverlay} />
           </motion.div>
 
-          {/* Countdown beneath hero frame */}
+          {/* Live Countdown Row for Oct 9-11, 2026 */}
           <motion.div
             className={styles.countdownRow}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <span className={styles.countdownLabel}>Days until Artimas</span>
-            <CountdownTimer targetDate={FEST_DATE} />
+            <span className={styles.countdownLabel}>Festival Begins Oct 9–11, 2026</span>
+            <CountdownTimer targetDate={ARTIMAS_START_DATE} />
           </motion.div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════
-          YUGAS — Four portrait cards
+          YUGA — Swastik & Dual Video Background
       ═══════════════════════════════════════ */}
-      <section className={styles.yugaSection}>
-        <div className="container">
-          {/* Section header */}
-          <motion.div
-            className={styles.sectionHead}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            viewport={{ once: true }}
-          >
-            <span className="eyebrow">The Cosmic Ages</span>
-            <h2 className={styles.sectionTitle}>
-              The Four Yugas
-            </h2>
-            <p className={styles.sectionSubtitle}>
-              From the dawn of creation to the age of chaos — each era has
-              its own legend. Artimas 26-27 is where all four live at once.
-            </p>
-          </motion.div>
-
-          {/* Orbital arc decoration */}
-          <div className={styles.arcRow}>
-            <OrbitalArc />
+      <section ref={yugaSectionRef} className={styles.yugaSection}>
+        {/* Layer 1: Dual Video Background (Devas left, Asuras right) */}
+        <div className={styles.dualVideoBg}>
+          <div className={styles.leftVideoWrap}>
+            <video
+              ref={devVideoRef}
+              muted
+              playsInline
+              preload="auto"
+              className={styles.sideVideo}
+            >
+              <source src={divinedevVideo} type="video/mp4" />
+            </video>
           </div>
-
-          {/* Yuga cards grid */}
-          <div className={styles.yugaGrid}>
-            {YUGA_ORDER.map((key, i) => (
-              <YugaCard key={key} yuga={YUGAS[key]} index={i} />
-            ))}
+          <div className={styles.rightVideoWrap}>
+            <video
+              ref={asurVideoRef}
+              muted
+              playsInline
+              preload="auto"
+              className={styles.sideVideo}
+            >
+              <source src={divineasurVideo} type="video/mp4" />
+            </video>
           </div>
+          <div className={styles.dualVideoOverlay} />
+        </div>
+
+        {/* Upper Arc Curve framing top of Chakra */}
+        <div style={{ width: '100%', marginBottom: '15px', position: 'relative', zIndex: 3 }}>
+          <CurvedLoop
+            marqueeText="॥ ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात् ॥ ✦ "
+            speed={2}
+            curveAmount={-160}
+            direction="right"
+            interactive={true}
+            className="curved-loop-text-gold"
+          />
+        </div>
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          {/* Rotating Swastik Chakra behind divine side videos */}
+          <SwastikChakra />
+        </div>
+
+        {/* Lower Arc Curve framing bottom of Chakra */}
+        <div style={{ width: '100%', marginTop: '15px', position: 'relative', zIndex: 3 }}>
+          <CurvedLoop
+            marqueeText="॥ ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात् ॥ ✦ "
+            speed={2}
+            curveAmount={160}
+            direction="left"
+            interactive={true}
+            className="curved-loop-text-gold"
+          />
         </div>
       </section>
 
@@ -167,36 +264,63 @@ const Home: React.FC = () => {
           ABOUT — Lifted cream, stats
       ═══════════════════════════════════════ */}
       <section className={styles.aboutSection}>
-        {/* Lifted cream surface */}
-        <div className={styles.aboutLiftedBg} />
+        {/* Video background container */}
+        <div className={styles.aboutVideoContainer}>
+          <video
+            ref={aboutVideoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className={styles.aboutVideoBg}
+            onLoadedData={() => playVideo(aboutVideoRef.current)}
+            onCanPlay={() => playVideo(aboutVideoRef.current)}
+          >
+            <source src={krishnaVideo} type="video/mp4" />
+          </video>
+          <div className={styles.aboutVideoOverlay} />
+        </div>
         <div className="container">
-          <div className={styles.aboutGrid}>
+          <div className={styles.aboutGridCentered}>
             <motion.div
-              className={styles.aboutText}
-              initial={{ opacity: 0, x: -32 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className={styles.aboutTextCentered}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65 }}
               viewport={{ once: true }}
             >
-              <span className="eyebrow">About the Fest</span>
-              <h2 className={styles.sectionTitle} style={{ marginTop: 16 }}>
-                AIMSA &amp; Artimas
+              {/* AIMSA Light Logo */}
+              <img
+                src={lightLogo}
+                alt="AIMSA"
+                className={styles.aboutAimsaLogo}
+              />
+
+              <span className="eyebrow" style={{ letterSpacing: '3px' }}>
+                presents
+              </span>
+
+              {/* ARTIMAS title styled like Hero */}
+              <h2 className={styles.aboutHeroTitle}>
+                ARTIMAS <span className={styles.aboutYearBadge}>2026</span>
               </h2>
+
               <p className={styles.aboutPara}>
-                <strong>AIMSA</strong> — the Association for Innovative Management and
-                Student Affairs — orchestrates Artimas every year: the college's
+                <strong>AIMSA</strong> — the Artificial Intelligence and Machine
+                Learning Student Association — orchestrates Artimas every year: the college's
                 flagship celebration of talent, creativity, and intellect.
               </p>
               <p className={styles.aboutPara}>
-                Artimas 26-27 weaves the mythology of the four Yugas into every
-                event, performance, and competition. This is not just a fest — it
-                is a cosmic saga in which every participant plays a hero.
+                Artimas 2026 weaves the mythology of the four Yugas into every
+                event, performance, and competition. This is a cosmic saga in
+                which every participant plays a hero across time and destiny.
               </p>
               <div className={styles.statRow}>
                 {[
-                  { num: '9',  lbl: 'Events' },
+                  { num: '7',  lbl: 'Events' },
                   { num: '4',  lbl: 'Yugas' },
-                  { num: '2',  lbl: 'Days' },
+                  { num: '3',  lbl: 'Days' },
                   { num: '∞',  lbl: 'Memories' },
                 ].map(({ num, lbl }) => (
                   <div key={lbl} className={styles.stat}>
@@ -205,42 +329,10 @@ const Home: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <Link to="/events" className={styles.aboutCta}>
-                View all events <ArrowRight size={14} />
-              </Link>
-            </motion.div>
-
-            {/* Right — circular Yuga portrait constellation */}
-            <motion.div
-              className={styles.aboutVisual}
-              initial={{ opacity: 0, x: 32 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.65, delay: 0.15 }}
-              viewport={{ once: true }}
-            >
-              {/* Ghost watermark */}
-              <div className={styles.aboutGhost}>AIMSA</div>
-
-              {/* 2×2 circular portrait grid */}
-              <div className={styles.portraitGrid}>
-                {YUGA_ORDER.map((key) => {
-                  const yuga = YUGAS[key];
-                  return (
-                    <div key={key} className={styles.portraitWrap}>
-                      <div className={styles.portraitCircle}>
-                        <span className={styles.portraitEmoji}>{yuga.icon}</span>
-                        {/* Satellite CTA */}
-                        <div className={styles.satelliteCta}>
-                          <ArrowRight size={18} />
-                        </div>
-                      </div>
-                      <span className="eyebrow" style={{ marginTop: 12, fontSize: 11 }}>
-                        {yuga.name}
-                      </span>
-                      <p className={styles.portraitLabel}>{yuga.tagline}</p>
-                    </div>
-                  );
-                })}
+              <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: 16 }}>
+                <Link to="/events" className={styles.aboutCta}>
+                  View all events <ArrowUpRight size={16} />
+                </Link>
               </div>
             </motion.div>
           </div>
@@ -259,12 +351,56 @@ const Home: React.FC = () => {
             transition={{ duration: 0.55 }}
             viewport={{ once: true }}
           >
-            <span className="eyebrow">9 Events · 4 Eras</span>
+            <span className="eyebrow">7 Events · 4 Eras</span>
             <h2 className={styles.sectionTitle}>The Arena Awaits</h2>
             <p className={styles.sectionSubtitle}>
               From oratory to hackathons, art to dance — every event is a
               battle in the cosmic tournament. Choose your Yuga.
             </p>
+          </motion.div>
+
+          {/* Ram & Hanuman divine illustration section */}
+          <div className={styles.ramHanumanContainer}>
+            {/* Lord Ram image rendered behind Hanuman */}
+            <motion.div
+              className={styles.ramImageWrap}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true }}
+            >
+              <img src={ramImg} alt="Lord Ram" className={styles.ramImg} />
+            </motion.div>
+
+            {/* Panchamukhi Hanuman illustration image */}
+            <motion.div
+              className={styles.hanumanImageWrap}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <img src={hanumanImg} alt="Panchamukhi Hanuman" className={styles.hanumanImg} />
+            </motion.div>
+          </div>
+
+          {/* Ravan video section right before event cards */}
+          <motion.div
+            className={styles.ravanaImageWrap}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <video
+              ref={ravanVideoRef}
+              muted
+              playsInline
+              preload="auto"
+              className={styles.ravanaVideo}
+            >
+              <source src={ravanVideo} type="video/mp4" />
+            </video>
           </motion.div>
 
           <div className={styles.eventsGrid}>
@@ -281,52 +417,17 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
           >
             <Link to="/events" className={styles.viewAllBtn}>
-              View all 9 events <ArrowRight size={15} />
+              View all 7 events <ArrowUpRight size={15} />
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════
-          CTA — Ink Black stadium card
-      ═══════════════════════════════════════ */}
-      <section className={styles.ctaSection}>
-        <div className="container">
-          <motion.div
-            className={styles.ctaCard}
-            initial={{ opacity: 0, scale: 0.97 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            {/* Ghost watermark on dark */}
-            <div className={styles.ctaGhost}>ARTIMAS</div>
-
-            <div className={styles.ctaInner}>
-              <span className="eyebrow" style={{ color: 'rgba(243,240,238,0.5)' }}>
-                Registration Opening Soon
-              </span>
-              <h2 className={styles.ctaTitle}>
-                The Four Ages
-                <br />
-                Await You
-              </h2>
-              <p className={styles.ctaSubtitle}>
-                Stay connected with AIMSA to be the first to know
-                when registrations open.
-              </p>
-              <div className={styles.ctaBtns}>
-                <Link to="/events" className={styles.ctaBtnWhite}>
-                  See all events
-                </Link>
-                <Link to="/contact" className={styles.ctaBtnGhost}>
-                  Contact AIMSA
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Cta Block */}
+      <CtaBlock
+        primaryButton={{ label: 'See all events', to: '/events' }}
+        secondaryButton={{ label: 'Contact AIMSA', to: '/contact' }}
+      />
     </main>
   );
 };

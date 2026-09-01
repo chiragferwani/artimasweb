@@ -1,0 +1,160 @@
+/* ══════════════════════════════════════════════════════════════════
+   CENTERED SWASTIK CHAKRA WITH EMBEDDED YUGA ICONS & 360° SHLOKA RING
+   ══════════════════════════════════════════════════════════════════ */
+
+.chakraContainer {
+  position: relative;
+  width: 100%;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centeredStage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 581px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.chakraStage {
+  position: relative;
+  width: 100%;
+  max-width: min(74vw, 580px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Swastik Image centered inside the Shlokas ring */
+.centerSwastikImg {
+  position: relative;
+  z-index: 2;
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(245, 215, 110, 0.5));
+  pointer-events: none;
+}
+
+/* Outer Decorative Ambient Glow Ring */
+.outerGlowRing {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(245, 215, 110, 0.4);
+  box-shadow: 0 0 35px rgba(245, 215, 110, 0.2);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ════ 1. ANTICLOCKWISE SHLOKA RING (COMPLETE 360° CIRCLE) ════ */
+.anticlockwiseRing {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  animation: rotateAnticlockwise 55s linear infinite;
+  transform-origin: center center;
+}
+
+.shlokaSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.shlokaTrackOuter {
+  fill: none;
+  stroke: rgba(232, 184, 75, 0.3);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.shlokaTrackInner {
+  fill: none;
+  stroke: rgba(232, 184, 75, 0.4);
+  stroke-width: 1.5;
+}
+
+.shlokaText {
+  font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  fill: url(#shlokaGoldGrad);
+  text-shadow: 0 0 10px rgba(245, 215, 110, 0.6);
+}
+
+/* ════ 2. CLOCKWISE SWASTIK CHAKRA ════ */
+.clockwiseChakra {
+  position: absolute;
+  inset: 52px;
+  z-index: 3;
+  animation: rotateClockwise 35s linear infinite;
+  transform-origin: center center;
+}
+
+.swastikSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 20px rgba(232, 184, 75, 0.3));
+}
+
+.chakraRim {
+  fill: none;
+  stroke: rgba(232, 184, 75, 0.45);
+  stroke-width: 2;
+  stroke-dasharray: 8 4;
+}
+
+.chakraSubRim {
+  fill: rgba(20, 18, 28, 0.92);
+  stroke: rgba(232, 184, 75, 0.35);
+  stroke-width: 1.5;
+}
+
+.swastikHub {
+  fill: #14121C;
+  stroke: url(#goldSwastik);
+  stroke-width: 3;
+}
+
+/* Yuga Emblem Groups inside Chakra */
+.yugaQuadrantGroup {
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
+}
+
+/* ════ ANIMATIONS ════ */
+@keyframes rotateClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateAnticlockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .clockwiseChakra { inset: 30px; }
+  .outerGlowRing { inset: 3px; }
+}

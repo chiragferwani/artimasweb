@@ -1,5 +1,19 @@
-// Yuga theme data — the single source of truth for all color palettes, 
-// mythological content, and motif definitions used throughout the site.
+import getCloudinaryUrl from '../utils/cloudinary';
+
+const saishImg = getCloudinaryUrl('src/assets/coordinators/saish.png');
+const harshImg = getCloudinaryUrl('src/assets/coordinators/harsh.png');
+const shamalImg = getCloudinaryUrl('src/assets/coordinators/shamal.png');
+const rutujaImg = getCloudinaryUrl('src/assets/coordinators/rutuja.png');
+const muskanImg = getCloudinaryUrl('src/assets/coordinators/muskan.png');
+const shrutiImg = getCloudinaryUrl('src/assets/coordinators/shruti.png');
+const parthImg = getCloudinaryUrl('src/assets/coordinators/parth.png');
+const sanikaImg = getCloudinaryUrl('src/assets/coordinators/sanika.png');
+const prathamImg = getCloudinaryUrl('src/assets/coordinators/pratham.png');
+const bhumikaImg = getCloudinaryUrl('src/assets/coordinators/bhumika.png');
+const kshitijImg = getCloudinaryUrl('src/assets/coordinators/kshitij.png');
+const vrushabhImg = getCloudinaryUrl('src/assets/coordinators/vrushabh.png');
+const debottamImg = getCloudinaryUrl('src/assets/coordinators/debottam.png');
+const tanmayeeImg = getCloudinaryUrl('src/assets/coordinators/tanmayee.png');
 
 export type YugaKey = 'satya' | 'treta' | 'dvapara' | 'kali';
 
@@ -167,6 +181,19 @@ export const YUGAS: Record<YugaKey, YugaTheme> = {
 
 export const YUGA_ORDER: YugaKey[] = ['satya', 'treta', 'dvapara', 'kali'];
 
+export interface Coordinator {
+  name: string;
+  phone: string;
+  email: string;
+  avatar?: string;
+}
+
+export interface GitaShloka {
+  sanskrit: string;
+  transliteration: string;
+  meaning: string;
+}
+
 export interface Event {
   id: string;
   name: string;
@@ -179,227 +206,228 @@ export interface Event {
   venue: string;
   teamSize: string;
   mythTieIn: string;
-  coordinators: { name: string; phone: string; email: string }[];
+  gitaShloka?: GitaShloka;
+  coordinators: Coordinator[];
   registrationOpen: boolean;
 }
 
 export const EVENTS: Event[] = [
   {
-    id: 'abhivyakti',
-    name: 'Abhivyakti',
+    id: 'hackmatrix',
+    name: 'Hackmatrix',
     yuga: 'satya',
-    tagline: 'Speak the eternal truth',
+    tagline: 'Matrix of pure code and truth',
     description:
-      'A solo debate and oratory event where participants articulate compelling arguments on contemporary and philosophical topics. As pure as the Satyuga itself — only truth and eloquence prevail.',
+      'A high-stakes coding hackathon where purity of logic and truth of code reign supreme, as unblemished as the Satyuga itself.',
     rules: [
-      'Each participant gets 5 minutes for the prepared speech',
-      'Impromptu round of 2 minutes on the spot topic',
-      'Judged on content, delivery, and clarity',
-      'No props or visual aids allowed',
+      'Teams of 1–4 members',
+      'Code must be written during the event window',
+      'Open-source libraries permitted',
+      'Judged on innovation, clean architecture, and execution',
     ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Auditorium, Block A',
-    teamSize: 'Solo',
+    date: 'Oct 9, 2026',
+    time: '09:30 AM – 01:30 PM',
+    venue: 'Computer Labs, Block D',
+    teamSize: '1–4 members',
     mythTieIn:
-      'In Satyuga, every word spoken was truth incarnate. Language itself was sacred. Abhivyakti channels that power — where your voice becomes your dharma.',
+      'In Satyuga, pure truth governed all existence. Hackmatrix challenges coders to craft immaculate, flawless solutions in harmony with fundamental logic.',
+    gitaShloka: {
+      sanskrit: 'कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥',
+      transliteration: 'Karmanye vadhikaraste, ma phaleshu kadachana',
+      meaning:
+        'Your right is to the work alone, never to its fruits — act without attachment to the outcome. A fitting anchor for a 30-hour build sprint, where the grind of creation matters more than guaranteed results.',
+    },
     coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
+      { name: 'Saish', phone: '+91 75887 68990', email: 'saish@aimsa.edu', avatar: saishImg },
+      { name: 'Harsh', phone: '+91 96043 71041', email: 'harsh@aimsa.edu', avatar: harshImg },
     ],
     registrationOpen: false,
   },
   {
-    id: 'srishti',
-    name: 'Srishti',
+    id: 'antaryami',
+    name: 'Antaryami',
     yuga: 'satya',
-    tagline: 'Create from pure imagination',
+    tagline: 'Channel the inner voice of intelligence',
     description:
-      'A fine arts and creative expression event — painting, sketching, and mixed media. Participants channel the pristine creative energy of Satyuga to craft something beautiful from nothing.',
+      'A prompt relay challenge testing your ability to guide AI systems with clarity, wisdom, and inner intuition.',
     rules: [
-      'Time limit: 3 hours',
-      'Theme revealed on the day of the event',
-      'Participants must bring their own materials',
-      'Digital art not permitted in the primary round',
+      'Teams of 2 participants',
+      'Multiple prompt engineering rounds',
+      'Time limits per relay round',
+      'Judged on response accuracy and creativity of prompts',
     ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Creative Arts Studio, Block B',
-    teamSize: 'Solo',
+    date: 'Oct 9, 2026',
+    time: '02:30 PM – 05:30 PM',
+    venue: 'Seminar Hall, Block A',
+    teamSize: 'Duo',
     mythTieIn:
-      'Brahma\'s first act was creation itself — breathing existence into the void. Srishti honours that primal creative impulse, where art becomes an offering to the cosmos.',
+      'Antaryami refers to the inner guide and divine consciousness within. Expressing thoughts clearly to guide intelligence echoes the divine word of Satyuga.',
+    gitaShloka: {
+      sanskrit: 'अहमात्मा गुडाकेश सर्वभूताशयस्थितः।',
+      transliteration: 'Aham atma gudakesha, sarva-bhutashaya-sthitah',
+      meaning:
+        '"I am the Self, seated in the hearts of all beings" — the indweller who perceives from within. Mirrors the event\'s core act: reading and relaying an inner, unseen truth to another mind.',
+    },
     coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
+      { name: 'Muskan', phone: '+91 92668 60617', email: 'muskan@aimsa.edu', avatar: muskanImg },
+      { name: 'Shruti', phone: '+91 80103 52757', email: 'shruti@aimsa.edu', avatar: shrutiImg },
     ],
     registrationOpen: false,
   },
   {
-    id: 'veer-gatha',
-    name: 'Veer Gatha',
+    id: 'setu-nirman',
+    name: 'Setu Nirman',
     yuga: 'treta',
-    tagline: 'Tell the saga of heroes',
+    tagline: 'Bridge ideas into iconic brands',
     description:
-      'A theatrical performance event where teams enact scenes from mythology, history, or original scripts. Drama, valor, and sacrifice take center stage in honor of Tretayuga\'s heroic age.',
+      'A brandathon where teams build complete brand identities, strategies, and narratives from scratch in record time.',
     rules: [
-      'Teams of 5–10 participants',
-      'Performance time: 10–15 minutes',
-      'Original or adapted scripts accepted',
-      'Props and costumes encouraged',
-      'Language: Hindi, English, or Sanskrit',
+      'Teams of 2–4 members',
+      'Case study revealed on the spot',
+      'Deliverables include brand story, logo design, and marketing pitch',
+      'Presentation time: 8 minutes',
     ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Main Stage, Open Air Theatre',
-    teamSize: '5–10 members',
+    date: 'Oct 10, 2026',
+    time: '09:30 AM – 12:30 PM',
+    venue: 'Conference Room, Block C',
+    teamSize: '2–4 members',
     mythTieIn:
-      'The Ramayana itself was first sung — a veer gatha, a song of valor. Lord Rama\'s journey was not just a story; it was a template for righteousness. Here, you carry that flame forward.',
+      'Just as the Vanar Sena constructed Ram Setu across the ocean, Setu Nirman challenges you to bridge vision and reality to build an enduring brand.',
+    gitaShloka: {
+      sanskrit: 'तस्मादसक्तः सततं कार्यं कर्म समाचर।',
+      transliteration: 'Tasmad asaktah satatam karyam karma samachara',
+      meaning:
+        'Therefore, without attachment, perform continuously the work that is to be done. Speaks to teams executing a brief that isn\'t their own — building with full commitment toward an assigned brand\'s vision.',
+    },
     coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
+      { name: 'Debottam', phone: '+91 86986 51336', email: 'debottam@aimsa.edu', avatar: debottamImg },
+      { name: 'Tanmayee', phone: '+91 90758 59781', email: 'tanmayee@aimsa.edu', avatar: tanmayeeImg },
     ],
     registrationOpen: false,
   },
   {
-    id: 'yuddha-kala',
-    name: 'Yuddha Kala',
-    yuga: 'treta',
-    tagline: 'Compete with discipline and skill',
+    id: 'datathon',
+    name: 'Datathon',
+    yuga: 'dvapara',
+    tagline: 'Unravel insights from cosmic chaos',
     description:
-      'A sports and physical challenge event inspired by the martial traditions of Tretayuga. Tests of strength, agility, and discipline — where athletes embody the spirit of Rama\'s warriors.',
+      'A data science and analytics battle to uncover patterns, forecast trends, and make strategic data-driven decisions.',
     rules: [
-      'Open to all participants',
-      'Multiple discipline rounds',
-      'Fair play strictly enforced',
-      'Medical clearance required for combat events',
+      'Teams of 2–3 members',
+      'Dataset provided on event day',
+      'Models must be submitted with reproducible notebooks',
+      'Judged on statistical rigor, accuracy metric, and insight presentation',
     ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Sports Ground',
-    teamSize: 'Solo or Duo',
+    date: 'Oct 10, 2026',
+    time: '05:00 PM – 08:00 PM',
+    venue: 'Data Analytics Lab, Block D',
+    teamSize: '2–3 members',
     mythTieIn:
-      'Hanuman\'s leap across the ocean, Rama\'s single arrow felling a demon — Tretayuga celebrated physical excellence in service of dharma. Yuddha Kala is your arena.',
+      'Dwaparyug was the age of deep strategy and calculated moves. Datathon puts your strategic analytical wisdom to the ultimate test.',
+    gitaShloka: {
+      sanskrit: 'योगः कर्मसु कौशलम्।',
+      transliteration: 'Yogah karmasu kaushalam',
+      meaning:
+        'Excellence in action is yoga — skill applied with clarity and discipline. Ties directly to the strategic precision of building and tuning an ML model under pressure.',
+    },
     coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
+      { name: 'Shamal', phone: '+91 95117 46783', email: 'shamal@aimsa.edu', avatar: shamalImg },
+      { name: 'Rutuja', phone: '+91 82619 77022', email: 'rutuja@aimsa.edu', avatar: rutujaImg },
+    ],
+    registrationOpen: false,
+  },
+  {
+    id: 'kurukshetra',
+    name: 'Kurukshetra (CTF)',
+    yuga: 'dvapara',
+    tagline: 'The ultimate cybersecurity battleground',
+    description:
+      'A Capture The Flag (CTF) cybersecurity war where ethical hackers clash to breach defenses, decipher codes, and secure flags.',
+    rules: [
+      'Teams of 1–4 members',
+      'Jeopardy-style CTF format (Web, Crypto, Reverse Engineering, Forensics)',
+      'Automated scoring platform',
+      'Strict prohibition of attacks against infrastructure',
+    ],
+    date: 'Oct 10, 2026',
+    time: '01:30 PM – 04:30 PM',
+    venue: 'Cyber Lab, Block D',
+    teamSize: '1–4 members',
+    mythTieIn:
+      'Kurukshetra was the legendary battlefield of strategic warfare. In this digital Kurukshetra, offense and defense clash for supreme cyber victory.',
+    gitaShloka: {
+      sanskrit: 'यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥',
+      transliteration:
+        'Yada yada hi dharmasya glanir bhavati bharata, abhyutthanam adharmasya tadatmanam srijamyaham',
+      meaning:
+        'Whenever dharma declines and adharma rises, the divine manifests to restore balance. The perfect anchor for a security battlefield — defenders rising each time a system\'s order is breached.',
+    },
+    coordinators: [
+      { name: 'Kshitij', phone: '+91 93226 42174', email: 'kshitij@aimsa.edu', avatar: kshitijImg },
+      { name: 'Vrushabh', phone: '+91 74993 40612', email: 'vrushabh@aimsa.edu', avatar: vrushabhImg },
     ],
     registrationOpen: false,
   },
   {
     id: 'chakravyuh',
     name: 'Chakravyuh',
-    yuga: 'dvapara',
-    tagline: 'Navigate the maze of strategy',
-    description:
-      'A multi-round strategy and puzzle event — quizzes, escape rooms, and tactical board challenges — echoing the labyrinthine strategies of the Mahabharata battlefield.',
-    rules: [
-      'Teams of 3',
-      'Multiple elimination rounds',
-      'Hints cost points',
-      'Time is a factor in tiebreakers',
-    ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Conference Room, Block C',
-    teamSize: '3 members',
-    mythTieIn:
-      'The Chakravyuh was the impenetrable spiral formation at Kurukshetra — only the greatest minds could navigate it. Abhimanyu entered knowing only the way in. Can you find the way out?',
-    coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
-    ],
-    registrationOpen: false,
-  },
-  {
-    id: 'dharma-sabha',
-    name: 'Dharma Sabha',
-    yuga: 'dvapara',
-    tagline: 'Debate the duality of right and wrong',
-    description:
-      'A group discussion and mock parliament event where teams argue for opposing sides of complex ethical dilemmas — mirroring the moral conflicts of Dwaparyuga.',
-    rules: [
-      'Teams of 4',
-      'Each team argues both sides across rounds',
-      'Judged on argument quality, research, and rebuttal',
-      'No personal attacks',
-    ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Seminar Hall, Block A',
-    teamSize: '4 members',
-    mythTieIn:
-      'The Kauravas and Pandavas both believed in their dharma. Krishna himself navigated the grey — where the right path was never simple. Dharma Sabha asks the same question: what is truly righteous?',
-    coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
-    ],
-    registrationOpen: false,
-  },
-  {
-    id: 'tandav',
-    name: 'Tāṇḍava',
-    yuga: 'dvapara',
-    tagline: 'Dance at the edge of destruction',
-    description:
-      'A group dance competition — classical, fusion, or contemporary — that channels the raw kinetic energy of the Dwaparyuga. The dance that Shiva himself performs at the end of ages.',
-    rules: [
-      'Groups of 6–15',
-      'Performance: 5–8 minutes',
-      'Any dance style permitted',
-      'Live musicians allowed (coordinate in advance)',
-      'No objectionable content',
-    ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Main Stage',
-    teamSize: '6–15 members',
-    mythTieIn:
-      'Lord Shiva\'s Tāṇḍava is the dance of creation and destruction — the cosmic rhythm that sustains the universe. Every powerful performance echoes that eternal beat.',
-    coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
-    ],
-    registrationOpen: false,
-  },
-  {
-    id: 'kalki-code',
-    name: 'Kalki Code',
     yuga: 'kali',
-    tagline: 'Forge the future from chaos',
+    tagline: 'Escape the labyrinth of illusions',
     description:
-      'A hackathon and innovation challenge — build a solution, app, or prototype that addresses a real-world problem. In Kalyuga, technology is the new dharma. Code your way to salvation.',
+      'A Houdini-style escape and tactical heist challenge where teams solve high-pressure puzzles and complex traps before time runs out.',
     rules: [
-      'Teams of 2–4',
-      '24-hour build window',
-      'Any technology stack',
-      'Working prototype required for final round',
-      'Open source libraries permitted',
+      'Teams of 3–4 members',
+      'Multiple elimination levels',
+      'Time penalties for hints',
+      'Physical and logic puzzle solving under pressure',
     ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Computer Labs, Block D',
-    teamSize: '2–4 members',
+    date: 'Oct 11, 2026',
+    time: '10:00 AM – 02:00 PM',
+    venue: 'Auditorium, Block A',
+    teamSize: '3–4 members',
     mythTieIn:
-      'Kalki arrives on a white horse with a blazing sword to cut through the darkness of Kalyuga. Your code is that sword — a tool of disruption, creation, and renewal in the age of machines.',
+      'In the chaotic Kalyug, the web of illusions is densest. Only the sharpest minds can unravel the Chakravyuh and escape the maze.',
+    gitaShloka: {
+      sanskrit: 'भूमिरापोऽनलो वायुः खं मनो बुद्धिरेव च।\nअहङ्कार इतीयं मे भिन्ना प्रकृतिरष्टधा॥',
+      transliteration:
+        'Bhumir apo \'nalo vayuh kham mano buddhir eva cha, ahankara itiyam me bhinna prakritir ashtadha',
+      meaning:
+        'Earth, water, fire, air, space, mind, intellect, and ego — these form the eightfold division of my material nature. The eight-layered nature of existence itself mirrors the nested, multi-layered structure of the chakravyuh formation — aptitude, mystery, and escape room, each ring harder to break through than the last.',
+    },
     coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
+      { name: 'Parth', phone: '+91 87884 23371', email: 'parth@aimsa.edu', avatar: parthImg },
+      { name: 'Sanika', phone: '+91 86057 68657', email: 'sanika@aimsa.edu', avatar: sanikaImg },
     ],
     registrationOpen: false,
   },
   {
-    id: 'pralay',
-    name: 'Pralaya',
+    id: 'mayavi',
+    name: 'Mayavi',
     yuga: 'kali',
-    tagline: 'The grand finale — chaos becomes celebration',
+    tagline: 'Unmask the impostor in the dark',
     description:
-      'The closing cultural extravaganza of Artimas 26-27 — a massive showcase of talent, performance, and community. Music, fusion acts, and open-mic performances as Kalyuga burns bright before the dawn of a new Satya.',
+      'A social deduction and deception game inspired by Among Us. Identify the illusionist before chaos consumes the ship.',
     rules: [
-      'Open participation after selection',
-      'Performance slots: 5–20 minutes',
-      'All art forms welcome',
-      'Final schedule announced 48 hours prior',
+      'Solo participation in assigned game lobbies',
+      'Secret roles assigned per game',
+      'Tasks and emergency discussions timed',
+      'Points awarded for survival, deductions, and successful bluffs',
     ],
-    date: 'TBD',
-    time: 'TBD',
-    venue: 'Main Stage, Open Air Theatre',
-    teamSize: 'Open',
+    date: 'Oct 11, 2026',
+    time: '03:00 PM – 07:00 PM',
+    venue: 'Main Stage / Open Air Theatre',
+    teamSize: 'Solo / Group',
     mythTieIn:
-      'Pralaya is the great dissolution — the cosmic reset. But dissolution is not death; it is the seed of what comes next. Artimas ends, and a new age begins. This is your moment.',
+      'Kalyug is marked by illusion (Maya) and deception. Mayavi tests your perception to distinguish truth from deceit in an era of shadows.',
+    gitaShloka: {
+      sanskrit: 'दैवी ह्येषा गुणमयी मम माया दुरत्यया।',
+      transliteration: 'Daivi hy esha guna-mayi mama maya duratyaya',
+      meaning:
+        'This divine illusion (maya) of mine, woven from the gunas, is exceedingly difficult to see through. Captures the essence of a hidden-identity social-deception game — nothing is quite what it appears to be.',
+    },
     coordinators: [
-      { name: 'TBD', phone: '+91 XXXXXXXXXX', email: 'coordinator@aimsa.edu' },
+      { name: 'Pratham', phone: '+91 82639 67306', email: 'pratham@aimsa.edu', avatar: prathamImg },
+      { name: 'Bhumika', phone: '+91 87666 42327', email: 'bhumika@aimsa.edu', avatar: bhumikaImg },
     ],
     registrationOpen: false,
   },

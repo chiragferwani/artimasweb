@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useApp } from '../../context/AppContext';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
-  { to: '/',       label: 'Home' },
-  { to: '/events', label: 'Events' },
-  { to: '/legacy', label: 'Legacy' },
-  { to: '/contact',label: 'Contact' },
+  { to: '/',        label: 'Home' },
+  { to: '/events',  label: 'Events' },
+  { to: '/sponsors',label: 'Sponsors' },
+  { to: '/calendar',label: 'Calendar' },
+  { to: '/legacy',  label: 'Legacy' },
+  { to: '/contact', label: 'Contact' },
 ];
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { theme, toggleTheme }     = useApp();
   const location = useLocation();
 
   useEffect(() => {
@@ -33,8 +33,7 @@ const Navbar: React.FC = () => {
         <nav className={styles.pill}>
           {/* Logo */}
           <NavLink to="/" className={styles.logo}>
-            <span className={styles.logoMark}>✦</span>
-            <span className={styles.logoText}>ARTIMAS</span>
+            <img src="/artimasnav.png" alt="Artimas" className={styles.logoImg} />
           </NavLink>
 
           {/* Desktop links */}
@@ -56,16 +55,6 @@ const Navbar: React.FC = () => {
 
           {/* Right side */}
           <div className={styles.right}>
-            {/* Theme Toggle Button */}
-            <button
-              className={styles.themeToggle}
-              onClick={toggleTheme}
-              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-
             <NavLink to="/events" className={styles.ctaBtn}>
               Register
             </NavLink>
@@ -120,15 +109,8 @@ const Navbar: React.FC = () => {
                 ))}
               </ul>
               <div className={styles.mobileActions}>
-                <button
-                  className={styles.mobileThemeToggle}
-                  onClick={toggleTheme}
-                >
-                  {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                  <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-                </button>
                 <NavLink to="/events" className={styles.mobileCta}>
-                  Register Now →
+                  Register Now ↗
                 </NavLink>
               </div>
             </motion.div>

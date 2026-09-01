@@ -1,0 +1,365 @@
+.main {
+  min-height: 100vh;
+  background: transparent;
+  padding-top: 100px;
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--transition);
+}
+
+.pageHeader {
+  padding: 48px 0 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  color: var(--color-slate);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.breadcrumb::before {
+  content: '•';
+  color: var(--color-orange-light);
+  font-size: 10px;
+}
+
+.pageTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 500;
+  letter-spacing: -1.28px;
+  color: var(--color-ink);
+  margin-bottom: 16px;
+}
+
+.pageSubtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-slate);
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+
+/* Goddess Saraswati Illustration & Rotating Celestial Background */
+.saraswatiWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -10px auto 24px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.saraswatiHeroContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: min(95vw, 640px);
+  min-height: 420px;
+}
+
+.swbgRotateImg {
+  position: absolute;
+  inset: -20px;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+  pointer-events: none;
+  animation: rotateClockwise 35s linear infinite;
+  transform-origin: center center;
+  filter: drop-shadow(0 0 35px rgba(245, 215, 110, 0.45));
+}
+
+@keyframes rotateClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.saraswatiHeroImg {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: min(88vw, 480px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 45px rgba(243, 115, 56, 0.55));
+}
+
+/* Controls */
+.controlsRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.dayTabs {
+  display: inline-flex;
+  background: var(--color-card);
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  gap: 4px;
+}
+
+.dayTab {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--color-slate);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dayTabActive {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--color-card);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-slate);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterActive {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-bg);
+}
+
+/* Schedule List */
+.scheduleSection {
+  padding: 0 0 96px;
+  position: relative;
+  z-index: 2;
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.eventCard {
+  position: relative;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  padding: 16px 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 24px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(199, 136, 46, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  overflow: hidden;
+}
+
+.eventCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(245, 215, 110, 0.35);
+  border-color: rgba(245, 215, 110, 0.7);
+}
+
+@media (max-width: 767px) {
+  .eventCard {
+    padding: 16px 16px 18px;
+  }
+}
+
+.cardHeaderRow {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.topLeftYugaWrap {
+  display: flex;
+  align-items: center;
+}
+
+.yugaBadgeImg {
+  height: clamp(26px, 3.8vw, 36px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.75));
+  display: block;
+}
+
+.topRightDateWrap {
+  display: flex;
+  align-items: center;
+}
+
+.dayBadge {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: rgba(35, 18, 5, 0.18);
+  color: #2E1504;
+  border: 1px solid rgba(60, 30, 10, 0.3);
+}
+
+.yugaBadge {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  background: rgba(20, 10, 3, 0.15);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.eventNameImg {
+  width: 100%;
+  max-width: min(94%, 650px);
+  height: auto;
+  max-height: 165px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.85));
+  margin: 2px 0 4px;
+  display: block;
+}
+
+.eventName {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #1A0D03;
+  letter-spacing: -0.3px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  margin: 2px 0;
+}
+
+.eventDesc {
+  font-size: 15px;
+  color: #38200B;
+  font-weight: 600;
+  line-height: 22px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.venueText {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4A280D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.detailBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 24px;
+  background: linear-gradient(135deg, #2B1605 0%, #150A02 100%);
+  border: 1px solid #D49E35;
+  border-radius: 20px;
+  color: #F5D76E;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+  margin-top: 6px;
+}
+
+.detailBtn:hover {
+  background: linear-gradient(135deg, #422308 0%, #2A1605 100%);
+  color: #FFFFFF;
+  border-color: #F5D76E;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  transform: translateY(-1px);
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 767px) {
+  .main { padding-top: 80px; }
+  .pageHeader { padding: 32px 0 28px; }
+  .saraswatiHeroContainer { min-height: 300px; }
+  .eventName { font-size: 22px; }
+  .controlsRow { margin-bottom: 32px; }
+  .scheduleSection { padding: 0 0 64px; }
+}
+
+@media (max-width: 480px) {
+  .dayTab { padding: 8px 16px; font-size: 12px; }
+  .filterBtn { padding: 5px 12px; font-size: 11px; }
+  .eventName { font-size: 18px; }
+  .eventDesc { font-size: 13px; line-height: 20px; }
+  .detailBtn { padding: 9px 18px; font-size: 12px; }
+  .saraswatiHeroContainer { min-height: 240px; }
+  .cardHeaderRow { left: 12px; right: 12px; top: 10px; }
+}

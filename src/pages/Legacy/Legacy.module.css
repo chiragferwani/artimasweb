@@ -1,6 +1,6 @@
 .main {
   min-height: 100vh;
-  background: var(--color-canvas);
+  background: transparent;
   padding-top: 100px;
   transition: background-color var(--transition);
 }
@@ -18,7 +18,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.56px;
@@ -38,7 +38,7 @@
 }
 
 .pageTitle {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: clamp(40px, 8vw, 80px);
   font-weight: 500;
   letter-spacing: -1.6px;
@@ -48,7 +48,7 @@
 }
 
 .editionBadge {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: clamp(16px, 3vw, 24px);
   font-weight: 500;
   letter-spacing: 0.2em;
@@ -63,6 +63,297 @@
   color: var(--color-slate);
   max-width: 520px;
   margin: 0 auto;
+}
+
+/* Krishna Hero Illustration */
+.krishnaHeroWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.krishnaHeroImg {
+  width: 100%;
+  max-width: min(92vw, 650px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(245, 180, 60, 0.45));
+  will-change: filter;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Concentric Orbiting Rectangular Loops around Krishna Image */
+.surroundingGalleryWrap {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 1350px;
+}
+
+.galleryTopRows,
+.galleryBottomRows {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Horizontal Marquee Track Container */
+.marqueeContainer {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.marqueeTrackClockwise {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: moveLeft 42s linear infinite;
+}
+
+.marqueeTrackCounterClockwise {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: moveRight 32s linear infinite;
+}
+
+.marqueeTrackClockwise:hover,
+.marqueeTrackCounterClockwise:hover,
+.verticalTrackDown:hover,
+.verticalTrackUp:hover {
+  animation-play-state: paused;
+}
+
+@keyframes moveLeft {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes moveRight {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.krishnaMiddleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  position: relative;
+  padding: 0;
+}
+
+.sidePhotosGridLeft,
+.sidePhotosGridRight {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+}
+
+/* Vertical Marquee Track Container for Side Columns */
+.verticalMarqueeContainer {
+  overflow: hidden;
+  height: 440px;
+  position: relative;
+  width: 135px;
+  flex-shrink: 0;
+  mask-image: linear-gradient(to bottom, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 4%, black 96%, transparent);
+}
+
+.verticalTrackDown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: max-content;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: moveDown 38s linear infinite;
+}
+
+.verticalTrackUp {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: max-content;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: moveUp 38s linear infinite;
+}
+
+@keyframes moveDown {
+  0% { transform: translate3d(0, -50%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes moveUp {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, -50%, 0); }
+}
+
+.photoHolderMarquee {
+  position: relative;
+  background: rgba(18, 18, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 175px;
+  height: 120px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 10;
+}
+
+.photoHolderVertical {
+  position: relative;
+  background: rgba(18, 18, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 135px;
+  height: 115px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 10;
+}
+
+.photoHolderMarquee:hover,
+.photoHolderVertical:hover {
+  border-color: var(--color-orange-light, #FF7733);
+  transform: scale(1.04);
+  box-shadow: 0 10px 24px rgba(243, 115, 56, 0.35);
+  z-index: 20;
+}
+
+.photoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.photoHolderMarquee:hover .photoImg,
+.photoHolderVertical:hover .photoImg {
+  transform: scale(1.08);
+}
+
+.krishnaMiddleRow .krishnaHeroWrap {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 520px;
+  height: 520px;
+  max-width: min(88vw, 520px);
+  z-index: 1;
+}
+
+.shlokaRingContainer {
+  position: absolute;
+  inset: -45px;
+  z-index: 5;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clockwiseRing {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+}
+
+.shlokaSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.shlokaTrackOuter {
+  fill: none;
+  stroke: rgba(232, 184, 75, 0.38);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.shlokaTrackInner {
+  fill: none;
+  stroke: rgba(232, 184, 75, 0.48);
+  stroke-width: 1.5;
+}
+
+.shlokaText {
+  font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  fill: url(#shlokaGoldGrad);
+  text-shadow: 0 0 14px rgba(245, 215, 110, 0.8);
+}
+
+@keyframes rotateClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.krishnaMiddleRow .krishnaHeroImg {
+  position: relative;
+  z-index: 1;
+  max-height: 390px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(245, 180, 60, 0.5));
+  will-change: filter;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 900px) {
+  .krishnaMiddleRow {
+    flex-direction: column;
+  }
+  .verticalMarqueeContainer {
+    height: 140px;
+    width: 100%;
+  }
+  .verticalTrackDown,
+  .verticalTrackUp {
+    flex-direction: row;
+    width: max-content;
+    height: 100%;
+    animation: moveLeft 30s linear infinite;
+  }
 }
 
 /* Story section */
@@ -82,7 +373,7 @@
 }
 
 .sectionPre {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.56px;
@@ -97,7 +388,7 @@
 }
 
 .sectionTitle {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: clamp(28px, 4vw, 40px);
   font-weight: 500;
   letter-spacing: -0.8px;
@@ -140,7 +431,7 @@
 }
 
 .highlightNum {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 28px;
   font-weight: 500;
   letter-spacing: -0.56px;
@@ -150,7 +441,7 @@
 }
 
 .highlightDesc {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.4px;
@@ -199,14 +490,14 @@
 }
 
 .eventRowNum {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: var(--color-dust);
 }
 
 .eventRowName {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: var(--color-ink);
@@ -217,7 +508,7 @@
   padding: 4px 12px;
   background: var(--color-bone);
   border-radius: 999px;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.4px;
@@ -276,7 +567,7 @@
 }
 
 .galleryPlaceholderText {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.4px;
@@ -294,13 +585,27 @@
   margin: 0 auto;
   text-align: center;
   padding: 64px 40px;
-  background: #14121C;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 1px solid var(--color-border);
   color: #FFFFFF;
   border-radius: 40px;
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-feature);
+}
+
+.bridgeOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 9, 15, 0.72) 0%, rgba(10, 9, 15, 0.88) 100%);
+  z-index: 1;
+}
+
+.bridgeContent {
+  position: relative;
+  z-index: 2;
 }
 
 .bridgeIcon {
@@ -312,7 +617,7 @@
 }
 
 .bridgeTitle {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: clamp(28px, 4vw, 40px);
   font-weight: 500;
   letter-spacing: -0.8px;
@@ -334,7 +639,7 @@
   padding: 12px 24px;
   background: #F3F0EE;
   color: #0A090F;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.3px;
@@ -347,4 +652,31 @@
 .bridgeBtn:hover {
   background: #FFFFFF;
   border-color: #FFFFFF;
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 767px) {
+  .main { padding-top: 80px; }
+  .header { padding: 32px 0 36px; }
+  .photoHolderMarquee { width: 140px; height: 95px; }
+  .photoHolderVertical { width: 110px; height: 90px; }
+  .krishnaMiddleRow .krishnaHeroWrap { width: 320px; height: 320px; }
+  .storySection { padding: 40px 0; }
+  .bridgeCard { padding: 40px 24px; border-radius: 28px; }
+  .bridgeSection { padding: 40px 0 64px; }
+  .pastEventsSection { padding: 32px 0; }
+  .eventRow { padding: 16px 20px; }
+}
+
+@media (max-width: 480px) {
+  .photoHolderMarquee { width: 120px; height: 80px; }
+  .photoHolderVertical { width: 90px; height: 75px; }
+  .verticalMarqueeContainer { width: 100%; height: 120px; }
+  .krishnaMiddleRow .krishnaHeroWrap { width: 260px; height: 260px; }
+  .krishnaMiddleRow .krishnaHeroImg { max-height: 260px; }
+  .highlightCard { padding: 18px; border-radius: 18px; }
+  .highlightNum { font-size: 22px; }
+  .bridgeCard { padding: 32px 20px; border-radius: 24px; }
+  .galleryGrid { gap: 10px; }
+  .galleryPlaceholder { border-radius: 14px; }
 }

@@ -47,20 +47,12 @@
   flex-shrink: 0;
 }
 
-.logoMark {
-  font-size: 18px;
-  color: var(--color-orange);
-  display: inline-block;
-  animation: spinSlow 20s linear infinite;
-}
-
-.logoText {
-  font-family: 'Sofia Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-ink);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.logoImg {
+  height: clamp(40px, 4.5vw, 48px);
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.25s ease;
 }
 
 /* Desktop links */
@@ -78,7 +70,7 @@
 }
 
 .link {
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: -0.3px;
@@ -135,7 +127,7 @@
   padding: 10px 20px;
   background: var(--nav-cta-bg);
   color: var(--nav-cta-text);
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.3px;
@@ -206,7 +198,7 @@
 
 .mobileLink {
   display: block;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 28px;
   font-weight: 500;
   letter-spacing: -0.56px;
@@ -239,7 +231,7 @@
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--nav-border);
   color: var(--color-ink);
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
@@ -251,7 +243,7 @@
   padding: 14px 28px;
   background: var(--nav-cta-bg);
   color: var(--nav-cta-text);
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 600;
   border-radius: 20px;
@@ -264,4 +256,11 @@
 @keyframes spinSlow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 380px) {
+  .pill { padding: 10px 14px 10px 18px; gap: 12px; }
+  .logoImg { height: 36px; }
+  .mobileLink { font-size: 24px; }
 }

@@ -1,0 +1,43 @@
+.constellationsWrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.constellationSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.starLine {
+  stroke: rgba(232, 184, 75, 0.45);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+
+.starLineBright {
+  stroke: rgba(243, 115, 56, 0.6);
+  stroke-width: 1.5;
+}
+
+.starNode {
+  fill: #F5D76E;
+  filter: drop-shadow(0 0 6px rgba(245, 215, 110, 0.8));
+}
+
+.starNodeAlpha {
+  fill: #FF7733;
+  filter: drop-shadow(0 0 10px rgba(255, 119, 51, 0.9));
+}
+
+.celestialCircle {
+  fill: none;
+  stroke: rgba(232, 184, 75, 0.12);
+  stroke-width: 1;
+  stroke-dasharray: 6 6;
+}

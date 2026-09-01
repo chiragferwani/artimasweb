@@ -11,6 +11,8 @@ interface AppContextValue {
   setMobileMenuOpen: (open: boolean) => void;
   theme: Theme;
   toggleTheme: () => void;
+  isInitialLoaderDone: boolean;
+  setInitialLoaderDone: (done: boolean) => void;
 }
 
 const AppContext = createContext<AppContextValue>({
@@ -21,16 +23,27 @@ const AppContext = createContext<AppContextValue>({
   setMobileMenuOpen: () => {},
   theme: 'dark',
   toggleTheme: () => {},
+  isInitialLoaderDone: false,
+  setInitialLoaderDone: () => {},
 });
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeYuga, setActiveYuga] = useState<YugaKey>('satya');
   const [scrollY, setScrollY] = useState(0);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('artimas_theme');
-    return saved === 'light' ? 'light' : 'dark';
+  const [theme] = useState<Theme>('dark');
+  const [isInitialLoaderDone, setIsInitialLoaderDone] = useState<boolean>(() => {
+    return typeof window !== 'undefined' && sessionStorage.getItem('artimas_initial_loader') === 'done';
   });
+
+  const setInitialLoaderDone = (done: boolean) => {
+    if (done) {
+      sessionStorage.setItem('artimas_initial_loader', 'done');
+    } else {
+      sessionStorage.removeItem('artimas_initial_loader');
+    }
+    setIsInitialLoaderDone(done);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -39,13 +52,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, []);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('artimas_theme', theme);
-  }, [theme]);
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('artimas_theme', 'dark');
+  }, []);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  const toggleTheme = () => {};
 
   return (
     <AppContext.Provider
@@ -57,6 +68,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setMobileMenuOpen,
         theme,
         toggleTheme,
+        isInitialLoaderDone,
+        setInitialLoaderDone,
       }}
     >
       {children}

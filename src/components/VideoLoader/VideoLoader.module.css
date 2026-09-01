@@ -76,7 +76,7 @@
   padding: 16px 36px;
   background: #F3F0EE;
   color: #0A090F;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.3px;
@@ -115,4 +115,58 @@
     max-width: 88vw;
     text-align: center;
   }
+}
+
+/* Circular Asset Preloader Indicator (Bottom Right) */
+.circularProgressWrap {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  z-index: 100002;
+  width: 52px;
+  height: 52px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 12px rgba(230, 92, 0, 0.6));
+}
+
+.circularSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circularTrack {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 3.5;
+}
+
+.circularFill {
+  fill: none;
+  stroke: #E65C00;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease-out;
+}
+
+.percentText {
+  position: relative;
+  z-index: 1;
+  font-family: 'Cinzel', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #F3F0EE;
+  letter-spacing: -0.3px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .circularProgressWrap { bottom: 16px; right: 16px; width: 44px; height: 44px; }
+  .startBtn { padding: 12px 24px; font-size: 14px; }
 }

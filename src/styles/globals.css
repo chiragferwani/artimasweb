@@ -4,7 +4,7 @@
    ============================================================ */
 
 :root {
-  --font: 'Sofia Sans', 'Arial', sans-serif;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
 
   /* Border Radius Scale */
   --r-sm:   4px;
@@ -149,11 +149,19 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -166,6 +174,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color var(--transition), color var(--transition);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* ── Scrollbar ───────────────────────────────────────────── */
@@ -412,4 +424,14 @@ img { max-width: 100%; display: block; }
   h1 { font-size: 36px; line-height: 40px; letter-spacing: -0.72px; }
   h2 { font-size: 28px; line-height: 34px; }
   h3 { font-size: 20px; line-height: 24px; }
+}
+
+/* ── Additional Responsive Fine-Tuning ──────────────────── */
+@media (max-width: 480px) {
+  h1 { font-size: 28px; line-height: 34px; letter-spacing: -0.56px; }
+  h2 { font-size: 24px; line-height: 30px; }
+  .btn-primary, .btn-secondary { padding: 10px 20px; font-size: 14px; }
+  .stadium-frame { border-radius: 24px; }
+  .card-lifted { padding: 20px; border-radius: 28px; }
+  .container { padding: 0 16px; }
 }
