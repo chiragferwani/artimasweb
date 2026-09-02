@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, MapPin, Users, Phone, Download } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, MapPin, Users, Phone, Download, Trophy, Award, Layers, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { EVENTS, YUGAS } from '../../data/yugas';
@@ -26,6 +26,9 @@ const mayaviBannerImg = getCloudinaryUrl('src/assets/mayavi.png');
 const antaryamiBannerImg = getCloudinaryUrl('src/assets/antaryami.png');
 const hackmatrixBannerImg = getCloudinaryUrl('src/assets/hackmatrix.png');
 const sudarshanImg = getCloudinaryUrl('src/assets/sudarshan.png');
+const silverImg = getCloudinaryUrl('src/assets/silver.png');
+const goldenImg = getCloudinaryUrl('src/assets/golden.png');
+const bronzeImg = getCloudinaryUrl('src/assets/bronze.png');
 import styles from './EventDetail.module.css';
 
 const EVENT_NAME_IMAGES: Record<string, string> = {
@@ -45,10 +48,51 @@ const YUGA_BADGE_IMAGES: Record<string, string> = {
   kali: kalyugBadgeImg,
 };
 
+const EVENT_ALT_IMAGES: Record<string, string> = {
+  antaryami: getCloudinaryUrl('src/assets/eventnames/promptrelay.png'),
+  mayavi: getCloudinaryUrl('src/assets/eventnames/amongus.png'),
+  'setu-nirman': getCloudinaryUrl('src/assets/eventnames/brandathon.png'),
+  chakravyuh: getCloudinaryUrl('src/assets/eventnames/houdini.png'),
+};
+
+const WhatsAppIcon: React.FC<{ size?: number; color?: string }> = ({ size = 20, color = '#FFFFFF' }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ color, flexShrink: 0 }}
+  >
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.04 20.16C10.56 20.16 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.8 7.37 7.5 3.67 12.04 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.04 20.16ZM16.56 14.37C16.31 14.25 15.09 13.65 14.86 13.57C14.64 13.48 14.47 13.44 14.31 13.69C14.14 13.93 13.67 14.48 13.53 14.65C13.38 14.81 13.24 14.83 12.99 14.71C12.75 14.59 11.96 14.33 11.03 13.5C10.3 12.85 9.81 12.05 9.67 11.81C9.52 11.56 9.65 11.43 9.77 11.31C9.88 11.2 10.02 11.02 10.14 10.88C10.26 10.74 10.3 10.63 10.39 10.47C10.47 10.31 10.43 10.16 10.37 10.04C10.31 9.92 9.82 8.72 9.62 8.23C9.42 7.76 9.22 7.82 9.07 7.81C8.93 7.81 8.76 7.81 8.6 7.81C8.44 7.81 8.17 7.87 7.95 8.11C7.72 8.36 7.09 8.95 7.09 10.15C7.09 11.35 7.97 12.51 8.09 12.67C8.21 12.84 9.8 15.29 12.24 16.34C12.82 16.59 13.27 16.74 13.63 16.85C14.22 17.04 14.75 17.01 15.18 16.95C15.66 16.88 16.66 16.35 16.86 15.77C17.07 15.2 17.07 14.71 17.01 14.61C16.95 14.51 16.8 14.49 16.56 14.37Z" />
+  </svg>
+);
+
 const EventDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [expandedRounds, setExpandedRounds] = React.useState(false);
+  const [isScrolledDown, setIsScrolledDown] = React.useState(false);
   const event = EVENTS.find((e) => e.id === id);
+
+  React.useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY <= 40) {
+        setIsScrolledDown(false);
+      } else if (currentScrollY > lastScrollY + 4 && currentScrollY > 60) {
+        setIsScrolledDown(true);
+      } else if (currentScrollY < lastScrollY - 6) {
+        setIsScrolledDown(false);
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (!event) {
     return (
@@ -81,13 +125,18 @@ const EventDetail: React.FC = () => {
           colors={[yuga.colors.primary, yuga.colors.accent, '#ffffff20']}
           count={40}
         />
-        <div className={styles.heroBg} />
 
         <div className="container">
           {/* Back button wrapper - aligned left */}
           <div className={styles.backBtnWrap}>
-            <button className={styles.backBtn} onClick={() => navigate(-1)}>
-              <ArrowLeft size={16} /> Back to Events
+            <button
+              className={`${styles.backBtn} ${isScrolledDown ? styles.backBtnCollapsed : ''}`}
+              onClick={() => navigate(-1)}
+              aria-label="Back to Events"
+              title="Back to Events"
+            >
+              <ArrowLeft size={16} />
+              <span className={styles.backBtnText}>Back to Events</span>
             </button>
           </div>
 
@@ -123,11 +172,12 @@ const EventDetail: React.FC = () => {
                   alt={event.name}
                   className={styles.eventNameImg}
                 />
-                {event.id === 'kurukshetra' && (
-                  <div className={styles.ctfTitleWrap}>
-                    <div className={styles.ctfGhostWatermark}>CTF</div>
-                    <div className={styles.ctfMainText}>CTF</div>
-                  </div>
+                {EVENT_ALT_IMAGES[event.id] && (
+                  <img 
+                    src={EVENT_ALT_IMAGES[event.id]} 
+                    alt="Alternative Event Name" 
+                    className={styles.eventAltNameImg} 
+                  />
                 )}
               </div>
             ) : (
@@ -202,6 +252,17 @@ const EventDetail: React.FC = () => {
                   <div className={styles.metaValue}>{event.teamSize}</div>
                 </div>
               </div>
+              {event.numberOfRounds && (
+                <div className={styles.metaItem}>
+                  <div className={styles.metaIconWrap}>
+                    <Layers size={18} />
+                  </div>
+                  <div className={styles.metaTextWrap}>
+                    <div className={styles.metaLabel}>Rounds</div>
+                    <div className={styles.metaValue}>{event.numberOfRounds} Rounds</div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Feature Illustration Image for Kurukshetra & Setu Nirman */}
@@ -316,6 +377,102 @@ const EventDetail: React.FC = () => {
       {/* Content */}
       <section className={styles.contentSection}>
         <div className="container">
+          {/* Centered Prize Pool Section */}
+          <motion.div
+            className={styles.prizePoolWrap}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            {event.prizes && (
+              <div className={styles.prizeTotalBanner}>
+                <span className={styles.prizeTotalBadge}>
+                  <Trophy size={14} /> Total Cash Prize Pool
+                </span>
+                <span className={styles.prizeTotalValue}>
+                  ₹{typeof event.prizes.totalCashPrize === 'number' ? event.prizes.totalCashPrize.toLocaleString('en-IN') : event.prizes.totalCashPrize}
+                </span>
+              </div>
+            )}
+
+            {(!event.prizes?.second && !event.prizes?.third) || event.id === 'chakravyuh' ? (
+              /* Single Winner Pedestal for Chakravyuh / Single prize events */
+              <div className={`${styles.prizePoolGrid} ${styles.singlePrizeGrid}`}>
+                <div className={`${styles.prizeItem} ${styles.goldenPrizeItem} ${styles.singleGoldenPrize}`}>
+                  <div className={styles.prizeCardBadge}>
+                    <span className={styles.prizeRankLabel}>1st Prize</span>
+                    <span className={styles.prizeRankValue}>
+                      {event.prizes?.first
+                        ? `₹${event.prizes.first.toLocaleString('en-IN')}`
+                        : `₹${typeof event.prizes?.totalCashPrize === 'number' ? event.prizes.totalCashPrize.toLocaleString('en-IN') : event.prizes?.totalCashPrize || '25,000'}`}
+                    </span>
+                  </div>
+                  <img
+                    src={goldenImg}
+                    alt="1st Prize - Golden"
+                    className={styles.prizePedestalImg}
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            ) : (
+              /* 3 Podium Pedestals */
+              <div className={styles.prizePoolGrid}>
+                {/* 2nd Prize - Silver */}
+                <div className={`${styles.prizeItem} ${styles.silverPrizeItem}`}>
+                  <div className={styles.prizeCardBadge}>
+                    <span className={styles.prizeRankLabel}>2nd Prize</span>
+                    <span className={styles.prizeRankValue}>
+                      {event.prizes?.second ? `₹${event.prizes.second.toLocaleString('en-IN')}` : '—'}
+                    </span>
+                  </div>
+                  <img
+                    src={silverImg}
+                    alt="2nd Prize - Silver"
+                    className={styles.prizePedestalImg}
+                    draggable={false}
+                  />
+                </div>
+
+                {/* 1st Prize - Golden */}
+                <div className={`${styles.prizeItem} ${styles.goldenPrizeItem}`}>
+                  <div className={styles.prizeCardBadge}>
+                    <span className={styles.prizeRankLabel}>1st Prize</span>
+                    <span className={styles.prizeRankValue}>
+                      {event.prizes?.first ? `₹${event.prizes.first.toLocaleString('en-IN')}` : '—'}
+                    </span>
+                  </div>
+                  <img
+                    src={goldenImg}
+                    alt="1st Prize - Golden"
+                    className={styles.prizePedestalImg}
+                    draggable={false}
+                  />
+                </div>
+
+                {/* 3rd Prize - Bronze */}
+                <div className={`${styles.prizeItem} ${styles.bronzePrizeItem}`}>
+                  <div className={styles.prizeCardBadge}>
+                    <span className={styles.prizeRankLabel}>3rd Prize</span>
+                    <span className={styles.prizeRankValue}>
+                      {event.prizes?.third ? `₹${event.prizes.third.toLocaleString('en-IN')}` : '—'}
+                    </span>
+                  </div>
+                  <img
+                    src={bronzeImg}
+                    alt="3rd Prize - Bronze"
+                    className={styles.prizePedestalImg}
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            )}
+
+            {event.prizes?.note && (
+              <p className={styles.prizeNoteText}>* {event.prizes.note}</p>
+            )}
+          </motion.div>
+
           <div className={styles.contentGrid}>
             {/* Main content */}
             <div className={styles.mainContent}>
@@ -326,20 +483,81 @@ const EventDetail: React.FC = () => {
               >
                 <div className={`${styles.block} ${styles.aboutBlock}`}>
                   <h2 className={styles.blockTitle}>About the Event</h2>
-                  <p className={styles.blockText}>{event.description}</p>
+                  <p className={styles.blockText}>{event.about || event.description}</p>
                 </div>
 
-                <div className={`${styles.block} ${styles.rulesBlock}`}>
-                  <h2 className={styles.blockTitle}>Rules & Format</h2>
-                  <ul className={styles.rulesList}>
-                    {event.rules.map((rule, i) => (
-                      <li key={i} className={styles.ruleItem}>
-                        <span className={styles.ruleNum}>{String(i + 1).padStart(2, '0')}</span>
-                        <span>{rule}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* Competition Rounds & Structure Block */}
+                {event.rounds && event.rounds.length > 0 && (
+                  <div className={`${styles.block} ${styles.roundsBlock}`}>
+                    <h2 className={styles.blockTitle}>Competition Rounds &amp; Timeline</h2>
+                    <div className={styles.roundsList}>
+                      {(expandedRounds ? event.rounds : event.rounds.slice(0, 2)).map((round) => (
+                        <div key={round.roundNumber} className={styles.roundCard}>
+                          <div className={styles.roundHeader}>
+                            <div className={styles.roundTitleWrap}>
+                              <span className={styles.roundBadge}>
+                                Round 0{round.roundNumber}
+                              </span>
+                              <h3 className={styles.roundTitle}>{round.title}</h3>
+                            </div>
+                            <span
+                              className={`${styles.roundModeBadge} ${
+                                round.mode === 'Online'
+                                  ? styles.roundModeOnline
+                                  : styles.roundModeOffline
+                              }`}
+                            >
+                              {round.mode === 'Online' ? <Globe size={12} /> : <MapPin size={12} />}
+                              {round.mode}
+                            </span>
+                          </div>
+
+                          <div className={styles.roundMetaRow}>
+                            {round.date && (
+                              <span className={styles.roundMetaChip}>
+                                <Calendar size={13} /> {round.date}
+                              </span>
+                            )}
+                            {round.time && (
+                              <span className={styles.roundMetaChip}>
+                                <Clock size={13} /> {round.time}
+                              </span>
+                            )}
+                            {round.venue && (
+                              <span className={styles.roundMetaChip}>
+                                <MapPin size={13} /> {round.venue}
+                              </span>
+                            )}
+                          </div>
+
+                          <p className={styles.roundDesc}>{round.description}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {event.rounds.length > 2 && (
+                      <div className={styles.roundsToggleWrap}>
+                        <button
+                          type="button"
+                          className={styles.roundsToggleBtn}
+                          onClick={() => setExpandedRounds((prev) => !prev)}
+                        >
+                          {expandedRounds ? (
+                            <>
+                              <span>Show Less</span>
+                              <ChevronUp size={16} />
+                            </>
+                          ) : (
+                            <>
+                              <span>Read More</span>
+                              <ChevronDown size={16} />
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </motion.div>
             </div>
 
@@ -356,6 +574,32 @@ const EventDetail: React.FC = () => {
                 <button className={styles.disabledWhiteBtn} disabled>
                   Registration Opening Soon
                 </button>
+              </div>
+
+              {/* Registration Fee */}
+              <div className={styles.sideCard}>
+                <h3 className={styles.sideTitle}>Registration Fee</h3>
+                <div className={styles.feeAmount}>{event.registrationFee || '₹100'}</div>
+                <div className={styles.feeNote}>(for outside PCCOE students)</div>
+              </div>
+
+              {/* Rules of the Event */}
+              <div className={`${styles.sideCard} ${styles.rulesSideCard}`}>
+                <h3 className={styles.sideTitle}>Rules of the Event</h3>
+                <ul className={styles.rulesList}>
+                  {event.rules.map((rule, i) => (
+                    <li key={i} className={styles.ruleItem}>
+                      <span className={styles.ruleNum}>{String(i + 1).padStart(2, '0')}</span>
+                      <span>{rule}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className={styles.rulesDownloadWrap}>
+                  <button className={styles.rulesDownloadBtn} disabled>
+                    <Download size={16} /> Download Rulebook
+                  </button>
+                </div>
               </div>
 
               {/* Coordinators */}
@@ -383,24 +627,16 @@ const EventDetail: React.FC = () => {
                 </div>
               </div>
 
-              {/* Yuga info */}
-              <div
-                className={styles.yugaSideCard}
-                style={{ borderColor: `${yuga.colors.primary}30` }}
-              >
-                <div
-                  className={styles.yugaSideName}
-                  style={{ color: yuga.colors.primary }}
+              {/* Join WhatsApp Group Button */}
+              <div className={styles.joinGroupWrap}>
+                <button
+                  type="button"
+                  className={styles.joinWhatsAppBtn}
+                  disabled
+                  title="WhatsApp Group joining soon"
                 >
-                  {yuga.icon} {yuga.name}
-                </div>
-                <p className={styles.yugaSideDesc}>{yuga.description}</p>
-              </div>
-
-              {/* Download Rulebook Button */}
-              <div className={styles.rulebookCard}>
-                <button className={styles.disabledWhiteBtn} disabled>
-                  <Download size={16} /> Download Rulebook
+                  <WhatsAppIcon size={20} color="#FFFFFF" />
+                  <span>Join WhatsApp Group</span>
                 </button>
               </div>
             </motion.aside>

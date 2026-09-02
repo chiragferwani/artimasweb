@@ -3,7 +3,8 @@ import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Legacy.module.css';
 
-const krishnaImg = getCloudinaryUrl('src/assets/krishna.png', { width: 600 });
+const krishnaVideo = getCloudinaryUrl('src/assets/fluteanimation.mp4');
+const waterfallImg = getCloudinaryUrl('src/assets/waterfall.png');
 const yugaHeroImg = getCloudinaryUrl('src/assets/yuga-hero.jpg', { width: 800 });
 
 // Import all 32 Artimas event photos from src/assets/events/artimas/
@@ -163,6 +164,8 @@ const Legacy: React.FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.7, delay: 0.2 }}
                 >
+
+
                   <div className={styles.shlokaRingContainer}>
                     <div className={styles.clockwiseRing}>
                       <svg viewBox="0 0 500 500" className={styles.shlokaSvg}>
@@ -185,13 +188,13 @@ const Legacy: React.FC = () => {
 
                         <text className={styles.shlokaText}>
                           <textPath
-                            xlinkHref="#krishnaShlokaRectPath"
-                            startOffset="0px"
+                            href="#krishnaShlokaRectPath"
+                            startOffset="0%"
                           >
                             <animate
                               attributeName="startOffset"
-                              from="-1651px"
-                              to="0px"
+                              from="-100%"
+                              to="0%"
                               dur="35s"
                               repeatCount="indefinite"
                             />
@@ -202,7 +205,19 @@ const Legacy: React.FC = () => {
                     </div>
                   </div>
 
-                  <img src={krishnaImg} alt="Lord Krishna" className={styles.krishnaHeroImg} loading="eager" />
+                  <img 
+                    src={waterfallImg} 
+                    alt="Waterfall Background" 
+                    className={styles.waterfallBgImg} 
+                  />
+                  <video 
+                    src={krishnaVideo} 
+                    className={styles.krishnaHeroImg} 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                  />
                 </motion.div>
 
                 {/* Right Side: Inner Up, Outer Down */}

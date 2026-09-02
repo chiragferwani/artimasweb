@@ -6,7 +6,7 @@
 
 /* ════════ HERO ════════ */
 .heroSection {
-  padding: 120px 0 80px;
+  padding: 180px 0 80px;
 }
 
 /* Stadium frame — holds hero video with blended edges */
@@ -1000,7 +1000,7 @@
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 1023px) {
-  .heroSection { padding: 100px 0 60px; }
+  .heroSection { padding: 140px 0 60px; }
   .aboutSection { padding: 64px 0; }
   .eventsSection { padding: 80px 0 64px; }
   .hanumanImageWrap { margin: 240px auto 0; }
@@ -1008,7 +1008,7 @@
 }
 
 @media (max-width: 767px) {
-  .heroSection { padding: 90px 0 40px; }
+  .heroSection { padding: 130px 0 40px; }
   .aboutSection { padding: 48px 0; }
   .aboutPara { font-size: 16px; line-height: 26px; }
   .eventsSection { padding: 60px 0 48px; }
@@ -1022,7 +1022,7 @@
 }
 
 @media (max-width: 480px) {
-  .heroSection { padding: 80px 0 32px; }
+  .heroSection { padding: 120px 0 32px; }
   .heroFrame { min-height: 220px; border-radius: 20px; }
   .heroVideoOverlay { border-radius: 20px; }
   .aboutHeroTitle { font-size: clamp(36px, 10vw, 56px); }

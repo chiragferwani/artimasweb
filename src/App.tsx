@@ -310,7 +310,9 @@ const AppContent: React.FC = () => {
       {/* Initial Video Loader — ONLY shown on first site visit */}
       {!isInitialLoaderDone && (
         <VideoLoader
-          loaderSrc={getCloudinaryUrl("https://res.cloudinary.com/kxwxs8yo/video/upload/v1788191808/artimasweb/loader.mp4")}
+          loaderSrc={isMobile 
+            ? getCloudinaryUrl('src/assets/mobileloader.mp4') 
+            : getCloudinaryUrl('src/assets/thefinal.mp4')}
           onComplete={handleLoaderComplete}
         />
       )}

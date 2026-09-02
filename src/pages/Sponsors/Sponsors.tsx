@@ -8,6 +8,7 @@ import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Sponsors.module.css';
 
 const vishnuImg = getCloudinaryUrl('src/assets/vishnu.png');
+const shivaVideo = getCloudinaryUrl('src/assets/shiva.mp4');
 
 const Sponsors: React.FC = () => {
   return (
@@ -50,33 +51,45 @@ const Sponsors: React.FC = () => {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
-            {/* Ambient Background Aura */}
-            <div className={styles.vaultGlow} />
+            {/* Background Video that stops at the end */}
+            <video 
+              src={shivaVideo} 
+              autoPlay 
+              muted 
+              playsInline 
+              className={styles.vaultVideoBg} 
+            />
 
-            {/* Top Live Ticker */}
-            <div className={styles.liveTicker}>
-              <span className={styles.pulseDot} />
-              <span className={styles.tickerText}>CELESTIAL FREQUENCY TRANSMISSION</span>
+            {/* Content Wrapper to sit above the video */}
+            <div className={styles.vaultContent}>
+              {/* Ambient Background Aura */}
+              <div className={styles.vaultGlow} />
+
+              {/* Top Live Ticker */}
+              <div className={styles.liveTicker}>
+                <span className={styles.pulseDot} />
+                <span className={styles.tickerText}>CELESTIAL FREQUENCY TRANSMISSION</span>
+              </div>
+
+              {/* Small Swastik Chakra */}
+              <div className={styles.chakraWrap}>
+                <SwastikChakra />
+              </div>
+
+              {/* Big Unique Headline */}
+              <h2 className={styles.revealTitle}>
+                Sponsors <span className={styles.revealHighlight}>Reveal Soon</span>
+              </h2>
+
+              <p className={styles.revealDescription}>
+                The divine guardians of tech, innovation, and culture are forging alliances behind the cosmic curtain. 
+                The grand revelation across all 4 Yugas approaches.
+              </p>
+
+              <Link to="/contact" className={styles.ctaBtn}>
+                Become a Sponsor <ArrowUpRight size={16} />
+              </Link>
             </div>
-
-            {/* Small Swastik Chakra */}
-            <div className={styles.chakraWrap}>
-              <SwastikChakra />
-            </div>
-
-            {/* Big Unique Headline */}
-            <h2 className={styles.revealTitle}>
-              Sponsors <span className={styles.revealHighlight}>Reveal Soon</span>
-            </h2>
-
-            <p className={styles.revealDescription}>
-              The divine guardians of tech, innovation, and culture are forging alliances behind the cosmic curtain. 
-              The grand revelation across all 4 Yugas approaches.
-            </p>
-
-            <Link to="/contact" className={styles.ctaBtn}>
-              Become a Sponsor <ArrowUpRight size={16} />
-            </Link>
           </motion.div>
         </div>
       </section>

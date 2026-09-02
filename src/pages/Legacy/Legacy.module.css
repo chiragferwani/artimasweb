@@ -82,7 +82,6 @@
   max-width: min(92vw, 650px);
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 25px rgba(245, 180, 60, 0.45));
   will-change: filter;
   transform: translate3d(0, 0, 0);
 }
@@ -328,15 +327,28 @@
   }
 }
 
+.waterfallBgImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  border-radius: 40px; /* match the rounded corners roughly if desired */
+  opacity: 0.6; /* Adjust blending as needed */
+  pointer-events: none;
+}
+
 .krishnaMiddleRow .krishnaHeroImg {
   position: relative;
   z-index: 1;
   max-height: 390px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 25px rgba(245, 180, 60, 0.5));
   will-change: filter;
   transform: translate3d(0, 0, 0);
+  mix-blend-mode: screen;
 }
 
 @media (max-width: 900px) {

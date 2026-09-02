@@ -52,9 +52,15 @@ interface EventCardProps {
   event: Event;
   index?: number;
   compact?: boolean;
+  showDescription?: boolean;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event, index = 0, compact = false }) => {
+const EventCard: React.FC<EventCardProps> = ({
+  event,
+  index = 0,
+  compact = false,
+  showDescription = false,
+}) => {
   const yuga      = YUGAS[event.yuga];
   const yugaColor = YUGA_COLORS[event.yuga] ?? '#F5D76E';
   const flagAnimation = index % 2 === 0 ? orangeFlagAnimation : redFlagAnimation;
@@ -74,7 +80,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, index = 0, compact = false
           <img src={logImg} alt="" className={styles.logBgImg} draggable={false} />
           <div className={styles.compactCardContent}>
             {nameImg ? (
-              <img src={nameImg} alt={event.name} className={styles.compactEventNameImg} />
+              <div className={styles.eventNameImgWrap}>
+                <img src={nameImg} alt={event.name} className={styles.compactEventNameImg} />
+              </div>
             ) : (
               <h3 className={styles.compactEventName}>{event.name}</h3>
             )}
@@ -129,7 +137,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, index = 0, compact = false
         <h3 className={styles.eventName}>{event.name}</h3>
       )}
       <div className={styles.tagline}>{event.tagline}</div>
-      <p className={styles.description}>{event.description}</p>
+      {showDescription && event.description && (
+        <p className={styles.description}>{event.description}</p>
+      )}
 
       <Link to={`/events/${event.id}`} className={styles.viewBtn}>
         Register now <ArrowUpRight size={13} />

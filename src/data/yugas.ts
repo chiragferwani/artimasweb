@@ -194,17 +194,42 @@ export interface GitaShloka {
   meaning: string;
 }
 
+export interface EventRound {
+  roundNumber: number;
+  title: string;
+  mode: 'Online' | 'Offline';
+  date: string;
+  time?: string | null;
+  venue?: string | null;
+  description: string;
+}
+
+export interface EventPrizes {
+  first?: number | string | null;
+  second?: number | string | null;
+  third?: number | string | null;
+  totalCashPrize: number | string;
+  currency: string;
+  note?: string;
+}
+
 export interface Event {
   id: string;
   name: string;
+  formerName?: string | null;
   yuga: YugaKey;
   tagline: string;
   description: string;
+  about?: string;
   rules: string[];
   date: string;
   time: string;
   venue: string;
   teamSize: string;
+  registrationFee?: string;
+  numberOfRounds?: number;
+  rounds?: EventRound[];
+  prizes?: EventPrizes;
   mythTieIn: string;
   gitaShloka?: GitaShloka;
   coordinators: Coordinator[];
@@ -215,20 +240,55 @@ export const EVENTS: Event[] = [
   {
     id: 'hackmatrix',
     name: 'Hackmatrix',
+    formerName: null,
     yuga: 'satya',
     tagline: 'Matrix of pure code and truth',
     description:
-      'A high-stakes coding hackathon where purity of logic and truth of code reign supreme, as unblemished as the Satyuga itself.',
+      'A 30-hour hackathon where teams build a working, AI/ML-integrated solution from scratch across two evaluation rounds. Round 1 is an online proof-of-concept submission judged on GitHub and demo quality; Round 2 is an offline overnight build culminating in a live prototype and pitch.',
+    about:
+      'A 30-hour hackathon where teams build a working, AI/ML-integrated solution from scratch across two evaluation rounds. Round 1 is an online proof-of-concept submission judged on GitHub and demo quality; Round 2 is an offline overnight build culminating in a live prototype and pitch.',
+    teamSize: '3–4 members',
+    registrationFee: '₹200 / Team',
+    numberOfRounds: 2,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'Proof of Concept',
+        mode: 'Online',
+        date: 'Oct 9, 2026 (Online Window)',
+        time: 'Problem Statement Release 11:00 AM, Submission Window 2:00 PM - 11:00 AM',
+        venue: 'Online / GFG PCCOE Hackathon Portal',
+        description:
+          'Teams submit a Proof of Concept (at least 50% working prototype) via GitHub, a max 6-minute video demo, and a solution overview through the GFG PCCOE Hackathon Portal. Solution must be AI/ML compatible and scalable. Evaluated on Innovativeness (10), Completion Level (10), Tech Stack (15), Presentation (10), UI/UX (15), GitHub Maintenance (20), Documentation (10), Social Impact (10). Top 4 teams per track advance.',
+      },
+      {
+        roundNumber: 2,
+        title: 'Final Build & Pitch',
+        mode: 'Offline',
+        date: 'Oct 11, 2026 (24-hr Overnight Build)',
+        time: 'Kickoff 10:00 AM through Final Evaluation 11:00 AM',
+        venue: 'Architecture Hall, PCCOE',
+        description:
+          'All team members must be present; a working end-product prototype is built entirely on-site over the overnight window and evaluated by domain experts. PPT must follow the provided template. Evaluated on Innovativeness, Tech Stack, Presentation, UI/UX, and AI & ML Integration. One winner selected per domain.',
+      },
+    ],
+    prizes: {
+      first: 20000,
+      second: 12000,
+      third: 8000,
+      totalCashPrize: 40000,
+      currency: 'INR',
+    },
     rules: [
-      'Teams of 1–4 members',
+      'Teams of 3–4 members',
       'Code must be written during the event window',
       'Open-source libraries permitted',
-      'Judged on innovation, clean architecture, and execution',
+      'Judged on innovation, clean architecture, AI/ML integration, and execution',
+      'Live prototype and presentation required in Round 2',
     ],
-    date: 'Oct 9, 2026',
-    time: '09:30 AM – 01:30 PM',
-    venue: 'Computer Labs, Block D',
-    teamSize: '1–4 members',
+    date: 'Oct 9–11, 2026',
+    time: '30-Hour Build Sprint',
+    venue: 'Architecture Hall, Block D',
     mythTieIn:
       'In Satyuga, pure truth governed all existence. Hackmatrix challenges coders to craft immaculate, flawless solutions in harmony with fundamental logic.',
     gitaShloka: {
@@ -246,20 +306,65 @@ export const EVENTS: Event[] = [
   {
     id: 'antaryami',
     name: 'Antaryami',
+    formerName: 'Prompt Relay',
     yuga: 'satya',
     tagline: 'Channel the inner voice of intelligence',
     description:
-      'A prompt relay challenge testing your ability to guide AI systems with clarity, wisdom, and inner intuition.',
-    rules: [
-      'Teams of 2 participants',
-      'Multiple prompt engineering rounds',
-      'Time limits per relay round',
-      'Judged on response accuracy and creativity of prompts',
+      'A team relay event testing memory, communication, and prompt-engineering skill. One player observes a reference image, relays what they remember verbally to a teammate, and a final teammate crafts the AI prompt to regenerate it as closely as possible to the original.',
+    about:
+      'A team relay event testing memory, communication, and prompt-engineering skill. One player observes a reference image, relays what they remember verbally to a teammate, and a final teammate crafts the AI prompt to regenerate it as closely as possible to the original.',
+    teamSize: '3 members (mandatory)',
+    registrationFee: '₹100 / Team',
+    numberOfRounds: 3,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'Prompt Upgrade Challenge',
+        mode: 'Online',
+        date: 'Oct 9, 2026',
+        time: 'Submission 12:00 PM – 11:59 PM',
+        venue: 'Online Submission',
+        description:
+          'Teams decode five pirate-themed riddles to reveal hidden keywords, integrate them into a weak base SDG-related prompt, and submit an enhanced prompt plus AI-generated image. Scored out of 100: Riddle Interpretation Accuracy (20), Prompt Quality (30), Image Quality (30), Creativity & Storytelling (20). Top 10 teams qualify for Round 2.',
+      },
+      {
+        roundNumber: 2,
+        title: 'Prompt Relay Challenge',
+        mode: 'Offline',
+        date: 'Oct 10, 2026',
+        time: 'Reporting 9:00 AM; Relay 10:00 AM – 11:00 AM; Results 12:00 PM',
+        venue: 'Labs 6517, 6518, 6519',
+        description:
+          'Three sequential roles: Player 1 (Observer) views the image and writes a base prompt; Player 2 (Interpreter) refines it based on verbal relay only; Player 3 (Finalizer) writes and submits the final prompt and generates the image. Scored out of 100: Accuracy to Original Image (75, based on 15 key elements x 5 pts), Prompt Quality (25).',
+      },
+      {
+        roundNumber: 3,
+        title: 'Prompt Duel: Decode, Bid, Generate',
+        mode: 'Offline',
+        date: 'Oct 10, 2026',
+        time: 'Afternoon Duel Session',
+        venue: 'Labs 6517, 6518, 6519',
+        description:
+          "Top 6 teams face off in head-to-head duels: Decode a puzzle, Observe a reference image for 10-15 seconds, then Prompt from memory. Includes a strategic 'Prompt Auction' bidding phase where teams spend Bid Credits on advantages (extra time, extra look, retry, hint) or disadvantages for opponents (buzzword injection, time penalty, word limit, constraint card, no revision). Weighted scoring: Puzzle Solving 20%, Prompt Quality 25%, Visual Similarity 35%, Creativity 10%, Strategic Bidding 10%.",
+      },
     ],
-    date: 'Oct 9, 2026',
+    prizes: {
+      first: 7000,
+      second: 7000,
+      third: 7000,
+      totalCashPrize: 21000,
+      currency: 'INR',
+      note: 'Equal cash prizes for all three podium positions',
+    },
+    rules: [
+      'Teams of exactly 3 members (mandatory)',
+      'Strict role division: Observer, Interpreter, Finalizer',
+      'No notes, cameras, or visual aids allowed for the Observer during relay',
+      'Prompt auction credits must be strategically managed in Round 3',
+    ],
+    date: 'Oct 9–10, 2026',
     time: '02:30 PM – 05:30 PM',
     venue: 'Seminar Hall, Block A',
-    teamSize: 'Duo',
     mythTieIn:
       'Antaryami refers to the inner guide and divine consciousness within. Expressing thoughts clearly to guide intelligence echoes the divine word of Satyuga.',
     gitaShloka: {
@@ -277,20 +382,64 @@ export const EVENTS: Event[] = [
   {
     id: 'setu-nirman',
     name: 'Setu Nirman',
+    formerName: 'Brandathon',
     yuga: 'treta',
     tagline: 'Bridge ideas into iconic brands',
     description:
-      'A brandathon where teams build complete brand identities, strategies, and narratives from scratch in record time.',
+      'A three-round branding and web-development competition. Teams progress from a design aptitude quiz, to researching and pitching a brand concept via video, to a 12-hour offline build where they construct a full brand identity and product/web presence, ending in a Shark-Tank-style final pitch.',
+    about:
+      'A three-round branding and web-development competition. Teams progress from a design aptitude quiz, to researching and pitching a brand concept via video, to a 12-hour offline build where they construct a full brand identity and product/web presence, ending in a Shark-Tank-style final pitch.',
+    teamSize: '2–4 members',
+    registrationFee: '₹100 / Team',
+    numberOfRounds: 3,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'Online Design Aptitude Quiz',
+        mode: 'Online',
+        date: 'Oct 9, 2026',
+        time: '5:00 PM – 6:00 PM',
+        venue: 'Online Quiz Portal',
+        description:
+          'A quiz testing design knowledge, creativity, visual thinking, branding, and logical reasoning across topics like design principles, colour theory & typography, branding & advertising, and visual communication. One submission per team; selected teams qualify for Round 2.',
+      },
+      {
+        roundNumber: 2,
+        title: 'Domain Selection & Video Presentation',
+        mode: 'Online',
+        date: 'Oct 10, 2026',
+        time: 'Domain Selection 9:00 AM; Video Submission 6:00 PM; Shortlist 9:00 AM (Oct 11)',
+        venue: 'Online Submission',
+        description:
+          'Shortlisted teams pick one of six domains (Luxury & Premium, Casual/Street, Food & Beverage, Technology & Gadgets, Healthcare & Wellness, Tourism & Travel), conduct research, and submit a short video presenting their brand idea. Evaluated on research quality, problem/opportunity identification, consumer understanding, brand strategy, creativity, and presentation quality. Shortlisting is domain-wise.',
+      },
+      {
+        roundNumber: 3,
+        title: 'Offline Brand Building Challenge & Final Pitch',
+        mode: 'Offline',
+        date: 'Oct 11, 2026',
+        time: 'Reporting 7:00 AM; Challenge 8:00 AM – 4:00 PM; Final Pitch 4:30 PM – 7:30 PM (12-hour total)',
+        venue: 'Old Reading Hall, PCCOE',
+        description:
+          'Teams turn their Round 2 brand idea into a complete product/service brand: logo & visual identity, colour palette & typography, packaging, 10-12 brand deliverables, an ad campaign, marketing/launch strategy, pricing, and a growth plan. Concludes with a Shark-Tank-style pitch to judges. Evaluated on market/consumer insight, brand strategy, creativity, product/service quality, visual identity/execution, marketing strategy, business potential, and final pitch/Q&A.',
+      },
+    ],
+    prizes: {
+      first: 7500,
+      second: 5000,
+      third: 2500,
+      totalCashPrize: 15000,
+      currency: 'INR',
+    },
     rules: [
       'Teams of 2–4 members',
-      'Case study revealed on the spot',
-      'Deliverables include brand story, logo design, and marketing pitch',
-      'Presentation time: 8 minutes',
+      'Round 1 quiz submission is 1 per team',
+      'Deliverables must include brand story, logo design, 10-12 assets, and marketing pitch',
+      'Final pitch follows a Shark-Tank presentation format with live Q&A',
     ],
-    date: 'Oct 10, 2026',
+    date: 'Oct 9–11, 2026',
     time: '09:30 AM – 12:30 PM',
-    venue: 'Conference Room, Block C',
-    teamSize: '2–4 members',
+    venue: 'Old Reading Hall / Block C',
     mythTieIn:
       'Just as the Vanar Sena constructed Ram Setu across the ocean, Setu Nirman challenges you to bridge vision and reality to build an enduring brand.',
     gitaShloka: {
@@ -308,20 +457,54 @@ export const EVENTS: Event[] = [
   {
     id: 'datathon',
     name: 'Datathon',
+    formerName: null,
     yuga: 'dvapara',
     tagline: 'Unravel insights from cosmic chaos',
     description:
-      'A data science and analytics battle to uncover patterns, forecast trends, and make strategic data-driven decisions.',
-    rules: [
-      'Teams of 2–3 members',
-      'Dataset provided on event day',
-      'Models must be submitted with reproducible notebooks',
-      'Judged on statistical rigor, accuracy metric, and insight presentation',
+      'A machine-learning competition built around a Kaggle-hosted dataset. Round 1 has teams build and submit predictive models scored on a live leaderboard; Round 2 is an on-site event with evolving datasets and surprise task changes to test adaptability under pressure.',
+    about:
+      'A machine-learning competition built around a Kaggle-hosted dataset. Round 1 has teams build and submit predictive models scored on a live leaderboard; Round 2 is an on-site event with evolving datasets and surprise task changes to test adaptability under pressure.',
+    teamSize: '1–2 members',
+    registrationFee: '₹100 / Participant',
+    numberOfRounds: 2,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'Kaggle Model Submission',
+        mode: 'Online',
+        date: 'Oct 9, 2026',
+        time: 'Submission window: 6:00 PM (Start) – 6:00 PM (End)',
+        venue: 'Kaggle Platform',
+        description:
+          'Participants develop ML models on the provided Train.csv and submit predictions for Test.csv via Kaggle, following the SampleSubmission.csv format. Scored automatically via accuracy-based metrics on a public leaderboard. Must submit a Submission.csv and a code file (.py/.ipynb). Max 3 submissions per team per day. Top 15 teams qualify for Round 2.',
+      },
+      {
+        roundNumber: 2,
+        title: 'Live Adaptive Challenge',
+        mode: 'Offline',
+        date: 'Oct 10, 2026',
+        time: 'Reporting 9:00 AM; Datathon 10:00 AM – 4:45 PM; Ends 5:00 PM',
+        venue: 'Labs 6517, 6518, 6519',
+        description:
+          'Teams tackle live, evolving datasets and tasks (surprise feature additions, missing data, scope changes) with all code written on-site; no pre-built models allowed. Internet access is restricted to approved APIs. Final code, predictions, and a methodology PDF/PPT are required. Judged on Adaptability and Technical Rigor, among other hidden multidimensional metrics.',
+      },
     ],
-    date: 'Oct 10, 2026',
+    prizes: {
+      first: 10000,
+      second: 6000,
+      third: 4000,
+      totalCashPrize: 20000,
+      currency: 'INR',
+    },
+    rules: [
+      'Teams of 1–2 members',
+      'Max 3 Kaggle submissions per team per day in Round 1',
+      'All Round 2 code must be written on-site; no pre-trained weights without authorization',
+      'Reproducible code notebooks and methodology slides mandatory',
+    ],
+    date: 'Oct 9–10, 2026',
     time: '05:00 PM – 08:00 PM',
     venue: 'Data Analytics Lab, Block D',
-    teamSize: '2–3 members',
     mythTieIn:
       'Dwaparyug was the age of deep strategy and calculated moves. Datathon puts your strategic analytical wisdom to the ultimate test.',
     gitaShloka: {
@@ -339,20 +522,54 @@ export const EVENTS: Event[] = [
   {
     id: 'kurukshetra',
     name: 'Kurukshetra (CTF)',
+    formerName: 'CTF',
     yuga: 'dvapara',
     tagline: 'The ultimate cybersecurity battleground',
     description:
-      'A Capture The Flag (CTF) cybersecurity war where ethical hackers clash to breach defenses, decipher codes, and secure flags.',
-    rules: [
-      'Teams of 1–4 members',
-      'Jeopardy-style CTF format (Web, Crypto, Reverse Engineering, Forensics)',
-      'Automated scoring platform',
-      'Strict prohibition of attacks against infrastructure',
+      'A two-round cybersecurity and AI challenge. Round 1 tests the ability to extract hidden information from LLMs via prompt jailbreaking; Round 2 is a full offline Capture-The-Flag spanning ten cybersecurity domains.',
+    about:
+      'A two-round cybersecurity and AI challenge. Round 1 tests the ability to extract hidden information from LLMs via prompt jailbreaking; Round 2 is a full offline Capture-The-Flag spanning ten cybersecurity domains.',
+    teamSize: '2–4 members',
+    registrationFee: '₹200 / Team',
+    numberOfRounds: 2,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'LLM Jailbreak',
+        mode: 'Online',
+        date: 'Oct 10, 2026',
+        time: '10:00 AM – 6:00 PM',
+        venue: 'Online CTF Arena',
+        description:
+          'Participants are given access to three LLMs, each built on a RAG setup with a hidden key embedded in their reference data. Teams craft prompts to bypass restrictions and extract the key. No prior LLM/AI experience required. Scoring based on speed and accuracy. Top 15 teams (by live leaderboard) qualify for Round 2.',
+      },
+      {
+        roundNumber: 2,
+        title: 'Capture The Flag',
+        mode: 'Offline',
+        date: 'Oct 11, 2026',
+        time: 'Reporting 9:00 AM; CTF 10:00 AM – 4:45 PM; Ends 5:00 PM',
+        venue: 'Seminar Hall, 5th Floor Mech Building, PCCOE',
+        description:
+          'The main CTF spans 10 domains, each with 2-3 sub-questions solved sequentially to unlock the next. Challenges span logic, decoding, hidden-information discovery, file/website analysis and other cybersecurity concepts, increasing in difficulty. Final score determines ranking.',
+      },
     ],
-    date: 'Oct 10, 2026',
+    prizes: {
+      first: 15000,
+      second: 10000,
+      third: 5000,
+      totalCashPrize: 30000,
+      currency: 'INR',
+    },
+    rules: [
+      'Teams of 2–4 members',
+      'Jeopardy-style CTF across 10 security domains',
+      'Automated scoring platform with live scoreboard',
+      'Strict prohibition of attacks against competition infrastructure or fellow participants',
+    ],
+    date: 'Oct 10–11, 2026',
     time: '01:30 PM – 04:30 PM',
-    venue: 'Cyber Lab, Block D',
-    teamSize: '1–4 members',
+    venue: 'Seminar Hall, 5th Floor Mech Building',
     mythTieIn:
       'Kurukshetra was the legendary battlefield of strategic warfare. In this digital Kurukshetra, offense and defense clash for supreme cyber victory.',
     gitaShloka: {
@@ -371,20 +588,65 @@ export const EVENTS: Event[] = [
   {
     id: 'chakravyuh',
     name: 'Chakravyuh',
+    formerName: 'Houdini Heist',
     yuga: 'kali',
     tagline: 'Escape the labyrinth of illusions',
     description:
-      'A Houdini-style escape and tactical heist challenge where teams solve high-pressure puzzles and complex traps before time runs out.',
-    rules: [
-      'Teams of 3–4 members',
-      'Multiple elimination levels',
-      'Time penalties for hints',
-      'Physical and logic puzzle solving under pressure',
+      'A three-round event moving from an aptitude test to a Chausar-inspired checkpoint mystery, and finally a live one-hour escape room. Tests general knowledge of mythology and scripture, logical reasoning, clue-based riddle solving, and physical/team problem-solving under time pressure.',
+    about:
+      'A three-round event moving from an aptitude test to a Chausar-inspired checkpoint mystery, and finally a live one-hour escape room. Tests general knowledge of mythology and scripture, logical reasoning, clue-based riddle solving, and physical/team problem-solving under time pressure.',
+    teamSize: '3 members (exactly)',
+    registrationFee: '₹200 / Team',
+    numberOfRounds: 3,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'Aptitude Round',
+        mode: 'Offline',
+        date: 'Oct 10, 2026',
+        time: '10:00 AM – 12:00 PM',
+        venue: 'Classroom, Block A',
+        description:
+          'Tests knowledge of Indian mythology, Vedas, scriptures, general awareness, aptitude, and logical reasoning. Each question worth 1 mark; ties broken by submission time. Top 12 teams (out of all participating) proceed to Round 2.',
+      },
+      {
+        roundNumber: 2,
+        title: 'Chausar-Inspired Checkpoint Challenge',
+        mode: 'Offline',
+        date: 'Oct 10, 2026',
+        time: '2:00 PM – 6:00 PM',
+        venue: 'Old Reading Hall',
+        description:
+          '12 teams split into 3 groups of 4, competing simultaneously in a checkpoint-based challenge inspired by the game of Chausar. Each team rotates through 4 checkpoints, solving a riddle on the spot at each and memorizing (not writing down) a clue. All 4 collected clues are stitched into a single AI image/video-generation prompt, scored against a reference output. One team per group of 4 advances - 3 teams total proceed to the final.',
+      },
+      {
+        roundNumber: 3,
+        title: 'Escape Room',
+        mode: 'Offline',
+        date: 'Oct 11, 2026',
+        time: '10:00 AM – 3:00 PM (1-hour duration per room)',
+        venue: 'Rooms 6517, 6518, 6519',
+        description:
+          'The final 3 teams each play in separate rooms; the first team to escape within the 1-hour limit wins. No cash prize is awarded if no team escapes in time. No damage to college property is permitted.',
+      },
     ],
-    date: 'Oct 11, 2026',
+    prizes: {
+      first: 25000,
+      second: null,
+      third: null,
+      totalCashPrize: 25000,
+      currency: 'INR',
+      note: 'Winner-take-all single championship cash prize of ₹25,000',
+    },
+    rules: [
+      'Teams of exactly 3 members (mandatory)',
+      'Multiple elimination levels across Aptitude, Checkpoint Mystery, and Escape Room',
+      'Strict 1-hour time limit for the final Escape Room',
+      'Physical and logic puzzle solving under pressure; no damage to college property permitted',
+    ],
+    date: 'Oct 10–11, 2026',
     time: '10:00 AM – 02:00 PM',
-    venue: 'Auditorium, Block A',
-    teamSize: '3–4 members',
+    venue: 'Auditorium / Rooms 6517–6519',
     mythTieIn:
       'In the chaotic Kalyug, the web of illusions is densest. Only the sharpest minds can unravel the Chakravyuh and escape the maze.',
     gitaShloka: {
@@ -403,20 +665,64 @@ export const EVENTS: Event[] = [
   {
     id: 'mayavi',
     name: 'Mayavi',
+    formerName: 'Among Us',
     yuga: 'kali',
     tagline: 'Unmask the impostor in the dark',
     description:
-      'A social deduction and deception game inspired by Among Us. Identify the illusionist before chaos consumes the ship.',
+      'A solo-participation event bringing the social-deduction game Among Us to real life. Starts with an aptitude round, narrows into a word-guessing \'Surprise Round\' in pairs, and ends with a live in-person Impostor-vs-Sheriff round.',
+    about:
+      'A solo-participation event bringing the social-deduction game Among Us to real life. Starts with an aptitude round, narrows into a word-guessing \'Surprise Round\' in pairs, and ends with a live in-person Impostor-vs-Sheriff round.',
+    teamSize: 'Individual participation only',
+    registrationFee: '₹50 / Participant',
+    numberOfRounds: 3,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'Aptitude Round',
+        mode: 'Offline',
+        date: 'Oct 9, 2026',
+        time: '11:00 AM – 1:00 PM',
+        venue: 'Classroom, Block A',
+        description:
+          'Tests general knowledge, awareness, aptitude, and logical reasoning; each question worth 1 mark, ties broken by submission time. Top 16 participants advance.',
+      },
+      {
+        roundNumber: 2,
+        title: 'Surprise Round',
+        mode: 'Offline',
+        date: 'Oct 9, 2026',
+        time: '2:00 PM – 6:00 PM',
+        venue: 'Old Reading Hall',
+        description:
+          "Top 16 players are randomly paired into 8 two-person teams by organizers and compete in elimination matchups of a word-guessing 'Surprise Round' game; the team that identifies all their words first, or has the most correct guesses at time-out, wins. Ties go to a tie-breaker round. Top 4 teams (8 players) proceed to the final round.",
+      },
+      {
+        roundNumber: 3,
+        title: 'Live Among Us',
+        mode: 'Offline',
+        date: 'Oct 11, 2026',
+        time: '3:00 PM – 4:00 PM (1 hour)',
+        venue: 'Main Stage / Open Air Theatre',
+        description:
+          'The 8 finalists play individually with roles (Impostor/Sheriff) randomly assigned. Impostors win by eliminating all Sheriffs; Sheriffs win by voting out all Impostors or completing all assigned tasks. No damage to college property permitted.',
+      },
+    ],
+    prizes: {
+      first: 5000,
+      second: 3000,
+      third: 2000,
+      totalCashPrize: 10000,
+      currency: 'INR',
+    },
     rules: [
       'Solo participation in assigned game lobbies',
-      'Secret roles assigned per game',
-      'Tasks and emergency discussions timed',
+      'Secret roles (Impostor / Sheriff) assigned per game',
+      'Tasks and emergency discussions strictly timed',
       'Points awarded for survival, deductions, and successful bluffs',
     ],
-    date: 'Oct 11, 2026',
+    date: 'Oct 9–11, 2026',
     time: '03:00 PM – 07:00 PM',
     venue: 'Main Stage / Open Air Theatre',
-    teamSize: 'Solo / Group',
     mythTieIn:
       'Kalyug is marked by illusion (Maya) and deception. Mayavi tests your perception to distinguish truth from deceit in an era of shadows.',
     gitaShloka: {
