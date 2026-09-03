@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, MapPin, Users, Phone, Download, Trophy, Award, Layers, Globe, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, MapPin, Users, Phone, Download, Trophy, Layers, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { EVENTS, YUGAS } from '../../data/yugas';
@@ -604,7 +604,7 @@ const EventDetail: React.FC = () => {
 
               {/* Coordinators */}
               <div className={styles.sideCard}>
-                <h3 className={styles.sideTitle}>Event Coordinators</h3>
+                <h3 className={styles.sideTitle}>Event Coordinators · AIMSA</h3>
                 <div className={styles.coordinatorsList}>
                   {event.coordinators.map((coord, i) => (
                     <div key={i} className={styles.coordinatorCard}>

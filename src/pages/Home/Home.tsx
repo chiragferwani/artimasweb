@@ -308,7 +308,7 @@ const Home: React.FC = () => {
 
               <p className={styles.aboutPara}>
                 <strong>AIMSA</strong> — the Artificial Intelligence and Machine
-                Learning Student Association — orchestrates Artimas every year: the college's
+                Learning Student Association under the <strong>Department of CSE (AI &amp; ML)</strong> — orchestrates Artimas every year: the department&apos;s
                 flagship celebration of talent, creativity, and intellect.
               </p>
               <p className={styles.aboutPara}>

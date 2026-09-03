@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Send, MapPin } from 'lucide-react';
+import { Mail, Phone, Send, MapPin, Globe } from 'lucide-react';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Contact.module.css';
 
-const durgaImg = getCloudinaryUrl('src/assets/durga.png');
-const lotusImg = getCloudinaryUrl('src/assets/lotus.png');
+const krishnaVid = getCloudinaryUrl('src/assets/krishnacontact.mp4');
+const chiranjeeviImg = getCloudinaryUrl('src/assets/chiranjeevi.png');
 
 // Senior Team Image Assets
 const harshilImg = getCloudinaryUrl('src/assets/team/harshil.png');
@@ -150,11 +150,11 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.7 }}
             className={styles.headerContent}
           >
-            <div className={styles.breadcrumb}>Reach the Council</div>
+            <div className={styles.breadcrumb}>Dept. of CSE (AI &amp; ML) · Reach the Council</div>
             <h1 className={styles.pageTitle}>Contact AIMSA</h1>
             <p className={styles.pageSubtitle}>
               Questions about registration, events, or collaborations?
-              The AIMSA council awaits your message.
+              The Department of CSE (AI &amp; ML) and AIMSA council await your message.
             </p>
           </motion.div>
         </div>
@@ -163,29 +163,23 @@ const Contact: React.FC = () => {
       {/* Content */}
       <section className={styles.contentSection}>
         <div className="container">
-          {/* Centered Durga Illustration with Rotating Ring */}
-          <motion.div
-            className={styles.durgaImgWrap}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            {/* Rotating Lotus Background */}
-            <div className={styles.durgaRingWrap}>
-              <img
-                src={lotusImg}
-                alt=""
-                className={styles.durgaRingImg}
-                draggable={false}
-              />
-            </div>
-
-            <img
-              src={durgaImg}
-              alt="Durga Illustration"
-              className={styles.durgaImg}
+          {/* Centered Krishna Feature Video & Chiranjeevi Motif */}
+          <div className={styles.krishnaVideoWrap}>
+            <video
+              src={krishnaVid}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={styles.krishnaVideo}
             />
-          </motion.div>
+            <img
+              src={chiranjeeviImg}
+              alt="Chiranjeevi"
+              className={styles.chiranjeeviImg}
+              draggable={false}
+            />
+          </div>
 
           <div className={styles.contentGrid}>
             {/* Form */}
@@ -342,6 +336,15 @@ const Contact: React.FC = () => {
                 <h3 className={styles.infoTitle}>Follow AIMSA</h3>
                 <div className={styles.socialList}>
                   <a
+                    href="https://aimsapccoe.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.socialItem}
+                  >
+                    <Globe size={18} />
+                    <span>aimsapccoe.in ↗</span>
+                  </a>
+                  <a
                     href="https://www.linkedin.com/company/pccoe-s-aimsa/posts/?feedView=all"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -378,7 +381,7 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <span className={styles.teamEyebrow}>The Council of Artimas</span>
+            <span className={styles.teamEyebrow}>Dept. of CSE (AI &amp; ML) · Council of Artimas</span>
             <h2 className={styles.teamTitle}>Meet the Team</h2>
             <p className={styles.teamSubtitle}>
               The visionaries and orchestrators behind the cosmic saga of Artimas 26–27.

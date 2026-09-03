@@ -163,7 +163,7 @@ const Calendar: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className={styles.breadcrumb}>Artimas 2026 · Oct 9th–11th</div>
+            <div className={styles.breadcrumb}>Dept. of CSE (AI &amp; ML) · Artimas 2026 · Oct 9th–11th</div>
             <h1 className={styles.pageTitle}>Event Schedule &amp; Calendar</h1>
             <p className={styles.pageSubtitle}>
               Three days of cosmic competition spanning the 4 Yugas (October 9–11, 2026). Plan your journey through the arena.

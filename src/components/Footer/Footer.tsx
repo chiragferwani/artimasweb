@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Globe } from 'lucide-react';
 import getCloudinaryUrl from '../../utils/cloudinary';
 
 const aaaiLogo = getCloudinaryUrl('src/assets/clubs/aaai.png');
@@ -136,6 +136,16 @@ const Footer: React.FC = () => {
             <ul className={styles.linkList}>
               <li>
                 <a
+                  href="https://aimsapccoe.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.footerLink}
+                >
+                  <Globe size={14} /> Website ↗
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://www.linkedin.com/company/pccoe-s-aimsa/posts/?feedView=all"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -163,7 +173,7 @@ const Footer: React.FC = () => {
         {/* Bottom bar */}
         <div className={styles.bottomBar}>
           <span className={styles.copyright}>
-            © 2026 AIMSA · Artimas 26-27 · All rights reserved. · Developed by{' '}
+            © 2026 AIMSA · Department of CSE (AI &amp; ML), PCCOE · Artimas 26-27 · All rights reserved. · Developed by{' '}
             <a
               href="https://chiragferwani.vercel.app"
               target="_blank"

@@ -25,7 +25,7 @@ const Events: React.FC = () => {
             transition={{ duration: 0.7 }}
             className={styles.headerContent}
           >
-            <div className={styles.breadcrumb}>Artimas 26-27</div>
+            <div className={styles.breadcrumb}>Dept. of CSE (AI &amp; ML) · Artimas 26-27</div>
             <h1 className={styles.pageTitle}>The Arena</h1>
             <p className={styles.pageSubtitle}>
               Seven battles across four cosmic ages. Choose your field. Claim your legend.

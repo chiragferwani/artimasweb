@@ -21,7 +21,7 @@ const Sponsors: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className={styles.breadcrumb}>Artimas 2026–2027</div>
+            <div className={styles.breadcrumb}>Dept. of CSE (AI &amp; ML) · Artimas 2026–2027</div>
             <h1 className={styles.pageTitle}>Our Celestial Partners</h1>
             <p className={styles.pageSubtitle}>
               The celestial portal is aligning. The visionary brands powering the 4 Yugas will soon step into the light.
