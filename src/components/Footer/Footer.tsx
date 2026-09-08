@@ -175,7 +175,7 @@ const Footer: React.FC = () => {
         {/* Bottom bar */}
         <div className={styles.bottomBar}>
           <span className={styles.copyright}>
-            © 2026 AIMSA · Department of CSE (AI &amp; ML), PCCOE · Artimas 26-27 · All rights reserved. · Developed by{' '}
+            © 2026 AIMSA · Department of CSE (AI &amp; ML), PCCOE · Artimas 26-27 · All rights reserved. ·{' '}
             <a
               href="https://chiragferwani.vercel.app"
               target="_blank"
@@ -183,15 +183,6 @@ const Footer: React.FC = () => {
               className={styles.devLink}
             >
               chiragferwani
-            </a>{' '}
-            &amp;{' '}
-            <a
-              href="https://vrushabhhirap.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.devLink}
-            >
-              vrushabhhirap
             </a>
           </span>
           <div className={styles.logoMark}>
