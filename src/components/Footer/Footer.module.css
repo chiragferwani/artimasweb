@@ -89,7 +89,7 @@
   .grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
 }
 @media (max-width: 560px) {
-  .grid { grid-template-columns: 1fr; gap: 28px; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
 }
 
 .col {}
@@ -123,6 +123,7 @@
   text-decoration: none;
   transition: color 0.2s ease;
   cursor: pointer;
+  word-break: break-word;
 }
 
 .footerLink:hover {
@@ -132,6 +133,17 @@
 .footerLink svg {
   flex-shrink: 0;
   opacity: 0.5;
+}
+
+@media (max-width: 480px) {
+  .footerLink {
+    font-size: 13px;
+    line-height: 18px;
+    gap: 4px;
+  }
+  .linkList {
+    gap: 10px;
+  }
 }
 
 /* Bottom bar */

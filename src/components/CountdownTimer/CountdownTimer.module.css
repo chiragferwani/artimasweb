@@ -54,17 +54,23 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 640px) {
-  .countdown { gap: 10px; }
-  .value { font-size: clamp(24px, 5vw, 36px); padding: 10px 14px; min-width: 64px; border-radius: 14px; }
-  .unit { min-width: 60px; }
-  .colon { font-size: 24px; margin-bottom: 20px; }
-  .label { font-size: 11px; }
+@media (max-width: 767px) {
+  .countdown { gap: 8px; flex-wrap: nowrap; }
+  .value { font-size: clamp(20px, 4.5vw, 32px); padding: 8px 10px; min-width: 52px; border-radius: 12px; }
+  .unit { min-width: 52px; }
+  .colon { font-size: 20px; margin-bottom: 18px; }
+  .label { font-size: 10px; margin-top: 6px; }
 }
-@media (max-width: 400px) {
+@media (max-width: 420px) {
+  .colon { font-size: 16px; margin-bottom: 16px; }
+  .countdown { gap: 4px; }
+  .value { padding: 6px 8px; min-width: 46px; border-radius: 10px; font-size: 18px; }
+  .unit { min-width: 46px; }
+  .label { font-size: 9px; letter-spacing: 0.5px; }
+}
+@media (max-width: 340px) {
   .colon { display: none; }
-  .countdown { gap: 8px; }
-  .value { padding: 8px 10px; min-width: 56px; border-radius: 12px; }
-  .unit { min-width: 50px; }
-  .label { font-size: 10px; }
+  .countdown { gap: 4px; }
+  .value { min-width: 42px; padding: 6px 4px; font-size: 16px; }
+  .unit { min-width: 42px; }
 }

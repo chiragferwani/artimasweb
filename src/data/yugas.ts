@@ -222,6 +222,7 @@ export interface Event {
   description: string;
   about?: string;
   rules: string[];
+  rulebookUrl?: string;
   date: string;
   time: string;
   venue: string;
@@ -259,40 +260,40 @@ export const EVENTS: Event[] = [
         time: 'Problem Statement Release 11:00 AM, Submission Window 2:00 PM - 11:00 AM',
         venue: 'Online / GFG PCCOE Hackathon Portal',
         description:
-          'Teams submit a Proof of Concept (at least 50% working prototype) via GitHub, a max 6-minute video demo, and a solution overview through the GFG PCCOE Hackathon Portal. Solution must be AI/ML compatible and scalable. Evaluated on Innovativeness (10), Completion Level (10), Tech Stack (15), Presentation (10), UI/UX (15), GitHub Maintenance (20), Documentation (10), Social Impact (10). Top 4 teams per track advance.',
+          'Teams must submit a functional prototype, GitHub repo link, and brief architecture video. Top teams advance to the overnight build.',
       },
       {
         roundNumber: 2,
-        title: 'Final Build & Pitch',
+        title: 'Grand Finale & Build Sprint',
         mode: 'Offline',
-        date: 'Oct 11, 2026 (24-hr Overnight Build)',
-        time: 'Kickoff 10:00 AM through Final Evaluation 11:00 AM',
-        venue: 'Architecture Hall, PCCOE',
+        date: 'Oct 10–11, 2026',
+        time: '11:00 AM (Oct 10) – 05:00 PM (Oct 11)',
+        venue: 'Main Auditorium / Innovation Lab',
         description:
-          'All team members must be present; a working end-product prototype is built entirely on-site over the overnight window and evaluated by domain experts. PPT must follow the provided template. Evaluated on Innovativeness, Tech Stack, Presentation, UI/UX, and AI & ML Integration. One winner selected per domain.',
+          '30-hour on-campus development sprint with periodic mentoring, surprise checkpoint reviews, and live final jury pitching.',
       },
     ],
     prizes: {
-      first: 20000,
-      second: 12000,
-      third: 8000,
-      totalCashPrize: 40000,
+      first: 25000,
+      second: 15000,
+      third: 10000,
+      totalCashPrize: 50000,
       currency: 'INR',
     },
     rules: [
-      'Teams of 3–4 members',
-      'Code must be written during the event window',
-      'Open-source libraries permitted',
-      'Judged on innovation, clean architecture, AI/ML integration, and execution',
-      'Live prototype and presentation required in Round 2',
+      'Teams must consist of 3 to 4 members',
+      'All code must be written during the hackathon period',
+      'Use of pre-built AI models / open-source libraries is permitted with disclosure',
+      'Decision of the jury panel is final and binding',
     ],
+    rulebookUrl: 'https://drive.google.com/file/d/1NkJAkI0yjIhUqrhZYbFfIhXRTXMJZIcc/view?usp=drive_link',
     date: 'Oct 9–11, 2026',
-    time: '30-Hour Build Sprint',
-    venue: 'Architecture Hall, Block D',
+    time: '11:00 AM (Oct 9) – 05:00 PM (Oct 11)',
+    venue: 'Main Auditorium / Innovation Lab',
     mythTieIn:
-      'In Satyuga, pure truth governed all existence. Hackmatrix challenges coders to craft immaculate, flawless solutions in harmony with fundamental logic.',
+      'In Satyuga, truth was absolute and uncompromised. Hackmatrix embodies this spirit: pure creation from raw truth, where every line of code must stand on its own merit without illusion.',
     gitaShloka: {
-      sanskrit: 'कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥',
+      sanskrit: 'कर्मण्येवाधिकारस्ते मा फलेषु कदाचन\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि',
       transliteration: 'Karmanye vadhikaraste, ma phaleshu kadachana',
       meaning:
         'Your right is to the work alone, never to its fruits — act without attachment to the outcome. A fitting anchor for a 30-hour build sprint, where the grind of creation matters more than guaranteed results.',
@@ -304,7 +305,7 @@ export const EVENTS: Event[] = [
     registrationOpen: false,
   },
   {
-    id: 'antaryami',
+    id: 'promptrelay',
     name: 'Antaryami',
     formerName: 'Prompt Relay',
     yuga: 'satya',
@@ -362,6 +363,7 @@ export const EVENTS: Event[] = [
       'No notes, cameras, or visual aids allowed for the Observer during relay',
       'Prompt auction credits must be strategically managed in Round 3',
     ],
+    rulebookUrl: 'https://drive.google.com/file/d/1iQYh2uXFR0Mh9P05klQr1_NSLWVdj4Gw/view?usp=drive_link',
     date: 'Oct 9–10, 2026',
     time: '02:30 PM – 05:30 PM',
     venue: 'Seminar Hall, Block A',
@@ -380,7 +382,7 @@ export const EVENTS: Event[] = [
     registrationOpen: false,
   },
   {
-    id: 'setu-nirman',
+    id: 'brandathon',
     name: 'Setu Nirman',
     formerName: 'Brandathon',
     yuga: 'treta',
@@ -437,6 +439,7 @@ export const EVENTS: Event[] = [
       'Deliverables must include brand story, logo design, 10-12 assets, and marketing pitch',
       'Final pitch follows a Shark-Tank presentation format with live Q&A',
     ],
+    rulebookUrl: 'https://drive.google.com/file/d/1AUBz0NDEqAadvhzAbrPBsmw5_FOWGk_M/view?usp=drive_link',
     date: 'Oct 9–11, 2026',
     time: '09:30 AM – 12:30 PM',
     venue: 'Old Reading Hall / Block C',
@@ -502,6 +505,7 @@ export const EVENTS: Event[] = [
       'All Round 2 code must be written on-site; no pre-trained weights without authorization',
       'Reproducible code notebooks and methodology slides mandatory',
     ],
+    rulebookUrl: 'https://drive.google.com/file/d/16Hffq-Jn3Q5RhPzedLmux5Km6E0u2q1U/view?usp=drive_link',
     date: 'Oct 9–10, 2026',
     time: '05:00 PM – 08:00 PM',
     venue: 'Data Analytics Lab, Block D',
@@ -567,6 +571,7 @@ export const EVENTS: Event[] = [
       'Automated scoring platform with live scoreboard',
       'Strict prohibition of attacks against competition infrastructure or fellow participants',
     ],
+    rulebookUrl: 'https://drive.google.com/file/d/1K8EYvn9FTv9G3cB4R0GuIkzH08GuyG98/view?usp=drive_link',
     date: 'Oct 10–11, 2026',
     time: '01:30 PM – 04:30 PM',
     venue: 'Seminar Hall, 5th Floor Mech Building',
@@ -644,6 +649,7 @@ export const EVENTS: Event[] = [
       'Strict 1-hour time limit for the final Escape Room',
       'Physical and logic puzzle solving under pressure; no damage to college property permitted',
     ],
+    rulebookUrl: 'https://drive.google.com/file/d/1-Dydkzz8A4Yp2-CPewqPymNqRA400aGu/view?usp=drive_link',
     date: 'Oct 10–11, 2026',
     time: '10:00 AM – 02:00 PM',
     venue: 'Auditorium / Rooms 6517–6519',
@@ -720,6 +726,7 @@ export const EVENTS: Event[] = [
       'Tasks and emergency discussions strictly timed',
       'Points awarded for survival, deductions, and successful bluffs',
     ],
+    rulebookUrl: 'https://drive.google.com/file/d/1vHn59xGK2iUGwnBQu6L-mn7-HB_LCnLF/view?usp=drive_link',
     date: 'Oct 9–11, 2026',
     time: '03:00 PM – 07:00 PM',
     venue: 'Main Stage / Open Air Theatre',
@@ -734,6 +741,137 @@ export const EVENTS: Event[] = [
     coordinators: [
       { name: 'Pratham', phone: '+91 82639 67306', email: 'pratham@aimsa.edu', avatar: prathamImg },
       { name: 'Bhumika', phone: '+91 87666 42327', email: 'bhumika@aimsa.edu', avatar: bhumikaImg },
+    ],
+    registrationOpen: false,
+  },
+  {
+    id: 'pixelperfect',
+    name: 'Pixel Perfect',
+    formerName: null,
+    yuga: 'treta',
+    tagline: 'Precision in design and visual mastery',
+    description:
+      'A design challenge testing UI/UX creativity, visual balance, and interactive prototyping. Designers battle to craft immaculate digital interfaces and compelling user journeys under pressure.',
+    about:
+      'A design challenge testing UI/UX creativity, visual balance, and interactive prototyping. Designers battle to craft immaculate digital interfaces and compelling user journeys under pressure.',
+    teamSize: '1–2 members',
+    registrationFee: '₹100 / Team',
+    numberOfRounds: 2,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'UI/UX Redesign & Wireframing',
+        mode: 'Offline',
+        date: 'Oct 10, 2026',
+        time: '10:00 AM – 01:00 PM',
+        venue: 'Computer Lab 3, Block D',
+        description:
+          'Participants receive a problem statement and must design low-fidelity wireframes and user journeys in Figma. Judged on usability, structure, and design rationale.',
+      },
+      {
+        roundNumber: 2,
+        title: 'High-Fidelity Prototype & Design Pitch',
+        mode: 'Offline',
+        date: 'Oct 10, 2026',
+        time: '02:00 PM – 05:00 PM',
+        venue: 'Computer Lab 3, Block D',
+        description:
+          'Qualifying teams turn their wireframes into interactive, responsive, pixel-perfect high-fidelity designs and pitch their design decisions to a jury.',
+      },
+    ],
+    prizes: {
+      first: 10000,
+      second: 6000,
+      third: 4000,
+      totalCashPrize: 20000,
+      currency: 'INR',
+    },
+    rules: [
+      'Teams of 1–2 members',
+      'Design assets must be created during the event window using Figma',
+      'Submissions evaluated on visual hierarchy, usability, creativity, and prototype flow',
+      'Final pitch required for shortlisted candidates in Round 2',
+    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1VtDYxMApD2vleAYA2E34yJwV_L9ohRQq/view?usp=drive_link',
+    date: 'Oct 10, 2026',
+    time: '10:00 AM – 05:00 PM',
+    venue: 'Computer Lab 3, Block D',
+    mythTieIn:
+      'In Tretayuga, the architecture of bridges and bows demanded flawless craftsmanship and divine symmetry. Pixel Perfect celebrates meticulous design accuracy where every pixel matters.',
+    gitaShloka: {
+      sanskrit: 'योगः कर्मसु कौशलम्।',
+      transliteration: 'Yogah karmasu kaushalam',
+      meaning:
+        'Excellence in action is yoga. True mastery lies in the perfection and precision brought to every stroke of creative craftsmanship.',
+    },
+    coordinators: [
+      { name: 'Saish', phone: '+91 84594 77995', email: 'saish@aimsa.edu', avatar: saishImg },
+      { name: 'Rutuja', phone: '+91 91583 05670', email: 'rutuja@aimsa.edu', avatar: rutujaImg },
+    ],
+    registrationOpen: false,
+  },
+  {
+    id: 'dronevedha',
+    name: 'Drone Vedha',
+    formerName: null,
+    yuga: 'kali',
+    tagline: 'Aerial mastery and precision obstacle navigation',
+    description:
+      'An exhilarating aerial obstacle racing and drone piloting competition. Pilots navigate intricate flight courses, tight slalom gates, and speed challenges to prove ultimate control of modern Astra technology.',
+    about:
+      'An exhilarating aerial obstacle racing and drone piloting competition. Pilots navigate intricate flight courses, tight slalom gates, and speed challenges to prove ultimate control of modern Astra technology.',
+    teamSize: '2–4 members',
+    registrationFee: '₹250 / Team',
+    numberOfRounds: 2,
+    rounds: [
+      {
+        roundNumber: 1,
+        title: 'Time Trial & Slalom Gate Navigation',
+        mode: 'Offline',
+        date: 'Oct 11, 2026',
+        time: '10:00 AM – 01:00 PM',
+        venue: 'Football Ground / Open Arena',
+        description:
+          'Individual time trials through a set aerial course with tight gates and altitude markers. Evaluated on lap time and gate clearance accuracy.',
+      },
+      {
+        roundNumber: 2,
+        title: 'Championship Obstacle Pursuit',
+        mode: 'Offline',
+        date: 'Oct 11, 2026',
+        time: '02:00 PM – 05:00 PM',
+        venue: 'Football Ground / Open Arena',
+        description:
+          'Top qualifiers compete head-to-head in an advanced obstacle course with dynamic hoops and precision landing targets.',
+      },
+    ],
+    prizes: {
+      first: 15000,
+      second: 10000,
+      third: 5000,
+      totalCashPrize: 30000,
+      currency: 'INR',
+    },
+    rules: [
+      'Teams of 2–4 members',
+      'Drones must comply with size and weight safety specifications',
+      'All pilots must pass pre-flight safety and frequency check',
+      'Penalties incurred for missing gates or out-of-boundary flight',
+    ],
+    date: 'Oct 11, 2026',
+    time: '10:00 AM – 05:00 PM',
+    venue: 'Football Ground / Open Arena',
+    mythTieIn:
+      'In Kaliyuga, machines and airborne technology dominate the skies like celestial arrows. Drone Vedha tests the razor-sharp focus and aim (Vedha) required to pilot high-speed flying craft.',
+    gitaShloka: {
+      sanskrit: 'अभ्यासेन तु कौन्तेय वैराग्येण च गृह्यते।',
+      transliteration: 'Abhyasena tu kaunteya vairagyena cha grihyate',
+      meaning:
+        'By constant practice and disciplined focus, O Arjuna, the mind and craft are mastered. Meticulous control of flying craft requires unwavering focus and intense practice.',
+    },
+    coordinators: [
+      { name: 'Kshitij', phone: '+91 93700 81223', email: 'kshitij@aimsa.edu', avatar: kshitijImg },
+      { name: 'Vrushabh', phone: '+91 95276 43288', email: 'vrushabh@aimsa.edu', avatar: vrushabhImg },
     ],
     registrationOpen: false,
   },

@@ -4,8 +4,9 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 100vw;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
@@ -13,6 +14,7 @@
 .curved-loop-svg {
   user-select: none;
   width: 100%;
+  max-width: 100%;
   aspect-ratio: 1440 / 240;
   overflow: visible;
   display: block;
@@ -31,4 +33,16 @@
 .curved-loop-text-gold {
   fill: #F5D76E;
   letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .curved-loop-svg {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .curved-loop-svg {
+    font-size: 22px;
+  }
 }

@@ -1,14 +1,69 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Cpu, Utensils, Cookie } from 'lucide-react';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { SwastikChakra } from '../../components/SwastikChakra/SwastikChakra';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Sponsors.module.css';
 
-const vishnuImg = getCloudinaryUrl('src/assets/vishnu.png');
 const shivaVideo = getCloudinaryUrl('src/assets/shiva.mp4');
+
+interface SponsorItem {
+  alt: string;
+  logo: string;
+  website?: string;
+}
+
+interface SponsorTier {
+  id: string;
+  title: string;
+  icon: React.ReactNode;
+  sponsors: SponsorItem[];
+}
+
+const sponsorTiers: SponsorTier[] = [
+  {
+    id: 'technical',
+    title: 'Technical Sponsors',
+    icon: <Cpu size={16} className={styles.tierIcon} />,
+    sponsors: [
+      {
+        alt: 'Thynqit',
+        logo: getCloudinaryUrl('src/assets/sponsors/Thynqit White Wordmark Logo.png'),
+      },
+    ],
+  },
+  {
+    id: 'food',
+    title: 'Food Sponsors',
+    icon: <Utensils size={16} className={styles.tierIcon} />,
+    sponsors: [
+      {
+        alt: 'MyFroyoLand',
+        logo: getCloudinaryUrl('src/assets/sponsors/MyFroyoLand_Food.jpeg'),
+      },
+      {
+        alt: 'Smoked Taxi',
+        logo: getCloudinaryUrl('src/assets/sponsors/smoked_taxi_food.jpeg'),
+      },
+    ],
+  },
+  {
+    id: 'munching',
+    title: 'Munching Partners',
+    icon: <Cookie size={16} className={styles.tierIcon} />,
+    sponsors: [
+      {
+        alt: 'Balaji Wafers',
+        logo: getCloudinaryUrl('src/assets/sponsors/balaji_munching.png'),
+      },
+      {
+        alt: 'Budhani Bros',
+        logo: getCloudinaryUrl('src/assets/sponsors/budhani_munching.jpeg'),
+      },
+    ],
+  },
+];
 
 const Sponsors: React.FC = () => {
   return (
@@ -22,28 +77,17 @@ const Sponsors: React.FC = () => {
             transition={{ duration: 0.7 }}
           >
             <div className={styles.breadcrumb}>Dept. of CSE (AI &amp; ML) · Artimas 2026–2027</div>
-            <h1 className={styles.pageTitle}>Our Celestial Partners</h1>
+            <h1 className={styles.pageTitle}>Our Sponsors</h1>
             <p className={styles.pageSubtitle}>
-              The celestial portal is aligning. The visionary brands powering the 4 Yugas will soon step into the light.
+              Proudly supported by visionary industry leaders and brands powering Artimas 2026 across the four Yugas.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Vishnu illustration image before reveal section */}
-      <motion.div
-        className={styles.vishnuImageWrap}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.65, delay: 0.2 }}
-      >
-        <img src={vishnuImg} alt="Lord Vishnu" className={styles.vishnuImg} />
-      </motion.div>
-
-      {/* Unique "Sponsors Reveal Soon" Showcase */}
-      <section className={styles.revealSection}>
+      {/* Hero Sponsors Vault Card Section */}
+      <section className={styles.vaultSection}>
         <div className="container">
-          {/* Hero Teaser Vault */}
           <motion.div
             className={styles.vaultCard}
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -51,44 +95,75 @@ const Sponsors: React.FC = () => {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
-            {/* Background Video that stops at the end */}
-            <video 
-              src={shivaVideo} 
-              autoPlay 
-              muted 
-              playsInline 
-              className={styles.vaultVideoBg} 
+            {/* Background Video (stops on end screen) */}
+            <video
+              src={shivaVideo}
+              autoPlay
+              muted
+              playsInline
+              className={styles.vaultVideoBg}
             />
 
-            {/* Content Wrapper to sit above the video */}
+            {/* Content Wrapper sitting above the video */}
             <div className={styles.vaultContent}>
               {/* Ambient Background Aura */}
               <div className={styles.vaultGlow} />
 
-              {/* Top Live Ticker */}
+              {/* Top Live Ticker without celestial wording */}
               <div className={styles.liveTicker}>
                 <span className={styles.pulseDot} />
-                <span className={styles.tickerText}>CELESTIAL FREQUENCY TRANSMISSION</span>
+                <span className={styles.tickerText}>OFFICIAL PARTNERS TRANSMISSION</span>
               </div>
 
-              {/* Small Swastik Chakra */}
+              {/* Swastik and 360° Shloka Animation */}
               <div className={styles.chakraWrap}>
                 <SwastikChakra />
               </div>
 
-              {/* Big Unique Headline */}
+              {/* Main Headline */}
               <h2 className={styles.revealTitle}>
-                Sponsors <span className={styles.revealHighlight}>Reveal Soon</span>
+                Artimas <span className={styles.revealHighlight}>Sponsors</span>
               </h2>
 
               <p className={styles.revealDescription}>
-                The divine guardians of tech, innovation, and culture are forging alliances behind the cosmic curtain. 
-                The grand revelation across all 4 Yugas approaches.
+                Honoring the alliances powering technology, dining, and hospitality across the cosmic spectrum.
               </p>
 
-              <Link to="/contact" className={styles.ctaBtn}>
-                Become a Sponsor <ArrowUpRight size={16} />
-              </Link>
+              {/* 3 Tier Groups Inside the Single Block */}
+              <div className={styles.tiersContainer}>
+                {sponsorTiers.map((tier) => (
+                  <div key={tier.id} className={styles.tierBlock}>
+                    {/* Tier Title Header */}
+                    <div className={styles.tierHeader}>
+                      <div className={styles.tierBadge}>
+                        {tier.icon}
+                        <span>{tier.title}</span>
+                      </div>
+                    </div>
+
+                    {/* Sponsor Logos Grid */}
+                    <div className={styles.sponsorGrid}>
+                      {tier.sponsors.map((sponsor, idx) => (
+                        <motion.div
+                          key={sponsor.alt + idx}
+                          className={`${styles.logoCard} ${
+                            sponsor.alt === 'Thynqit' ? styles.wordmarkCard : styles.imageCard
+                          } ${tier.id === 'food' ? styles.foodLogoCard : ''}`}
+                          whileHover={{ y: -5, scale: 1.03 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <img
+                            src={sponsor.logo}
+                            alt={sponsor.alt}
+                            className={styles.sponsorLogo}
+                            loading="lazy"
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>

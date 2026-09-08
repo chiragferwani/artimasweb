@@ -55,14 +55,14 @@
   z-index: 1;
 }
 
-/* ════ 1. ANTICLOCKWISE SHLOKA RING (COMPLETE 360° CIRCLE) ════ */
-.anticlockwiseRing {
+/* ════ 1. CLOCKWISE SHLOKA RING (COMPLETE 360° CIRCLE) ════ */
+.shlokaRing {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   z-index: 2;
-  animation: rotateAnticlockwise 55s linear infinite;
+  animation: rotateClockwise 55s linear infinite;
   transform-origin: center center;
 }
 

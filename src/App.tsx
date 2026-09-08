@@ -289,20 +289,21 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      {/* Fixed background Galaxy animation — stays active on all pages */}
+
+      {/* Fixed background Galaxy animation over bg_image — stays active on all pages */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <Galaxy
-          stars={isMobile ? 400 : 1000}
-          speed={2}
+          stars={isMobile ? 250 : 600}
+          speed={1.5}
           spread={5}
           focal={2}
           twinkle={0.35}
-          trail={0.75}
-          size={isMobile ? 1.5 : 2}
+          trail={1}
+          size={isMobile ? 1.2 : 1.6}
           fadeInRange={5}
           reverseFly={true}
           followCursor={!isMobile}
-          background="#000000"
+          background="transparent"
           starColor="#ffffff"
         />
       </div>
@@ -311,8 +312,8 @@ const AppContent: React.FC = () => {
       {!isInitialLoaderDone && (
         <VideoLoader
           loaderSrc={isMobile 
-            ? getCloudinaryUrl('src/assets/mobileloader.mp4') 
-            : getCloudinaryUrl('src/assets/thefinal.mp4')}
+            ? getCloudinaryUrl('src/assets/loaders/mobile-loader.mp4') 
+            : getCloudinaryUrl('src/assets/loaders/final-loader.mp4')}
           onComplete={handleLoaderComplete}
         />
       )}

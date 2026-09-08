@@ -16,8 +16,8 @@ export const SwastikChakra: React.FC = () => {
           {/* Outer Decorative Ambient Glow Ring */}
           <div className={styles.outerGlowRing} />
 
-          {/* 1. OUTER RING: Rotating Anticlockwise with Sacred Shlokas (360° Complete Circle) */}
-          <div className={styles.anticlockwiseRing}>
+          {/* 1. OUTER RING: Rotating Clockwise with Sacred Shlokas (360° Complete Circle) */}
+          <div className={styles.shlokaRing}>
             <svg viewBox="0 0 500 500" className={styles.shlokaSvg}>
               <defs>
                 {/* Circle path radius 220 -> Circumference ~ 1382.3px */}

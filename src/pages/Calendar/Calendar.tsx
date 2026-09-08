@@ -9,28 +9,45 @@ import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Calendar.module.css';
 
 const calImg = getCloudinaryUrl('src/assets/cal.jpeg');
-const saraswatiImg = getCloudinaryUrl('src/assets/saraswati.png');
-const swbgImg = getCloudinaryUrl('src/assets/swbg.png');
-const antaryamiImg = getCloudinaryUrl('src/assets/eventnames/antaryami.png');
-const chakravyuhImg = getCloudinaryUrl('src/assets/eventnames/chakravyuh.png');
+const artimasonlineImg = getCloudinaryUrl('src/assets/artimasonline.png');
+const artimas9thImg = getCloudinaryUrl('src/assets/artimas9th.png');
+const artimas10thImg = getCloudinaryUrl('src/assets/artimas10th.png');
+const artimas11thImg = getCloudinaryUrl('src/assets/artimas11th.png');
+const promptrelayImg = getCloudinaryUrl('src/assets/eventnames/promptrelay.png');
+const houdiniheistImg = getCloudinaryUrl('src/assets/eventnames/houdiniheist.png');
 const datathonImg = getCloudinaryUrl('src/assets/eventnames/datathon.png');
 const hackmatrixImg = getCloudinaryUrl('src/assets/eventnames/hackmatrix.png');
 const kurukshetraImg = getCloudinaryUrl('src/assets/eventnames/kurukshetra.png');
-const mayaviImg = getCloudinaryUrl('src/assets/eventnames/mayavi.png');
-const setunirmanImg = getCloudinaryUrl('src/assets/eventnames/setunirman.png');
+const amongusImg = getCloudinaryUrl('src/assets/eventnames/amongus.png');
+const brandathonImg = getCloudinaryUrl('src/assets/eventnames/brandathon.png');
+const pixelperfectImg = getCloudinaryUrl('src/assets/eventnames/pixelperfect.png');
+const dronevedhaImg = getCloudinaryUrl('src/assets/eventnames/dronevedha.png');
 const satyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/satyug.png');
 const tretayugBadgeImg = getCloudinaryUrl('src/assets/eventnames/tretayug.png');
 const dwaparyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/dwaparyug.png');
 const kalyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/kalyug.png');
 
+const DAY_BANNER_IMAGES: Record<string, string> = {
+  all: artimasonlineImg,
+  day1: artimas9thImg,
+  day2: artimas10thImg,
+  day3: artimas11thImg,
+};
+
 const EVENT_NAME_IMAGES: Record<string, string> = {
-  'antaryami': antaryamiImg,
-  'chakravyuh': chakravyuhImg,
+  'promptrelay': promptrelayImg,
+  'antaryami': promptrelayImg,
+  'chakravyuh': houdiniheistImg,
   'datathon': datathonImg,
   'hackmatrix': hackmatrixImg,
   'kurukshetra': kurukshetraImg,
-  'mayavi': mayaviImg,
-  'setu-nirman': setunirmanImg,
+  'mayavi': amongusImg,
+  'brandathon': brandathonImg,
+  'setu-nirman': brandathonImg,
+  'pixelperfect': pixelperfectImg,
+  'pixel-perfect': pixelperfectImg,
+  'dronevedha': dronevedhaImg,
+  'drone-vedha': dronevedhaImg,
 };
 
 const YUGA_BADGE_IMAGES: Record<string, string> = {
@@ -62,13 +79,13 @@ const SCHEDULE: ScheduleItem[] = [
     day: 'day1',
     dayLabel: 'Day 1',
     date: 'Oct 9, 2026',
-    timeSlot: '09:30 AM – 01:30 PM',
-    venue: 'Computer Labs, Block D',
-    description: 'Matrix of pure code and truth hackathon competition.',
+    timeSlot: '09:00 AM – 12:00 PM',
+    venue: 'Main Auditorium',
+    description: '30-hour offline hackathon testing pure logic and AI innovation.',
   },
   {
     id: 's-2',
-    eventId: 'antaryami',
+    eventId: 'promptrelay',
     name: 'Antaryami',
     yuga: 'satya',
     day: 'day1',
@@ -80,7 +97,7 @@ const SCHEDULE: ScheduleItem[] = [
   },
   {
     id: 's-4',
-    eventId: 'setu-nirman',
+    eventId: 'brandathon',
     name: 'Setu Nirman',
     yuga: 'treta',
     day: 'day2',
@@ -89,6 +106,18 @@ const SCHEDULE: ScheduleItem[] = [
     timeSlot: '09:30 AM – 12:30 PM',
     venue: 'Conference Room, Block C',
     description: 'Brandathon building brand identity and marketing strategy.',
+  },
+  {
+    id: 's-pixel-perfect',
+    eventId: 'pixelperfect',
+    name: 'Pixel Perfect',
+    yuga: 'treta',
+    day: 'day2',
+    dayLabel: 'Day 2',
+    date: 'Oct 10, 2026',
+    timeSlot: '10:00 AM – 05:00 PM',
+    venue: 'Computer Lab 3, Block D',
+    description: 'UI/UX design challenge testing precision, aesthetics, and prototype flow.',
   },
   {
     id: 's-5',
@@ -125,6 +154,18 @@ const SCHEDULE: ScheduleItem[] = [
     timeSlot: '10:00 AM – 02:00 PM',
     venue: 'Auditorium, Block A',
     description: 'Houdini-style escape and tactical heist puzzle maze.',
+  },
+  {
+    id: 's-drone-vedha',
+    eventId: 'dronevedha',
+    name: 'Drone Vedha',
+    yuga: 'kali',
+    day: 'day3',
+    dayLabel: 'Day 3',
+    date: 'Oct 11, 2026',
+    timeSlot: '10:00 AM – 05:00 PM',
+    venue: 'Football Ground / Open Arena',
+    description: 'High-speed drone obstacle navigation and aerial precision pursuit.',
   },
   {
     id: 's-8',
@@ -168,19 +209,6 @@ const Calendar: React.FC = () => {
             <p className={styles.pageSubtitle}>
               Three days of cosmic competition spanning the 4 Yugas (October 9–11, 2026). Plan your journey through the arena.
             </p>
-
-            {/* Goddess Saraswati illustration with rotating swbg background */}
-            <motion.div
-              className={styles.saraswatiWrap}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.2 }}
-            >
-              <div className={styles.saraswatiHeroContainer}>
-                <img src={swbgImg} alt="Celestial Background" className={styles.swbgRotateImg} />
-                <img src={saraswatiImg} alt="Goddess Saraswati" className={styles.saraswatiHeroImg} />
-              </div>
-            </motion.div>
 
             {/* Filter controls */}
             <div className={styles.controlsRow}>
@@ -238,6 +266,23 @@ const Calendar: React.FC = () => {
       {/* Schedule Timeline List */}
       <section className={styles.scheduleSection}>
         <div className="container">
+          {/* Day Banner Image Card with curved background */}
+          {DAY_BANNER_IMAGES[selectedDay] && (
+            <motion.div
+              key={selectedDay}
+              className={styles.bannerCard}
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.45 }}
+            >
+              <img
+                src={DAY_BANNER_IMAGES[selectedDay]}
+                alt={selectedDay === 'all' ? 'Artimas All 3 Days' : `Artimas ${selectedDay}`}
+                className={styles.dayBannerImg}
+              />
+            </motion.div>
+          )}
+
           <div className={styles.timelineList}>
             {filteredSchedule.map((item, i) => {
               const yugaTheme = YUGAS[item.yuga];
@@ -266,11 +311,13 @@ const Calendar: React.FC = () => {
                     </div>
                   </div>
                   {EVENT_NAME_IMAGES[item.eventId] ? (
-                    <img
-                      src={EVENT_NAME_IMAGES[item.eventId]}
-                      alt={item.name}
-                      className={styles.eventNameImg}
-                    />
+                    <div className={styles.eventNameImgWrap}>
+                      <img
+                        src={EVENT_NAME_IMAGES[item.eventId]}
+                        alt={item.name}
+                        className={styles.eventNameImg}
+                      />
+                    </div>
                   ) : (
                     <h3 className={styles.eventName}>{item.name}</h3>
                   )}

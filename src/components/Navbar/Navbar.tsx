@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Navbar.module.css';
+
+const logoImg = getCloudinaryUrl('src/assets/logo.png');
 
 const NAV_LINKS = [
   { to: '/',        label: 'Home' },
@@ -24,7 +27,20 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => { setMobileOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
 
   return (
     <>
@@ -33,7 +49,7 @@ const Navbar: React.FC = () => {
         <nav className={styles.pill}>
           {/* Logo */}
           <NavLink to="/" className={styles.logo}>
-            <img src="/artimasnav.png" alt="Artimas" className={styles.logoImg} />
+            <img src={logoImg} alt="Artimas" className={styles.logoImg} />
           </NavLink>
 
           {/* Desktop links */}

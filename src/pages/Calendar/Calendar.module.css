@@ -52,60 +52,6 @@
   margin: 0 auto 24px;
 }
 
-/* Goddess Saraswati Illustration & Rotating Celestial Background */
-.saraswatiWrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: -10px auto 24px;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-.saraswatiHeroContainer {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: min(95vw, 640px);
-  min-height: 420px;
-}
-
-.swbgRotateImg {
-  position: absolute;
-  inset: -20px;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  z-index: 1;
-  pointer-events: none;
-  animation: rotateClockwise 35s linear infinite;
-  transform-origin: center center;
-  filter: drop-shadow(0 0 35px rgba(245, 215, 110, 0.45));
-}
-
-@keyframes rotateClockwise {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.saraswatiHeroImg {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: min(88vw, 480px);
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 0 45px rgba(243, 115, 56, 0.55));
-}
-
 /* Controls */
 .controlsRow {
   display: flex;
@@ -178,6 +124,43 @@
   z-index: 2;
 }
 
+/* Day Banner Card matching width of event cards below */
+.bannerCard {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto 36px;
+  padding: 0;
+  background: radial-gradient(ellipse 90% 80% at 50% 50%, rgba(16, 28, 48, 0.92) 0%, rgba(8, 14, 26, 0.98) 100%);
+  border: 1.5px solid rgba(245, 215, 110, 0.45);
+  border-radius: clamp(18px, 3.5vw, 32px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.75), inset 0 0 24px rgba(56, 189, 248, 0.1), 0 0 24px rgba(245, 215, 110, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.bannerCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(245, 215, 110, 0.7);
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.85), inset 0 0 32px rgba(56, 189, 248, 0.15), 0 0 32px rgba(245, 215, 110, 0.25);
+}
+
+.dayBannerImg {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+
 .timelineList {
   display: flex;
   flex-direction: column;
@@ -214,7 +197,7 @@
 
 @media (max-width: 767px) {
   .eventCard {
-    padding: 16px 16px 18px;
+    padding: 46px 16px 18px;
   }
 }
 
@@ -274,14 +257,38 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.eventNameImgWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px 4px;
+  margin: 2px 0 4px;
+}
+
+.eventNameImgWrap::before {
+  content: '';
+  position: absolute;
+  inset: 10% 15%;
+  background: radial-gradient(ellipse 90% 80% at 50% 50%, rgba(10, 5, 2, 0.28) 0%, rgba(15, 8, 3, 0.12) 60%, transparent 100%);
+  border-radius: 999px;
+  filter: blur(14px);
+  z-index: 0;
+  pointer-events: none;
+}
+
 .eventNameImg {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: min(94%, 650px);
   height: auto;
   max-height: 165px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.85));
-  margin: 2px 0 4px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.65));
+  margin: 0 auto;
   display: block;
 }
 
@@ -346,20 +353,33 @@
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 767px) {
-  .main { padding-top: 80px; }
-  .pageHeader { padding: 32px 0 28px; }
-  .saraswatiHeroContainer { min-height: 300px; }
-  .eventName { font-size: 22px; }
-  .controlsRow { margin-bottom: 32px; }
-  .scheduleSection { padding: 0 0 64px; }
+  .main { padding-top: 72px; }
+  .pageHeader { padding: 24px 0 20px; }
+  .eventName { font-size: 20px; }
+  .controlsRow { margin-bottom: 24px; }
+  .scheduleSection { padding: 0 0 48px; }
+  .dayTabs { padding: 4px; }
+  .dayTab { padding: 8px 16px; font-size: 13px; }
+  .bannerCard {
+    margin-bottom: 24px;
+    padding: 16px 14px;
+    border-radius: 24px;
+  }
 }
 
 @media (max-width: 480px) {
-  .dayTab { padding: 8px 16px; font-size: 12px; }
+  .pageTitle { font-size: clamp(28px, 8vw, 38px); }
+  .pageSubtitle { font-size: 14px; margin-bottom: 16px; }
+  .dayTab { padding: 7px 12px; font-size: 12px; }
   .filterBtn { padding: 5px 12px; font-size: 11px; }
   .eventName { font-size: 18px; }
   .eventDesc { font-size: 13px; line-height: 20px; }
   .detailBtn { padding: 9px 18px; font-size: 12px; }
-  .saraswatiHeroContainer { min-height: 240px; }
   .cardHeaderRow { left: 12px; right: 12px; top: 10px; }
+  .eventCard { padding: 42px 12px 16px; }
+  .bannerCard {
+    margin-bottom: 20px;
+    padding: 12px 8px;
+    border-radius: 18px;
+  }
 }

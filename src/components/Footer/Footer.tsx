@@ -94,12 +94,14 @@ const Footer: React.FC = () => {
             <div className={styles.colHeader}>Events</div>
             <ul className={styles.linkList}>
               <li><NavLink to="/events/hackmatrix" className={styles.footerLink}>Hackmatrix</NavLink></li>
-              <li><NavLink to="/events/antaryami" className={styles.footerLink}>Antaryami</NavLink></li>
-              <li><NavLink to="/events/setu-nirman" className={styles.footerLink}>Setu Nirman</NavLink></li>
+              <li><NavLink to="/events/promptrelay" className={styles.footerLink}>Prompt Relay</NavLink></li>
+              <li><NavLink to="/events/brandathon" className={styles.footerLink}>Brandathon</NavLink></li>
+              <li><NavLink to="/events/pixelperfect" className={styles.footerLink}>Pixel Perfect</NavLink></li>
               <li><NavLink to="/events/datathon" className={styles.footerLink}>Datathon</NavLink></li>
               <li><NavLink to="/events/kurukshetra" className={styles.footerLink}>Kurukshetra (CTF)</NavLink></li>
-              <li><NavLink to="/events/chakravyuh" className={styles.footerLink}>Chakravyuh</NavLink></li>
-              <li><NavLink to="/events/mayavi" className={styles.footerLink}>Mayavi</NavLink></li>
+              <li><NavLink to="/events/chakravyuh" className={styles.footerLink}>Houdini Heist</NavLink></li>
+              <li><NavLink to="/events/mayavi" className={styles.footerLink}>Among Us</NavLink></li>
+              <li><NavLink to="/events/dronevedha" className={styles.footerLink}>Drone Vedha</NavLink></li>
             </ul>
           </div>
 

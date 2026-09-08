@@ -2,35 +2,68 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Lottie } from 'lottie-react';
 import type { Event } from '../../data/yugas';
 import { YUGAS } from '../../data/yugas';
-import orangeFlagAnimation from '../../animations/orangeflag.json';
-import redFlagAnimation from '../../animations/redflag.json';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './EventCard.module.css';
 
 const logImg = getCloudinaryUrl('src/assets/log.png');
-const antaryamiImg = getCloudinaryUrl('src/assets/eventnames/antaryami.png');
-const chakravyuhImg = getCloudinaryUrl('src/assets/eventnames/chakravyuh.png');
+const calImg = getCloudinaryUrl('src/assets/cal.jpeg');
+const promptrelayImg = getCloudinaryUrl('src/assets/eventnames/promptrelay.png');
+const houdiniheistImg = getCloudinaryUrl('src/assets/eventnames/houdiniheist.png');
 const datathonImg = getCloudinaryUrl('src/assets/eventnames/datathon.png');
 const hackmatrixImg = getCloudinaryUrl('src/assets/eventnames/hackmatrix.png');
 const kurukshetraImg = getCloudinaryUrl('src/assets/eventnames/kurukshetra.png');
-const mayaviImg = getCloudinaryUrl('src/assets/eventnames/mayavi.png');
-const setunirmanImg = getCloudinaryUrl('src/assets/eventnames/setunirman.png');
+const amongusImg = getCloudinaryUrl('src/assets/eventnames/amongus.png');
+const brandathonImg = getCloudinaryUrl('src/assets/eventnames/brandathon.png');
+const pixelperfectImg = getCloudinaryUrl('src/assets/eventnames/pixelperfect.png');
+const dronevedhaImg = getCloudinaryUrl('src/assets/eventnames/dronevedha.png');
 const satyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/satyug.png');
 const tretayugBadgeImg = getCloudinaryUrl('src/assets/eventnames/tretayug.png');
 const dwaparyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/dwaparyug.png');
 const kalyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/kalyug.png');
 
+// Event icons
+const promptrelayIcon = getCloudinaryUrl('src/assets/eventnames/promptrelayicon.png');
+const houdiniheistIcon = getCloudinaryUrl('src/assets/eventnames/houdiniheisticon.png');
+const datathonIcon = getCloudinaryUrl('src/assets/eventnames/datathonicon.png');
+const hackmatrixIcon = getCloudinaryUrl('src/assets/eventnames/hackmatrixicon.png');
+const kurukshetraIcon = getCloudinaryUrl('src/assets/eventnames/kurukshetraicon.png');
+const amongusIcon = getCloudinaryUrl('src/assets/eventnames/amongusicon.png');
+const brandathonIcon = getCloudinaryUrl('src/assets/eventnames/brandathonicon.png');
+const pixelperfectIcon = getCloudinaryUrl('src/assets/eventnames/pixelperfecticon.png');
+const dronevedhaIcon = getCloudinaryUrl('src/assets/eventnames/dronevedhaicon.png');
+
 const EVENT_NAME_IMAGES: Record<string, string> = {
-  'antaryami': antaryamiImg,
-  'chakravyuh': chakravyuhImg,
+  'promptrelay': promptrelayImg,
+  'antaryami': promptrelayImg,
+  'chakravyuh': houdiniheistImg,
   'datathon': datathonImg,
   'hackmatrix': hackmatrixImg,
   'kurukshetra': kurukshetraImg,
-  'mayavi': mayaviImg,
-  'setu-nirman': setunirmanImg,
+  'mayavi': amongusImg,
+  'brandathon': brandathonImg,
+  'setu-nirman': brandathonImg,
+  'pixelperfect': pixelperfectImg,
+  'pixel-perfect': pixelperfectImg,
+  'dronevedha': dronevedhaImg,
+  'drone-vedha': dronevedhaImg,
+};
+
+const EVENT_ICON_IMAGES: Record<string, string> = {
+  'promptrelay': promptrelayIcon,
+  'antaryami': promptrelayIcon,
+  'chakravyuh': houdiniheistIcon,
+  'datathon': datathonIcon,
+  'hackmatrix': hackmatrixIcon,
+  'kurukshetra': kurukshetraIcon,
+  'mayavi': amongusIcon,
+  'brandathon': brandathonIcon,
+  'setu-nirman': brandathonIcon,
+  'pixelperfect': pixelperfectIcon,
+  'pixel-perfect': pixelperfectIcon,
+  'dronevedha': dronevedhaIcon,
+  'drone-vedha': dronevedhaIcon,
 };
 
 const YUGA_BADGE_IMAGES: Record<string, string> = {
@@ -63,34 +96,27 @@ const EventCard: React.FC<EventCardProps> = ({
 }) => {
   const yuga      = YUGAS[event.yuga];
   const yugaColor = YUGA_COLORS[event.yuga] ?? '#F5D76E';
-  const flagAnimation = index % 2 === 0 ? orangeFlagAnimation : redFlagAnimation;
   const nameImg = EVENT_NAME_IMAGES[event.id];
+  const iconImg = EVENT_ICON_IMAGES[event.id];
   const yugaBadgeImg = YUGA_BADGE_IMAGES[event.yuga];
 
   if (compact) {
     return (
       <div className={styles.compactCardWrapper}>
-        {/* Animated Flag on top */}
-        <div className={styles.flagWrap}>
-          <Lottie src={flagAnimation} loop autoplay className={styles.flagLottie} />
-        </div>
-
-        {/* Transparent compact card containing log.png image, event name PNG image & view details button below */}
-        <div className={styles.compactCard}>
+        {/* Clickable scroll card containing log background & enlarged event name logo */}
+        <Link to={`/events/${event.id}`} className={styles.compactCard} title={event.name}>
           <img src={logImg} alt="" className={styles.logBgImg} draggable={false} />
           <div className={styles.compactCardContent}>
+            {iconImg && (
+              <img src={iconImg} alt="" className={styles.compactEventIconImg} draggable={false} />
+            )}
             {nameImg ? (
-              <div className={styles.eventNameImgWrap}>
-                <img src={nameImg} alt={event.name} className={styles.compactEventNameImg} />
-              </div>
+              <img src={nameImg} alt={event.name} className={styles.compactEventNameImg} />
             ) : (
               <h3 className={styles.compactEventName}>{event.name}</h3>
             )}
-            <Link to={`/events/${event.id}`} className={styles.compactViewBtn}>
-              Register now <ArrowUpRight size={13} />
-            </Link>
           </div>
-        </div>
+        </Link>
       </div>
     );
   }
@@ -102,13 +128,13 @@ const EventCard: React.FC<EventCardProps> = ({
       transition={{ duration: 0.5, delay: index * 0.07 }}
       viewport={{ once: true, margin: '-40px' }}
       className={styles.card}
+      style={{ backgroundImage: `url(${calImg})` }}
     >
-      {/* Yuga-tinted top strip */}
-      <div className={styles.topStrip} style={{ background: yugaColor }} />
+      <Link to={`/events/${event.id}`} className={styles.cardLinkOverlay} aria-label={event.name} />
 
-      {/* Tag row */}
-      <div className={styles.tagRow}>
-        <div className={styles.tagLeft}>
+      {/* Header row with Yuga Badge on top-left and Team / Open tags on top-right */}
+      <div className={styles.cardHeaderRow}>
+        <div className={styles.topLeftYugaWrap}>
           {yugaBadgeImg ? (
             <img src={yugaBadgeImg} alt={yuga.name} className={styles.yugaBadgeImg} />
           ) : (
@@ -119,29 +145,50 @@ const EventCard: React.FC<EventCardProps> = ({
               {yuga.icon} {yuga.name}
             </span>
           )}
+        </div>
+        <div className={styles.topRightTagsWrap}>
           {event.registrationOpen && (
             <span className={styles.openTag}>Open</span>
           )}
-        </div>
-        <div className={styles.teamTag}>
-          <Users size={12} />
-          <span>{event.teamSize}</span>
+          <div className={styles.teamTag}>
+            <Users size={12} />
+            <span>{event.teamSize}</span>
+          </div>
         </div>
       </div>
 
       {nameImg ? (
         <div className={styles.eventNameImgWrap}>
+          {iconImg && (
+            <img
+              src={iconImg}
+              alt=""
+              className={`${styles.eventIconImg} ${event.id === 'brandathon' || event.id === 'setu-nirman' ? styles.brandathonIcon : ''}`}
+              draggable={false}
+            />
+          )}
           <img src={nameImg} alt={event.name} className={styles.eventNameImg} />
         </div>
       ) : (
-        <h3 className={styles.eventName}>{event.name}</h3>
+        <div className={styles.eventNameImgWrap}>
+          {iconImg && (
+            <img
+              src={iconImg}
+              alt=""
+              className={`${styles.eventIconImg} ${event.id === 'brandathon' || event.id === 'setu-nirman' ? styles.brandathonIcon : ''}`}
+              draggable={false}
+            />
+          )}
+          <h3 className={styles.eventName}>{event.name}</h3>
+        </div>
       )}
       <div className={styles.tagline}>{event.tagline}</div>
       {showDescription && event.description && (
         <p className={styles.description}>{event.description}</p>
       )}
 
-      <Link to={`/events/${event.id}`} className={styles.viewBtn}>
+      {/* Register Now Button */}
+      <Link to={`/events/${event.id}`} className={styles.registerBtn}>
         Register now <ArrowUpRight size={13} />
       </Link>
     </motion.div>

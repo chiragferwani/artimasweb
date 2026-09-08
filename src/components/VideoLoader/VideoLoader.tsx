@@ -11,7 +11,7 @@ interface VideoLoaderProps {
 
 const VideoLoader: React.FC<VideoLoaderProps> = ({
   onComplete,
-  loaderSrc = getCloudinaryUrl('src/assets/thefinal.mp4'),
+  loaderSrc = getCloudinaryUrl('src/assets/loaders/final-loader.mp4'),
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);

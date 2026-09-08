@@ -110,7 +110,7 @@ const Legacy: React.FC = () => {
                 {/* Outer Top Row (Clockwise — Leftwards Marquee) */}
                 <div className={styles.marqueeContainer}>
                   <div className={styles.marqueeTrackClockwise}>
-                    {[...GALLERY_IMAGES.slice(0, 10), ...GALLERY_IMAGES.slice(0, 10)].map((img, i) => (
+                    {[...GALLERY_IMAGES.slice(0, 13), ...GALLERY_IMAGES.slice(0, 13)].map((img, i) => (
                       <div key={`outTop-${i}`} className={styles.photoHolderMarquee}>
                         <img src={img} alt={`Event ${i + 1}`} className={styles.photoImg} loading="lazy" decoding="async" />
                       </div>
@@ -121,9 +121,9 @@ const Legacy: React.FC = () => {
                 {/* Inner Top Row (Counter-Clockwise — Rightwards Marquee) */}
                 <div className={styles.marqueeContainer}>
                   <div className={styles.marqueeTrackCounterClockwise}>
-                    {[...GALLERY_IMAGES.slice(10, 20), ...GALLERY_IMAGES.slice(10, 20)].map((img, i) => (
+                    {[...GALLERY_IMAGES.slice(13, 26), ...GALLERY_IMAGES.slice(13, 26)].map((img, i) => (
                       <div key={`inTop-${i}`} className={styles.photoHolderMarquee}>
-                        <img src={img} alt={`Event ${i + 11}`} className={styles.photoImg} loading="lazy" decoding="async" />
+                        <img src={img} alt={`Event ${i + 14}`} className={styles.photoImg} loading="lazy" decoding="async" />
                       </div>
                     ))}
                   </div>
@@ -137,9 +137,9 @@ const Legacy: React.FC = () => {
                   {/* Outer Left Column (Upwards Vertical Track) */}
                   <div className={styles.verticalMarqueeContainer}>
                     <div className={styles.verticalTrackUp}>
-                      {[...GALLERY_IMAGES.slice(20, 26), ...GALLERY_IMAGES.slice(20, 26)].map((img, i) => (
+                      {[...GALLERY_IMAGES.slice(26, 32), ...GALLERY_IMAGES.slice(26, 32)].map((img, i) => (
                         <div key={`outL-${i}`} className={styles.photoHolderVertical}>
-                          <img src={img} alt={`Event ${i + 21}`} className={styles.photoImg} loading="lazy" decoding="async" />
+                          <img src={img} alt={`Event ${i + 27}`} className={styles.photoImg} loading="lazy" decoding="async" />
                         </div>
                       ))}
                     </div>
@@ -148,9 +148,9 @@ const Legacy: React.FC = () => {
                   {/* Inner Left Column (Downwards Vertical Track) */}
                   <div className={styles.verticalMarqueeContainer}>
                     <div className={styles.verticalTrackDown}>
-                      {[...GALLERY_IMAGES.slice(26, 32), ...GALLERY_IMAGES.slice(26, 32)].map((img, i) => (
+                      {[...GALLERY_IMAGES.slice(32, 38), ...GALLERY_IMAGES.slice(32, 38)].map((img, i) => (
                         <div key={`inL-${i}`} className={styles.photoHolderVertical}>
-                          <img src={img} alt={`Event ${i + 27}`} className={styles.photoImg} loading="lazy" decoding="async" />
+                          <img src={img} alt={`Event ${i + 33}`} className={styles.photoImg} loading="lazy" decoding="async" />
                         </div>
                       ))}
                     </div>
@@ -225,9 +225,9 @@ const Legacy: React.FC = () => {
                   {/* Inner Right Column (Upwards Vertical Track) */}
                   <div className={styles.verticalMarqueeContainer}>
                     <div className={styles.verticalTrackUp}>
-                      {[...GALLERY_IMAGES.slice(32, 38), ...GALLERY_IMAGES.slice(32, 38)].map((img, i) => (
+                      {[...GALLERY_IMAGES.slice(38, 44), ...GALLERY_IMAGES.slice(38, 44)].map((img, i) => (
                         <div key={`inR-${i}`} className={styles.photoHolderVertical}>
-                          <img src={img} alt={`Event ${i + 33}`} className={styles.photoImg} loading="lazy" decoding="async" />
+                          <img src={img} alt={`Event ${i + 39}`} className={styles.photoImg} loading="lazy" decoding="async" />
                         </div>
                       ))}
                     </div>
@@ -236,9 +236,9 @@ const Legacy: React.FC = () => {
                   {/* Outer Right Column (Downwards Vertical Track) */}
                   <div className={styles.verticalMarqueeContainer}>
                     <div className={styles.verticalTrackDown}>
-                      {[...GALLERY_IMAGES.slice(38, 44), ...GALLERY_IMAGES.slice(38, 44)].map((img, i) => (
+                      {[...GALLERY_IMAGES.slice(44, 50), ...GALLERY_IMAGES.slice(44, 50)].map((img, i) => (
                         <div key={`outR-${i}`} className={styles.photoHolderVertical}>
-                          <img src={img} alt={`Event ${i + 39}`} className={styles.photoImg} loading="lazy" decoding="async" />
+                          <img src={img} alt={`Event ${i + 45}`} className={styles.photoImg} loading="lazy" decoding="async" />
                         </div>
                       ))}
                     </div>
@@ -251,9 +251,9 @@ const Legacy: React.FC = () => {
                 {/* Inner Bottom Row (Counter-Clockwise — Rightwards Marquee) */}
                 <div className={styles.marqueeContainer}>
                   <div className={styles.marqueeTrackCounterClockwise}>
-                    {[...GALLERY_IMAGES.slice(44, 52), ...GALLERY_IMAGES.slice(44, 52)].map((img, i) => (
+                    {[...GALLERY_IMAGES.slice(26, 39), ...GALLERY_IMAGES.slice(26, 39)].map((img, i) => (
                       <div key={`inBot-${i}`} className={styles.photoHolderMarquee}>
-                        <img src={img} alt={`Event ${i + 45}`} className={styles.photoImg} loading="lazy" decoding="async" />
+                        <img src={img} alt={`Event ${i + 27}`} className={styles.photoImg} loading="lazy" decoding="async" />
                       </div>
                     ))}
                   </div>
@@ -262,9 +262,9 @@ const Legacy: React.FC = () => {
                 {/* Outer Bottom Row (Clockwise — Leftwards Marquee) */}
                 <div className={styles.marqueeContainer}>
                   <div className={styles.marqueeTrackClockwise}>
-                    {[...GALLERY_IMAGES.slice(0, 10).reverse(), ...GALLERY_IMAGES.slice(0, 10).reverse()].map((img, i) => (
+                    {[...GALLERY_IMAGES.slice(39, 52), ...GALLERY_IMAGES.slice(39, 52)].map((img, i) => (
                       <div key={`outBot-${i}`} className={styles.photoHolderMarquee}>
-                        <img src={img} alt={`Event ${i + 1}`} className={styles.photoImg} loading="lazy" decoding="async" />
+                        <img src={img} alt={`Event ${i + 40}`} className={styles.photoImg} loading="lazy" decoding="async" />
                       </div>
                     ))}
                   </div>

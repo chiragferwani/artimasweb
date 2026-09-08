@@ -446,7 +446,7 @@ const Contact: React.FC = () => {
       {/* Cta Block */}
       <CtaBlock
         primaryButton={{ label: 'See all events', to: '/events' }}
-        secondaryButton={{ label: 'Our Celestial Partners', to: '/sponsors' }}
+        secondaryButton={{ label: 'Our Sponsors', to: '/sponsors' }}
       />
     </main>
   );

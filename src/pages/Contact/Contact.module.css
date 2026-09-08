@@ -633,27 +633,28 @@
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 767px) {
-  .main { padding-top: 80px; }
-  .pageHeader { padding: 32px 0 8px; }
-  .krishnaVideoWrap { margin: -24px auto -15px; }
-  .krishnaVideo { max-height: 520px; max-width: min(92vw, 380px); }
-  .chiranjeeviImg { max-width: min(96vw, 580px); margin-top: -150px; margin-bottom: 24px; }
-  .form { padding: 28px 20px; border-radius: 24px; }
-  .formTitle { font-size: 20px; margin-bottom: 24px; }
-  .successBox { padding: 40px 24px; border-radius: 24px; }
-  .infoCard { padding: 20px; border-radius: 20px; }
-  .contentSection { padding: 0 0 64px; }
-  .teamSection { padding: 48px 0 64px; }
-  .teamHeader { margin-bottom: 40px; }
-  .teamGroup { margin-bottom: 48px; }
+  .main { padding-top: 72px; }
+  .pageHeader { padding: 24px 0 8px; }
+  .krishnaVideoWrap { margin: -20px auto -15px; }
+  .krishnaVideo { max-height: 480px; max-width: min(92vw, 360px); }
+  .chiranjeeviImg { max-width: min(96vw, 540px); margin-top: -130px; margin-bottom: 20px; }
+  .form { padding: 24px 18px; border-radius: 20px; }
+  .formTitle { font-size: 20px; margin-bottom: 20px; }
+  .successBox { padding: 36px 20px; border-radius: 20px; }
+  .infoCard { padding: 18px; border-radius: 18px; }
+  .contentSection { padding: 0 0 48px; }
+  .teamSection { padding: 40px 0 48px; }
+  .teamHeader { margin-bottom: 32px; }
+  .teamGroup { margin-bottom: 36px; }
 }
 
 @media (max-width: 480px) {
-  .form { padding: 20px 16px; border-radius: 20px; }
-  .avatarCircleSenior { width: 100px; height: 100px; }
-  .avatarCircleJunior { width: 80px; height: 80px; }
-  .profileBox { padding: 20px 16px; border-radius: 20px; }
-  .seniorCard { padding: 24px 16px; }
-  .memberName { font-size: 16px; }
-  .contactValue { word-break: break-all; overflow-wrap: break-word; }
+  .pageTitle { font-size: clamp(28px, 8vw, 38px); }
+  .form { padding: 18px 14px; border-radius: 16px; }
+  .avatarCircleSenior { width: 96px; height: 96px; }
+  .avatarCircleJunior { width: 76px; height: 76px; }
+  .profileBox { padding: 18px 12px; border-radius: 16px; }
+  .seniorCard { padding: 20px 14px; }
+  .memberName { font-size: 15px; }
+  .contactValue { word-break: break-all; overflow-wrap: anywhere; }
 }

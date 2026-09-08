@@ -5,10 +5,9 @@
   transition: background-color var(--transition);
 }
 
-/* Hero stadium frame */
 .hero {
   position: relative;
-  padding: 40px 0 0;
+  padding: 40px 0 16px;
 }
 
 .heroFrame {
@@ -24,19 +23,19 @@
 
 @media (max-width: 767px) {
   .heroFrame {
-    padding: 64px 20px 36px;
-    border-radius: 28px;
+    padding: 48px 16px 28px;
+    border-radius: 20px;
   }
   .backBtnWrap {
-    top: 90px;
-    left: 16px;
+    top: 70px;
+    left: 12px;
   }
 }
 
 .backBtnWrap {
   position: fixed;
-  top: 110px;
-  left: 36px;
+  top: 96px;
+  left: 28px;
   z-index: 90;
 }
 
@@ -535,7 +534,7 @@
 .contentSection {
   position: relative;
   z-index: 10;
-  padding: 40px 0 96px;
+  padding: 24px 0 96px;
 }
 
 .contentGrid {
@@ -1046,11 +1045,28 @@
   font-weight: 700;
   letter-spacing: 0.2px;
   text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rulesDownloadBtn:hover {
+  background: #f0f0f0;
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.rulesDownloadBtn:active {
+  transform: translateY(0);
+}
+
+.rulesDownloadBtn:disabled {
   opacity: 0.65;
   cursor: not-allowed;
   pointer-events: none;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
-  transition: all 0.2s ease;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Myth block */
@@ -1332,28 +1348,41 @@
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 767px) {
-  .metaGrid { flex-wrap: wrap; justify-content: center; }
-  .metaItem { flex: 1 1 calc(50% - 8px); min-width: 140px; }
-  .aboutBlock, .rulesBlock { padding: 32px 24px; min-height: auto; }
-  .aboutBlock .blockText { font-size: 16px; line-height: 26px; }
-  .aboutBlock .blockTitle, .rulesBlock .blockTitle { font-size: 22px; }
-  .heroFeatureImgWrap { margin-bottom: -30px; }
-  .chakravyuhFeatureImgWrap, .setuNirmanFeatureImgWrap, .datathonFeatureImgWrap { margin-bottom: -60px; }
-  .mayaviFeatureImgWrap, .antaryamiFeatureImgWrap { margin-bottom: -60px; margin-top: -10px; }
-  .block { padding: 28px 20px; border-radius: 20px; }
-  .sideCard { padding: 20px; border-radius: 20px; }
-  .main { padding-top: 80px; }
-  .contentSection { padding: 20px 0 64px; }
+  .metaGrid { flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .metaItem { flex: 1 1 calc(50% - 8px); min-width: 130px; padding: 6px 10px; border-radius: 12px; }
+  .metaIconWrap { width: 30px; height: 30px; }
+  .metaValue { font-size: 12px; }
+  .aboutBlock, .rulesBlock { padding: 28px 18px; min-height: auto; border-radius: 20px; }
+  .aboutBlock .blockText { font-size: 15px; line-height: 24px; }
+  .aboutBlock .blockTitle, .rulesBlock .blockTitle { font-size: 20px; }
+  .heroFeatureImgWrap { margin-bottom: -20px; }
+  .chakravyuhFeatureImgWrap, .setuNirmanFeatureImgWrap, .datathonFeatureImgWrap { margin-bottom: -40px; }
+  .mayaviFeatureImgWrap, .antaryamiFeatureImgWrap { margin-bottom: -40px; margin-top: -10px; }
+  .block { padding: 24px 16px; border-radius: 18px; }
+  .sideCard { padding: 18px; border-radius: 18px; }
+  .main { padding-top: 72px; }
+  .contentSection { padding: 16px 0 48px; }
+  .prizePoolWrap { margin: 20px auto 16px; }
+  .roundsBlock { padding: 28px 18px; }
+  .roundCard { padding: 18px 16px; }
+  .roundTitle { font-size: 16px; }
 }
 
 @media (max-width: 480px) {
   .metaItem { flex: 1 1 100%; }
-  .heroFrame { padding: 48px 16px 28px; border-radius: 20px; }
-  .eventTagline { font-size: 12px; margin-bottom: 16px; }
-  .aboutBlock, .rulesBlock { padding: 24px 16px; }
-  .contentSection { padding: 16px 0 64px; }
-  .yugaBadgeImg { height: 40px; }
-  .shlokaCard { padding: 12px 0; }
-  .shlokaSanskrit { font-size: clamp(14px, 2vw, 18px); }
-  .mythBlock { flex-direction: column; padding: 20px; }
+  .heroFrame { padding: 36px 12px 20px; border-radius: 16px; }
+  .eventTagline { font-size: 12px; margin-bottom: 14px; }
+  .aboutBlock, .rulesBlock { padding: 20px 14px; }
+  .contentSection { padding: 12px 0 48px; }
+  .yugaBadgeImg { height: 36px; }
+  .shlokaCard { padding: 10px 0; }
+  .shlokaSanskrit { font-size: clamp(13px, 3.5vw, 16px); }
+  .shlokaTransliteration { font-size: 11.5px; }
+  .shlokaMeaning { font-size: 12.5px; }
+  .mythBlock { flex-direction: column; padding: 16px; }
+  .prizeTotalValue { font-size: clamp(26px, 7vw, 36px); }
+  .prizeRankValue { font-size: clamp(22px, 6vw, 30px); }
+  .goldenPrizeItem .prizeRankValue { font-size: clamp(26px, 7vw, 36px); }
+  .prizeCardBadge { margin-bottom: -16px; }
+  .goldenPrizeItem .prizeCardBadge { margin-bottom: -18px; }
 }

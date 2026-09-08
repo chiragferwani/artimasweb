@@ -7,24 +7,19 @@ import { EVENTS, YUGAS } from '../../data/yugas';
 import ParticleField from '../../components/ParticleField/ParticleField';
 import getCloudinaryUrl from '../../utils/cloudinary';
 
-const antaryamiName = getCloudinaryUrl('src/assets/eventnames/antaryami.png');
-const chakravyuhName = getCloudinaryUrl('src/assets/eventnames/chakravyuh.png');
+const promptrelayName = getCloudinaryUrl('src/assets/eventnames/promptrelay.png');
+const houdiniheistName = getCloudinaryUrl('src/assets/eventnames/houdiniheist.png');
 const datathonName = getCloudinaryUrl('src/assets/eventnames/datathon.png');
 const hackmatrixName = getCloudinaryUrl('src/assets/eventnames/hackmatrix.png');
 const kurukshetraName = getCloudinaryUrl('src/assets/eventnames/kurukshetra.png');
-const mayaviName = getCloudinaryUrl('src/assets/eventnames/mayavi.png');
-const setunirmanName = getCloudinaryUrl('src/assets/eventnames/setunirman.png');
+const amongusName = getCloudinaryUrl('src/assets/eventnames/amongus.png');
+const brandathonName = getCloudinaryUrl('src/assets/eventnames/brandathon.png');
+const pixelperfectName = getCloudinaryUrl('src/assets/eventnames/pixelperfect.png');
+const dronevedhaName = getCloudinaryUrl('src/assets/eventnames/dronevedha.png');
 const satyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/satyug.png');
 const tretayugBadgeImg = getCloudinaryUrl('src/assets/eventnames/tretayug.png');
 const dwaparyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/dwaparyug.png');
 const kalyugBadgeImg = getCloudinaryUrl('src/assets/eventnames/kalyug.png');
-const kurukshetraBannerImg = getCloudinaryUrl('src/assets/kurukshetra.png');
-const setuNirmanBannerImg = getCloudinaryUrl('src/assets/setunirman.png');
-const chakravyuhBannerImg = getCloudinaryUrl('src/assets/chakravyuh.png');
-const datathonBannerImg = getCloudinaryUrl('src/assets/datathon.png');
-const mayaviBannerImg = getCloudinaryUrl('src/assets/mayavi.png');
-const antaryamiBannerImg = getCloudinaryUrl('src/assets/antaryami.png');
-const hackmatrixBannerImg = getCloudinaryUrl('src/assets/hackmatrix.png');
 const sudarshanImg = getCloudinaryUrl('src/assets/sudarshan.png');
 const silverImg = getCloudinaryUrl('src/assets/silver.png');
 const goldenImg = getCloudinaryUrl('src/assets/golden.png');
@@ -32,13 +27,19 @@ const bronzeImg = getCloudinaryUrl('src/assets/bronze.png');
 import styles from './EventDetail.module.css';
 
 const EVENT_NAME_IMAGES: Record<string, string> = {
-  antaryami: antaryamiName,
-  chakravyuh: chakravyuhName,
+  promptrelay: promptrelayName,
+  antaryami: promptrelayName,
+  chakravyuh: houdiniheistName,
   datathon: datathonName,
   hackmatrix: hackmatrixName,
   kurukshetra: kurukshetraName,
-  mayavi: mayaviName,
-  'setu-nirman': setunirmanName,
+  mayavi: amongusName,
+  brandathon: brandathonName,
+  'setu-nirman': brandathonName,
+  pixelperfect: pixelperfectName,
+  'pixel-perfect': pixelperfectName,
+  dronevedha: dronevedhaName,
+  'drone-vedha': dronevedhaName,
 };
 
 const YUGA_BADGE_IMAGES: Record<string, string> = {
@@ -48,12 +49,6 @@ const YUGA_BADGE_IMAGES: Record<string, string> = {
   kali: kalyugBadgeImg,
 };
 
-const EVENT_ALT_IMAGES: Record<string, string> = {
-  antaryami: getCloudinaryUrl('src/assets/eventnames/promptrelay.png'),
-  mayavi: getCloudinaryUrl('src/assets/eventnames/amongus.png'),
-  'setu-nirman': getCloudinaryUrl('src/assets/eventnames/brandathon.png'),
-  chakravyuh: getCloudinaryUrl('src/assets/eventnames/houdini.png'),
-};
 
 const WhatsAppIcon: React.FC<{ size?: number; color?: string }> = ({ size = 20, color = '#FFFFFF' }) => (
   <svg
@@ -172,13 +167,6 @@ const EventDetail: React.FC = () => {
                   alt={event.name}
                   className={styles.eventNameImg}
                 />
-                {EVENT_ALT_IMAGES[event.id] && (
-                  <img 
-                    src={EVENT_ALT_IMAGES[event.id]} 
-                    alt="Alternative Event Name" 
-                    className={styles.eventAltNameImg} 
-                  />
-                )}
               </div>
             ) : (
               <h1 className={styles.eventTitle}>{event.name}</h1>
@@ -265,111 +253,6 @@ const EventDetail: React.FC = () => {
               )}
             </div>
 
-            {/* Feature Illustration Image for Kurukshetra & Setu Nirman */}
-            {event.id === 'kurukshetra' && (
-              <motion.div
-                className={styles.heroFeatureImgWrap}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-              >
-                <img
-                  src={kurukshetraBannerImg}
-                  alt="Kurukshetra CTF Illustration"
-                  className={styles.heroFeatureImg}
-                />
-              </motion.div>
-            )}
-
-            {event.id === 'setu-nirman' && (
-              <motion.div
-                className={`${styles.heroFeatureImgWrap} ${styles.setuNirmanFeatureImgWrap}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-              >
-                <img
-                  src={setuNirmanBannerImg}
-                  alt="Setu Nirman Illustration"
-                  className={`${styles.heroFeatureImg} ${styles.setuNirmanFeatureImg}`}
-                />
-              </motion.div>
-            )}
-
-            {event.id === 'chakravyuh' && (
-              <motion.div
-                className={`${styles.heroFeatureImgWrap} ${styles.chakravyuhFeatureImgWrap}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-              >
-                <img
-                  src={chakravyuhBannerImg}
-                  alt="Chakravyuh Illustration"
-                  className={`${styles.heroFeatureImg} ${styles.chakravyuhFeatureImg}`}
-                />
-              </motion.div>
-            )}
-
-            {event.id === 'datathon' && (
-              <motion.div
-                className={`${styles.heroFeatureImgWrap} ${styles.datathonFeatureImgWrap}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-              >
-                <img
-                  src={datathonBannerImg}
-                  alt="Datathon Illustration"
-                  className={`${styles.heroFeatureImg} ${styles.datathonFeatureImg}`}
-                />
-              </motion.div>
-            )}
-
-            {event.id === 'mayavi' && (
-              <motion.div
-                className={`${styles.heroFeatureImgWrap} ${styles.mayaviFeatureImgWrap}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-              >
-                <img
-                  src={mayaviBannerImg}
-                  alt="Mayavi Illustration"
-                  className={`${styles.heroFeatureImg} ${styles.mayaviFeatureImg}`}
-                />
-              </motion.div>
-            )}
-
-            {event.id === 'antaryami' && (
-              <motion.div
-                className={`${styles.heroFeatureImgWrap} ${styles.antaryamiFeatureImgWrap}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-              >
-                <img
-                  src={antaryamiBannerImg}
-                  alt="Antaryami Illustration"
-                  className={`${styles.heroFeatureImg} ${styles.antaryamiFeatureImg}`}
-                />
-              </motion.div>
-            )}
-
-            {event.id === 'hackmatrix' && (
-              <motion.div
-                className={`${styles.heroFeatureImgWrap} ${styles.hackmatrixFeatureImgWrap}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-              >
-                <img
-                  src={hackmatrixBannerImg}
-                  alt="Hackmatrix Illustration"
-                  className={`${styles.heroFeatureImg} ${styles.hackmatrixFeatureImg}`}
-                />
-              </motion.div>
-            )}
           </motion.div>
         </div>
       </section>
@@ -596,9 +479,20 @@ const EventDetail: React.FC = () => {
                 </ul>
 
                 <div className={styles.rulesDownloadWrap}>
-                  <button className={styles.rulesDownloadBtn} disabled>
-                    <Download size={16} /> Download Rulebook
-                  </button>
+                  {event.rulebookUrl ? (
+                    <a
+                      href={event.rulebookUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.rulesDownloadBtn}
+                    >
+                      <Download size={16} /> Download Rulebook
+                    </a>
+                  ) : (
+                    <button className={styles.rulesDownloadBtn} disabled>
+                      <Download size={16} /> Download Rulebook
+                    </button>
+                  )}
                 </div>
               </div>
 

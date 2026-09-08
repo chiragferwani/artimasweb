@@ -94,14 +94,18 @@ export default function Galaxy({
       const w = canvas.width / DPR;
       const h = canvas.height / DPR;
 
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = background;
-      ctx.fillRect(0, 0, w, h);
-
-      if (trail < 1) {
-        ctx.globalAlpha = 1 - trail;
+      if (background === 'transparent' || background === 'rgba(0,0,0,0)' || background === 'rgba(0, 0, 0, 0)') {
+        ctx.clearRect(0, 0, w, h);
+      } else {
+        ctx.globalAlpha = 1;
         ctx.fillStyle = background;
         ctx.fillRect(0, 0, w, h);
+
+        if (trail < 1) {
+          ctx.globalAlpha = 1 - trail;
+          ctx.fillStyle = background;
+          ctx.fillRect(0, 0, w, h);
+        }
       }
 
       ctx.globalAlpha = 1;
