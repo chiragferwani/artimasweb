@@ -1149,6 +1149,19 @@
   text-align: center;
 }
 
+.feeSubNote {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #D4AF37;
+  letter-spacing: 0.2px;
+  line-height: 1.45;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
 .disabledWhiteBtn {
   display: flex;
   align-items: center;

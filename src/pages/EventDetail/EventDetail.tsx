@@ -502,8 +502,19 @@ const EventDetail: React.FC = () => {
               {/* Registration Fee */}
               <div className={styles.sideCard}>
                 <h3 className={styles.sideTitle}>Registration Fee</h3>
-                <div className={styles.feeAmount}>{event.registrationFee || '₹100'}</div>
-                <div className={styles.feeNote}>(for outside PCCOE students)</div>
+                <div className={styles.feeAmount}>
+                  {event.id === 'brandathon' ? '₹100 per team' : (event.registrationFee || '₹100')}
+                </div>
+                <div className={styles.feeNote}>
+                  {event.id === 'brandathon'
+                    ? '(Round 1 · for outside PCCOE students)'
+                    : '(for outside PCCOE students)'}
+                </div>
+                {event.id === 'brandathon' && (
+                  <div className={styles.feeSubNote}>
+                    * Additional ₹100 per team for teams qualifying to Round 2 (PCCOE teams free)
+                  </div>
+                )}
               </div>
 
               {/* Rules of the Event */}

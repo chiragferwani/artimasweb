@@ -392,7 +392,7 @@ export const EVENTS: Event[] = [
     about:
       'A three-round branding and design competition testing design aptitude, brand strategy research, and a 12-hour brand-building challenge culminating in a Shark Tank-style pitch.',
     teamSize: 'Teams of 2-4 members',
-    registrationFee: '₹100 per team for Round 1; additional ₹100 per team for teams qualifying to Round 2 (PCCOE teams free)',
+    registrationFee: '₹100 per team',
     numberOfRounds: 3,
     rounds: [
       {
