@@ -198,4 +198,7 @@ export const tickAnimationData = {
   "markers": []
 };
 
+export const tickAnimationUrl = 'https://res.cloudinary.com/exq0xlou/raw/upload/v1788887893/artimasweb/tick.json';
+
 export default tickAnimationData;
+

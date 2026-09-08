@@ -434,7 +434,7 @@
 /* Payment Section */
 .paymentGrid {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 280px 1fr;
   gap: 28px;
   align-items: center;
 }
@@ -461,24 +461,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   color: #0F172A;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
   margin-bottom: 12px;
-  padding: 0 4px;
+  padding: 0 2px;
 }
 
 .qrFeeBadge {
-  background: #25D366;
-  color: #FFFFFF;
-  padding: 4px 12px;
+  background: #DCFCE7;
+  color: #15803D;
+  border: 1px solid #86EFAC;
+  padding: 3px 10px;
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.3px;
-  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.35);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.25;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
 }
 
 .qrImageWrap {
@@ -1029,7 +1037,7 @@
   }
 
   .qrCodeBox {
-    max-width: 240px;
+    max-width: 280px;
     width: 100%;
   }
 

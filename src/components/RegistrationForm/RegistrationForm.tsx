@@ -27,7 +27,7 @@ import { uploadPaymentScreenshot } from '../../utils/paymentUpload';
 import { submitRegistrationToGoogleSheets, type TeamMemberData } from '../../utils/googleSheets';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import qrCodeImg from '../../data/qrCode';
-import tickAnimationData from '../../data/tickAnimation';
+import tickAnimationData, { tickAnimationUrl } from '../../data/tickAnimation';
 import styles from './RegistrationForm.module.css';
 
 const promptrelayName = getCloudinaryUrl('src/assets/eventnames/promptrelay.png');
@@ -783,7 +783,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                   {/* Lottie Tick Animation */}
                   <div className={styles.lottieWrap}>
                     <Lottie
-                      src={tickAnimationData}
+                      src={tickAnimationUrl || tickAnimationData}
                       loop={false}
                       autoplay={true}
                       className={styles.lottieTick}
