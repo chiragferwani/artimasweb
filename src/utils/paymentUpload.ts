@@ -12,11 +12,11 @@ async function sha1(str: string): Promise<string> {
 }
 
 export async function uploadPaymentScreenshot(file: File): Promise<string> {
-  const cloudName = 'exq0xlou';
-  const apiKey = '625758234191985';
-  const apiSecret = 'BTUVaUD5abWa799TWRvdQTmc5rc';
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'exq0xlou';
+  const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY || '625758234191985';
+  const apiSecret = import.meta.env.VITE_CLOUDINARY_API_SECRET || 'BTUVaUD5abWa799TWRvdQTmc5rc';
   const timestamp = Math.floor(Date.now() / 1000).toString();
-  const folder = 'artimas_payments';
+  const folder = import.meta.env.VITE_CLOUDINARY_FOLDER || 'artimas_payments';
 
   // Cloudinary signature parameters in alphabetical order: folder, timestamp
   const signaturePayload = `folder=${folder}&timestamp=${timestamp}${apiSecret}`;
