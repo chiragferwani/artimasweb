@@ -1,23 +1,24 @@
 .card {
   position: relative;
   width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 16px;
-  padding: 16px 24px 20px;
+  border-radius: 20px;
+  padding: 52px 22px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  gap: 6px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 24px rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(199, 136, 46, 0.45);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   overflow: hidden;
   cursor: pointer;
-  min-height: 200px;
+  min-height: 330px;
+  box-sizing: border-box;
 }
 
 .card:hover {
@@ -29,9 +30,9 @@
 /* Card Header row */
 .cardHeaderRow {
   position: absolute;
-  top: 12px;
-  left: 18px;
-  right: 18px;
+  top: 16px;
+  left: 20px;
+  right: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,7 +52,7 @@
 }
 
 .yugaBadgeImg {
-  height: clamp(24px, 3.5vw, 32px);
+  height: clamp(26px, 3.8vw, 34px);
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.75));
@@ -113,19 +114,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   width: 100%;
-  padding: 18px 12px 2px;
-  margin: 2px 0 2px;
+  height: 155px;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
 }
 
 .eventNameImgWrap::before {
   content: '';
   position: absolute;
-  inset: 4% 8%;
-  background: radial-gradient(ellipse 90% 85% at 50% 50%, rgba(10, 5, 2, 0.28) 0%, rgba(15, 8, 3, 0.12) 60%, transparent 100%);
+  inset: 2% 4%;
+  background: radial-gradient(ellipse 90% 85% at 50% 50%, rgba(10, 5, 2, 0.32) 0%, rgba(15, 8, 3, 0.15) 60%, transparent 100%);
   border-radius: 999px;
-  filter: blur(14px);
+  filter: blur(16px);
   z-index: 0;
   pointer-events: none;
 }
@@ -133,45 +136,44 @@
 .eventIconImg {
   position: relative;
   z-index: 1;
-  width: clamp(52px, 6.5vw, 74px);
-  height: clamp(52px, 6.5vw, 74px);
+  width: 66px;
+  height: 66px;
   object-fit: contain;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 12px rgba(245, 215, 110, 0.65)) drop-shadow(0 0 3px rgba(255, 240, 180, 0.5)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9)) brightness(1.28) contrast(1.18);
+  filter: drop-shadow(0 0 14px rgba(245, 215, 110, 0.7)) drop-shadow(0 0 4px rgba(255, 240, 180, 0.55)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9)) brightness(1.28) contrast(1.18);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
 }
 
 .eventIconImg.brandathonIcon {
-  width: clamp(68px, 9vw, 96px);
-  height: clamp(68px, 9vw, 96px);
-  transform: scale(1.24);
+  width: 70px;
+  height: 70px;
+  transform: none;
 }
 
 .card:hover .eventIconImg {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 18px rgba(255, 225, 120, 0.9)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.7)) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.95)) brightness(1.38) contrast(1.25);
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 20px rgba(255, 225, 120, 0.95)) drop-shadow(0 0 8px rgba(255, 255, 255, 0.75)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.95)) brightness(1.38) contrast(1.25);
 }
 
 .card:hover .eventIconImg.brandathonIcon {
-  transform: scale(1.35);
+  transform: scale(1.1);
 }
 
 .eventNameImg {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: min(92%, 280px);
-  height: auto;
-  max-height: 60px;
+  max-width: min(98%, 320px);
+  height: 68px;
   object-fit: contain;
   display: block;
   margin: 0 auto;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.65));
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.75));
 }
 
 .eventName {
   font-family: 'Inter', sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
   letter-spacing: -0.3px;
   color: #1A0D03;
@@ -191,14 +193,20 @@
 /* Tagline */
 .tagline {
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 800;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: #38200B;
   text-align: center;
   width: 100%;
-  margin: 2px 0 4px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0 12px;
+  flex-shrink: 0;
+  line-height: 1.3;
 }
 
 /* Description */
@@ -218,20 +226,20 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 9px 24px;
+  padding: 10px 26px;
   background: linear-gradient(135deg, #2B1605 0%, #150A02 100%);
   border: 1px solid #D49E35;
-  border-radius: 20px;
+  border-radius: 22px;
   color: #F5D76E;
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: -0.2px;
   text-decoration: none;
   white-space: nowrap;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   transition: all 0.25s ease;
-  margin-top: 6px;
+  margin-top: auto;
   position: relative;
   z-index: 12;
 }
@@ -359,25 +367,35 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .card {
-    padding: 16px 16px 18px;
-    gap: 4px;
-    min-height: 180px;
-    border-radius: 16px;
+    padding: 48px 16px 20px;
+    min-height: 300px;
+    border-radius: 18px;
   }
   .cardHeaderRow {
-    top: 10px;
-    left: 14px;
-    right: 14px;
+    top: 12px;
+    left: 16px;
+    right: 16px;
   }
   .eventNameImgWrap {
-    padding: 16px 0 4px;
+    height: 145px;
+    gap: 7px;
+  }
+  .eventIconImg {
+    width: 60px;
+    height: 60px;
+  }
+  .eventIconImg.brandathonIcon {
+    width: 64px;
+    height: 64px;
   }
   .eventNameImg {
-    max-height: 56px;
+    height: 62px;
+    max-width: min(96%, 290px);
   }
   .tagline {
-    font-size: 10px;
-    margin: 2px 0 4px;
+    font-size: 10.5px;
+    height: 24px;
+    margin: 4px 0 8px;
     line-height: 1.3;
   }
   .description {
@@ -390,13 +408,13 @@
     overflow: hidden;
   }
   .registerBtn {
-    padding: 6px 16px;
-    font-size: 12px;
-    margin-top: 6px;
-    border-radius: 16px;
+    padding: 8px 20px;
+    font-size: 12.5px;
+    margin-top: auto;
+    border-radius: 18px;
   }
   .yugaBadgeImg {
-    height: 22px;
+    height: 24px;
   }
   .teamTag {
     padding: 2px 8px;
@@ -407,26 +425,40 @@
 
 @media (max-width: 480px) {
   .card {
-    border-radius: 16px;
-    padding: 14px 14px 16px;
-    gap: 3px;
-    min-height: 170px;
+    border-radius: 18px;
+    padding: 44px 14px 18px;
+    min-height: 280px;
   }
   .cardHeaderRow {
-    top: 8px;
-    left: 12px;
-    right: 12px;
+    top: 10px;
+    left: 14px;
+    right: 14px;
   }
   .eventName {
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 12px;
   }
+  .eventNameImgWrap {
+    height: 132px;
+    gap: 6px;
+  }
+  .eventIconImg {
+    width: 54px;
+    height: 54px;
+  }
+  .eventIconImg.brandathonIcon {
+    width: 58px;
+    height: 58px;
+  }
   .eventNameImg {
-    max-height: 48px;
+    height: 56px;
+    max-width: min(96%, 260px);
   }
   .tagline {
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.4px;
+    height: 22px;
+    margin: 2px 0 6px;
   }
   .description {
     font-size: 10.5px;
@@ -434,14 +466,16 @@
     -webkit-line-clamp: 4;
   }
   .yugaBadgeImg {
-    height: 18px;
+    height: 20px;
   }
   .teamTag {
-    padding: 2px 6px;
-    font-size: 9px;
+    padding: 2px 7px;
+    font-size: 9.5px;
   }
   .registerBtn {
-    padding: 6px 14px;
-    font-size: 11px;
+    padding: 8px 18px;
+    font-size: 12px;
+    margin-top: auto;
+    border-radius: 18px;
   }
 }

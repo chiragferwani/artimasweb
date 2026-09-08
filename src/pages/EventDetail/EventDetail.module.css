@@ -27,8 +27,10 @@
     border-radius: 20px;
   }
   .backBtnWrap {
-    top: 70px;
-    left: 12px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 10;
   }
 }
 
@@ -1253,18 +1255,29 @@
   gap: 10px;
   padding: 14px 20px;
   background: #25D366;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   border: none;
   border-radius: 20px;
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.3px;
-  cursor: not-allowed;
-  opacity: 0.75;
-  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.25);
-  transition: all 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
   user-select: none;
+}
+
+.joinWhatsAppBtn:hover {
+  background: #20BA5A;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.55);
+}
+
+.joinWhatsAppBtn:active {
+  transform: translateY(0);
 }
 
 .joinWhatsAppBtn svg {
@@ -1296,6 +1309,45 @@
 .rulebookCard {
   width: 100%;
   margin-top: 4px;
+}
+
+.registerSideWrap {
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.registerSideBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  background: #FFFFFF;
+  color: #000000;
+  border: 1.5px solid #FFFFFF;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.registerSideBtn:hover {
+  background: #E8E5E2;
+  color: #000000;
+  border-color: #E8E5E2;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.35);
+}
+
+.registerSideBtn:active {
+  transform: translateY(0);
 }
 
 .rulebookBtn {

@@ -7,6 +7,7 @@ import EventCard from '../EventCard/EventCard';
 import { EVENTS } from '../../data/yugas';
 import type { YugaKey } from '../../data/yugas';
 import getCloudinaryUrl from '../../utils/cloudinary';
+import { precacheMediaUrls } from '../../utils/preloadAssets';
 import styles from './Chakra3D.module.css';
 
 const glbUrl = getCloudinaryUrl('src/assets/chakra_medallion.glb');
@@ -67,6 +68,8 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   const [step, setStep] = useState(0);
   const [mobileEventIndex, setMobileEventIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [cachedVideoUrls, setCachedVideoUrls] = useState<Record<string, string>>({});
+  const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
 
   const targetRotationZ = useRef(0);
   const pivotRef = useRef<THREE.Group | null>(null);
@@ -78,6 +81,43 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   useEffect(() => {
     hasEnteredRef.current = hasEnteredYugas;
   }, [hasEnteredYugas]);
+
+  // Current Yuga in 4-step sequence
+  const yugaIndex = ((step % 4) + 4) % 4;
+  const currentYuga = YUGA_LIST[yugaIndex];
+  const activeEvents = EVENTS.filter((e) => e.yuga === currentYuga.key);
+
+  // Safe normalized mobile event index
+  const safeMobileEventIndex =
+    activeEvents.length > 0 ? ((mobileEventIndex % activeEvents.length) + activeEvents.length) % activeEvents.length : 0;
+  const currentMobileEvent = activeEvents[safeMobileEventIndex];
+
+  // Pre-cache all 4 Yuga videos in CacheStorage & in-memory Blob URLs on load
+  useEffect(() => {
+    const videoUrls = YUGA_LIST.map((y) => y.video);
+    precacheMediaUrls(videoUrls).then((urlsMap) => {
+      setCachedVideoUrls(urlsMap);
+    });
+  }, []);
+
+  // Synchronize playback across persistent video elements
+  useEffect(() => {
+    Object.entries(videoRefs.current).forEach(([yugaId, videoEl]) => {
+      if (!videoEl) return;
+      if (yugaId === currentYuga.id) {
+        videoEl.currentTime = 0;
+        const playPromise = videoEl.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            videoEl.muted = true;
+            videoEl.play().catch(() => {});
+          });
+        }
+      } else {
+        videoEl.pause();
+      }
+    });
+  }, [currentYuga.id, hasEnteredYugas]);
 
   // Detect mobile view (< 768px)
   useEffect(() => {
@@ -294,16 +334,6 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
     };
   }, []);
 
-  // Current Yuga in 4-step sequence
-  const yugaIndex = ((step % 4) + 4) % 4;
-  const currentYuga = YUGA_LIST[yugaIndex];
-  const activeEvents = EVENTS.filter((e) => e.yuga === currentYuga.key);
-
-  // Safe normalized mobile event index
-  const safeMobileEventIndex =
-    activeEvents.length > 0 ? ((mobileEventIndex % activeEvents.length) + activeEvents.length) % activeEvents.length : 0;
-  const currentMobileEvent = activeEvents[safeMobileEventIndex];
-
   // Rotate Right handler (Next)
   const handleRotateRight = () => {
     if (isMobile) {
@@ -348,39 +378,49 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
     }
   };
 
-  // Enter the Yugas handler: smoothly snaps rotation to current aligned Yuga
+  // Enter the Yugas handler: smoothly snaps to Satyug (step 0)
   const handleEnterYugas = () => {
     setHasEnteredYugas(true);
-    const currentRot = pivotRef.current ? pivotRef.current.rotation.z : targetRotationZ.current;
-    const nearestStep = Math.round(-currentRot / STEP_RAD);
-    const normalizedStep = ((nearestStep % 4) + 4) % 4;
-    setStep(normalizedStep);
-    targetRotationZ.current = -nearestStep * STEP_RAD;
+    setStep(0);
     setMobileEventIndex(0);
+
+    if (pivotRef.current) {
+      // Normalize current rotation to [-PI, PI] range so it smoothly transitions to 0 without spinning wildly
+      let currentRot = pivotRef.current.rotation.z % (Math.PI * 2);
+      if (currentRot > Math.PI) currentRot -= Math.PI * 2;
+      if (currentRot < -Math.PI) currentRot += Math.PI * 2;
+      pivotRef.current.rotation.z = currentRot;
+    }
+    targetRotationZ.current = 0;
   };
 
   return (
     <div className={`${styles.chakraWrapper} ${className || ''}`}>
       {/* Background Container: Video plays continuously with smooth Pillar Overlay cross-dissolve */}
       <div className={styles.yugaBgVideoContainer}>
-        {/* Dynamic Yuga Video (plays once per selected Yuga and stays on the end frame) */}
-        <AnimatePresence mode="wait">
-          <motion.video
-            key={currentYuga.id}
-            src={currentYuga.video}
-            autoPlay
-            muted
-            playsInline
-            onEnded={(e) => {
-              e.currentTarget.pause();
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className={styles.yugaBgVideo}
-          />
-        </AnimatePresence>
+        {/* Dynamic Yuga Videos (persistent pre-rendered videos for seamless instant transitions) */}
+        {YUGA_LIST.map((yuga) => {
+          const isActive = currentYuga.id === yuga.id;
+          const src = cachedVideoUrls[yuga.video] || yuga.video;
+          return (
+            <video
+              key={yuga.id}
+              ref={(el) => {
+                videoRefs.current[yuga.id] = el;
+              }}
+              src={src}
+              preload="auto"
+              muted
+              playsInline
+              onEnded={(e) => {
+                e.currentTarget.pause();
+              }}
+              className={`${styles.yugaBgVideo} ${
+                isActive ? styles.yugaBgVideoActive : styles.yugaBgVideoInactive
+              }`}
+            />
+          );
+        })}
         <div className={styles.yugaBgOverlay} />
 
         {/* Initial Pillar Scene Overlay (Zooms in & fades seamlessly on enter) */}

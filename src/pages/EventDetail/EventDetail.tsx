@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, MapPin, Users, Phone, Download, Trophy, Layers, Globe, ChevronDown, ChevronUp } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { EVENTS, YUGAS } from '../../data/yugas';
 import ParticleField from '../../components/ParticleField/ParticleField';
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import getCloudinaryUrl from '../../utils/cloudinary';
 
 const promptrelayName = getCloudinaryUrl('src/assets/eventnames/promptrelay.png');
@@ -68,7 +69,22 @@ const EventDetail: React.FC = () => {
   const navigate = useNavigate();
   const [expandedRounds, setExpandedRounds] = React.useState(false);
   const [isScrolledDown, setIsScrolledDown] = React.useState(false);
+  const [isRegistering, setIsRegistering] = React.useState(false);
+  const mainContentRef = React.useRef<HTMLDivElement>(null);
   const event = EVENTS.find((e) => e.id === id);
+
+  const handleToggleRegister = () => {
+    setIsRegistering((prev) => !prev);
+    if (!isRegistering && mainContentRef.current) {
+      mainContentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [id]);
 
   React.useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -357,91 +373,111 @@ const EventDetail: React.FC = () => {
           </motion.div>
 
           <div className={styles.contentGrid}>
-            {/* Main content */}
-            <div className={styles.mainContent}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <div className={`${styles.block} ${styles.aboutBlock}`}>
-                  <h2 className={styles.blockTitle}>About the Event</h2>
-                  <p className={styles.blockText}>{event.about || event.description}</p>
-                </div>
-
-                {/* Competition Rounds & Structure Block */}
-                {event.rounds && event.rounds.length > 0 && (
-                  <div className={`${styles.block} ${styles.roundsBlock}`}>
-                    <h2 className={styles.blockTitle}>Competition Rounds &amp; Timeline</h2>
-                    <div className={styles.roundsList}>
-                      {(expandedRounds ? event.rounds : event.rounds.slice(0, 2)).map((round) => (
-                        <div key={round.roundNumber} className={styles.roundCard}>
-                          <div className={styles.roundHeader}>
-                            <div className={styles.roundTitleWrap}>
-                              <span className={styles.roundBadge}>
-                                Round 0{round.roundNumber}
-                              </span>
-                              <h3 className={styles.roundTitle}>{round.title}</h3>
-                            </div>
-                            <span
-                              className={`${styles.roundModeBadge} ${
-                                round.mode === 'Online'
-                                  ? styles.roundModeOnline
-                                  : styles.roundModeOffline
-                              }`}
-                            >
-                              {round.mode === 'Online' ? <Globe size={12} /> : <MapPin size={12} />}
-                              {round.mode}
-                            </span>
-                          </div>
-
-                          <div className={styles.roundMetaRow}>
-                            {round.date && (
-                              <span className={styles.roundMetaChip}>
-                                <Calendar size={13} /> {round.date}
-                              </span>
-                            )}
-                            {round.time && (
-                              <span className={styles.roundMetaChip}>
-                                <Clock size={13} /> {round.time}
-                              </span>
-                            )}
-                            {round.venue && (
-                              <span className={styles.roundMetaChip}>
-                                <MapPin size={13} /> {round.venue}
-                              </span>
-                            )}
-                          </div>
-
-                          <p className={styles.roundDesc}>{round.description}</p>
-                        </div>
-                      ))}
+            {/* Main content with flip transition */}
+            <div ref={mainContentRef} className={styles.mainContent}>
+              <AnimatePresence mode="wait">
+                {!isRegistering ? (
+                  <motion.div
+                    key="event-details"
+                    initial={{ opacity: 0, rotateY: -6, y: 15 }}
+                    animate={{ opacity: 1, rotateY: 0, y: 0 }}
+                    exit={{ opacity: 0, rotateY: 6, y: -15 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <div className={`${styles.block} ${styles.aboutBlock}`}>
+                      <h2 className={styles.blockTitle}>About the Event</h2>
+                      <p className={styles.blockText}>{event.about || event.description}</p>
                     </div>
 
-                    {event.rounds.length > 2 && (
-                      <div className={styles.roundsToggleWrap}>
-                        <button
-                          type="button"
-                          className={styles.roundsToggleBtn}
-                          onClick={() => setExpandedRounds((prev) => !prev)}
-                        >
-                          {expandedRounds ? (
-                            <>
-                              <span>Show Less</span>
-                              <ChevronUp size={16} />
-                            </>
-                          ) : (
-                            <>
-                              <span>Read More</span>
-                              <ChevronDown size={16} />
-                            </>
-                          )}
-                        </button>
+                    {/* Competition Rounds & Structure Block */}
+                    {event.rounds && event.rounds.length > 0 && (
+                      <div className={`${styles.block} ${styles.roundsBlock}`}>
+                        <h2 className={styles.blockTitle}>Competition Rounds &amp; Timeline</h2>
+                        <div className={styles.roundsList}>
+                          {(expandedRounds ? event.rounds : event.rounds.slice(0, 2)).map((round) => (
+                            <div key={round.roundNumber} className={styles.roundCard}>
+                              <div className={styles.roundHeader}>
+                                <div className={styles.roundTitleWrap}>
+                                  <span className={styles.roundBadge}>
+                                    Round 0{round.roundNumber}
+                                  </span>
+                                  <h3 className={styles.roundTitle}>{round.title}</h3>
+                                </div>
+                                <span
+                                  className={`${styles.roundModeBadge} ${
+                                    round.mode === 'Online'
+                                      ? styles.roundModeOnline
+                                      : styles.roundModeOffline
+                                  }`}
+                                >
+                                  {round.mode === 'Online' ? <Globe size={12} /> : <MapPin size={12} />}
+                                  {round.mode}
+                                </span>
+                              </div>
+
+                              <div className={styles.roundMetaRow}>
+                                {round.date && (
+                                  <span className={styles.roundMetaChip}>
+                                    <Calendar size={13} /> {round.date}
+                                  </span>
+                                )}
+                                {round.time && (
+                                  <span className={styles.roundMetaChip}>
+                                    <Clock size={13} /> {round.time}
+                                  </span>
+                                )}
+                                {round.venue && (
+                                  <span className={styles.roundMetaChip}>
+                                    <MapPin size={13} /> {round.venue}
+                                  </span>
+                                )}
+                              </div>
+
+                              <p className={styles.roundDesc}>{round.description}</p>
+                            </div>
+                          ))}
+                        </div>
+
+                        {event.rounds.length > 2 && (
+                          <div className={styles.roundsToggleWrap}>
+                            <button
+                              type="button"
+                              className={styles.roundsToggleBtn}
+                              onClick={() => setExpandedRounds((prev) => !prev)}
+                            >
+                              {expandedRounds ? (
+                                <>
+                                  <span>Show Less</span>
+                                  <ChevronUp size={16} />
+                                </>
+                              ) : (
+                                <>
+                                  <span>Read More</span>
+                                  <ChevronDown size={16} />
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        )}
                       </div>
                     )}
-                  </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="registration-form"
+                    initial={{ opacity: 0, rotateY: 6, y: 15 }}
+                    animate={{ opacity: 1, rotateY: 0, y: 0 }}
+                    exit={{ opacity: 0, rotateY: -6, y: -15 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <RegistrationForm
+                      event={event}
+                      onCancel={() => setIsRegistering(false)}
+                      yugaColor={yuga.colors.primary}
+                    />
+                  </motion.div>
                 )}
-              </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Sidebar */}
@@ -454,8 +490,12 @@ const EventDetail: React.FC = () => {
               {/* Registration */}
               <div className={styles.sideCard}>
                 <h3 className={styles.sideTitle}>Registration</h3>
-                <button className={styles.disabledWhiteBtn} disabled>
-                  Registration Opening Soon
+                <button
+                  type="button"
+                  onClick={handleToggleRegister}
+                  className={styles.registerSideBtn}
+                >
+                  {isRegistering ? 'View Details' : 'Register Now'}
                 </button>
               </div>
 
@@ -523,15 +563,16 @@ const EventDetail: React.FC = () => {
 
               {/* Join WhatsApp Group Button */}
               <div className={styles.joinGroupWrap}>
-                <button
-                  type="button"
+                <a
+                  href="https://chat.whatsapp.com/DgwPI9EgaAQ1Z1epQcUZ40?s=qt&p=a&mlu=4&ilr=4"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={styles.joinWhatsAppBtn}
-                  disabled
-                  title="WhatsApp Group joining soon"
+                  title="Join WhatsApp Group"
                 >
                   <WhatsAppIcon size={20} color="#FFFFFF" />
                   <span>Join WhatsApp Group</span>
-                </button>
+                </a>
               </div>
             </motion.aside>
           </div>

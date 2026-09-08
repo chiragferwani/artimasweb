@@ -20,17 +20,25 @@ const Legacy = lazy(() => import('./pages/Legacy/Legacy'));
 const Contact = lazy(() => import('./pages/Contact/Contact'));
 
 // Page transition wrapper
-const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 8 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -8 }}
-    transition={{ duration: 0.35, ease: 'easeInOut' }}
-    style={{ minHeight: '100vh' }}
-  >
-    {children}
-  </motion.div>
-);
+const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.35, ease: 'easeInOut' }}
+      style={{ minHeight: '100vh' }}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 // Transparent fallback for route chunk loading (never shows video loader screen on route navigation)
 const RouteFallback: React.FC = () => (
