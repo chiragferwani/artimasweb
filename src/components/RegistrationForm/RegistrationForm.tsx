@@ -26,8 +26,8 @@ import type { Event } from '../../data/yugas';
 import { uploadPaymentScreenshot } from '../../utils/paymentUpload';
 import { submitRegistrationToGoogleSheets, type TeamMemberData } from '../../utils/googleSheets';
 import getCloudinaryUrl from '../../utils/cloudinary';
-import qrCodeImg from '../../assets/qrcode.jpeg';
-import tickAnimationData from '../../assets/tick.json';
+import qrCodeImg from '../../data/qrCode';
+import tickAnimationData from '../../data/tickAnimation';
 import styles from './RegistrationForm.module.css';
 
 const promptrelayName = getCloudinaryUrl('src/assets/eventnames/promptrelay.png');

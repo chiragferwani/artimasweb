@@ -14,6 +14,8 @@ dist-ssr
 *.local
 src/assets/
 assets/
+!src/assets/qrcode.jpeg
+!src/assets/tick.json
 
 # Editor directories and files
 .vscode/*
