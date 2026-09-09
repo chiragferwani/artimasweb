@@ -138,22 +138,15 @@ const Contact: React.FC = () => {
     setErrorMessage(null);
 
     try {
-      const payload = {
-        access_key: '054a649b-befd-4f4f-9178-3a6f0346101f',
-        name: form.name,
-        email: form.email,
-        subject: `Artimas Contact [${form.subject.toUpperCase()}]: ${form.name}`,
-        message: form.message,
-        from_name: 'Artimas Portal',
-      };
+      const formData = new FormData(e.currentTarget);
+      formData.append('access_key', '054a649b-befd-4f4f-9178-3a6f0346101f');
+      formData.append('from_name', 'Artimas 2026 Portal');
+      formData.append('subject', `Artimas Inquiry: ${form.subject ? form.subject.toUpperCase() : 'GENERAL'} - ${form.name}`);
+      formData.append('replyto', form.email);
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
+        body: formData,
       });
 
       const data = await response.json();
@@ -244,6 +237,9 @@ const Contact: React.FC = () => {
                 </div>
               ) : (
                 <form className={styles.form} onSubmit={handleSubmit}>
+                  {/* Honeypot Spam Protection Field for Web3Forms */}
+                  <input type="checkbox" name="botcheck" className={styles.botcheck} style={{ display: 'none' }} />
+
                   <h2 className={styles.formTitle}>Send a Message</h2>
 
                   <div className={styles.formRow}>
