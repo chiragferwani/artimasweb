@@ -187,5 +187,8 @@
   "src/assets/yuga-hero.jpg": "https://res.cloudinary.com/kxwxs8yo/image/upload/v1788191798/artimasweb/yuga-hero.jpg",
   "src/assets/qrcode.jpeg": "https://res.cloudinary.com/exq0xlou/image/upload/v1788887771/artimasweb/qrcode.jpg",
   "src/assets/qrcode.jpg": "https://res.cloudinary.com/exq0xlou/image/upload/v1788887771/artimasweb/qrcode.jpg",
-  "src/assets/tick.json": "https://res.cloudinary.com/exq0xlou/raw/upload/v1788887893/artimasweb/tick.json"
+  "src/assets/tick.json": "https://res.cloudinary.com/exq0xlou/raw/upload/v1788887893/artimasweb/tick.json",
+  "src/assets/team/hari.png": "https://res.cloudinary.com/exq0xlou/image/upload/v1788935324/artimasweb/team/hari.png",
+  "src/assets/team/nirbhay.png": "https://res.cloudinary.com/exq0xlou/image/upload/v1788935326/artimasweb/team/nirbhay.png",
+  "src/assets/team/meetr.png": "https://res.cloudinary.com/exq0xlou/image/upload/v1788935579/artimasweb/team/meetr.png"
 }

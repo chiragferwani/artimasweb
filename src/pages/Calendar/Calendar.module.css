@@ -283,9 +283,9 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: min(94%, 650px);
+  max-width: min(96%, 720px);
   height: auto;
-  max-height: 165px;
+  max-height: 200px;
   object-fit: contain;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.65));
   margin: 0 auto;

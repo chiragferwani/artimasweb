@@ -142,16 +142,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 12px auto 20px;
+  margin: 14px auto 24px;
   width: 100%;
 }
 
 .eventNameImg {
-  max-width: min(95vw, 680px);
+  max-width: min(95vw, 860px);
+  width: auto;
   height: auto;
-  max-height: 220px;
+  max-height: 320px;
   object-fit: contain;
-  filter: drop-shadow(0 0 40px rgba(245, 215, 110, 0.65));
+  filter: drop-shadow(0 0 45px rgba(245, 215, 110, 0.75)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.8));
 }
 
 /* ═══════ 3D CURVED GOLDEN TEXT EFFECT ═══════ */
@@ -561,9 +562,9 @@
 }
 
 .aboutBlock {
-  min-height: 300px;
-  padding: 56px 48px;
-  border-radius: 28px;
+  min-height: auto;
+  padding: 36px 36px 32px;
+  border-radius: 24px;
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
@@ -571,16 +572,16 @@
 }
 
 .aboutBlock .blockTitle {
-  font-size: 26px;
+  font-size: 24px;
   letter-spacing: -0.5px;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
 }
 
 .aboutBlock .blockText {
-  font-size: 18px;
+  font-size: 16.5px;
   font-weight: 400;
-  line-height: 30px;
+  line-height: 28px;
   color: var(--color-ink, #FFFFFF);
 }
 
@@ -946,9 +947,9 @@
 }
 
 .rulesBlock {
-  min-height: 300px;
-  padding: 56px 48px;
-  border-radius: 28px;
+  min-height: auto;
+  padding: 36px 36px 32px;
+  border-radius: 24px;
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
@@ -956,10 +957,10 @@
 }
 
 .rulesBlock .blockTitle {
-  font-size: 26px;
+  font-size: 24px;
   letter-spacing: -0.5px;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
 }
 
 .blockTitle {
@@ -1413,6 +1414,7 @@
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 767px) {
+  .eventNameImg { max-height: 240px; }
   .metaGrid { flex-wrap: wrap; justify-content: center; gap: 8px; }
   .metaItem { flex: 1 1 calc(50% - 8px); min-width: 130px; padding: 6px 10px; border-radius: 12px; }
   .metaIconWrap { width: 30px; height: 30px; }
@@ -1434,6 +1436,7 @@
 }
 
 @media (max-width: 480px) {
+  .eventNameImg { max-height: 180px; }
   .metaItem { flex: 1 1 100%; }
   .heroFrame { padding: 36px 12px 20px; border-radius: 16px; }
   .eventTagline { font-size: 12px; margin-bottom: 14px; }

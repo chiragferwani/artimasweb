@@ -208,17 +208,22 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
       if (!m.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.email.trim())) {
         return `Please enter a valid email address for ${memberLabel}.`;
       }
-      if (!m.phone.trim() || !/^\+?[0-9]{10,13}$/.test(m.phone.trim().replace(/[\s-]/g, ''))) {
-        return `Please enter a valid 10-digit contact number for ${memberLabel}.`;
-      }
 
       if (isPCCOE) {
+        const emailLower = m.email.trim().toLowerCase();
+        if (!emailLower.endsWith('@pccoepune.org')) {
+          return `PCCOE students must use their official college email ID ending with @pccoepune.org for ${memberLabel}.`;
+        }
         if (!m.prn || !m.prn.trim()) {
           return `Please enter PRN number for ${memberLabel}.`;
         }
         if (!m.branch || !m.branch.trim()) {
           return `Please select branch for ${memberLabel}.`;
         }
+      }
+
+      if (!m.phone.trim() || !/^\+?[0-9]{10,13}$/.test(m.phone.trim().replace(/[\s-]/g, ''))) {
+        return `Please enter a valid 10-digit contact number for ${memberLabel}.`;
       }
     }
 
@@ -516,19 +521,25 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                     {/* Email */}
                     <div className={styles.fieldGroup}>
                       <label className={styles.fieldLabel}>
-                        Email Address <span className={styles.requiredMark}>*</span>
+                        {isPCCOE ? 'PCCOE Email ID' : 'Email Address'}{' '}
+                        <span className={styles.requiredMark}>*</span>
                       </label>
                       <div className={styles.inputWrapper}>
                         <Mail size={16} className={styles.inputIcon} />
                         <input
                           type="email"
-                          placeholder="e.g. aarav.sharma@example.com"
+                          placeholder={isPCCOE ? 'e.g. yourname.prn@pccoepune.org' : 'e.g. aarav.sharma@example.com'}
                           value={member.email}
                           onChange={(e) => handleMemberChange(idx, 'email', e.target.value)}
                           className={styles.textInput}
                           required
                         />
                       </div>
+                      {isPCCOE && (
+                        <span style={{ fontSize: '11px', color: '#9E9A94', marginTop: '4px', display: 'block' }}>
+                          Must be official college email ending with @pccoepune.org
+                        </span>
+                      )}
                     </div>
 
                     {/* Contact Number */}
@@ -650,7 +661,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
               <div className={styles.qrCodeBox}>
                 <div className={styles.qrHeader}>
                   <span>Scan to Pay</span>
-                  <span className={styles.qrFeeBadge}>{event.registrationFee || '₹100'}</span>
+                  <span className={styles.qrFeeBadge}>
+                    {event.id === 'datathon'
+                      ? members.length === 2
+                        ? '₹150 (2 Members)'
+                        : '₹100 (1 Member)'
+                      : event.registrationFee || '₹100'}
+                  </span>
                 </div>
                 <div className={styles.qrImageWrap}>
                   <img

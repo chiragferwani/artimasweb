@@ -89,9 +89,9 @@
 }
 
 .formEventNameImg {
-  height: clamp(38px, 6vw, 54px);
+  height: clamp(44px, 7vw, 64px);
   width: auto;
-  max-width: min(90vw, 320px);
+  max-width: min(90vw, 360px);
   object-fit: contain;
   filter: drop-shadow(0 0 16px rgba(245, 215, 110, 0.45));
 }

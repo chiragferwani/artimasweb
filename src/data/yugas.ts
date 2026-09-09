@@ -14,6 +14,8 @@ const kshitijImg = getCloudinaryUrl('src/assets/coordinators/kshitij.png');
 const vrushabhImg = getCloudinaryUrl('src/assets/coordinators/vrushabh.png');
 const debottamImg = getCloudinaryUrl('src/assets/coordinators/debottam.png');
 const tanmayeeImg = getCloudinaryUrl('src/assets/coordinators/tanmayee.png');
+const hariImg = getCloudinaryUrl('src/assets/team/hari.png');
+const nirbhayImg = getCloudinaryUrl('src/assets/team/nirbhay.png');
 
 export type YugaKey = 'satya' | 'treta' | 'dvapara' | 'kali';
 
@@ -249,7 +251,7 @@ export const EVENTS: Event[] = [
     about:
       'A two-round hackathon requiring an idea-submission PPT and GitHub prototype (Round 1), followed by an overnight offline hackathon to build a working AI/ML-integrated prototype (Round 2).',
     teamSize: 'Teams of 3-4 members',
-    registrationFee: '₹100',
+    registrationFee: '₹200',
     numberOfRounds: 2,
     rounds: [
       {
@@ -315,7 +317,7 @@ export const EVENTS: Event[] = [
     about:
       'A three-round AI prompt-engineering competition combining riddle decoding, a Chinese-whispers-style relay to recreate an image via prompts, and head-to-head prompt duels.',
     teamSize: 'Teams of exactly 3 members',
-    registrationFee: '₹100',
+    registrationFee: '₹150',
     numberOfRounds: 3,
     rounds: [
       {
@@ -468,7 +470,7 @@ export const EVENTS: Event[] = [
     about:
       'A two-round data science/ML competition where teams build predictive models on Kaggle (Round 1) and tackle a live, evolving data challenge onsite (Round 2).',
     teamSize: 'Teams of 1-2 members',
-    registrationFee: '₹100 per participant',
+    registrationFee: '₹100 (Solo) / ₹150 (Duo)',
     numberOfRounds: 2,
     rounds: [
       {
@@ -534,7 +536,7 @@ export const EVENTS: Event[] = [
     about:
       'A two-round cybersecurity and AI challenge: an LLM jailbreaking round to extract a hidden key, followed by a multi-domain Capture The Flag event.',
     teamSize: 'Teams of 2-4 members',
-    registrationFee: '₹100',
+    registrationFee: '₹200',
     numberOfRounds: 2,
     rounds: [
       {
@@ -601,7 +603,7 @@ export const EVENTS: Event[] = [
     about:
       'A mythology-and-riddle-themed escape challenge across three rounds, culminating in a live escape-room finale inspired by the Chakravyuh.',
     teamSize: 'Teams of exactly 3 members',
-    registrationFee: '₹100',
+    registrationFee: '₹150',
     numberOfRounds: 3,
     rounds: [
       {
@@ -679,7 +681,7 @@ export const EVENTS: Event[] = [
     about:
       'A real-life adaptation of the game Among Us testing knowledge, aptitude, logical reasoning, and teamwork across three escalating rounds.',
     teamSize: 'Individual only',
-    registrationFee: '₹100',
+    registrationFee: '₹80',
     numberOfRounds: 3,
     rounds: [
       {
@@ -755,7 +757,7 @@ export const EVENTS: Event[] = [
     about:
       'An online themed photography competition where participants capture and submit a single original photograph based on a released theme within a fixed time window.',
     teamSize: 'Individual only',
-    registrationFee: '₹100',
+    registrationFee: '₹40',
     numberOfRounds: 1,
     rounds: [
       {
@@ -795,8 +797,8 @@ export const EVENTS: Event[] = [
         'Excellence in action is yoga. True mastery lies in the perfection and precision brought to every stroke of creative craftsmanship.',
     },
     coordinators: [
-      { name: 'Saish', phone: '+91 84594 77995', email: 'saish@aimsa.edu', avatar: saishImg },
-      { name: 'Rutuja', phone: '+91 91583 05670', email: 'rutuja@aimsa.edu', avatar: rutujaImg },
+      { name: 'Hari', phone: '+91 94042 60399', email: 'hari@aimsa.edu', avatar: hariImg },
+      { name: 'Nirbhay', phone: '+91 86689 54048', email: 'nirbhay@aimsa.edu', avatar: nirbhayImg },
     ],
     registrationOpen: false,
   },

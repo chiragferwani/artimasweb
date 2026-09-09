@@ -184,10 +184,17 @@
 }
 
 .logoImg {
-  height: 22px;
+  height: 32px;
   width: auto;
   display: block;
-  opacity: 0.5;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.logoImg:hover {
+  opacity: 1;
+  transform: translateY(-1px);
 }
 
 /* ── Responsive ── */

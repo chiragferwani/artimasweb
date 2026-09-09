@@ -116,7 +116,7 @@
   align-items: center;
   gap: 8px;
   width: 100%;
-  height: 155px;
+  height: 175px;
   padding: 0;
   margin: 0;
   flex-shrink: 0;
@@ -136,8 +136,8 @@
 .eventIconImg {
   position: relative;
   z-index: 1;
-  width: 66px;
-  height: 66px;
+  width: 68px;
+  height: 68px;
   object-fit: contain;
   flex-shrink: 0;
   filter: drop-shadow(0 0 14px rgba(245, 215, 110, 0.7)) drop-shadow(0 0 4px rgba(255, 240, 180, 0.55)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9)) brightness(1.28) contrast(1.18);
@@ -145,8 +145,8 @@
 }
 
 .eventIconImg.brandathonIcon {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
   transform: none;
 }
 
@@ -163,8 +163,8 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: min(98%, 320px);
-  height: 68px;
+  max-width: min(98%, 350px);
+  height: 88px;
   object-fit: contain;
   display: block;
   margin: 0 auto;
@@ -334,10 +334,10 @@
 .compactEventNameImg {
   position: relative;
   z-index: 1;
-  max-width: 90%;
+  max-width: 92%;
   width: auto;
   height: auto;
-  max-height: clamp(40px, 9vw, 115px);
+  max-height: clamp(52px, 12vw, 140px);
   object-fit: contain;
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.75));
   display: block;
@@ -368,7 +368,7 @@
 @media (max-width: 768px) {
   .card {
     padding: 48px 16px 20px;
-    min-height: 300px;
+    min-height: 320px;
     border-radius: 18px;
   }
   .cardHeaderRow {
@@ -377,20 +377,20 @@
     right: 16px;
   }
   .eventNameImgWrap {
-    height: 145px;
+    height: 162px;
     gap: 7px;
   }
   .eventIconImg {
-    width: 60px;
-    height: 60px;
-  }
-  .eventIconImg.brandathonIcon {
     width: 64px;
     height: 64px;
   }
+  .eventIconImg.brandathonIcon {
+    width: 68px;
+    height: 68px;
+  }
   .eventNameImg {
-    height: 62px;
-    max-width: min(96%, 290px);
+    height: 80px;
+    max-width: min(98%, 330px);
   }
   .tagline {
     font-size: 10.5px;
@@ -427,7 +427,7 @@
   .card {
     border-radius: 18px;
     padding: 44px 14px 18px;
-    min-height: 280px;
+    min-height: 295px;
   }
   .cardHeaderRow {
     top: 10px;
@@ -439,20 +439,20 @@
     margin-top: 12px;
   }
   .eventNameImgWrap {
-    height: 132px;
+    height: 148px;
     gap: 6px;
   }
   .eventIconImg {
-    width: 54px;
-    height: 54px;
-  }
-  .eventIconImg.brandathonIcon {
     width: 58px;
     height: 58px;
   }
+  .eventIconImg.brandathonIcon {
+    width: 62px;
+    height: 62px;
+  }
   .eventNameImg {
-    height: 56px;
-    max-width: min(96%, 260px);
+    height: 72px;
+    max-width: min(98%, 290px);
   }
   .tagline {
     font-size: 10px;

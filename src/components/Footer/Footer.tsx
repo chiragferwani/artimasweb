@@ -9,6 +9,7 @@ const gfgLogo = getCloudinaryUrl('src/assets/clubs/gfg.png');
 const ieeecisLogo = getCloudinaryUrl('src/assets/clubs/ieeecis.png');
 const ieeecsLogo = getCloudinaryUrl('src/assets/clubs/ieeecs.png');
 const innsLogo = getCloudinaryUrl('src/assets/clubs/inns.png');
+const logoImg = getCloudinaryUrl('src/assets/logo.png');
 import styles from './Footer.module.css';
 
 const CLUB_LOGOS = [
@@ -186,7 +187,7 @@ const Footer: React.FC = () => {
             </a>
           </span>
           <div className={styles.logoMark}>
-            <img src="/artimasnav.png" alt="Artimas" className={styles.logoImg} />
+            <img src={logoImg} alt="Artimas" className={styles.logoImg} />
           </div>
         </div>
       </div>
