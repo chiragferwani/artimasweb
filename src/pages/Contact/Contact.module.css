@@ -260,6 +260,19 @@
   box-shadow: var(--shadow-card);
 }
 
+.lottieWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.lottieTick {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 4px 16px rgba(98, 196, 98, 0.45));
+}
+
 .successIcon {
   font-size: 40px;
   color: var(--color-orange);

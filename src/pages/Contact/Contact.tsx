@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Send, MapPin, Globe } from 'lucide-react';
+import { Lottie } from 'lottie-react';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import getCloudinaryUrl from '../../utils/cloudinary';
+import tickAnimationData, { tickAnimationUrl } from '../../data/tickAnimation';
 import styles from './Contact.module.css';
 
 const krishnaVid = getCloudinaryUrl('src/assets/krishnacontact.mp4');
@@ -213,11 +215,17 @@ const Contact: React.FC = () => {
             >
               {submitted ? (
                 <div className={styles.successBox}>
-                  <div className={styles.successIcon}>✦</div>
-                  <h3 className={styles.successTitle}>Message Received</h3>
+                  <div className={styles.lottieWrap}>
+                    <Lottie
+                      src={tickAnimationUrl || tickAnimationData}
+                      loop={false}
+                      autoplay={true}
+                      className={styles.lottieTick}
+                    />
+                  </div>
+                  <h3 className={styles.successTitle}>Message Sent Successfully!</h3>
                   <p className={styles.successText}>
-                    Your message has been sent to the AIMSA council. We shall respond
-                    within the cosmic cycle (2–3 business days).
+                    Thank you for reaching out. We have received your query and you will get a reply within <strong>12 hours</strong>.
                   </p>
                   <button
                     className={styles.resetBtn}
