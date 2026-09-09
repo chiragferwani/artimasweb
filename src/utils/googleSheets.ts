@@ -46,7 +46,7 @@ export const EVENT_SHEET_MAPPING: Record<string, string> = {
 // Configurable Google Apps Script Web App URL from environment or default
 export const GOOGLE_SCRIPT_WEB_APP_URL =
   import.meta.env.VITE_GOOGLE_SCRIPT_URL ||
-  'https://script.google.com/macros/s/AKfycbxsYi25U6G1fSBXNVrDR124RMADrQ9Vzj5cmqpRckTTkh6vVl5hLYMOHgfTjJOalUQ-bg/exec';
+  'https://script.google.com/macros/s/AKfycbyqllKhON2DyNL7mUlKOb9TOFy3rxynbYPjIQokB9dgWsopHDoZwAeBY9ftuwrb7RDwkw/exec';
 
 /**
  * Submits registration payload to Google Apps Script Web App endpoint.

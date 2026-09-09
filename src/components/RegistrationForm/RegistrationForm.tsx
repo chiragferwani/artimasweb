@@ -25,6 +25,7 @@ import { Lottie } from 'lottie-react';
 import type { Event } from '../../data/yugas';
 import { uploadPaymentScreenshot } from '../../utils/paymentUpload';
 import { submitRegistrationToGoogleSheets, type TeamMemberData } from '../../utils/googleSheets';
+import { sendRegistrationConfirmationEmail } from '../../utils/resendEmail';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import qrCodeImg from '../../data/qrCode';
 import tickAnimationData, { tickAnimationUrl } from '../../data/tickAnimation';
@@ -278,6 +279,23 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         paymentStatus: isPCCOE ? 'Free (PCCOE)' : 'Paid',
         paymentScreenshotUrl,
       });
+
+      // 3. Dispatch confirmation emails via Resend (async, non-blocking)
+      const primaryMember = members[0];
+      if (primaryMember?.email) {
+        sendRegistrationConfirmationEmail({
+          toEmail: primaryMember.email.trim(),
+          recipientName: primaryMember.name.trim() || teamName.trim(),
+          eventName: event.name,
+          registrationId: response.registrationId,
+          teamName: teamName.trim(),
+          collegeName: effectiveCollegeName.trim(),
+          teamSize: members.length,
+          paymentStatus: isPCCOE ? 'Free (PCCOE Student)' : 'Paid (Verified via Screenshot)',
+        }).catch((emailErr) => {
+          console.warn('Confirmation email dispatch warning:', emailErr);
+        });
+      }
 
       setRegistrationResultId(response.registrationId);
       setSuccessModalOpen(true);
