@@ -138,14 +138,22 @@ const Contact: React.FC = () => {
     setErrorMessage(null);
 
     try {
-      const formData = new FormData(e.currentTarget);
-      formData.append('access_key', '054a649b-befd-4f4f-9178-3a6f0346101f');
-      formData.append('from_name', 'Artimas 2026 Portal Contact');
-      formData.append('subject', `Artimas Contact Inquiry: ${form.subject.toUpperCase()} - ${form.name}`);
+      const payload = {
+        access_key: '054a649b-befd-4f4f-9178-3a6f0346101f',
+        name: form.name,
+        email: form.email,
+        subject: `Artimas Contact [${form.subject.toUpperCase()}]: ${form.name}`,
+        message: form.message,
+        from_name: 'Artimas Portal',
+      };
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
