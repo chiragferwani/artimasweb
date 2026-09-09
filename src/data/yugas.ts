@@ -804,7 +804,7 @@ export const EVENTS: Event[] = [
       note: 'Goodies, vouchers & gift hampers included in the prize pool. Cash prize: ₹3,000 (2 Winners ₹1,500 each).',
       prizeList: [
         { label: 'Winner 1', amount: '₹1,500', type: 'gold' },
-        { label: 'Winner 2', amount: '₹1,500', type: 'silver' },
+        { label: 'Winner 2', amount: '₹1,500', type: 'gold' },
       ],
     },
     rules: [

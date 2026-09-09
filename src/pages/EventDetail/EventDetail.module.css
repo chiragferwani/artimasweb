@@ -671,6 +671,22 @@
   width: 100%;
 }
 
+.dualPrizeGrid {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  gap: 32px !important;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+@media (max-width: 540px) {
+  .dualPrizeGrid {
+    gap: 16px !important;
+  }
+}
+
 .singleGoldenPrize {
   max-width: 280px;
 }

@@ -329,6 +329,34 @@ const EventDetail: React.FC = () => {
                   );
                 })}
               </div>
+            ) : event.id === 'pixelperfect' ? (
+              /* 2 Centered Golden Winners for Pixel Perfect */
+              <div className={`${styles.prizePoolGrid} ${styles.dualPrizeGrid}`}>
+                <div className={`${styles.prizeItem} ${styles.goldenPrizeItem}`}>
+                  <div className={styles.prizeCardBadge}>
+                    <span className={styles.prizeRankLabel}>Winner 1</span>
+                    <span className={styles.prizeRankValue}>₹1,500</span>
+                  </div>
+                  <img
+                    src={goldenImg}
+                    alt="Winner 1 - Golden"
+                    className={styles.prizePedestalImg}
+                    draggable={false}
+                  />
+                </div>
+                <div className={`${styles.prizeItem} ${styles.goldenPrizeItem}`}>
+                  <div className={styles.prizeCardBadge}>
+                    <span className={styles.prizeRankLabel}>Winner 2</span>
+                    <span className={styles.prizeRankValue}>₹1,500</span>
+                  </div>
+                  <img
+                    src={goldenImg}
+                    alt="Winner 2 - Golden"
+                    className={styles.prizePedestalImg}
+                    draggable={false}
+                  />
+                </div>
+              </div>
             ) : (!event.prizes?.second && !event.prizes?.third) || event.id === 'chakravyuh' || event.id === 'mayavi' ? (
               /* Single Winner Pedestal for Houdini Heist / Among Us / Single prize events */
               <div className={`${styles.prizePoolGrid} ${styles.singlePrizeGrid}`}>
