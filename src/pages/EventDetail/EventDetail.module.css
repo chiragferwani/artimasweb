@@ -640,6 +640,30 @@
   width: 100%;
 }
 
+.multiPrizeGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+}
+
+@media (max-width: 768px) {
+  .multiPrizeGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .multiPrizeGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
 .singlePrizeGrid {
   display: flex !important;
   justify-content: center !important;
@@ -752,6 +776,11 @@
 .bronzePrizeItem .prizeRankValue {
   color: #E5A87B;
   text-shadow: 0 0 14px rgba(205, 127, 50, 0.35);
+}
+
+.specialPrizeItem .prizeRankValue {
+  color: #A0C4FF;
+  text-shadow: 0 0 14px rgba(160, 196, 255, 0.35);
 }
 
 .prizeNoteText {

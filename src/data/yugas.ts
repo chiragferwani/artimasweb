@@ -206,6 +206,12 @@ export interface EventRound {
   description: string;
 }
 
+export interface PrizeRankItem {
+  label: string;
+  amount: string;
+  type?: 'gold' | 'silver' | 'bronze' | 'special';
+}
+
 export interface EventPrizes {
   first?: number | string | null;
   second?: number | string | null;
@@ -213,6 +219,7 @@ export interface EventPrizes {
   totalCashPrize: number | string;
   currency: string;
   note?: string;
+  prizeList?: PrizeRankItem[];
 }
 
 export interface Event {
@@ -276,11 +283,19 @@ export const EVENTS: Event[] = [
       },
     ],
     prizes: {
-      first: 25000,
-      second: 15000,
+      first: 30000,
+      second: 20000,
       third: 10000,
-      totalCashPrize: 50000,
+      totalCashPrize: '1,00,000+',
       currency: 'INR',
+      note: 'Goodies, vouchers & gift hampers included in the prize pool',
+      prizeList: [
+        { label: '4th Prize', amount: '₹5,000', type: 'special' },
+        { label: '3rd Prize', amount: '₹10,000', type: 'bronze' },
+        { label: '1st Prize', amount: '₹30,000', type: 'gold' },
+        { label: '2nd Prize', amount: '₹20,000', type: 'silver' },
+        { label: '5th Prize', amount: '₹5,000', type: 'special' },
+      ],
     },
     rules: [
       'Team size must be 3-4; team composition final after registration.',
@@ -352,12 +367,17 @@ export const EVENTS: Event[] = [
       },
     ],
     prizes: {
-      first: 7000,
-      second: 7000,
-      third: 7000,
-      totalCashPrize: 21000,
+      first: 5000,
+      second: 5000,
+      third: 5000,
+      totalCashPrize: '30,000',
       currency: 'INR',
-      note: 'Equal cash prizes for all three podium positions',
+      note: 'Goodies, vouchers & gift hampers included in the prize pool. Cash prize ₹15,000 (₹5,000 each for 1st, 2nd, and 3rd).',
+      prizeList: [
+        { label: 'Winner 1', amount: '₹5,000', type: 'gold' },
+        { label: 'Winner 2', amount: '₹5,000', type: 'silver' },
+        { label: 'Winner 3', amount: '₹5,000', type: 'bronze' },
+      ],
     },
     rules: [
       'Team size must be exactly 3 (mandatory); roles (Observer, Interpreter, Finalizer) assigned before Round 2 begins.',
@@ -429,11 +449,12 @@ export const EVENTS: Event[] = [
       },
     ],
     prizes: {
-      first: 7500,
-      second: 5000,
-      third: 2500,
-      totalCashPrize: 15000,
+      first: 10000,
+      second: 6000,
+      third: 4000,
+      totalCashPrize: '30,000',
       currency: 'INR',
+      note: 'Goodies, vouchers & gift hampers included in the prize pool',
     },
     rules: [
       'Team size must be 2-4 members; team composition is final after registration.',
@@ -498,8 +519,9 @@ export const EVENTS: Event[] = [
       first: 10000,
       second: 6000,
       third: 4000,
-      totalCashPrize: 20000,
+      totalCashPrize: '30,000',
       currency: 'INR',
+      note: 'Goodies, vouchers & gift hampers included in the prize pool',
     },
     rules: [
       'Unauthorized use of the dataset for external purposes is strictly prohibited.',
@@ -561,11 +583,12 @@ export const EVENTS: Event[] = [
       },
     ],
     prizes: {
-      first: 15000,
-      second: 10000,
-      third: 5000,
-      totalCashPrize: 30000,
+      first: 10000,
+      second: 6000,
+      third: 4000,
+      totalCashPrize: '30,000',
       currency: 'INR',
+      note: 'Goodies, vouchers & gift hampers included in the prize pool',
     },
     rules: [
       'Team size 2-4; team composition final after registration; participants must bring own laptops.',
@@ -638,12 +661,12 @@ export const EVENTS: Event[] = [
       },
     ],
     prizes: {
-      first: 25000,
+      first: 10000,
       second: null,
       third: null,
-      totalCashPrize: 25000,
+      totalCashPrize: '25,000',
       currency: 'INR',
-      note: 'Winner-take-all single championship cash prize of ₹25,000',
+      note: 'Goodies, vouchers & gift hampers included in the prize pool. Single winner cash prize: ₹10,000.',
     },
     rules: [
       'Teams must consist of exactly 3 players; no more, no less.',
@@ -716,11 +739,12 @@ export const EVENTS: Event[] = [
       },
     ],
     prizes: {
-      first: 5000,
-      second: 3000,
-      third: 2000,
-      totalCashPrize: 10000,
+      first: 10000,
+      second: null,
+      third: null,
+      totalCashPrize: '25,000',
       currency: 'INR',
+      note: 'Goodies, vouchers & gift hampers included in the prize pool. Single winner cash prize: ₹10,000.',
     },
     rules: [
       'Only individual participation is allowed.',
@@ -772,11 +796,16 @@ export const EVENTS: Event[] = [
       },
     ],
     prizes: {
-      first: 10000,
-      second: 6000,
-      third: 4000,
-      totalCashPrize: 20000,
+      first: 1500,
+      second: 1500,
+      third: null,
+      totalCashPrize: '10,000',
       currency: 'INR',
+      note: 'Goodies, vouchers & gift hampers included in the prize pool. Cash prize: ₹3,000 (2 Winners ₹1,500 each).',
+      prizeList: [
+        { label: 'Winner 1', amount: '₹1,500', type: 'gold' },
+        { label: 'Winner 2', amount: '₹1,500', type: 'silver' },
+      ],
     },
     rules: [
       'Only basic editing (brightness, contrast, colour correction, cropping) is allowed; heavy manipulation/photoshopping is not.',

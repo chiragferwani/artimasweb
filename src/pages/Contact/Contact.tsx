@@ -121,21 +121,44 @@ const Contact: React.FC = () => {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (errorMessage) setErrorMessage(null);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    // Placeholder: replace with actual API call when backend is ready
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitted(true);
-    setSubmitting(false);
-    setForm(INITIAL_FORM);
+    setErrorMessage(null);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      formData.append('access_key', '054a649b-befd-4f4f-9178-3a6f0346101f');
+      formData.append('from_name', 'Artimas 2026 Portal Contact');
+      formData.append('subject', `Artimas Contact Inquiry: ${form.subject.toUpperCase()} - ${form.name}`);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setForm(INITIAL_FORM);
+      } else {
+        setErrorMessage(data.message || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setErrorMessage('Failed to connect to the server. Please check your network and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -276,6 +299,12 @@ const Contact: React.FC = () => {
                       required
                     />
                   </div>
+
+                  {errorMessage && (
+                    <div className={styles.formErrorMsg}>
+                      {errorMessage}
+                    </div>
+                  )}
 
                   <button
                     type="submit"

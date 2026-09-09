@@ -239,6 +239,17 @@
   cursor: not-allowed;
 }
 
+.formErrorMsg {
+  background: rgba(238, 82, 82, 0.12);
+  border: 1px solid rgba(238, 82, 82, 0.35);
+  color: #EE5252;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
 /* Success */
 .successBox {
   background: var(--color-card);
