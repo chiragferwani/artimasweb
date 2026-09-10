@@ -1,7 +1,5 @@
 import getCloudinaryUrl from '../utils/cloudinary';
 
-import jatinLocalImg from '../assets/team/jatin.png';
-
 const saishImg = getCloudinaryUrl('src/assets/coordinators/saish.png');
 const harshImg = getCloudinaryUrl('src/assets/coordinators/harsh.png');
 const shamalImg = getCloudinaryUrl('src/assets/coordinators/shamal.png');
@@ -17,7 +15,7 @@ const debottamImg = getCloudinaryUrl('src/assets/coordinators/debottam.png');
 const tanmayeeImg = getCloudinaryUrl('src/assets/coordinators/tanmayee.png');
 const hariImg = getCloudinaryUrl('src/assets/team/hari.png');
 const nirbhayImg = getCloudinaryUrl('src/assets/team/nirbhay.png');
-const jatinImg = getCloudinaryUrl('src/assets/team/jatin.png') || jatinLocalImg;
+const jatinImg = getCloudinaryUrl('src/assets/team/jatin.png');
 
 export type YugaKey = 'satya' | 'treta' | 'dvapara' | 'kali';
 
