@@ -102,7 +102,6 @@ const Footer: React.FC = () => {
               <li><NavLink to="/events/kurukshetra" className={styles.footerLink}>Kurukshetra (CTF)</NavLink></li>
               <li><NavLink to="/events/chakravyuh" className={styles.footerLink}>Houdini Heist</NavLink></li>
               <li><NavLink to="/events/mayavi" className={styles.footerLink}>Among Us</NavLink></li>
-              <li><NavLink to="/events/dronevedha" className={styles.footerLink}>Drone Vedha</NavLink></li>
             </ul>
           </div>
 

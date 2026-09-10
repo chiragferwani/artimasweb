@@ -346,47 +346,57 @@
   position: relative;
   z-index: 10;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
   width: 100%;
-  max-width: 100%;
-  margin-top: 8px;
+  max-width: 1000px;
+  margin: 18px auto 0;
 }
 
 .metaItem {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 12px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 16px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
-  transition: all 0.25s ease;
-  white-space: nowrap;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
 }
 
 .metaItem:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.metaItemTime {
+  /* Default desktop style */
 }
 
 .metaIconWrap {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
+  color: var(--yuga-primary, #F5D76E);
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.metaIconWrap svg {
+  color: var(--yuga-primary, #F5D76E) !important;
 }
 
 .metaTextWrap {
@@ -394,24 +404,27 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  min-width: 0;
+  flex: 1;
 }
 
 .metaLabel {
   font-family: 'Inter', sans-serif;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.9px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 2px;
 }
 
 .metaValue {
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #FFFFFF;
-  line-height: 1.2;
+  line-height: 1.3;
+  word-break: break-word;
 }
 
 .heroFeatureImgWrap {
@@ -1376,6 +1389,59 @@
   margin-bottom: 8px;
 }
 
+/* Mobile Top Register Banner (Task 15) */
+.mobileRegisterBanner {
+  display: none;
+  width: 100%;
+  max-width: 440px;
+  margin: 8px auto 24px;
+  text-align: center;
+}
+
+.mobileRegisterBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F0EB 100%);
+  color: #000000 !important;
+  border: 1.5px solid #FFFFFF;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.25), 0 0 16px rgba(245, 215, 110, 0.4);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.mobileRegisterBtn:hover {
+  background: #E8E5E2;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255, 255, 255, 0.4), 0 0 24px rgba(245, 215, 110, 0.6);
+}
+
+.mobileRegisterBtn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 899px) {
+  .mobileRegisterBanner {
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .registrationSideCard {
+    display: none !important;
+  }
+}
+
 .registerSideBtn {
   display: flex;
   align-items: center;
@@ -1460,10 +1526,45 @@
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 767px) {
   .eventNameImg { max-height: 240px; }
-  .metaGrid { flex-wrap: wrap; justify-content: center; gap: 8px; }
-  .metaItem { flex: 1 1 calc(50% - 8px); min-width: 130px; padding: 6px 10px; border-radius: 12px; }
-  .metaIconWrap { width: 30px; height: 30px; }
-  .metaValue { font-size: 12px; }
+  .metaGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    max-width: 480px;
+    margin: 16px auto 0;
+  }
+  .metaItem {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 135px;
+    padding: 10px 12px;
+    gap: 10px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+  }
+  .metaItemTime {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .metaIconWrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+  .metaLabel {
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+  .metaValue {
+    font-size: 12.5px;
+    line-height: 1.3;
+  }
   .aboutBlock, .rulesBlock { padding: 28px 18px; min-height: auto; border-radius: 20px; }
   .aboutBlock .blockText { font-size: 15px; line-height: 24px; }
   .aboutBlock .blockTitle, .rulesBlock .blockTitle { font-size: 20px; }
@@ -1482,7 +1583,49 @@
 
 @media (max-width: 480px) {
   .eventNameImg { max-height: 180px; }
-  .metaItem { flex: 1 1 100%; }
+  .metaGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    max-width: 380px;
+    margin: 12px auto 0;
+  }
+  .metaItem {
+    flex: 1 1 calc(50% - 6px);
+    min-width: 125px;
+    padding: 8px 10px;
+    gap: 8px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-sizing: border-box;
+  }
+  .metaItemTime {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .metaIconWrap {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+  .metaIconWrap svg {
+    width: 14px;
+    height: 14px;
+  }
+  .metaLabel {
+    font-size: 9.5px;
+    letter-spacing: 0.6px;
+    margin-bottom: 1px;
+  }
+  .metaValue {
+    font-size: 12px;
+    line-height: 1.25;
+  }
   .heroFrame { padding: 36px 12px 20px; border-radius: 16px; }
   .eventTagline { font-size: 12px; margin-bottom: 14px; }
   .aboutBlock, .rulesBlock { padding: 20px 14px; }

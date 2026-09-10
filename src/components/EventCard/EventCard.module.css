@@ -188,6 +188,8 @@
   position: absolute;
   inset: 0;
   z-index: 10;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 /* Tagline */
@@ -241,7 +243,9 @@
   transition: all 0.25s ease;
   margin-top: auto;
   position: relative;
-  z-index: 12;
+  z-index: 20;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .registerBtn:hover {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import type { Event } from '../../data/yugas';
@@ -94,17 +94,24 @@ const EventCard: React.FC<EventCardProps> = ({
   compact = false,
   showDescription = false,
 }) => {
+  const navigate  = useNavigate();
   const yuga      = YUGAS[event.yuga];
   const yugaColor = YUGA_COLORS[event.yuga] ?? '#F5D76E';
   const nameImg = EVENT_NAME_IMAGES[event.id];
   const iconImg = EVENT_ICON_IMAGES[event.id];
   const yugaBadgeImg = YUGA_BADGE_IMAGES[event.yuga];
 
+  const handleNavigate = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`/events/${event.id}`);
+  };
+
   if (compact) {
     return (
       <div className={styles.compactCardWrapper}>
         {/* Clickable scroll card containing log background & enlarged event name logo */}
-        <Link to={`/events/${event.id}`} className={styles.compactCard} title={event.name}>
+        <Link to={`/events/${event.id}`} className={styles.compactCard} title={event.name} onClick={handleNavigate}>
           <img src={logImg} alt="" className={styles.logBgImg} draggable={false} />
           <div className={styles.compactCardContent}>
             {iconImg && (
@@ -129,8 +136,14 @@ const EventCard: React.FC<EventCardProps> = ({
       viewport={{ once: true, margin: '-40px' }}
       className={styles.card}
       style={{ backgroundImage: `url(${calImg})` }}
+      onClick={handleNavigate}
     >
-      <Link to={`/events/${event.id}`} className={styles.cardLinkOverlay} aria-label={event.name} />
+      <a
+        href={`/events/${event.id}`}
+        className={styles.cardLinkOverlay}
+        aria-label={event.name}
+        onClick={handleNavigate}
+      />
 
       {/* Header row with Yuga Badge on top-left and Team / Open tags on top-right */}
       <div className={styles.cardHeaderRow}>
@@ -188,9 +201,13 @@ const EventCard: React.FC<EventCardProps> = ({
       )}
 
       {/* Register Now Button */}
-      <Link to={`/events/${event.id}`} className={styles.registerBtn}>
+      <a
+        href={`/events/${event.id}`}
+        className={styles.registerBtn}
+        onClick={handleNavigate}
+      >
         Register now <ArrowUpRight size={13} />
-      </Link>
+      </a>
     </motion.div>
   );
 };

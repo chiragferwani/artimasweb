@@ -197,6 +197,10 @@
   justify-content: center;
 }
 
+.canvasContainerClickable {
+  cursor: pointer !important;
+}
+
 .canvasContainer:active {
   cursor: grabbing;
 }
@@ -258,7 +262,8 @@
   max-width: 1140px;
   margin: 0 auto;
   position: relative;
-  z-index: 4;
+  z-index: 20;
+  pointer-events: auto;
   padding-bottom: 24px;
 }
 
@@ -271,6 +276,9 @@
   width: 100%;
   perspective: 1200px;
   transform-style: preserve-3d;
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 .cardItem {
@@ -280,6 +288,9 @@
   display: flex;
   transform-style: preserve-3d;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 .cardItem:hover {
@@ -296,6 +307,9 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 .singleMobileCardWrap > div {

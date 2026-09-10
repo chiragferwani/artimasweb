@@ -6,6 +6,8 @@ import { SwastikChakra } from '../../components/SwastikChakra/SwastikChakra';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Sponsors.module.css';
 
+import cookieSponsorImg from '../../assets/sponsors/Cookie Sponsor.jpg';
+
 const shivaVideo = getCloudinaryUrl('src/assets/shiva.mp4');
 
 interface SponsorItem {
@@ -45,6 +47,17 @@ const sponsorTiers: SponsorTier[] = [
       {
         alt: 'Smoked Taxi',
         logo: getCloudinaryUrl('src/assets/sponsors/smoked_taxi_food.jpeg'),
+      },
+    ],
+  },
+  {
+    id: 'cookie',
+    title: 'Cookie Sponsor',
+    icon: <Cookie size={16} className={styles.tierIcon} />,
+    sponsors: [
+      {
+        alt: 'Cookie Sponsor',
+        logo: getCloudinaryUrl('src/assets/sponsors/Cookie Sponsor.jpg') || cookieSponsorImg,
       },
     ],
   },

@@ -95,6 +95,98 @@ function getTeamSizeLimits(teamSizeStr: string) {
   return { min: 1, max: 4, isFixed: false, label: 'Team Registration' };
 }
 
+// ── Validation Helpers ──
+const DUMMY_EMAIL_PREFIXES = new Set([
+  'test', 'testing', 'abc', 'abcd', 'dummy', 'fake', 'admin', 'asdf',
+  'user', 'student', 'none', 'null', 'sample', 'temp', 'xyz', 'pccoe',
+  'a', 'b', 'c', '123', '1234', 'aaa', '111', 'artimas', 'demo'
+]);
+
+const DUMMY_PHONES = new Set([
+  '9999999999', '8888888888', '7777777777', '6666666666',
+  '9876543210', '1234567890', '9123456789', '9000000000',
+  '9898989898', '9191919191', '9090909090', '0000000000'
+]);
+
+const DUMMY_PRNS = new Set([
+  '12345678', '123456789', '1234567890', '87654321', '00000000',
+  '11111111', '22222222', '33333333', '99999999', 'TESTPRN',
+  'DUMMYPRN', 'ABCDEFGH', 'PRN12345', 'ASDFGHJK', 'QWERTYUI'
+]);
+
+function validatePccoeEmail(email: string): string | null {
+  const clean = email.trim().toLowerCase();
+  if (!clean) return 'Official PCCOE email is required.';
+  
+  if (!clean.endsWith('@pccoepune.org')) {
+    return 'Must be an official email ending with @pccoepune.org';
+  }
+
+  const prefix = clean.split('@')[0];
+  if (prefix.length < 3) {
+    return 'Invalid email prefix. Please enter your valid college email ID.';
+  }
+
+  if (DUMMY_EMAIL_PREFIXES.has(prefix) || /^(.)\1+$/.test(prefix)) {
+    return 'Please enter a genuine PCCOE student email ID.';
+  }
+
+  if (!/^[a-z0-9]+[a-z0-9._-]*$/.test(prefix)) {
+    return 'Invalid characters in email ID.';
+  }
+
+  return null;
+}
+
+function validateGeneralEmail(email: string): string | null {
+  const clean = email.trim();
+  if (!clean) return 'Email address is required.';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean)) {
+    return 'Please enter a valid email address.';
+  }
+  return null;
+}
+
+function validatePrn(prn: string): string | null {
+  const clean = prn.trim().toUpperCase();
+  if (!clean) return 'PRN number is required for PCCOE students.';
+  
+  if (clean.length < 7 || clean.length > 12) {
+    return 'PRN must be between 7 and 12 characters.';
+  }
+
+  if (!/^[0-9A-Z]+$/.test(clean)) {
+    return 'PRN must contain only numbers and letters.';
+  }
+
+  if (DUMMY_PRNS.has(clean) || /^(.)\1+$/.test(clean)) {
+    return 'Please enter a valid, authentic PRN number.';
+  }
+
+  return null;
+}
+
+function validatePhone(phone: string): string | null {
+  const cleaned = phone.replace(/[\s\-()+]/g, '');
+  const normalized = cleaned.startsWith('91') && cleaned.length === 12
+    ? cleaned.slice(2)
+    : cleaned.startsWith('0') && cleaned.length === 11
+    ? cleaned.slice(1)
+    : cleaned;
+
+  if (!normalized) return 'Contact number is required.';
+  
+  if (!/^[6-9]\d{9}$/.test(normalized)) {
+    return 'Enter a valid 10-digit Indian phone number starting with 6-9.';
+  }
+
+  if (DUMMY_PHONES.has(normalized) || /^(.)\1{7,}/.test(normalized)) {
+    return 'Please enter a valid, active contact number.';
+  }
+
+  return null;
+}
+
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
   event,
   onCancel,
@@ -127,11 +219,23 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   // Submission & Status State
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [registrationResultId, setRegistrationResultId] = useState<string>('');
 
   const isPCCOE = collegeType === 'PCCOE';
   const effectiveCollegeName = isPCCOE ? 'PCCoE (Pimpri Chinchwad College of Engineering)' : customCollege;
+
+  // Clear single field error when user edits
+  const clearFieldError = (key: string) => {
+    if (fieldErrors[key]) {
+      setFieldErrors((prev) => {
+        const next = { ...prev };
+        delete next[key];
+        return next;
+      });
+    }
+  };
 
   // Member Management
   const handleAddMember = () => {
@@ -152,10 +256,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   const handleRemoveMember = (idx: number) => {
     if (members.length > limits.min) {
       setMembers((prev) => prev.filter((_, i) => i !== idx));
+      setFieldErrors((prev) => {
+        const next = { ...prev };
+        delete next[`member_${idx}_name`];
+        delete next[`member_${idx}_email`];
+        delete next[`member_${idx}_phone`];
+        delete next[`member_${idx}_prn`];
+        delete next[`member_${idx}_branch`];
+        return next;
+      });
     }
   };
 
   const handleMemberChange = (idx: number, field: keyof TeamMemberData, value: string) => {
+    clearFieldError(`member_${idx}_${field}`);
     setMembers((prev) => {
       const updated = [...prev];
       updated[idx] = { ...updated[idx], [field]: value };
@@ -168,11 +282,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       if (!file.type.startsWith('image/')) {
-        setFormError('Please select a valid image file (PNG, JPG, JPEG, WEBP).');
+        setFieldErrors((prev) => ({ ...prev, screenshot: 'Please select a valid image file (PNG, JPG, JPEG, WEBP).' }));
         return;
       }
       setScreenshotFile(file);
       setScreenshotPreview(URL.createObjectURL(file));
+      clearFieldError('screenshot');
       setFormError(null);
     }
   };
@@ -188,54 +303,99 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     }
   };
 
-  // Validation
-  const validateForm = (): string | null => {
+  // Comprehensive Form Validation
+  const validateForm = (): Record<string, string> => {
+    const errors: Record<string, string> = {};
+
+    // 1. Team / Participant Name
     if (!teamName.trim()) {
-      return limits.max === 1 ? 'Please enter participant name or alias.' : 'Please enter your team name.';
+      errors.teamName = limits.max === 1 ? 'Participant name is required.' : 'Team name is required.';
+    } else if (teamName.trim().length < 2) {
+      errors.teamName = 'Name must be at least 2 characters.';
     }
 
+    // 2. College Name (if Other)
     if (!isPCCOE && !customCollege.trim()) {
-      return 'Please enter your college name.';
+      errors.customCollege = 'Please enter your college/institute name.';
     }
 
-    // Validate each member
-    for (let i = 0; i < members.length; i++) {
-      const m = members[i];
-      const memberLabel = limits.max === 1 ? 'Participant' : `Member ${i + 1}`;
+    // Sets to track duplicates across team members
+    const seenEmails = new Map<string, number>();
+    const seenPhones = new Map<string, number>();
+    const seenPrns = new Map<string, number>();
 
+    // 3. Member validations
+    members.forEach((m, idx) => {
+      const label = limits.max === 1 ? 'Participant' : `Member ${idx + 1}`;
+
+      // Name
       if (!m.name.trim()) {
-        return `Please enter the full name for ${memberLabel}.`;
-      }
-      if (!m.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.email.trim())) {
-        return `Please enter a valid email address for ${memberLabel}.`;
+        errors[`member_${idx}_name`] = `Full name is required for ${label}.`;
+      } else if (m.name.trim().length < 2) {
+        errors[`member_${idx}_name`] = `Enter a valid name (at least 2 characters).`;
       }
 
+      // Email
+      const emailVal = m.email.trim().toLowerCase();
+      if (!emailVal) {
+        errors[`member_${idx}_email`] = `Email address is required for ${label}.`;
+      } else if (isPCCOE) {
+        const pccoeErr = validatePccoeEmail(emailVal);
+        if (pccoeErr) errors[`member_${idx}_email`] = pccoeErr;
+      } else {
+        const generalErr = validateGeneralEmail(emailVal);
+        if (generalErr) errors[`member_${idx}_email`] = generalErr;
+      }
+
+      // Check duplicate email
+      if (emailVal && !errors[`member_${idx}_email`]) {
+        if (seenEmails.has(emailVal)) {
+          const prevIdx = seenEmails.get(emailVal)!;
+          errors[`member_${idx}_email`] = `Duplicate email! Same as Member ${prevIdx + 1}.`;
+        } else {
+          seenEmails.set(emailVal, idx);
+        }
+      }
+
+      // Phone
+      const phoneErr = validatePhone(m.phone);
+      if (phoneErr) {
+        errors[`member_${idx}_phone`] = phoneErr;
+      } else {
+        const cleanPhone = m.phone.replace(/[\s\-()+]/g, '').slice(-10);
+        if (seenPhones.has(cleanPhone)) {
+          const prevIdx = seenPhones.get(cleanPhone)!;
+          errors[`member_${idx}_phone`] = `Duplicate contact number! Same as Member ${prevIdx + 1}.`;
+        } else {
+          seenPhones.set(cleanPhone, idx);
+        }
+      }
+
+      // PCCOE Specific (PRN & Branch)
       if (isPCCOE) {
-        const emailLower = m.email.trim().toLowerCase();
-        if (!emailLower.endsWith('@pccoepune.org')) {
-          return `PCCOE students must use their official college email ID ending with @pccoepune.org for ${memberLabel}.`;
+        const prnVal = (m.prn || '').trim().toUpperCase();
+        const prnErr = validatePrn(prnVal);
+        if (prnErr) {
+          errors[`member_${idx}_prn`] = prnErr;
+        } else if (seenPrns.has(prnVal)) {
+          const prevIdx = seenPrns.get(prnVal)!;
+          errors[`member_${idx}_prn`] = `Duplicate PRN! Same as Member ${prevIdx + 1}.`;
+        } else {
+          seenPrns.set(prnVal, idx);
         }
-        if (!m.prn || !m.prn.trim()) {
-          return `Please enter PRN number for ${memberLabel}.`;
-        }
+
         if (!m.branch || !m.branch.trim()) {
-          return `Please select branch for ${memberLabel}.`;
+          errors[`member_${idx}_branch`] = `Please select branch for ${label}.`;
         }
       }
+    });
 
-      if (!m.phone.trim() || !/^\+?[0-9]{10,13}$/.test(m.phone.trim().replace(/[\s-]/g, ''))) {
-        return `Please enter a valid 10-digit contact number for ${memberLabel}.`;
-      }
+    // 4. Payment Screenshot (if non-PCCOE)
+    if (!isPCCOE && !screenshotFile) {
+      errors.screenshot = 'Payment transaction screenshot is required.';
     }
 
-    // If outside PCCOE, require payment screenshot
-    if (!isPCCOE) {
-      if (!screenshotFile) {
-        return 'Please upload a screenshot of your payment transaction.';
-      }
-    }
-
-    return null;
+    return errors;
   };
 
   // Handle Form Submission
@@ -243,11 +403,24 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     e.preventDefault();
     setFormError(null);
 
-    const error = validateForm();
-    if (error) {
-      setFormError(error);
-      const errEl = document.getElementById('form-error-banner');
-      if (errEl) errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setFormError('Please resolve the highlighted errors below before proceeding.');
+      
+      // Auto-scroll to the first invalid field
+      const firstErrorKey = Object.keys(errors)[0];
+      setTimeout(() => {
+        const errEl = document.getElementById(`field-${firstErrorKey}`);
+        if (errEl) {
+          errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const inputEl = errEl.querySelector<HTMLInputElement | HTMLSelectElement>('input, select');
+          if (inputEl) inputEl.focus();
+        } else {
+          const banner = document.getElementById('form-error-banner');
+          if (banner) banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 50);
       return;
     }
 
@@ -273,7 +446,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           name: m.name.trim(),
           email: m.email.trim(),
           phone: m.phone.trim(),
-          prn: isPCCOE ? (m.prn?.trim() || '') : '',
+          prn: isPCCOE ? (m.prn?.trim().toUpperCase() || '') : '',
           branch: isPCCOE ? (m.branch?.trim() || '') : '',
         })),
         paymentStatus: isPCCOE ? 'Free (PCCOE)' : 'Paid',
@@ -364,7 +537,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
           <div className={styles.fieldsGrid}>
             {/* Team Name */}
-            <div className={styles.fieldGroup}>
+            <div id="field-teamName" className={styles.fieldGroup}>
               <label className={styles.fieldLabel} htmlFor="team-name">
                 {limits.max === 1 ? 'Participant Name / Alias' : 'Team Name'}{' '}
                 <span className={styles.requiredMark}>*</span>
@@ -376,11 +549,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                   type="text"
                   placeholder={limits.max === 1 ? 'Enter your name/alias' : 'Enter a unique team name'}
                   value={teamName}
-                  onChange={(e) => setTeamName(e.target.value)}
-                  className={styles.textInput}
+                  onChange={(e) => {
+                    setTeamName(e.target.value);
+                    clearFieldError('teamName');
+                  }}
+                  className={`${styles.textInput} ${fieldErrors.teamName ? styles.inputError : ''}`}
                   required
                 />
               </div>
+              {fieldErrors.teamName && (
+                <div className={styles.fieldErrorText}>
+                  <AlertCircle size={13} />
+                  <span>{fieldErrors.teamName}</span>
+                </div>
+              )}
             </div>
 
             {/* College Dropdown */}
@@ -397,6 +579,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                     const val = e.target.value as 'PCCOE' | 'Other';
                     setCollegeType(val);
                     if (val === 'PCCOE') setCustomCollege('');
+                    clearFieldError('customCollege');
                   }}
                   className={styles.selectInput}
                 >
@@ -413,6 +596,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
+                id="field-customCollege"
                 className={`${styles.fieldGroup} ${styles.fullWidthField}`}
               >
                 <label className={styles.fieldLabel} htmlFor="custom-college">
@@ -425,11 +609,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                     type="text"
                     placeholder="e.g. COEP, PICT, MIT WPU, VIIT, DY Patil, etc."
                     value={customCollege}
-                    onChange={(e) => setCustomCollege(e.target.value)}
-                    className={styles.textInput}
+                    onChange={(e) => {
+                      setCustomCollege(e.target.value);
+                      clearFieldError('customCollege');
+                    }}
+                    className={`${styles.textInput} ${fieldErrors.customCollege ? styles.inputError : ''}`}
                     required={!isPCCOE}
                   />
                 </div>
+                {fieldErrors.customCollege && (
+                  <div className={styles.fieldErrorText}>
+                    <AlertCircle size={13} />
+                    <span>{fieldErrors.customCollege}</span>
+                  </div>
+                )}
               </motion.div>
             )}
           </div>
@@ -496,6 +689,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 ? 'Team Leader (Member 1)'
                 : `Team Member ${idx + 1}`;
 
+              const nameErr = fieldErrors[`member_${idx}_name`];
+              const emailErr = fieldErrors[`member_${idx}_email`];
+              const phoneErr = fieldErrors[`member_${idx}_phone`];
+              const prnErr = fieldErrors[`member_${idx}_prn`];
+              const branchErr = fieldErrors[`member_${idx}_branch`];
+
               return (
                 <div key={idx} className={styles.memberCard}>
                   <div className={styles.memberCardHeader}>
@@ -519,7 +718,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
                   <div className={styles.memberFieldsGrid}>
                     {/* Full Name */}
-                    <div className={styles.fieldGroup}>
+                    <div id={`field-member_${idx}_name`} className={styles.fieldGroup}>
                       <label className={styles.fieldLabel}>
                         Full Name <span className={styles.requiredMark}>*</span>
                       </label>
@@ -530,14 +729,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                           placeholder="e.g. Aarav Sharma"
                           value={member.name}
                           onChange={(e) => handleMemberChange(idx, 'name', e.target.value)}
-                          className={styles.textInput}
+                          className={`${styles.textInput} ${nameErr ? styles.inputError : ''}`}
                           required
                         />
                       </div>
+                      {nameErr && (
+                        <div className={styles.fieldErrorText}>
+                          <AlertCircle size={13} />
+                          <span>{nameErr}</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Email */}
-                    <div className={styles.fieldGroup}>
+                    <div id={`field-member_${idx}_email`} className={styles.fieldGroup}>
                       <label className={styles.fieldLabel}>
                         {isPCCOE ? 'PCCOE Email ID' : 'Email Address'}{' '}
                         <span className={styles.requiredMark}>*</span>
@@ -549,19 +754,24 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                           placeholder={isPCCOE ? 'e.g. yourname.prn@pccoepune.org' : 'e.g. aarav.sharma@example.com'}
                           value={member.email}
                           onChange={(e) => handleMemberChange(idx, 'email', e.target.value)}
-                          className={styles.textInput}
+                          className={`${styles.textInput} ${emailErr ? styles.inputError : ''}`}
                           required
                         />
                       </div>
-                      {isPCCOE && (
+                      {emailErr ? (
+                        <div className={styles.fieldErrorText}>
+                          <AlertCircle size={13} />
+                          <span>{emailErr}</span>
+                        </div>
+                      ) : isPCCOE ? (
                         <span style={{ fontSize: '11px', color: '#9E9A94', marginTop: '4px', display: 'block' }}>
                           Must be official college email ending with @pccoepune.org
                         </span>
-                      )}
+                      ) : null}
                     </div>
 
                     {/* Contact Number */}
-                    <div className={styles.fieldGroup}>
+                    <div id={`field-member_${idx}_phone`} className={styles.fieldGroup}>
                       <label className={styles.fieldLabel}>
                         Contact Number <span className={styles.requiredMark}>*</span>
                       </label>
@@ -572,16 +782,22 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                           placeholder="e.g. 9876543210"
                           value={member.phone}
                           onChange={(e) => handleMemberChange(idx, 'phone', e.target.value)}
-                          className={styles.textInput}
+                          className={`${styles.textInput} ${phoneErr ? styles.inputError : ''}`}
                           required
                         />
                       </div>
+                      {phoneErr && (
+                        <div className={styles.fieldErrorText}>
+                          <AlertCircle size={13} />
+                          <span>{phoneErr}</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* PCCOE-Specific Fields: PRN & Branch */}
                     {isPCCOE && (
                       <>
-                        <div className={styles.fieldGroup}>
+                        <div id={`field-member_${idx}_prn`} className={styles.fieldGroup}>
                           <label className={styles.fieldLabel}>
                             PRN Number <span className={styles.requiredMark}>*</span>
                           </label>
@@ -591,14 +807,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                               type="text"
                               placeholder="e.g. 122B1B123"
                               value={member.prn || ''}
-                              onChange={(e) => handleMemberChange(idx, 'prn', e.target.value)}
-                              className={styles.textInput}
+                              onChange={(e) => handleMemberChange(idx, 'prn', e.target.value.toUpperCase())}
+                              className={`${styles.textInput} ${prnErr ? styles.inputError : ''}`}
                               required={isPCCOE}
                             />
                           </div>
+                          {prnErr && (
+                            <div className={styles.fieldErrorText}>
+                              <AlertCircle size={13} />
+                              <span>{prnErr}</span>
+                            </div>
+                          )}
                         </div>
 
-                        <div className={styles.fieldGroup}>
+                        <div id={`field-member_${idx}_branch`} className={styles.fieldGroup}>
                           <label className={styles.fieldLabel}>
                             Branch / Department <span className={styles.requiredMark}>*</span>
                           </label>
@@ -607,7 +829,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                             <select
                               value={member.branch || 'CSE (AI & ML)'}
                               onChange={(e) => handleMemberChange(idx, 'branch', e.target.value)}
-                              className={styles.selectInput}
+                              className={`${styles.selectInput} ${branchErr ? styles.inputError : ''}`}
                               required={isPCCOE}
                             >
                               {BRANCH_OPTIONS.map((branch) => (
@@ -618,6 +840,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                             </select>
                             <ChevronDown size={16} className={styles.selectArrow} />
                           </div>
+                          {branchErr && (
+                            <div className={styles.fieldErrorText}>
+                              <AlertCircle size={13} />
+                              <span>{branchErr}</span>
+                            </div>
+                          )}
                         </div>
                       </>
                     )}
@@ -700,7 +928,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
               </div>
 
               {/* Upload Screenshot Area */}
-              <div className={styles.uploadAreaContainer}>
+              <div id="field-screenshot" className={styles.uploadAreaContainer}>
                 <label className={styles.uploadLabel}>
                   Upload Payment Screenshot <span className={styles.requiredMark}>*</span>
                 </label>
@@ -719,7 +947,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
                 {!screenshotPreview ? (
                   <div
-                    className={styles.dropzone}
+                    className={`${styles.dropzone} ${fieldErrors.screenshot ? styles.inputError : ''}`}
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <div className={styles.dropzoneIconWrap}>
@@ -755,6 +983,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                         <Trash2 size={14} /> Remove / Replace
                       </button>
                     </div>
+                  </div>
+                )}
+                {fieldErrors.screenshot && (
+                  <div className={styles.fieldErrorText}>
+                    <AlertCircle size={13} />
+                    <span>{fieldErrors.screenshot}</span>
                   </div>
                 )}
               </div>

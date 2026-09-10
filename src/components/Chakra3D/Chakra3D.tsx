@@ -61,6 +61,7 @@ interface Chakra3DProps {
 }
 
 const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [loadProgress, setLoadProgress] = useState(0);
@@ -77,6 +78,8 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   const dragStartAngle = useRef(0);
   const initialRotationOnDrag = useRef(0);
   const hasEnteredRef = useRef(false);
+  const pointerDownPos = useRef<{ x: number; y: number; time: number }>({ x: 0, y: 0, time: 0 });
+  const lastInteractionTime = useRef<number>(Date.now());
 
   useEffect(() => {
     hasEnteredRef.current = hasEnteredYugas;
@@ -85,12 +88,17 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   // Current Yuga in 4-step sequence
   const yugaIndex = ((step % 4) + 4) % 4;
   const currentYuga = YUGA_LIST[yugaIndex];
-  const activeEvents = EVENTS.filter((e) => e.yuga === currentYuga.key);
+  // Filter out dronevedha from active events (Task 3)
+  const activeEvents = EVENTS.filter((e) => e.yuga === currentYuga.key && e.id !== 'dronevedha');
 
   // Safe normalized mobile event index
   const safeMobileEventIndex =
     activeEvents.length > 0 ? ((mobileEventIndex % activeEvents.length) + activeEvents.length) % activeEvents.length : 0;
   const currentMobileEvent = activeEvents[safeMobileEventIndex];
+
+  const resetAutoScrollTimer = () => {
+    lastInteractionTime.current = Date.now();
+  };
 
   // Pre-cache all 4 Yuga videos in CacheStorage & in-memory Blob URLs on load
   useEffect(() => {
@@ -128,6 +136,115 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Rotate Right handler (Next)
+  const handleRotateRight = () => {
+    resetAutoScrollTimer();
+    if (isMobile) {
+      if (safeMobileEventIndex < activeEvents.length - 1) {
+        // Next event in same Yuga
+        setMobileEventIndex(safeMobileEventIndex + 1);
+      } else {
+        // Last event in current Yuga -> Advance to next Yuga
+        const nextStep = step + 1;
+        setStep(nextStep);
+        setMobileEventIndex(0);
+        targetRotationZ.current = -nextStep * STEP_RAD;
+      }
+    } else {
+      const nextStep = step + 1;
+      setStep(nextStep);
+      targetRotationZ.current = -nextStep * STEP_RAD;
+    }
+  };
+
+  // Rotate Left handler (Previous)
+  const handleRotateLeft = () => {
+    resetAutoScrollTimer();
+    if (isMobile) {
+      if (safeMobileEventIndex > 0) {
+        // Previous event in same Yuga
+        setMobileEventIndex(safeMobileEventIndex - 1);
+      } else {
+        // First event in current Yuga -> Go to previous Yuga, last event
+        const prevStep = step - 1;
+        const prevYugaIndex = ((prevStep % 4) + 4) % 4;
+        const prevYuga = YUGA_LIST[prevYugaIndex];
+        const prevEvents = EVENTS.filter((e) => e.yuga === prevYuga.key && e.id !== 'dronevedha');
+
+        setStep(prevStep);
+        setMobileEventIndex(Math.max(0, prevEvents.length - 1));
+        targetRotationZ.current = -prevStep * STEP_RAD;
+      }
+    } else {
+      const prevStep = step - 1;
+      setStep(prevStep);
+      targetRotationZ.current = -prevStep * STEP_RAD;
+    }
+  };
+
+  // Enter the Yugas handler: smoothly snaps to Satyug (step 0)
+  const handleEnterYugas = () => {
+    setHasEnteredYugas(true);
+    setStep(0);
+    setMobileEventIndex(0);
+    resetAutoScrollTimer();
+
+    if (pivotRef.current) {
+      let currentRot = pivotRef.current.rotation.z % (Math.PI * 2);
+      if (currentRot > Math.PI) currentRot -= Math.PI * 2;
+      if (currentRot < -Math.PI) currentRot += Math.PI * 2;
+      pivotRef.current.rotation.z = currentRot;
+    }
+    targetRotationZ.current = 0;
+  };
+
+  // Auto-scroll after 10s of inactivity on each Yug (Task 2)
+  useEffect(() => {
+    if (!hasEnteredYugas) return;
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - lastInteractionTime.current;
+      if (elapsed >= 10000) {
+        handleRotateRight();
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [hasEnteredYugas, step, mobileEventIndex, isMobile, safeMobileEventIndex, activeEvents.length]);
+
+  // Mouse wheel / trackpad scroll effect to navigate through Yugas (Task 2)
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    let lastWheelTime = 0;
+    const handleWheel = (e: WheelEvent) => {
+      const now = Date.now();
+      if (now - lastWheelTime < 650) {
+        return;
+      }
+      if (Math.abs(e.deltaY) < 25 && Math.abs(e.deltaX) < 25) {
+        return;
+      }
+
+      if (!hasEnteredRef.current) {
+        if (e.deltaY > 0) {
+          handleEnterYugas();
+          lastWheelTime = now;
+        }
+      } else {
+        if (e.deltaY > 0 || e.deltaX > 0) {
+          handleRotateRight();
+          lastWheelTime = now;
+        } else if (e.deltaY < 0 || e.deltaX < 0) {
+          handleRotateLeft();
+          lastWheelTime = now;
+        }
+      }
+    };
+
+    wrapper.addEventListener('wheel', handleWheel, { passive: true });
+    return () => wrapper.removeEventListener('wheel', handleWheel);
+  }, [hasEnteredYugas, step, mobileEventIndex, isMobile, safeMobileEventIndex, activeEvents.length]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -236,12 +353,14 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
       return Math.atan2(clientY - centerY, clientX - centerX);
     };
 
-    // 6. Pointer Drag for rotating & snapping
+    // 6. Pointer Drag for rotating & snapping + Tap to Enter (Task 5)
     const onPointerDown = (e: PointerEvent) => {
+      pointerDownPos.current = { x: e.clientX, y: e.clientY, time: Date.now() };
       isDragging.current = true;
       dragStartAngle.current = getPointerAngle(e.clientX, e.clientY);
       initialRotationOnDrag.current = targetRotationZ.current;
       container.setPointerCapture(e.pointerId);
+      resetAutoScrollTimer();
     };
 
     const onPointerMove = (e: PointerEvent) => {
@@ -264,12 +383,22 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
         // ignore
       }
 
-      if (hasEnteredRef.current) {
+      const dist = Math.hypot(e.clientX - pointerDownPos.current.x, e.clientY - pointerDownPos.current.y);
+      const duration = Date.now() - pointerDownPos.current.time;
+
+      if (!hasEnteredRef.current) {
+        // If clicked on 3D object without substantial drag, enter the yugas (Task 5)
+        if (dist < 14 && duration < 500) {
+          handleEnterYugas();
+          return;
+        }
+      } else {
         // Snap to nearest 90 degree step on drag release after entering
         const nearestStep = Math.round(-targetRotationZ.current / STEP_RAD);
         targetRotationZ.current = -nearestStep * STEP_RAD;
         setStep(nearestStep);
         setMobileEventIndex(0);
+        resetAutoScrollTimer();
       }
     };
 
@@ -334,68 +463,8 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
     };
   }, []);
 
-  // Rotate Right handler (Next)
-  const handleRotateRight = () => {
-    if (isMobile) {
-      if (safeMobileEventIndex < activeEvents.length - 1) {
-        // Next event in same Yuga
-        setMobileEventIndex(safeMobileEventIndex + 1);
-      } else {
-        // Last event in current Yuga -> Advance to next Yuga
-        const nextStep = step + 1;
-        setStep(nextStep);
-        setMobileEventIndex(0);
-        targetRotationZ.current = -nextStep * STEP_RAD;
-      }
-    } else {
-      const nextStep = step + 1;
-      setStep(nextStep);
-      targetRotationZ.current = -nextStep * STEP_RAD;
-    }
-  };
-
-  // Rotate Left handler (Previous)
-  const handleRotateLeft = () => {
-    if (isMobile) {
-      if (safeMobileEventIndex > 0) {
-        // Previous event in same Yuga
-        setMobileEventIndex(safeMobileEventIndex - 1);
-      } else {
-        // First event in current Yuga -> Go to previous Yuga, last event
-        const prevStep = step - 1;
-        const prevYugaIndex = ((prevStep % 4) + 4) % 4;
-        const prevYuga = YUGA_LIST[prevYugaIndex];
-        const prevEvents = EVENTS.filter((e) => e.yuga === prevYuga.key);
-
-        setStep(prevStep);
-        setMobileEventIndex(Math.max(0, prevEvents.length - 1));
-        targetRotationZ.current = -prevStep * STEP_RAD;
-      }
-    } else {
-      const prevStep = step - 1;
-      setStep(prevStep);
-      targetRotationZ.current = -prevStep * STEP_RAD;
-    }
-  };
-
-  // Enter the Yugas handler: smoothly snaps to Satyug (step 0)
-  const handleEnterYugas = () => {
-    setHasEnteredYugas(true);
-    setStep(0);
-    setMobileEventIndex(0);
-
-    if (pivotRef.current) {
-      // Normalize current rotation to [-PI, PI] range so it smoothly transitions to 0 without spinning wildly
-      let currentRot = pivotRef.current.rotation.z % (Math.PI * 2);
-      if (currentRot > Math.PI) currentRot -= Math.PI * 2;
-      if (currentRot < -Math.PI) currentRot += Math.PI * 2;
-      pivotRef.current.rotation.z = currentRot;
-    }
-    targetRotationZ.current = 0;
-  };
-
   return (
-    <div className={`${styles.chakraWrapper} ${className || ''}`}>
+    <div ref={wrapperRef} className={`${styles.chakraWrapper} ${className || ''}`}>
       {/* Background Container: Video plays continuously with smooth Pillar Overlay cross-dissolve */}
       <div className={styles.yugaBgVideoContainer}>
         {/* Dynamic Yuga Videos (persistent pre-rendered videos for seamless instant transitions) */}
@@ -508,7 +577,12 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
           hasEnteredYugas ? styles.canvasWrapperEntered : styles.canvasWrapperIntro
         }`}
       >
-        <div ref={containerRef} className={styles.canvasContainer}>
+        <div
+          ref={containerRef}
+          className={`${styles.canvasContainer} ${!hasEnteredYugas ? styles.canvasContainerClickable : ''}`}
+          onClick={!hasEnteredYugas ? handleEnterYugas : undefined}
+          title={!hasEnteredYugas ? 'Click to Enter the Yugas' : undefined}
+        >
           {loading && (
             <div className={styles.loaderWrap}>
               <div className={styles.spinner} />

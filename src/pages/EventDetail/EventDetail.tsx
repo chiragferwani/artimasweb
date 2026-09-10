@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, MapPin, Users, Phone, Download, Trophy, Layers, Globe, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, MapPin, Users, Phone, Download, Trophy, Layers, Globe, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { EVENTS, YUGAS } from '../../data/yugas';
@@ -105,7 +105,7 @@ const EventDetail: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!event) {
+  if (!event || event.id === 'dronevedha') {
     return (
       <main className={styles.notFound}>
         <h2>Event not found</h2>
@@ -231,15 +231,6 @@ const EventDetail: React.FC = () => {
               </div>
               <div className={styles.metaItem}>
                 <div className={styles.metaIconWrap}>
-                  <Clock size={18} />
-                </div>
-                <div className={styles.metaTextWrap}>
-                  <div className={styles.metaLabel}>Time</div>
-                  <div className={styles.metaValue}>{event.time}</div>
-                </div>
-              </div>
-              <div className={styles.metaItem}>
-                <div className={styles.metaIconWrap}>
                   <MapPin size={18} />
                 </div>
                 <div className={styles.metaTextWrap}>
@@ -267,6 +258,15 @@ const EventDetail: React.FC = () => {
                   </div>
                 </div>
               )}
+              <div className={`${styles.metaItem} ${styles.metaItemTime}`}>
+                <div className={styles.metaIconWrap}>
+                  <Clock size={18} />
+                </div>
+                <div className={styles.metaTextWrap}>
+                  <div className={styles.metaLabel}>Time</div>
+                  <div className={styles.metaValue}>{event.time}</div>
+                </div>
+              </div>
             </div>
 
           </motion.div>
@@ -286,7 +286,7 @@ const EventDetail: React.FC = () => {
             {event.prizes && (
               <div className={styles.prizeTotalBanner}>
                 <span className={styles.prizeTotalBadge}>
-                  <Trophy size={14} /> Total Cash Prize Pool
+                  <Trophy size={14} /> Total Prize Pool
                 </span>
                 <span className={styles.prizeTotalValue}>
                   ₹{typeof event.prizes.totalCashPrize === 'number' ? event.prizes.totalCashPrize.toLocaleString('en-IN') : event.prizes.totalCashPrize}
@@ -371,7 +371,7 @@ const EventDetail: React.FC = () => {
                   </div>
                   <img
                     src={goldenImg}
-                    alt="Winner Cash Prize"
+                    alt="Winner Prize"
                     className={styles.prizePedestalImg}
                     draggable={false}
                   />
@@ -440,6 +440,29 @@ const EventDetail: React.FC = () => {
               <p className={styles.prizeNoteText}>* {event.prizes.note}</p>
             )}
           </motion.div>
+
+          {/* Mobile Top Register Banner (Task 15: Place Register Now above for mobile view) */}
+          <div className={styles.mobileRegisterBanner}>
+            {event.id === 'hackmatrix' ? (
+              <a
+                href="https://hackmatrix.gfgpccoe.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mobileRegisterBtn}
+              >
+                <span>Register Now for HackMatrix</span>
+                <ExternalLink size={16} />
+              </a>
+            ) : (
+              <button
+                type="button"
+                onClick={handleToggleRegister}
+                className={styles.mobileRegisterBtn}
+              >
+                {isRegistering ? '← View Event Details' : 'Register Now'}
+              </button>
+            )}
+          </div>
 
           <div className={styles.contentGrid}>
             {/* Main content with flip transition */}
@@ -557,15 +580,28 @@ const EventDetail: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               {/* Registration */}
-              <div className={styles.sideCard}>
+              <div className={`${styles.sideCard} ${styles.registrationSideCard}`}>
                 <h3 className={styles.sideTitle}>Registration</h3>
-                <button
-                  type="button"
-                  onClick={handleToggleRegister}
-                  className={styles.registerSideBtn}
-                >
-                  {isRegistering ? 'View Details' : 'Register Now'}
-                </button>
+                {event.id === 'hackmatrix' ? (
+                  <a
+                    href="https://hackmatrix.gfgpccoe.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.registerSideBtn}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <span>Register Now</span>
+                    <ExternalLink size={16} />
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleToggleRegister}
+                    className={styles.registerSideBtn}
+                  >
+                    {isRegistering ? 'View Details' : 'Register Now'}
+                  </button>
+                )}
               </div>
 
               {/* Registration Fee */}

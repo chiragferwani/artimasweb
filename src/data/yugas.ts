@@ -1,5 +1,7 @@
 import getCloudinaryUrl from '../utils/cloudinary';
 
+import jatinLocalImg from '../assets/team/jatin.png';
+
 const saishImg = getCloudinaryUrl('src/assets/coordinators/saish.png');
 const harshImg = getCloudinaryUrl('src/assets/coordinators/harsh.png');
 const shamalImg = getCloudinaryUrl('src/assets/coordinators/shamal.png');
@@ -8,7 +10,6 @@ const muskanImg = getCloudinaryUrl('src/assets/coordinators/muskan.png');
 const shrutiImg = getCloudinaryUrl('src/assets/coordinators/shruti.png');
 const parthImg = getCloudinaryUrl('src/assets/coordinators/parth.png');
 const sanikaImg = getCloudinaryUrl('src/assets/coordinators/sanika.png');
-const prathamImg = getCloudinaryUrl('src/assets/coordinators/pratham.png');
 const bhumikaImg = getCloudinaryUrl('src/assets/coordinators/bhumika.png');
 const kshitijImg = getCloudinaryUrl('src/assets/coordinators/kshitij.png');
 const vrushabhImg = getCloudinaryUrl('src/assets/coordinators/vrushabh.png');
@@ -16,6 +17,7 @@ const debottamImg = getCloudinaryUrl('src/assets/coordinators/debottam.png');
 const tanmayeeImg = getCloudinaryUrl('src/assets/coordinators/tanmayee.png');
 const hariImg = getCloudinaryUrl('src/assets/team/hari.png');
 const nirbhayImg = getCloudinaryUrl('src/assets/team/nirbhay.png');
+const jatinImg = getCloudinaryUrl('src/assets/team/jatin.png') || jatinLocalImg;
 
 export type YugaKey = 'satya' | 'treta' | 'dvapara' | 'kali';
 
@@ -251,7 +253,7 @@ export const EVENTS: Event[] = [
     id: 'hackmatrix',
     name: 'HackMatrix',
     formerName: null,
-    yuga: 'satya',
+    yuga: 'kali',
     tagline: 'Matrix of pure code and truth',
     description:
       'A two-round hackathon requiring an idea-submission PPT and GitHub prototype (Round 1), followed by an overnight offline hackathon to build a working AI/ML-integrated prototype (Round 2).',
@@ -303,12 +305,12 @@ export const EVENTS: Event[] = [
       'PPT must strictly follow the provided template with no additional slides.',
       "Female participants must shift to the girls' hostel after dinner in Round 02 per institutional policy.",
     ],
-    rulebookUrl: 'https://drive.google.com/file/d/1NkJAkI0yjIhUqrhZYbFfIhXRTXMJZIcc/view?usp=drive_link',
+    rulebookUrl: 'https://drive.google.com/file/d/1DXl-JMDclFmZ_76ap_zWgzcXygCGyWPu/view?usp=sharing',
     date: '7 Sept – 11 Oct 2026',
     time: 'Kick-off 9:00 AM (10th) – 11:00 AM (11th)',
     venue: 'Main Auditorium / Innovation Lab',
     mythTieIn:
-      'In Satyuga, truth was absolute and uncompromised. Hackmatrix embodies this spirit: pure creation from raw truth, where every line of code must stand on its own merit without illusion.',
+      'In Kaliyuga, technology and code forge the modern battleground of creation. Hackmatrix challenges developers to engineer transformative AI solutions amidst digital chaos.',
     gitaShloka: {
       sanskrit: 'कर्मण्येवाधिकारस्ते मा फलेषु कदाचन\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि',
       transliteration: 'Karmanye vadhikaraste, ma phaleshu kadachana',
@@ -325,7 +327,7 @@ export const EVENTS: Event[] = [
     id: 'promptrelay',
     name: 'Prompt Relay',
     formerName: 'Antaryami',
-    yuga: 'satya',
+    yuga: 'treta',
     tagline: 'Channel the inner voice of intelligence',
     description:
       'A three-round AI prompt-engineering competition combining riddle decoding, a Chinese-whispers-style relay to recreate an image via prompts, and head-to-head prompt duels.',
@@ -390,7 +392,7 @@ export const EVENTS: Event[] = [
     time: '09:00 AM – 05:00 PM',
     venue: 'Seminar Hall, Block A',
     mythTieIn:
-      'Antaryami refers to the inner guide and divine consciousness within. Expressing thoughts clearly to guide intelligence echoes the divine word of Satyuga.',
+      'In Tretayuga, the power of the spoken word and unwavering duty guided legendary heroes. Prompt Relay tests communication and instinct to channel intelligence through words.',
     gitaShloka: {
       sanskrit: 'अहमात्मा गुडाकेश सर्वभूताशयस्थितः।',
       transliteration: 'Aham atma gudakesha, sarva-bhutashaya-sthitah',
@@ -421,7 +423,7 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1 - Online Design Aptitude Quiz',
         mode: 'Online',
-        date: '2/10/2026',
+        date: '2nd Oct 2026',
         time: '5:00 PM - 6:00 PM',
         venue: 'Online Quiz Portal',
         description:
@@ -431,8 +433,8 @@ export const EVENTS: Event[] = [
         roundNumber: 2,
         title: 'Round 2 - Domain Selection & Video Presentation',
         mode: 'Online',
-        date: '3/10/2026 - 6/10/2026',
-        time: 'Domain selection 9:00-11:00 AM (3/10); Video due 6:00 PM (4/10); Shortlist 9:00 AM (6/10)',
+        date: '3rd Oct – 6th Oct 2026',
+        time: 'Domain selection 9:00-11:00 AM (3rd Oct); Video due 6:00 PM (4th Oct); Shortlist 9:00 AM (6th Oct)',
         venue: 'Online Submission',
         description:
           'Teams pick a domain, research it, and submit a short video pitching a brand idea. Shortlisting is domain-wise.',
@@ -441,7 +443,7 @@ export const EVENTS: Event[] = [
         roundNumber: 3,
         title: 'Round 3 - 12-Hour Brand Building Challenge',
         mode: 'Offline',
-        date: 'Offline finale',
+        date: '11th Oct 2026',
         time: '7:00 AM Reporting - 8:00 PM Event Ends',
         venue: 'Old Reading Hall, PCCOE',
         description:
@@ -462,8 +464,8 @@ export const EVENTS: Event[] = [
       'Round 3 members must be present offline and bring their own laptops/chargers.',
       'Teams must continue with their Round 2 brand idea; organizers may give on-spot changes.',
     ],
-    rulebookUrl: 'https://drive.google.com/file/d/1AUBz0NDEqAadvhzAbrPBsmw5_FOWGk_M/view?usp=drive_link',
-    date: '2/10/2026 – Offline Finale',
+    rulebookUrl: 'https://drive.google.com/file/d/1RaOFfcGKPdt6mWXiOZvHeJCNkYPZbLzw/view?usp=sharing',
+    date: '2nd Oct – 11th Oct 2026',
     time: '7:00 AM – 8:00 PM',
     venue: 'Old Reading Hall / Block C',
     mythTieIn:
@@ -484,7 +486,7 @@ export const EVENTS: Event[] = [
     id: 'datathon',
     name: 'Datathon',
     formerName: null,
-    yuga: 'dvapara',
+    yuga: 'satya',
     tagline: 'Unravel insights from cosmic chaos',
     description:
       'A two-round data science/ML competition where teams build predictive models on Kaggle (Round 1) and tackle a live, evolving data challenge onsite (Round 2).',
@@ -498,7 +500,7 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1 (Online)',
         mode: 'Online',
-        date: '6th Oct 2026 - 8th Oct 2026',
+        date: '6th Oct – 8th Oct 2026',
         time: 'Submission opens 6:00 PM (6th); closes 6:00 PM (8th)',
         venue: 'Online (Kaggle)',
         description:
@@ -508,7 +510,7 @@ export const EVENTS: Event[] = [
         roundNumber: 2,
         title: 'Round 2 (Offline)',
         mode: 'Offline',
-        date: '9th October 2026',
+        date: '9th Oct 2026',
         time: '9:00 AM Reporting - 5:00 PM Ends',
         venue: 'Labs 6517, 6518, 6519',
         description:
@@ -534,7 +536,7 @@ export const EVENTS: Event[] = [
     time: '09:00 AM – 05:00 PM',
     venue: 'Data Analytics Lab, Block D',
     mythTieIn:
-      'Dwaparyug was the age of deep strategy and calculated moves. Datathon puts your strategic analytical wisdom to the ultimate test.',
+      'In Satyuga, knowledge and truth were pure and absolute. Datathon puts analytical precision to the test to unravel divine clarity and predictive wisdom from raw data.',
     gitaShloka: {
       sanskrit: 'योगः कर्मसु कौशलम्।',
       transliteration: 'Yogah karmasu kaushalam',
@@ -565,7 +567,7 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1 - LLM Jailbreak (Online)',
         mode: 'Online',
-        date: 'Saturday, 3rd Oct',
+        date: 'Saturday, 3rd Oct 2026',
         time: '10:00 AM - 6:00 PM',
         venue: 'Online Arena',
         description:
@@ -575,7 +577,7 @@ export const EVENTS: Event[] = [
         roundNumber: 2,
         title: 'Round 2 - Capture The Flag (Offline)',
         mode: 'Offline',
-        date: 'Sunday, 11th Oct',
+        date: 'Sunday, 11th Oct 2026',
         time: '9:00 AM Reporting - 5:00 PM Ends',
         venue: 'Seminar Hall, 5th Floor Mech Building, PCCOE',
         description:
@@ -619,7 +621,7 @@ export const EVENTS: Event[] = [
     id: 'chakravyuh',
     name: 'Houdini Heist',
     formerName: 'Chakravyuh',
-    yuga: 'kali',
+    yuga: 'dvapara',
     tagline: 'Escape the labyrinth of illusions',
     description:
       'A mythology-and-riddle-themed escape challenge across three rounds, culminating in a live escape-room finale inspired by the Chakravyuh.',
@@ -633,7 +635,7 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1',
         mode: 'Offline',
-        date: '10/10/2026',
+        date: '10th Oct 2026',
         time: '10:00 AM – 12:00 PM',
         venue: 'Classroom, Block A',
         description:
@@ -643,7 +645,7 @@ export const EVENTS: Event[] = [
         roundNumber: 2,
         title: 'Round 2',
         mode: 'Offline',
-        date: '10/10/2026',
+        date: '10th Oct 2026',
         time: '2:00 PM – 6:00 PM',
         venue: 'Old Reading Hall',
         description:
@@ -653,7 +655,7 @@ export const EVENTS: Event[] = [
         roundNumber: 3,
         title: 'Round 3 (Final)',
         mode: 'Offline',
-        date: '11/10/2026',
+        date: '11th Oct 2026',
         time: '10:00 AM – 3:00 PM (1 hour duration)',
         venue: 'Rooms 6517, 6518, 6519',
         description:
@@ -675,11 +677,11 @@ export const EVENTS: Event[] = [
       'No damage to college property; no cash prize if a team fails to escape within the time limit.',
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1-Dydkzz8A4Yp2-CPewqPymNqRA400aGu/view?usp=drive_link',
-    date: '10/10/2026 – 11/10/2026',
+    date: '10th Oct – 11th Oct 2026',
     time: '10:00 AM – 03:00 PM',
     venue: 'Auditorium / Rooms 6517–6519',
     mythTieIn:
-      'In the chaotic Kalyug, the web of illusions is densest. Only the sharpest minds can unravel the Chakravyuh and escape the maze.',
+      'The Chakravyuh was the legendary military labyrinth conceived in the Mahabharata war of Dwaparyuga. Houdini Heist tests your tactical intellect to decode the layers and escape the maze.',
     gitaShloka: {
       sanskrit: 'भूमिरापोऽनलो वायुः खं मनो बुद्धिरेव च।\nअहङ्कार इतीयं मे भिन्ना प्रकृतिरष्टधा॥',
       transliteration:
@@ -711,7 +713,7 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1',
         mode: 'Offline',
-        date: '09/10/2026',
+        date: '9th Oct 2026',
         time: '11:00 AM',
         venue: 'Classroom, Block A',
         description:
@@ -721,7 +723,7 @@ export const EVENTS: Event[] = [
         roundNumber: 2,
         title: 'Round 2',
         mode: 'Offline',
-        date: '09/01/2026',
+        date: '9th Oct 2026',
         time: '1:00 PM',
         venue: 'Old Reading Hall',
         description:
@@ -731,7 +733,7 @@ export const EVENTS: Event[] = [
         roundNumber: 3,
         title: 'Round 3 (Final)',
         mode: 'Offline',
-        date: '09/10/2026',
+        date: '9th Oct 2026',
         time: '3:00 PM (1 hour duration)',
         venue: 'Main Stage / Open Air Theatre',
         description:
@@ -753,7 +755,7 @@ export const EVENTS: Event[] = [
       'Organizers reserve the right to disqualify any participant violating rules or instructions.',
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1vHn59xGK2iUGwnBQu6L-mn7-HB_LCnLF/view?usp=drive_link',
-    date: '09/10/2026',
+    date: '9th Oct 2026',
     time: '11:00 AM – 04:00 PM',
     venue: 'Main Stage / Open Air Theatre',
     mythTieIn:
@@ -765,7 +767,7 @@ export const EVENTS: Event[] = [
         'This divine illusion (maya) of mine, woven from the gunas, is exceedingly difficult to see through. Captures the essence of a hidden-identity social-deception game — nothing is quite what it appears to be.',
     },
     coordinators: [
-      { name: 'Pratham', phone: '+91 82639 67306', email: 'pratham@aimsa.edu', avatar: prathamImg },
+      { name: 'Jatin Patil', phone: '+91 78419 69111', email: 'jatin@aimsa.edu', avatar: jatinImg },
       { name: 'Bhumika', phone: '+91 87666 42327', email: 'bhumika@aimsa.edu', avatar: bhumikaImg },
     ],
     registrationOpen: false,
@@ -774,7 +776,7 @@ export const EVENTS: Event[] = [
     id: 'pixelperfect',
     name: 'Pixel Perfect',
     formerName: null,
-    yuga: 'treta',
+    yuga: 'satya',
     tagline: 'Precision in design and visual mastery',
     description:
       'An online themed photography competition where participants capture and submit a single original photograph based on a released theme within a fixed time window.',
@@ -818,7 +820,7 @@ export const EVENTS: Event[] = [
     time: 'Theme 9:00 AM (1st Oct) – Submissions 9:00 PM (11th Oct)',
     venue: 'Online Submission',
     mythTieIn:
-      'In Tretayuga, the architecture of bridges and bows demanded flawless craftsmanship and divine symmetry. Pixel Perfect celebrates meticulous design accuracy where every pixel matters.',
+      'In Satyuga, truth, symmetry, and perfection were uncompromised. Pixel Perfect celebrates meticulous visual accuracy and aesthetic purity where every pixel matters.',
     gitaShloka: {
       sanskrit: 'योगः कर्मसु कौशलम्।',
       transliteration: 'Yogah karmasu kaushalam',

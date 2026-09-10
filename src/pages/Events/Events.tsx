@@ -22,7 +22,7 @@ const Events: React.FC = () => {
             <div className={styles.breadcrumb}>Dept. of CSE (AI &amp; ML) · Artimas 26-27</div>
             <h1 className={styles.pageTitle}>The Arena</h1>
             <p className={styles.pageSubtitle}>
-              Nine battles across four cosmic ages. Choose your field. Claim your legend.
+              Eight battles across four cosmic ages. Choose your field. Claim your legend.
             </p>
           </motion.div>
         </div>
@@ -34,7 +34,7 @@ const Events: React.FC = () => {
         <div className={styles.eventsGridSection}>
           <div className="container">
             <div className={styles.grid}>
-              {EVENTS.map((event, index) => (
+              {EVENTS.filter((event) => event.id !== 'dronevedha').map((event, index) => (
                 <EventCard key={event.id} event={event} index={index} />
               ))}
             </div>

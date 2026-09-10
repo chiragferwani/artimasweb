@@ -1,0 +1,13 @@
+# Artimas 26-27 — AIMSA Flagship Fest | PCCOE Pune
+# https://artimas.aimsapccoe.in
+
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /src/
+
+# Sitemap
+Sitemap: https://artimas.aimsapccoe.in/sitemap.xml
+
+# LLMs.txt
+# See https://artimas.aimsapccoe.in/llms.txt for LLM-friendly content
