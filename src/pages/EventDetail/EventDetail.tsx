@@ -358,157 +358,121 @@ const EventDetail: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            {event.prizes && (
-              <div className={styles.prizeTotalBanner}>
-                <span className={styles.prizeTotalBadge}>
-                  <Trophy size={14} /> Total Prize Pool
+            {(event.id === 'chakravyuh' || event.id === 'mayavi' || event.id === 'pixelperfect' || event.id === 'houdiniheist' || event.id === 'houdini' || event.id === 'amongus') ? (
+              /* Enlarged Prize Pool Hero Banner for Houdini Heist, Among Us, and Pixel Perfect */
+              <div className={styles.prizePoolHeroBanner}>
+                <span className={styles.prizePoolHeroBadge}>
+                  <Trophy size={16} /> Total Prize Pool
                 </span>
-                <span className={styles.prizeTotalValue}>
-                  ₹{typeof event.prizes.totalCashPrize === 'number' ? event.prizes.totalCashPrize.toLocaleString('en-IN') : event.prizes.totalCashPrize}
+                <span className={styles.prizePoolHeroValue}>
+                  ₹{typeof event.prizes?.totalCashPrize === 'number'
+                    ? event.prizes.totalCashPrize.toLocaleString('en-IN')
+                    : event.prizes?.totalCashPrize || '25,000'}
                 </span>
               </div>
-            )}
+            ) : (
+              <>
+                {event.prizes && (
+                  <div className={styles.prizeTotalBanner}>
+                    <span className={styles.prizeTotalBadge}>
+                      <Trophy size={14} /> Total Prize Pool
+                    </span>
+                    <span className={styles.prizeTotalValue}>
+                      ₹{typeof event.prizes.totalCashPrize === 'number' ? event.prizes.totalCashPrize.toLocaleString('en-IN') : event.prizes.totalCashPrize}
+                    </span>
+                  </div>
+                )}
 
-            {event.prizes?.prizeList && event.prizes.prizeList.length > 3 ? (
-              /* Multi-prize grid for events with >3 awards (e.g. HackMatrix 5 prizes) */
-              <div className={styles.multiPrizeGrid}>
-                {event.prizes.prizeList.map((prize, pIdx) => {
-                  const itemClass =
-                    prize.type === 'gold'
-                      ? styles.goldenPrizeItem
-                      : prize.type === 'silver'
-                      ? styles.silverPrizeItem
-                      : prize.type === 'bronze'
-                      ? styles.bronzePrizeItem
-                      : styles.specialPrizeItem;
-                  const pedestalImg =
-                    prize.type === 'gold'
-                      ? goldenImg
-                      : prize.type === 'silver'
-                      ? silverImg
-                      : bronzeImg;
+                {event.prizes?.prizeList && event.prizes.prizeList.length > 3 ? (
+                  /* Multi-prize grid for events with >3 awards (e.g. HackMatrix 5 prizes) */
+                  <div className={styles.multiPrizeGrid}>
+                    {event.prizes.prizeList.map((prize, pIdx) => {
+                      const itemClass =
+                        prize.type === 'gold'
+                          ? styles.goldenPrizeItem
+                          : prize.type === 'silver'
+                          ? styles.silverPrizeItem
+                          : prize.type === 'bronze'
+                          ? styles.bronzePrizeItem
+                          : styles.specialPrizeItem;
+                      const pedestalImg =
+                        prize.type === 'gold'
+                          ? goldenImg
+                          : prize.type === 'silver'
+                          ? silverImg
+                          : bronzeImg;
 
-                  return (
-                    <div key={pIdx} className={`${styles.prizeItem} ${itemClass}`}>
+                      return (
+                        <div key={pIdx} className={`${styles.prizeItem} ${itemClass}`}>
+                          <div className={styles.prizeCardBadge}>
+                            <span className={styles.prizeRankLabel}>{prize.label}</span>
+                            <span className={styles.prizeRankValue}>{prize.amount}</span>
+                          </div>
+                          <img
+                            src={pedestalImg}
+                            alt={prize.label}
+                            className={styles.prizePedestalImg}
+                            draggable={false}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  /* 3 Podium Pedestals */
+                  <div className={styles.prizePoolGrid}>
+                    {/* 2nd Prize - Silver */}
+                    <div className={`${styles.prizeItem} ${styles.silverPrizeItem}`}>
                       <div className={styles.prizeCardBadge}>
-                        <span className={styles.prizeRankLabel}>{prize.label}</span>
-                        <span className={styles.prizeRankValue}>{prize.amount}</span>
+                        <span className={styles.prizeRankLabel}>2nd Prize</span>
+                        <span className={styles.prizeRankValue}>
+                          {event.prizes?.second ? `₹${event.prizes.second.toLocaleString('en-IN')}` : '—'}
+                        </span>
                       </div>
                       <img
-                        src={pedestalImg}
-                        alt={prize.label}
+                        src={silverImg}
+                        alt="2nd Prize - Silver"
                         className={styles.prizePedestalImg}
                         draggable={false}
                       />
                     </div>
-                  );
-                })}
-              </div>
-            ) : event.id === 'pixelperfect' ? (
-              /* 2 Centered Golden Winners for Pixel Perfect */
-              <div className={`${styles.prizePoolGrid} ${styles.dualPrizeGrid}`}>
-                <div className={`${styles.prizeItem} ${styles.goldenPrizeItem}`}>
-                  <div className={styles.prizeCardBadge}>
-                    <span className={styles.prizeRankLabel}>Winner 1</span>
-                    <span className={styles.prizeRankValue}>₹1,500</span>
-                  </div>
-                  <img
-                    src={goldenImg}
-                    alt="Winner 1 - Golden"
-                    className={styles.prizePedestalImg}
-                    draggable={false}
-                  />
-                </div>
-                <div className={`${styles.prizeItem} ${styles.goldenPrizeItem}`}>
-                  <div className={styles.prizeCardBadge}>
-                    <span className={styles.prizeRankLabel}>Winner 2</span>
-                    <span className={styles.prizeRankValue}>₹1,500</span>
-                  </div>
-                  <img
-                    src={goldenImg}
-                    alt="Winner 2 - Golden"
-                    className={styles.prizePedestalImg}
-                    draggable={false}
-                  />
-                </div>
-              </div>
-            ) : (!event.prizes?.second && !event.prizes?.third) || event.id === 'chakravyuh' || event.id === 'mayavi' ? (
-              /* Single Winner Pedestal for Houdini Heist / Among Us / Single prize events */
-              <div className={`${styles.prizePoolGrid} ${styles.singlePrizeGrid}`}>
-                <div className={`${styles.prizeItem} ${styles.goldenPrizeItem} ${styles.singleGoldenPrize}`}>
-                  <div className={styles.prizeCardBadge}>
-                    <span className={styles.prizeRankLabel}>Winner</span>
-                    <span className={styles.prizeRankValue}>
-                      {event.prizes?.first
-                        ? `₹${event.prizes.first.toLocaleString('en-IN')}`
-                        : `₹${typeof event.prizes?.totalCashPrize === 'number' ? event.prizes.totalCashPrize.toLocaleString('en-IN') : event.prizes?.totalCashPrize || '10,000'}`}
-                    </span>
-                  </div>
-                  <img
-                    src={goldenImg}
-                    alt="Winner Prize"
-                    className={styles.prizePedestalImg}
-                    draggable={false}
-                  />
-                </div>
-              </div>
-            ) : (
-              /* 3 Podium Pedestals */
-              <div className={styles.prizePoolGrid}>
-                {/* 2nd Prize - Silver */}
-                <div className={`${styles.prizeItem} ${styles.silverPrizeItem}`}>
-                  <div className={styles.prizeCardBadge}>
-                    <span className={styles.prizeRankLabel}>
-                      {event.id === 'pixelperfect' ? 'Winner 2' : '2nd Prize'}
-                    </span>
-                    <span className={styles.prizeRankValue}>
-                      {event.prizes?.second ? `₹${event.prizes.second.toLocaleString('en-IN')}` : '—'}
-                    </span>
-                  </div>
-                  <img
-                    src={silverImg}
-                    alt="2nd Prize - Silver"
-                    className={styles.prizePedestalImg}
-                    draggable={false}
-                  />
-                </div>
 
-                {/* 1st Prize - Golden */}
-                <div className={`${styles.prizeItem} ${styles.goldenPrizeItem}`}>
-                  <div className={styles.prizeCardBadge}>
-                    <span className={styles.prizeRankLabel}>
-                      {event.id === 'pixelperfect' ? 'Winner 1' : '1st Prize'}
-                    </span>
-                    <span className={styles.prizeRankValue}>
-                      {event.prizes?.first ? `₹${event.prizes.first.toLocaleString('en-IN')}` : '—'}
-                    </span>
-                  </div>
-                  <img
-                    src={goldenImg}
-                    alt="1st Prize - Golden"
-                    className={styles.prizePedestalImg}
-                    draggable={false}
-                  />
-                </div>
-
-                {/* 3rd Prize - Bronze */}
-                {event.prizes?.third !== null && event.prizes?.third !== undefined ? (
-                  <div className={`${styles.prizeItem} ${styles.bronzePrizeItem}`}>
-                    <div className={styles.prizeCardBadge}>
-                      <span className={styles.prizeRankLabel}>3rd Prize</span>
-                      <span className={styles.prizeRankValue}>
-                        {`₹${event.prizes.third.toLocaleString('en-IN')}`}
-                      </span>
+                    {/* 1st Prize - Golden */}
+                    <div className={`${styles.prizeItem} ${styles.goldenPrizeItem}`}>
+                      <div className={styles.prizeCardBadge}>
+                        <span className={styles.prizeRankLabel}>1st Prize</span>
+                        <span className={styles.prizeRankValue}>
+                          {event.prizes?.first ? `₹${event.prizes.first.toLocaleString('en-IN')}` : '—'}
+                        </span>
+                      </div>
+                      <img
+                        src={goldenImg}
+                        alt="1st Prize - Golden"
+                        className={styles.prizePedestalImg}
+                        draggable={false}
+                      />
                     </div>
-                    <img
-                      src={bronzeImg}
-                      alt="3rd Prize - Bronze"
-                      className={styles.prizePedestalImg}
-                      draggable={false}
-                    />
+
+                    {/* 3rd Prize - Bronze */}
+                    {event.prizes?.third !== null && event.prizes?.third !== undefined ? (
+                      <div className={`${styles.prizeItem} ${styles.bronzePrizeItem}`}>
+                        <div className={styles.prizeCardBadge}>
+                          <span className={styles.prizeRankLabel}>3rd Prize</span>
+                          <span className={styles.prizeRankValue}>
+                            {`₹${event.prizes.third.toLocaleString('en-IN')}`}
+                          </span>
+                        </div>
+                        <img
+                          src={bronzeImg}
+                          alt="3rd Prize - Bronze"
+                          className={styles.prizePedestalImg}
+                          draggable={false}
+                        />
+                      </div>
+                    ) : null}
                   </div>
-                ) : null}
-              </div>
+                )}
+              </>
             )}
 
             {event.prizes?.note && (

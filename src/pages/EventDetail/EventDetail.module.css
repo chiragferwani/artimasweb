@@ -644,6 +644,54 @@
   text-shadow: 0 0 24px rgba(245, 215, 110, 0.45);
 }
 
+.prizePoolHeroBanner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 48px;
+  margin: 12px auto 20px;
+  background: radial-gradient(circle at 50% 30%, rgba(245, 215, 110, 0.12) 0%, rgba(15, 17, 24, 0.6) 80%);
+  border: 1.5px solid rgba(245, 215, 110, 0.35);
+  border-radius: 28px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 32px rgba(245, 215, 110, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 580px;
+  box-sizing: border-box;
+}
+
+.prizePoolHeroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 24px;
+  background: rgba(245, 215, 110, 0.15);
+  border: 1px solid rgba(245, 215, 110, 0.45);
+  border-radius: 999px;
+  color: #F5D76E;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  box-shadow: 0 0 20px rgba(245, 215, 110, 0.25);
+}
+
+.prizePoolHeroValue {
+  font-family: 'Cinzel', 'Inter', sans-serif;
+  font-size: clamp(52px, 10vw, 84px);
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: 1.5px;
+  line-height: 1.05;
+  text-shadow: 0 0 40px rgba(245, 215, 110, 0.75), 0 4px 20px rgba(0, 0, 0, 0.9);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF5D0 50%, #F5D76E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .prizePoolGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -824,6 +872,19 @@
 @media (max-width: 640px) {
   .prizePoolWrap {
     margin: 32px 0;
+  }
+  .prizePoolHeroBanner {
+    padding: 24px 20px;
+    border-radius: 20px;
+    margin: 8px auto 14px;
+  }
+  .prizePoolHeroBadge {
+    font-size: 12px;
+    padding: 6px 18px;
+    margin-bottom: 10px;
+  }
+  .prizePoolHeroValue {
+    font-size: clamp(40px, 12vw, 56px);
   }
   .prizePoolGrid {
     gap: 10px;
