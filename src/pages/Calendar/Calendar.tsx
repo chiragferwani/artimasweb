@@ -323,7 +323,7 @@ const Calendar: React.FC = () => {
       {/* Cta Block */}
       <CtaBlock
         primaryButton={{ label: 'See all events', to: '/events' }}
-        secondaryButton={{ label: 'Contact AIMSA', to: '/contact' }}
+        secondaryButton={{ label: 'Contact AiMSA', to: '/contact' }}
       />
     </main>
   );

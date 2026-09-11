@@ -923,7 +923,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                   />
                 </div>
                 <div className={styles.qrFooter}>
-                  <span>UPI Payment Acceptor · AIMSA PCCOE</span>
+                  <span>UPI Payment Acceptor · AiMSA PCCOE</span>
                 </div>
               </div>
 

@@ -13,7 +13,7 @@ const logoImg = getCloudinaryUrl('src/assets/logo.png');
 import styles from './Footer.module.css';
 
 const CLUB_LOGOS = [
-  { name: 'AIMSA', src: aimsaLogo },
+  { name: 'AiMSA', src: aimsaLogo },
   { name: 'AAAI', src: aaaiLogo },
   { name: 'GFG', src: gfgLogo },
   { name: 'IEEE CIS', src: ieeecisLogo },
@@ -175,7 +175,7 @@ const Footer: React.FC = () => {
         {/* Bottom bar */}
         <div className={styles.bottomBar}>
           <span className={styles.copyright}>
-            © 2026 AIMSA · Department of CSE (AI &amp; ML), PCCOE · Artimas 26-27 · All rights reserved. ·{' '}
+            © 2026 AiMSA · Department of CSE (AI &amp; ML), PCCOE · Artimas 26-27 · All rights reserved. ·{' '}
             <a
               href="https://chiragferwani.vercel.app"
               target="_blank"

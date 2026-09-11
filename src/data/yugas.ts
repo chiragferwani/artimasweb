@@ -5,7 +5,7 @@ const harshImg = getCloudinaryUrl('src/assets/coordinators/harsh.png');
 const shamalImg = getCloudinaryUrl('src/assets/coordinators/shamal.png');
 const rutujaImg = getCloudinaryUrl('src/assets/coordinators/rutuja.png');
 const muskanImg = getCloudinaryUrl('src/assets/coordinators/muskan.png');
-const shrutiImg = getCloudinaryUrl('src/assets/coordinators/shruti.png');
+const anuskaImg = getCloudinaryUrl('src/assets/teamaimsa/anuska.png');
 const parthImg = getCloudinaryUrl('src/assets/coordinators/parth.png');
 const sanikaImg = getCloudinaryUrl('src/assets/coordinators/sanika.png');
 const bhumikaImg = getCloudinaryUrl('src/assets/coordinators/bhumika.png');
@@ -399,7 +399,7 @@ export const EVENTS: Event[] = [
     },
     coordinators: [
       { name: 'Muskan', phone: '+91 92668 60617', email: 'muskan@aimsa.edu', avatar: muskanImg },
-      { name: 'Shruti', phone: '+91 80103 52757', email: 'shruti@aimsa.edu', avatar: shrutiImg },
+      { name: 'Anuska', phone: '+91 81045 95396', email: 'anuska@aimsa.edu', avatar: anuskaImg },
     ],
     registrationOpen: false,
   },
@@ -631,33 +631,33 @@ export const EVENTS: Event[] = [
     rounds: [
       {
         roundNumber: 1,
-        title: 'Round 1',
+        title: 'Aptitude Test',
         mode: 'Offline',
         date: '10th Oct 2026',
         time: '10:00 AM – 12:00 PM',
         venue: 'Classroom, Block A',
         description:
-          'Written test on Indian mythology, Vedas, scriptures, general awareness, and logical reasoning; 1 mark/question. Top 12 teams advance.',
+          'An offline aptitude test to assess participants’ analytical thinking, logical reasoning, and problem-solving abilities. The top 12 teams based on their performance will qualify for Round 2.',
       },
       {
         roundNumber: 2,
-        title: 'Round 2',
+        title: 'Chausar Challenge',
         mode: 'Offline',
         date: '10th Oct 2026',
         time: '2:00 PM – 6:00 PM',
         venue: 'Old Reading Hall',
         description:
-          '12 teams split into 3 groups of 4; checkpoint-based Chausar-inspired challenge collecting 4 clues, combined into a single AI image/video prompt scored against a reference. One team per group (3 total) advances.',
+          'Step into a strategic challenge inspired by the ancient game of Chausar, where every move could bring you closer to victory. Qualified teams will face a series of checkpoints, each testing their logic, observation, and problem-solving skills. Solve the challenges, make the right moves, and use the information you gather wisely to stay ahead of the competition.',
       },
       {
         roundNumber: 3,
-        title: 'Round 3 (Final)',
+        title: 'Final Escape',
         mode: 'Offline',
         date: '11th Oct 2026',
         time: '10:00 AM – 3:00 PM (1 hour duration)',
         venue: 'Rooms 6517, 6518, 6519',
         description:
-          'Final 3 teams compete in 3 separate escape rooms; first team to escape within the hour wins the cash prize.',
+          'The final 3 teams enter 3 separate escape rooms, where teamwork, observation, and problem-solving will determine who escapes first. With a maximum of 1 hour to complete the challenge, the first team to successfully escape will claim victory and the cash prize.',
       },
     ],
     prizes: {

@@ -25,6 +25,79 @@ const sudarshanImg = getCloudinaryUrl('src/assets/sudarshan.png');
 const silverImg = getCloudinaryUrl('src/assets/silver.png');
 const goldenImg = getCloudinaryUrl('src/assets/golden.png');
 const bronzeImg = getCloudinaryUrl('src/assets/bronze.png');
+
+// ═══════ Event Heads Data ═══════
+// ═══════ Event Heads Data ═══════
+interface EventHead {
+  name: string;
+  phone: string;
+  avatar: string;
+}
+
+const getAvatar = (p: string) => getCloudinaryUrl(p, { width: 220, height: 220, crop: 'fill', quality: 'auto' });
+
+const datathonHeads: EventHead[] = [
+  { name: 'Shamal', phone: '9511746783', avatar: getAvatar('src/assets/teamaimsa/shamal.png') },
+  { name: 'Meet', phone: '7588235428', avatar: getAvatar('src/assets/teamaimsa/meet.png') },
+  { name: 'Rutuja', phone: '8261977022', avatar: getAvatar('src/assets/teamaimsa/rutuja.png') },
+  { name: 'Ansh', phone: '8408905979', avatar: getAvatar('src/assets/teamaimsa/ansh.png') },
+];
+
+const promptRelayHeads: EventHead[] = [
+  { name: 'Muskan', phone: '9266860617', avatar: getAvatar('src/assets/teamaimsa/muskan.png') },
+  { name: 'Anuska', phone: '8104595396', avatar: getAvatar('src/assets/teamaimsa/anuska.png') },
+];
+
+const houdiniHeads: EventHead[] = [
+  { name: 'Parth', phone: '8788423371', avatar: getAvatar('src/assets/teamaimsa/parth.png') },
+  { name: 'Sanika', phone: '8605768657', avatar: getAvatar('src/assets/teamaimsa/sanika.png') },
+  { name: 'Ved', phone: '8626049559', avatar: getAvatar('src/assets/teamaimsa/ved.png') },
+  { name: 'Bhumika', phone: '8766642327', avatar: getAvatar('src/assets/teamaimsa/bhumika.png') },
+];
+
+const amongUsHeads: EventHead[] = [
+  { name: 'Soham', phone: '7972818734', avatar: getAvatar('src/assets/teamaimsa/soham.png') },
+  { name: 'Sarfaraz', phone: '9359800047', avatar: getAvatar('src/assets/teamaimsa/sarfaraz.png') },
+  { name: 'Pratham', phone: '8263967306', avatar: getAvatar('src/assets/teamaimsa/pratham.png') },
+  { name: 'Jatin', phone: '7841969111', avatar: getAvatar('src/assets/teamaimsa/jatin.png') },
+];
+
+const ctfHeads: EventHead[] = [
+  { name: 'Kshitij', phone: '93322642174', avatar: getAvatar('src/assets/teamaimsa/kshitij.png') },
+  { name: 'Vrushabh', phone: '7499340612', avatar: getAvatar('src/assets/teamaimsa/vrushabh.png') },
+];
+
+const brandathonHeads: EventHead[] = [
+  { name: 'Debottam', phone: '8698651336', avatar: getAvatar('src/assets/teamaimsa/debottam.png') },
+  { name: 'Aarya', phone: '7743850757', avatar: getAvatar('src/assets/teamaimsa/arya.png') },
+  { name: 'Tanmayee', phone: '9075859781', avatar: getAvatar('src/assets/teamaimsa/tanmayee.png') },
+  { name: 'Sharvari', phone: '8459068976', avatar: getAvatar('src/assets/teamaimsa/sharvari.png') },
+  { name: 'Prince', phone: '8459633120', avatar: getAvatar('src/assets/teamaimsa/prince.png') },
+];
+
+const surpriseEventHeads: EventHead[] = [
+  { name: 'Hari', phone: '9404260399', avatar: getAvatar('src/assets/teamaimsa/hari.png') },
+  { name: 'Nirbhay', phone: '8668954048', avatar: getAvatar('src/assets/teamaimsa/nirbhay.png') },
+  { name: 'Krish', phone: '9922499717', avatar: getAvatar('src/assets/teamaimsa/krish.png') },
+];
+
+const EVENT_HEADS: Record<string, EventHead[]> = {
+  datathon: datathonHeads,
+  promptrelay: promptRelayHeads,
+  antaryami: promptRelayHeads,
+  chakravyuh: houdiniHeads,
+  houdini: houdiniHeads,
+  houdiniheist: houdiniHeads,
+  mayavi: amongUsHeads,
+  amongus: amongUsHeads,
+  kurukshetra: ctfHeads,
+  ctf: ctfHeads,
+  brandathon: brandathonHeads,
+  'setu-nirman': brandathonHeads,
+  pixelperfect: surpriseEventHeads,
+  'pixel-perfect': surpriseEventHeads,
+};
+
 import styles from './EventDetail.module.css';
 
 const EVENT_NAME_IMAGES: Record<string, string> = {
@@ -134,7 +207,7 @@ const EventDetail: React.FC = () => {
       <section className={styles.hero}>
         <ParticleField
           colors={[yuga.colors.primary, yuga.colors.accent, '#ffffff20']}
-          count={40}
+          count={16}
         />
 
         <div className="container">
@@ -200,6 +273,8 @@ const EventDetail: React.FC = () => {
                     alt=""
                     className={styles.shlokaSudarshanImg}
                     draggable={false}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 
@@ -663,31 +738,6 @@ const EventDetail: React.FC = () => {
                 </div>
               </div>
 
-              {/* Coordinators */}
-              <div className={styles.sideCard}>
-                <h3 className={styles.sideTitle}>Event Coordinators · AIMSA</h3>
-                <div className={styles.coordinatorsList}>
-                  {event.coordinators.map((coord, i) => (
-                    <div key={i} className={styles.coordinatorCard}>
-                      <img
-                        src={coord.avatar || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(coord.name)}`}
-                        alt={coord.name}
-                        className={styles.coordAvatar}
-                      />
-                      <div className={styles.coordName}>{coord.name}</div>
-                      <a
-                        href={`tel:${coord.phone}`}
-                        className={styles.coordCallIconBtn}
-                        title={`Call ${coord.name} (${coord.phone})`}
-                        aria-label={`Call ${coord.name}`}
-                      >
-                        <Phone size={16} />
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* Join WhatsApp Group Button */}
               <div className={styles.joinGroupWrap}>
                 <a
@@ -705,6 +755,62 @@ const EventDetail: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Event Heads Section */}
+      {EVENT_HEADS[event.id] && EVENT_HEADS[event.id].length > 0 && (
+        <section className={styles.eventHeadsSection}>
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className={styles.eventHeadsHeader}
+            >
+              <span className={styles.eventHeadsEyebrow}>AiMSA · Event Management</span>
+              <h2 className={styles.eventHeadsTitle}>Event Heads</h2>
+              <p className={styles.eventHeadsSubtitle}>
+                The team behind {event.name}. Reach out for any queries.
+              </p>
+            </motion.div>
+
+            <div className={styles.eventHeadsGrid}>
+              {EVENT_HEADS[event.id].map((head, i) => (
+                <motion.div
+                  key={head.name}
+                  className={styles.eventHeadCard}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: i * 0.07 }}
+                  viewport={{ once: true }}
+                >
+                  <div className={styles.eventHeadAvatarWrap}>
+                    <img
+                      src={head.avatar}
+                      alt={head.name}
+                      className={styles.eventHeadAvatar}
+                      draggable={false}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className={styles.eventHeadInfoRow}>
+                    <h4 className={styles.eventHeadName}>{head.name}</h4>
+                    <a
+                      href={`tel:+91${head.phone}`}
+                      className={styles.eventHeadCallIconBtn}
+                      title={`Call ${head.name} (+91 ${head.phone})`}
+                      aria-label={`Call ${head.name}`}
+                    >
+                      <Phone size={15} />
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Cta Block */}
       <CtaBlock

@@ -99,7 +99,7 @@ const Legacy: React.FC = () => {
             <h1 className={styles.pageTitle}>Artimas</h1>
             <div className={styles.editionBadge}>25-26</div>
             <p className={styles.pageSubtitle}>
-              Before the four ages converge, there was one. The chronicle of the first saga presented by the Department of CSE (AI &amp; ML) &amp; AIMSA —
+              Before the four ages converge, there was one. The chronicle of the first saga presented by the Department of CSE (AI &amp; ML) &amp; AiMSA —
               the age that lit the flame for what Artimas 26-27 shall become.
             </p>
 

@@ -7,7 +7,6 @@ import EventCard from '../EventCard/EventCard';
 import { EVENTS } from '../../data/yugas';
 import type { YugaKey } from '../../data/yugas';
 import getCloudinaryUrl from '../../utils/cloudinary';
-import { precacheMediaUrls } from '../../utils/preloadAssets';
 import styles from './Chakra3D.module.css';
 
 const glbUrl = getCloudinaryUrl('src/assets/chakra_medallion.glb');
@@ -69,7 +68,6 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   const [step, setStep] = useState(0);
   const [mobileEventIndex, setMobileEventIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [cachedVideoUrls, setCachedVideoUrls] = useState<Record<string, string>>({});
   const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
 
   const targetRotationZ = useRef(0);
@@ -99,14 +97,6 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   const resetAutoScrollTimer = () => {
     lastInteractionTime.current = Date.now();
   };
-
-  // Pre-cache all 4 Yuga videos in CacheStorage & in-memory Blob URLs on load
-  useEffect(() => {
-    const videoUrls = YUGA_LIST.map((y) => y.video);
-    precacheMediaUrls(videoUrls).then((urlsMap) => {
-      setCachedVideoUrls(urlsMap);
-    });
-  }, []);
 
   // Synchronize playback across persistent video elements
   useEffect(() => {
@@ -211,40 +201,6 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
     return () => clearInterval(interval);
   }, [hasEnteredYugas, step, mobileEventIndex, isMobile, safeMobileEventIndex, activeEvents.length]);
 
-  // Mouse wheel / trackpad scroll effect to navigate through Yugas (Task 2)
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-
-    let lastWheelTime = 0;
-    const handleWheel = (e: WheelEvent) => {
-      const now = Date.now();
-      if (now - lastWheelTime < 650) {
-        return;
-      }
-      if (Math.abs(e.deltaY) < 25 && Math.abs(e.deltaX) < 25) {
-        return;
-      }
-
-      if (!hasEnteredRef.current) {
-        if (e.deltaY > 0) {
-          handleEnterYugas();
-          lastWheelTime = now;
-        }
-      } else {
-        if (e.deltaY > 0 || e.deltaX > 0) {
-          handleRotateRight();
-          lastWheelTime = now;
-        } else if (e.deltaY < 0 || e.deltaX < 0) {
-          handleRotateLeft();
-          lastWheelTime = now;
-        }
-      }
-    };
-
-    wrapper.addEventListener('wheel', handleWheel, { passive: true });
-    return () => wrapper.removeEventListener('wheel', handleWheel);
-  }, [hasEnteredYugas, step, mobileEventIndex, isMobile, safeMobileEventIndex, activeEvents.length]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -470,15 +426,14 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
         {/* Dynamic Yuga Videos (persistent pre-rendered videos for seamless instant transitions) */}
         {YUGA_LIST.map((yuga) => {
           const isActive = currentYuga.id === yuga.id;
-          const src = cachedVideoUrls[yuga.video] || yuga.video;
           return (
             <video
               key={yuga.id}
               ref={(el) => {
                 videoRefs.current[yuga.id] = el;
               }}
-              src={src}
-              preload="auto"
+              src={yuga.video}
+              preload="metadata"
               muted
               playsInline
               onEnded={(e) => {

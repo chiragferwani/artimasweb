@@ -1,4 +1,4 @@
-# Artimas 26-27 — AIMSA Flagship Fest | PCCOE Pune
+# Artimas 26-27 — AiMSA Flagship Fest | PCCOE Pune
 # https://artimas.aimsapccoe.in
 
 User-agent: *

@@ -116,7 +116,7 @@ const AnimatedRoutes: React.FC = () => {
                 <h1 style={{ marginBottom: '24px', textAlign: 'center' }}>Privacy Policy</h1>
                 <div style={{ color: 'var(--color-slate)', lineHeight: '1.8', fontSize: '16px', maxWidth: '860px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', margin: '0 auto', textAlign: 'center' }}>
                   <p style={{ textAlign: 'center' }}>
-                    Artimas 26-27 is committed to safeguarding your privacy and data security. All participant details collected during registration—including names, contact numbers, email addresses, and team affiliations—are strictly utilized for event coordination, schedule communication, and prize distribution by AIMSA and PCCOE.
+                    Artimas 26-27 is committed to safeguarding your privacy and data security. All participant details collected during registration—including names, contact numbers, email addresses, and team affiliations—are strictly utilized for event coordination, schedule communication, and prize distribution by AiMSA and PCCOE.
                   </p>
                   <p style={{ textAlign: 'center' }}>
                     No personal information is sold, shared, or distributed to third-party commercial entities. All data collected remains securely stored within institutional records for the duration of the festival.
@@ -124,7 +124,7 @@ const AnimatedRoutes: React.FC = () => {
                   <div style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)', borderRadius: '16px', padding: '24px', marginTop: '12px', width: '100%', maxWidth: '800px', margin: '12px auto 0', textAlign: 'center' }}>
                     <h3 style={{ fontSize: '18px', color: 'var(--color-orange-light)', marginBottom: '12px', textAlign: 'center' }}>Artistic Intent &amp; Cultural Disclaimer</h3>
                     <p style={{ fontSize: '14px', lineHeight: '1.7', color: 'var(--color-slate)', textAlign: 'center' }}>
-                      Pimpri Chinchwad College of Engineering (PCCOE), the Department of Computer Science &amp; Engineering (AI &amp; ML), and AIMSA explicitly state that this web application and festival theme have no intention of hurting the sentiments of any community, religion, person, or belief. The Yuga themes, mythological references, and visual elements depicted in Artimas 26-27 are purely a work of art, creative design, and cultural celebration—portraying Hindu mythology and divine archetypes as enduring symbols of spirituality, duty, strategy, and cosmic wisdom.
+                      Pimpri Chinchwad College of Engineering (PCCOE), the Department of Computer Science &amp; Engineering (AI &amp; ML), and AiMSA explicitly state that this web application and festival theme have no intention of hurting the sentiments of any community, religion, person, or belief. The Yuga themes, mythological references, and visual elements depicted in Artimas 26-27 are purely a work of art, creative design, and cultural celebration—portraying Hindu mythology and divine archetypes as enduring symbols of spirituality, duty, strategy, and cosmic wisdom.
                     </p>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ const AnimatedRoutes: React.FC = () => {
                 <h1 style={{ marginBottom: '24px', textAlign: 'center' }}>Terms &amp; Conditions</h1>
                 <div style={{ color: 'var(--color-slate)', lineHeight: '1.8', fontSize: '16px', maxWidth: '860px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', margin: '0 auto', textAlign: 'center' }}>
                   <p style={{ textAlign: 'center' }}>
-                    By registering for or participating in any competition under Artimas 26-27, all participants and team members agree to comply with the rules, timelines, and guidelines established by AIMSA and PCCOE Department of CSE (AI &amp; ML).
+                    By registering for or participating in any competition under Artimas 26-27, all participants and team members agree to comply with the rules, timelines, and guidelines established by AiMSA and PCCOE Department of CSE (AI &amp; ML).
                   </p>
                   <ul style={{ paddingLeft: '0', listStylePosition: 'inside', display: 'flex', flexDirection: 'column', gap: '10px', textAlign: 'center' }}>
                     <li>Participants must maintain professional decorum, sportsmanship, and academic integrity across all events.</li>
@@ -150,7 +150,7 @@ const AnimatedRoutes: React.FC = () => {
                   <div style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)', borderRadius: '16px', padding: '24px', marginTop: '12px', width: '100%', maxWidth: '800px', margin: '12px auto 0', textAlign: 'center' }}>
                     <h3 style={{ fontSize: '18px', color: 'var(--color-orange-light)', marginBottom: '12px', textAlign: 'center' }}>Artistic Intent &amp; Cultural Disclaimer</h3>
                     <p style={{ fontSize: '14px', lineHeight: '1.7', color: 'var(--color-slate)', textAlign: 'center' }}>
-                      Pimpri Chinchwad College of Engineering (PCCOE), the Department of Computer Science &amp; Engineering (AI &amp; ML), and AIMSA explicitly declare that the festival, web application, and event themes carry no intention of hurting the sentiments of any community, religion, individual, or belief system. The portrayal of Hindu gods, cosmic Yugas, and mythological motifs is strictly a work of art trying to portray divine themes as universal symbols of spirituality, righteousness, and intellect.
+                      Pimpri Chinchwad College of Engineering (PCCOE), the Department of Computer Science &amp; Engineering (AI &amp; ML), and AiMSA explicitly declare that the festival, web application, and event themes carry no intention of hurting the sentiments of any community, religion, individual, or belief system. The portrayal of Hindu gods, cosmic Yugas, and mythological motifs is strictly a work of art trying to portray divine themes as universal symbols of spirituality, righteousness, and intellect.
                     </p>
                   </div>
                 </div>
@@ -301,13 +301,13 @@ const AppContent: React.FC = () => {
       {/* Fixed background Galaxy animation over bg_image — stays active on all pages */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <Galaxy
-          stars={isMobile ? 250 : 600}
-          speed={1.5}
+          stars={isMobile ? 35 : 100}
+          speed={1.2}
           spread={5}
           focal={2}
-          twinkle={0.35}
+          twinkle={0.3}
           trail={1}
-          size={isMobile ? 1.2 : 1.6}
+          size={isMobile ? 1.0 : 1.4}
           fadeInRange={5}
           reverseFly={true}
           followCursor={!isMobile}

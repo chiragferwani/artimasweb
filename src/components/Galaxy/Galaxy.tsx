@@ -87,56 +87,61 @@ export default function Galaxy({
       }
     };
 
-    window.addEventListener('mousemove', onMouseMove);
-
     let raf = 0;
+    let isRunning = true;
+
+    const onVisibilityChange = () => {
+      isRunning = !document.hidden;
+      if (isRunning) {
+        raf = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     const animate = () => {
+      if (!isRunning) return;
+
       const w = canvas.width / DPR;
       const h = canvas.height / DPR;
 
-      if (background === 'transparent' || background === 'rgba(0,0,0,0)' || background === 'rgba(0, 0, 0, 0)') {
-        ctx.clearRect(0, 0, w, h);
-      } else {
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = background;
-        ctx.fillRect(0, 0, w, h);
-
-        if (trail < 1) {
-          ctx.globalAlpha = 1 - trail;
-          ctx.fillStyle = background;
-          ctx.fillRect(0, 0, w, h);
-        }
-      }
-
-      ctx.globalAlpha = 1;
+      ctx.clearRect(0, 0, w, h);
       ctx.fillStyle = starColor;
 
       const cx = followCursor ? mouse.current.x * w : w / 2;
       const cy = followCursor ? mouse.current.y * h : h / 2;
+      const clampedFocal = clamp(focal, 0.01, 10);
+      const speedStep = (reverseFly ? 1 : -1) * clamp(speed, 0, 10) * 0.002;
+      const twinkleStep = clamp(twinkle, 0, 1) * 0.05;
+      const clampedFade = clamp(fadeInRange, 0.1, 10);
+      const baseSize = clamp(size, 0.1, 5);
 
-      for (const s of starsRef.current) {
-        const depth = s.z * clamp(focal, 0.01, 10) + 0.001;
+      for (let i = 0; i < starsRef.current.length; i++) {
+        const s = starsRef.current[i];
+        const depth = s.z * clampedFocal + 0.001;
         const px = cx + (s.x / depth) * w;
         const py = cy + (s.y / depth) * h;
 
-        s.z += reverseFly
-          ? clamp(speed, 0, 10) * 0.002
-          : -clamp(speed, 0, 10) * 0.002;
+        // Skip offscreen stars
+        if (px < -10 || px > w + 10 || py < -10 || py > h + 10) {
+          s.z += speedStep;
+          if (s.z <= 0 || s.z > 1) starsRef.current[i] = createStar();
+          continue;
+        }
 
-        if (s.z <= 0 || s.z > 1) Object.assign(s, createStar());
+        s.z += speedStep;
+        if (s.z <= 0 || s.z > 1) {
+          starsRef.current[i] = createStar();
+          continue;
+        }
 
-        s.tw += clamp(twinkle, 0, 1) * 0.05;
+        s.tw += twinkleStep;
 
-        const alpha = Math.max(0, 1 - s.z / clamp(fadeInRange, 0.1, 10));
-        const radius =
-          clamp(size, 0.1, 5) *
-          (1 - s.z) *
-          (1 + Math.sin(s.tw) * clamp(twinkle, 0, 1));
+        const alpha = Math.max(0, Math.min(1, 1 - s.z / clampedFade));
+        const radius = Math.max(0.5, baseSize * (1 - s.z) * (1 + Math.sin(s.tw) * 0.35));
+        const d = radius * 2;
 
         ctx.globalAlpha = alpha;
-        ctx.beginPath();
-        ctx.arc(px, py, radius, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillRect(px - radius, py - radius, d, d);
       }
 
       ctx.globalAlpha = 1;
@@ -147,6 +152,7 @@ export default function Galaxy({
 
     return () => {
       cancelAnimationFrame(raf);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);
     };

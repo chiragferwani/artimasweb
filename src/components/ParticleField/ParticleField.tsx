@@ -61,12 +61,29 @@ const ParticleField: React.FC<ParticleFieldProps> = ({
 
     particlesRef.current = Array.from({ length: countRef.current }, createParticle);
 
+    let isRunning = true;
+
+    const onVisibilityChange = () => {
+      isRunning = !document.hidden;
+      if (isRunning) {
+        animRef.current = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     const animate = () => {
+      if (!isRunning) return;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesRef.current.forEach((p, i) => {
+      const cw = canvas.width;
+      const ch = canvas.height;
+
+      for (let i = 0; i < particlesRef.current.length; i++) {
+        const p = particlesRef.current[i];
         p.life++;
         p.x += p.speedX;
         p.y += p.speedY;
+
         const lifeRatio = p.life / p.maxLife;
         const fade =
           lifeRatio < 0.1
@@ -74,29 +91,30 @@ const ParticleField: React.FC<ParticleFieldProps> = ({
             : lifeRatio > 0.8
             ? (1 - lifeRatio) * 5
             : 1;
-        ctx.save();
-        ctx.globalAlpha = p.opacity * fade;
+
+        ctx.globalAlpha = Math.max(0, Math.min(1, p.opacity * fade));
         ctx.fillStyle = p.color;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
+        const d = p.size * 2;
+        ctx.fillRect(p.x - p.size, p.y - p.size, d, d);
+
         if (
           p.life >= p.maxLife ||
-          p.y < 0 ||
-          p.x < 0 ||
-          p.x > canvas.width
+          p.y < -10 ||
+          p.x < -10 ||
+          p.x > cw + 10 ||
+          p.y > ch + 10
         ) {
           particlesRef.current[i] = createParticle();
         }
-      });
+      }
+
+      ctx.globalAlpha = 1;
       animRef.current = requestAnimationFrame(animate);
     };
     animate();
 
     return () => {
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animRef.current);
     };

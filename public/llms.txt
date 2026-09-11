@@ -1,10 +1,10 @@
 # Artimas 26-27
 
-> Artimas 26-27 is the flagship technical and creative festival organized by AIMSA (AI & ML Student Association) at the Department of Computer Science & Engineering (AI & ML), Pimpri Chinchwad College of Engineering (PCCOE), Pune, India. The festival theme is "The Four Yugas Converge" — a mythological journey through the four cosmic ages of Hindu philosophy: Satyuga, Tretayuga, Dwaparyuga, and Kalyuga.
+> Artimas 26-27 is the flagship technical and creative festival organized by AiMSA (AI & ML Student Association) at the Department of Computer Science & Engineering (AI & ML), Pimpri Chinchwad College of Engineering (PCCOE), Pune, India. The festival theme is "The Four Yugas Converge" — a mythological journey through the four cosmic ages of Hindu philosophy: Satyuga, Tretayuga, Dwaparyuga, and Kalyuga.
 
 ## About
 
-- **Organized by**: AIMSA (AI & ML Student Association), CSE (AI & ML) Department
+- **Organized by**: AiMSA (AI & ML Student Association), CSE (AI & ML) Department
 - **College**: Pimpri Chinchwad College of Engineering (PCCOE), Pune, Maharashtra, India
 - **Dates**: October 9–11, 2026
 - **Website**: https://artimas.aimsapccoe.in
@@ -47,7 +47,7 @@
 
 ## Keywords
 
-Artimas, Artimas 2026, Artimas 26-27, AIMSA, PCCOE AIMSA, AIMSAPCCOE, PCCOE, Pimpri Chinchwad College of Engineering, PCCOE Pune, CSE AI ML, technical fest, college fest, hackathon, HackMatrix, coding competition, datathon, CTF, capture the flag, cybersecurity, prompt engineering, UI/UX design, brand building, escape room, among us, Pune college fest, engineering college fest India, AI ML fest, Artimas fest PCCOE, SPPU, Savitribai Phule Pune University
+Artimas, Artimas 2026, Artimas 26-27, AiMSA, PCCOE AiMSA, AiMSAPCCOE, PCCOE, Pimpri Chinchwad College of Engineering, PCCOE Pune, CSE AI ML, technical fest, college fest, hackathon, HackMatrix, coding competition, datathon, CTF, capture the flag, cybersecurity, prompt engineering, UI/UX design, brand building, escape room, among us, Pune college fest, engineering college fest India, AI ML fest, Artimas fest PCCOE, SPPU, Savitribai Phule Pune University
 
 ## Contact
 

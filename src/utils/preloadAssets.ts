@@ -1,96 +1,44 @@
 import { getCloudinaryUrl } from './cloudinary';
-import mappingData from '../data/cloudinary_mapping.json';
 
-const CACHE_NAME = 'artimas-media-cache-v1';
-const memoryBlobCache = new Map<string, string>();
-const ongoingFetches = new Map<string, Promise<string>>();
+// Critical above-the-fold images only (very lightweight)
+const CRITICAL_IMAGE_PATHS = [
+  'src/assets/logo.png',
+  'src/assets/artimasnav.png',
+  'src/assets/bg_image.png',
+  'src/assets/pillar.png',
+  'src/assets/newartimas.webp',
+  'src/assets/eventnames/satyug.png',
+  'src/assets/eventnames/tretayug.png',
+  'src/assets/eventnames/dwaparyug.png',
+  'src/assets/eventnames/kalyug.png',
+];
 
-/**
- * Retrieves a cached Blob URL for a given media/video URL using CacheStorage & in-memory Blob URLs.
- * If not already cached, fetches in background, stores in CacheStorage, and creates a Blob URL.
- */
-export async function getCachedMediaUrl(url: string): Promise<string> {
-  if (!url) return '';
-
-  // 1. Check in-memory blob URL cache
-  if (memoryBlobCache.has(url)) {
-    return memoryBlobCache.get(url)!;
-  }
-
-  // 2. Prevent duplicate concurrent fetches for the same URL
-  if (ongoingFetches.has(url)) {
-    return ongoingFetches.get(url)!;
-  }
-
-  const fetchPromise = (async () => {
-    try {
-      // Check CacheStorage API if available
-      if ('caches' in window) {
-        const cache = await caches.open(CACHE_NAME);
-        const cachedResponse = await cache.match(url);
-        if (cachedResponse) {
-          const blob = await cachedResponse.blob();
-          const blobUrl = URL.createObjectURL(blob);
-          memoryBlobCache.set(url, blobUrl);
-          return blobUrl;
-        }
-
-        // Fetch over network, cache response, and return Blob URL
-        const networkResponse = await fetch(url, { mode: 'cors' });
-        if (networkResponse.ok) {
-          await cache.put(url, networkResponse.clone());
-          const blob = await networkResponse.blob();
-          const blobUrl = URL.createObjectURL(blob);
-          memoryBlobCache.set(url, blobUrl);
-          return blobUrl;
-        }
-      } else {
-        // Fallback: fetch as blob directly
-        const response = await fetch(url);
-        if (response.ok) {
-          const blob = await response.blob();
-          const blobUrl = URL.createObjectURL(blob);
-          memoryBlobCache.set(url, blobUrl);
-          return blobUrl;
-        }
-      }
-    } catch {
-      // Fallback gracefully to original URL if offline or network error
-    }
-
-    return url;
-  })();
-
-  ongoingFetches.set(url, fetchPromise);
-  const result = await fetchPromise;
-  ongoingFetches.delete(url);
-  return result;
-}
-
-/**
- * Pre-caches multiple media URLs in parallel with priority for weak connections.
- */
-export async function precacheMediaUrls(urls: string[]): Promise<Record<string, string>> {
-  const results: Record<string, string> = {};
-  await Promise.allSettled(
-    urls.map(async (url) => {
-      const cached = await getCachedMediaUrl(url);
-      results[url] = cached;
-    })
-  );
-  return results;
-}
-
-const ALL_CLOUDINARY_URLS = Array.from(
-  new Set(Object.keys(mappingData).map((key) => getCloudinaryUrl(key)))
-);
+const CRITICAL_IMAGE_URLS = CRITICAL_IMAGE_PATHS.map((p) => getCloudinaryUrl(p));
 
 let preloadingStarted = false;
 let isPreloaded = false;
 
 /**
- * Preloads all Cloudinary images and videos into browser HTTP cache and CacheStorage.
- * Can be called repeatedly; will only execute once.
+ * Returns optimized media URL directly. Native HTML5 video streaming handles byte-range requests
+ * far better than loading multi-megabyte Blobs into JS memory.
+ */
+export async function getCachedMediaUrl(url: string): Promise<string> {
+  return url || '';
+}
+
+/**
+ * Pre-caches media URLs gracefully without blocking network thread.
+ */
+export async function precacheMediaUrls(urls: string[]): Promise<Record<string, string>> {
+  const results: Record<string, string> = {};
+  for (const url of urls) {
+    results[url] = url;
+  }
+  return results;
+}
+
+/**
+ * Preloads essential lightweight UI images without choking the network bandwidth.
  */
 export function startAssetPreloading(
   onProgress?: (loaded: number, total: number, percent: number) => void
@@ -100,48 +48,36 @@ export function startAssetPreloading(
   }
   preloadingStarted = true;
 
-  const total = ALL_CLOUDINARY_URLS.length;
+  const total = CRITICAL_IMAGE_URLS.length;
   let loadedCount = 0;
 
-  const handleLoaded = () => {
-    loadedCount++;
-    const percent = Math.round((loadedCount / total) * 100);
-    if (onProgress) {
-      onProgress(loadedCount, total, percent);
+  return new Promise<void>((resolve) => {
+    if (total === 0) {
+      isPreloaded = true;
+      if (onProgress) onProgress(1, 1, 100);
+      resolve();
+      return;
     }
-  };
 
-  const promises = ALL_CLOUDINARY_URLS.map((url) => {
-    return new Promise<void>((resolve) => {
-      if (url.endsWith('.mp4') || url.includes('/video/upload/')) {
-        getCachedMediaUrl(url)
-          .then(() => {
-            handleLoaded();
-            resolve();
-          })
-          .catch(() => {
-            handleLoaded();
-            resolve();
-          });
-      } else {
-        const img = new Image();
-        img.src = url;
-
-        img.onload = () => {
-          handleLoaded();
-          resolve();
-        };
-
-        img.onerror = () => {
-          handleLoaded();
-          resolve();
-        };
+    const checkDone = () => {
+      loadedCount++;
+      const percent = Math.min(100, Math.round((loadedCount / total) * 100));
+      if (onProgress) {
+        onProgress(loadedCount, total, percent);
       }
-    });
-  });
+      if (loadedCount >= total) {
+        isPreloaded = true;
+        resolve();
+      }
+    };
 
-  return Promise.all(promises).then(() => {
-    isPreloaded = true;
+    CRITICAL_IMAGE_URLS.forEach((url) => {
+      const img = new Image();
+      img.decoding = 'async';
+      img.onload = checkDone;
+      img.onerror = checkDone;
+      img.src = url;
+    });
   });
 }
 
@@ -150,3 +86,4 @@ export function isAssetsPreloaded(): boolean {
 }
 
 export default startAssetPreloading;
+

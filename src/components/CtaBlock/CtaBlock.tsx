@@ -25,7 +25,7 @@ export const CtaBlock: React.FC<CtaBlockProps> = ({
   title = 'ARTIMAS',
   ghostTitle = 'ARTIMAS',
   primaryButton = { label: 'See all events', to: '/events', variant: 'primary' },
-  secondaryButton = { label: 'Contact AIMSA', to: '/contact', variant: 'secondary' },
+  secondaryButton = { label: 'Contact AiMSA', to: '/contact', variant: 'secondary' },
   bgImage = shivaBg,
 }) => {
   return (

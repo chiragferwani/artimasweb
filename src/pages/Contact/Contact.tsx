@@ -8,7 +8,6 @@ import tickAnimationData, { tickAnimationUrl } from '../../data/tickAnimation';
 import styles from './Contact.module.css';
 
 const krishnaVid = getCloudinaryUrl('src/assets/krishnacontact.mp4');
-const chiranjeeviImg = getCloudinaryUrl('src/assets/chiranjeevi.png');
 
 // Development Team Image Assets
 const chiragImg = getCloudinaryUrl('src/assets/team/chiragferwani.png');
@@ -177,10 +176,10 @@ const Contact: React.FC = () => {
             className={styles.headerContent}
           >
             <div className={styles.breadcrumb}>Dept. of CSE (AI &amp; ML) · Reach the Council</div>
-            <h1 className={styles.pageTitle}>Contact AIMSA</h1>
+            <h1 className={styles.pageTitle}>Contact AiMSA</h1>
             <p className={styles.pageSubtitle}>
               Questions about registration, events, or collaborations?
-              The Department of CSE (AI &amp; ML) and AIMSA council await your message.
+              The Department of CSE (AI &amp; ML) and AiMSA council await your message.
             </p>
           </motion.div>
         </div>
@@ -198,12 +197,6 @@ const Contact: React.FC = () => {
               muted
               playsInline
               className={styles.krishnaVideo}
-            />
-            <img
-              src={chiranjeeviImg}
-              alt="Chiranjeevi"
-              className={styles.chiranjeeviImg}
-              draggable={false}
             />
           </div>
 
@@ -374,7 +367,7 @@ const Contact: React.FC = () => {
 
               {/* Social media */}
               <div className={styles.infoCard}>
-                <h3 className={styles.infoTitle}>Follow AIMSA</h3>
+                <h3 className={styles.infoTitle}>Follow AiMSA</h3>
                 <div className={styles.socialList}>
                   <a
                     href="https://aimsapccoe.in/"
@@ -392,7 +385,7 @@ const Contact: React.FC = () => {
                     className={styles.socialItem}
                   >
                     <LinkedinIcon size={18} />
-                    <span>PCCOE&apos;s AIMSA (LinkedIn) ↗</span>
+                    <span>PCCOE&apos;s AiMSA (LinkedIn) ↗</span>
                   </a>
                   <a
                     href="https://www.instagram.com/pccoe_aimsa"
