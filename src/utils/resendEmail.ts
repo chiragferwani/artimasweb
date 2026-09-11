@@ -11,6 +11,7 @@ export interface SendRegistrationEmailParams {
   collegeName: string;
   teamSize: number;
   paymentStatus: string;
+  whatsappUrl?: string;
 }
 
 const RESEND_API_KEY =
@@ -32,6 +33,7 @@ export async function sendRegistrationConfirmationEmail(
     collegeName,
     teamSize,
     paymentStatus,
+    whatsappUrl = 'https://chat.whatsapp.com/DgwPI9EgaAQ1Z1epQcUZ40?s=qt&p=a&mlu=4&ilr=4',
   } = params;
 
   const htmlContent = `
@@ -102,7 +104,7 @@ export async function sendRegistrationConfirmationEmail(
             <div class="whatsapp-box">
               <div style="color: #ffffff; font-weight: 600; font-size: 15px; margin-bottom: 6px;">Stay Connected with the Council</div>
               <div style="color: #9e9a94; font-size: 13px;">Join the official WhatsApp group for schedule updates, rulebooks, and queries:</div>
-              <a href="https://chat.whatsapp.com/DgwPI9EgaAQ1Z1epQcUZ40?s=qt&p=a&mlu=4&ilr=4" class="whatsapp-btn">Join WhatsApp Group ↗</a>
+              <a href="${whatsappUrl}" class="whatsapp-btn">Join WhatsApp Group ↗</a>
             </div>
 
             <p class="text" style="font-size: 13px; color: #9e9a94; margin-bottom: 0;">

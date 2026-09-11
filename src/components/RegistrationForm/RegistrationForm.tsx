@@ -26,6 +26,7 @@ import type { Event } from '../../data/yugas';
 import { uploadPaymentScreenshot } from '../../utils/paymentUpload';
 import { submitRegistrationToGoogleSheets, type TeamMemberData } from '../../utils/googleSheets';
 import { sendRegistrationConfirmationEmail } from '../../utils/resendEmail';
+import { getEventWhatsAppUrl } from '../../data/whatsappLinks';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import qrCodeImg from '../../data/qrCode';
 import tickAnimationData, { tickAnimationUrl } from '../../data/tickAnimation';
@@ -465,6 +466,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           collegeName: effectiveCollegeName.trim(),
           teamSize: members.length,
           paymentStatus: isPCCOE ? 'Free (PCCOE Student)' : 'Paid (Verified via Screenshot)',
+          whatsappUrl: getEventWhatsAppUrl(event?.id),
         }).catch((emailErr) => {
           console.warn('Confirmation email dispatch warning:', emailErr);
         });
@@ -1098,7 +1100,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                       Join the official WhatsApp group now to receive schedule announcements, round updates, and mentor support!
                     </p>
                     <a
-                      href="https://chat.whatsapp.com/DgwPI9EgaAQ1Z1epQcUZ40?s=qt&p=a&mlu=4&ilr=4"
+                      href={getEventWhatsAppUrl(event?.id)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.modalWhatsAppBtn}

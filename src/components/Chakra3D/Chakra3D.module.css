@@ -12,6 +12,7 @@
   padding: 85px 24px 20px;
   border-radius: 0;
   box-sizing: border-box;
+  touch-action: pan-y;
 }
 
 /* ════════ Dynamic Yuga Background Video Container ════════ */
@@ -483,6 +484,9 @@
   }
   .singleMobileCardWrap {
     max-width: 320px;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
   }
   .controlPillWrap {
     margin-top: 14px;

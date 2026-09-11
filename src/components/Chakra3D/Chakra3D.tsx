@@ -68,6 +68,7 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   const [step, setStep] = useState(0);
   const [mobileEventIndex, setMobileEventIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
   const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
 
   const targetRotationZ = useRef(0);
@@ -77,6 +78,7 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   const initialRotationOnDrag = useRef(0);
   const hasEnteredRef = useRef(false);
   const pointerDownPos = useRef<{ x: number; y: number; time: number }>({ x: 0, y: 0, time: 0 });
+  const touchStartPos = useRef<{ x: number; y: number; time: number }>({ x: 0, y: 0, time: 0 });
   const lastInteractionTime = useRef<number>(Date.now());
 
   useEffect(() => {
@@ -130,6 +132,7 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   // Rotate Right handler (Next)
   const handleRotateRight = () => {
     resetAutoScrollTimer();
+    setSlideDirection('right');
     if (isMobile) {
       if (safeMobileEventIndex < activeEvents.length - 1) {
         // Next event in same Yuga
@@ -151,6 +154,7 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   // Rotate Left handler (Previous)
   const handleRotateLeft = () => {
     resetAutoScrollTimer();
+    setSlideDirection('left');
     if (isMobile) {
       if (safeMobileEventIndex > 0) {
         // Previous event in same Yuga
@@ -170,6 +174,44 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
       const prevStep = step - 1;
       setStep(prevStep);
       targetRotationZ.current = -prevStep * STEP_RAD;
+    }
+  };
+
+  // Touch gesture handlers for mobile horizontal swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      touchStartPos.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        time: Date.now(),
+      };
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.changedTouches.length === 1) {
+      const deltaX = e.changedTouches[0].clientX - touchStartPos.current.x;
+      const deltaY = e.changedTouches[0].clientY - touchStartPos.current.y;
+      const duration = Date.now() - touchStartPos.current.time;
+
+      // Check if it's primarily a horizontal swipe (> 35px, deltaX > deltaY, within 800ms)
+      if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) && duration < 800) {
+        if (!hasEnteredYugas) {
+          handleEnterYugas();
+          if (deltaX < 0) {
+            // Swiped left in intro -> advance to next
+            setTimeout(() => handleRotateRight(), 100);
+          }
+        } else {
+          if (deltaX < 0) {
+            // Swiped left -> Next
+            handleRotateRight();
+          } else {
+            // Swiped right -> Previous
+            handleRotateLeft();
+          }
+        }
+      }
     }
   };
 
@@ -341,6 +383,8 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
 
       const dist = Math.hypot(e.clientX - pointerDownPos.current.x, e.clientY - pointerDownPos.current.y);
       const duration = Date.now() - pointerDownPos.current.time;
+      const deltaX = e.clientX - pointerDownPos.current.x;
+      const deltaY = e.clientY - pointerDownPos.current.y;
 
       if (!hasEnteredRef.current) {
         // If clicked on 3D object without substantial drag, enter the yugas (Task 5)
@@ -348,13 +392,28 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
           handleEnterYugas();
           return;
         }
+        if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) && duration < 800) {
+          handleEnterYugas();
+          if (deltaX < 0) {
+            setTimeout(() => handleRotateRight(), 100);
+          }
+          return;
+        }
       } else {
-        // Snap to nearest 90 degree step on drag release after entering
-        const nearestStep = Math.round(-targetRotationZ.current / STEP_RAD);
-        targetRotationZ.current = -nearestStep * STEP_RAD;
-        setStep(nearestStep);
-        setMobileEventIndex(0);
-        resetAutoScrollTimer();
+        if (isMobile && Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) && duration < 700) {
+          if (deltaX < 0) {
+            handleRotateRight();
+          } else {
+            handleRotateLeft();
+          }
+        } else {
+          // Snap to nearest 90 degree step on drag release after entering
+          const nearestStep = Math.round(-targetRotationZ.current / STEP_RAD);
+          targetRotationZ.current = -nearestStep * STEP_RAD;
+          setStep(nearestStep);
+          setMobileEventIndex(0);
+          resetAutoScrollTimer();
+        }
       }
     };
 
@@ -420,7 +479,12 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
   }, []);
 
   return (
-    <div ref={wrapperRef} className={`${styles.chakraWrapper} ${className || ''}`}>
+    <div
+      ref={wrapperRef}
+      className={`${styles.chakraWrapper} ${className || ''}`}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Background Container: Video plays continuously with smooth Pillar Overlay cross-dissolve */}
       <div className={styles.yugaBgVideoContainer}>
         {/* Dynamic Yuga Videos (persistent pre-rendered videos for seamless instant transitions) */}
@@ -586,10 +650,28 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
                   {currentMobileEvent && (
                     <motion.div
                       key={currentMobileEvent.id}
-                      initial={{ opacity: 0, scale: 0.94, y: 16 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.94, y: -16 }}
-                      transition={{ duration: 0.35, ease: 'easeOut' }}
+                      initial={{
+                        opacity: 0,
+                        scale: 0.94,
+                        x: slideDirection === 'right' ? 50 : -50,
+                      }}
+                      animate={{ opacity: 1, scale: 1, x: 0 }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.94,
+                        x: slideDirection === 'right' ? -50 : 50,
+                      }}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(_e, info) => {
+                        if (info.offset.x < -35 || info.velocity.x < -250) {
+                          handleRotateRight();
+                        } else if (info.offset.x > 35 || info.velocity.x > 250) {
+                          handleRotateLeft();
+                        }
+                      }}
+                      transition={{ duration: 0.32, ease: 'easeOut' }}
                       className={styles.singleMobileCardWrap}
                     >
                       <EventCard event={currentMobileEvent} index={0} />

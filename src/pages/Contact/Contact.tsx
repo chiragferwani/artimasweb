@@ -7,8 +7,6 @@ import getCloudinaryUrl from '../../utils/cloudinary';
 import tickAnimationData, { tickAnimationUrl } from '../../data/tickAnimation';
 import styles from './Contact.module.css';
 
-const krishnaVid = getCloudinaryUrl('src/assets/krishnacontact.mp4');
-
 // Development Team Image Assets
 const chiragImg = getCloudinaryUrl('src/assets/team/chiragferwani.png');
 const vrushabhImg = getCloudinaryUrl('src/assets/team/vrushabh.png');
@@ -188,18 +186,6 @@ const Contact: React.FC = () => {
       {/* Content */}
       <section className={styles.contentSection}>
         <div className="container">
-          {/* Centered Krishna Feature Video & Chiranjeevi Motif */}
-          <div className={styles.krishnaVideoWrap}>
-            <video
-              src={krishnaVid}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className={styles.krishnaVideo}
-            />
-          </div>
-
           <div className={styles.contentGrid}>
             {/* Form */}
             <motion.div
