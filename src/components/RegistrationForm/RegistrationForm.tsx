@@ -452,6 +452,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         })),
         paymentStatus: isPCCOE ? 'Free (PCCOE)' : 'Paid',
         paymentScreenshotUrl,
+        whatsappUrl: getEventWhatsAppUrl(event?.id),
       });
 
       // 3. Dispatch confirmation emails via Resend (async, non-blocking)

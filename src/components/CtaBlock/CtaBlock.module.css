@@ -65,6 +65,17 @@
 .ctaTitleWrap {
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.ctaTitleLine,
+.ctaSubtitleLine {
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -76,7 +87,7 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(1.03);
   font-family: 'Inter', sans-serif;
-  font-size: clamp(72px, 18vw, 190px);
+  font-size: clamp(64px, 16vw, 175px);
   font-weight: 900;
   letter-spacing: -3px;
   line-height: 0.90;
@@ -93,10 +104,43 @@
   position: relative;
   z-index: 2;
   font-family: 'Inter', sans-serif;
-  font-size: clamp(72px, 18vw, 190px);
+  font-size: clamp(64px, 16vw, 175px);
   font-weight: 900;
   letter-spacing: -3px;
   line-height: 0.90;
+  color: #FFFFFF;
+  margin: 0;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.ctaGhostWatermarkSub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.03);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(26px, 6vw, 56px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.0;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.ctaSubtitleText {
+  position: relative;
+  z-index: 2;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(26px, 6vw, 56px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.0;
   color: #FFFFFF;
   margin: 0;
   text-transform: uppercase;
@@ -159,7 +203,8 @@
 
 /* ── Responsive ── */
 @media (max-width: 480px) {
-  .ctaGhostWatermark, .ctaTitleText { font-size: clamp(48px, 15vw, 72px); letter-spacing: -2px; }
+  .ctaGhostWatermark, .ctaTitleText { font-size: clamp(44px, 14vw, 76px); letter-spacing: -2px; }
+  .ctaGhostWatermarkSub, .ctaSubtitleText { font-size: clamp(20px, 5.5vw, 30px); letter-spacing: -0.5px; }
   .ctaBtnPrimary, .ctaBtnSecondary { padding: 12px 24px; font-size: 14px; }
   .ctaSection { padding: 48px 0 64px; }
 }

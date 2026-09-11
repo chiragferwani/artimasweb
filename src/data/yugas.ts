@@ -641,13 +641,13 @@ export const EVENTS: Event[] = [
       },
       {
         roundNumber: 2,
-        title: 'Chausar Challenge',
+        title: 'Mystery Round',
         mode: 'Offline',
         date: '10th Oct 2026',
         time: '2:00 PM – 6:00 PM',
         venue: 'Old Reading Hall',
         description:
-          'Step into a strategic challenge inspired by the ancient game of Chausar, where every move could bring you closer to victory. Qualified teams will face a series of checkpoints, each testing their logic, observation, and problem-solving skills. Solve the challenges, make the right moves, and use the information you gather wisely to stay ahead of the competition.',
+          'A thrilling challenge of clues, riddles, memory, and problem-solving awaits! Navigate through checkpoints, solve riddles, uncover clues, and connect the pieces to complete the final challenge. Stay sharp, think fast, and crack the mystery together!',
       },
       {
         roundNumber: 3,
@@ -674,7 +674,7 @@ export const EVENTS: Event[] = [
       'In Round 2, clues must be memorized (cannot be written down).',
       'No damage to college property; no cash prize if a team fails to escape within the time limit.',
     ],
-    rulebookUrl: 'https://drive.google.com/file/d/1-Dydkzz8A4Yp2-CPewqPymNqRA400aGu/view?usp=drive_link',
+    rulebookUrl: 'https://drive.google.com/file/d/1fUtDqHNsTI7lPxECRLO7gIcztDA4CpcY/view?usp=sharing',
     date: '10th Oct – 11th Oct 2026',
     time: '10:00 AM – 03:00 PM',
     venue: 'Auditorium / Rooms 6517–6519',

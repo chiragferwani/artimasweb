@@ -16,6 +16,8 @@ export interface CtaButtonConfig {
 export interface CtaBlockProps {
   title?: string;
   ghostTitle?: string;
+  subtitle?: string;
+  ghostSubtitle?: string;
   primaryButton?: CtaButtonConfig;
   secondaryButton?: CtaButtonConfig;
   bgImage?: string;
@@ -24,6 +26,8 @@ export interface CtaBlockProps {
 export const CtaBlock: React.FC<CtaBlockProps> = ({
   title = 'ARTIMAS',
   ghostTitle = 'ARTIMAS',
+  subtitle = '26-27',
+  ghostSubtitle = '26-27',
   primaryButton = { label: 'See all events', to: '/events', variant: 'primary' },
   secondaryButton = { label: 'Contact AiMSA', to: '/contact', variant: 'secondary' },
   bgImage = shivaBg,
@@ -47,8 +51,16 @@ export const CtaBlock: React.FC<CtaBlockProps> = ({
           <div className={styles.ctaInner}>
             {/* Title with watermarked text stroke effect */}
             <div className={styles.ctaTitleWrap}>
-              <div className={styles.ctaGhostWatermark}>{ghostTitle}</div>
-              <h2 className={styles.ctaTitleText}>{title}</h2>
+              <div className={styles.ctaTitleLine}>
+                <div className={styles.ctaGhostWatermark}>{ghostTitle}</div>
+                <h2 className={styles.ctaTitleText}>{title}</h2>
+              </div>
+              {subtitle && (
+                <div className={styles.ctaSubtitleLine}>
+                  <div className={styles.ctaGhostWatermarkSub}>{ghostSubtitle || subtitle}</div>
+                  <h3 className={styles.ctaSubtitleText}>{subtitle}</h3>
+                </div>
+              )}
             </div>
 
             {/* Contextual buttons */}

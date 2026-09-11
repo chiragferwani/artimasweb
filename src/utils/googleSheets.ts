@@ -3,6 +3,8 @@
  * Connects registration submissions to the Google Apps Script Web App.
  */
 
+import { getEventWhatsAppUrl } from '../data/whatsappLinks';
+
 export interface TeamMemberData {
   name: string;
   email: string;
@@ -24,6 +26,9 @@ export interface RegistrationPayload {
   paymentScreenshotUrl?: string;
   registrationId?: string;
   submittedAt?: string;
+  whatsappUrl?: string;
+  whatsappLink?: string;
+  whatsappGroup?: string;
 }
 
 // Exact tab names as defined in user's Google Sheet
@@ -65,10 +70,15 @@ export async function submitRegistrationToGoogleSheets(
     EVENT_SHEET_MAPPING[payload.eventId.toLowerCase()] ||
     payload.eventId;
 
+  const eventWhatsAppLink = payload.whatsappUrl || getEventWhatsAppUrl(payload.eventId);
+
   const finalPayload: RegistrationPayload = {
     ...payload,
     sheetName: targetSheetName,
     registrationId,
+    whatsappUrl: eventWhatsAppLink,
+    whatsappLink: eventWhatsAppLink,
+    whatsappGroup: eventWhatsAppLink,
     submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
   };
 
