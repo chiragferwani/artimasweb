@@ -8,10 +8,11 @@ import tickAnimationData, { tickAnimationUrl } from '../../data/tickAnimation';
 import styles from './Contact.module.css';
 
 // Development Team Image Assets
+const sanikaImg = getCloudinaryUrl('src/assets/teamaimsa/sanika.png');
 const chiragImg = getCloudinaryUrl('src/assets/team/chiragferwani.png');
 const vrushabhImg = getCloudinaryUrl('src/assets/team/vrushabh.png');
-const hariImg = getCloudinaryUrl('src/assets/team/hari.png');
 const nirbhayImg = getCloudinaryUrl('src/assets/team/nirbhay.png');
+const hariImg = getCloudinaryUrl('src/assets/team/hari.png');
 const meetImg = getCloudinaryUrl('src/assets/team/meetr.png');
 const anayImg = getCloudinaryUrl('src/assets/team/anay.jpeg');
 const maitriImg = getCloudinaryUrl('src/assets/team/maitri.jpeg');
@@ -78,21 +79,25 @@ const InstagramIcon: React.FC<{ size?: number }> = ({ size = 18 }) => (
 );
 
 const DEV_ROW_1: TeamMember[] = [
-  { id: 'dev-1', name: 'Hari', role: 'Technical Head', tag: '', img: hariImg },
-  { id: 'dev-2', name: 'Vrushabh Hirap', role: 'Technical Head', tag: '', img: vrushabhImg },
-  { id: 'dev-3', name: 'Chirag Ferwani', role: 'Technical Head', tag: '', img: chiragImg },
-  { id: 'dev-4', name: 'Nirbhay', role: 'Technical Head', tag: '', img: nirbhayImg },
-  { id: 'dev-5', name: 'Meet', role: 'Technical Head', tag: '', img: meetImg },
+  { id: 'dev-sanika', name: 'Sanika', role: 'Design Head', tag: '', img: sanikaImg },
+  { id: 'dev-chirag', name: 'Chirag Ferwani', role: 'Technical Head', tag: '', img: chiragImg },
+  { id: 'dev-vrushabh', name: 'Vrushabh Hirap', role: 'Technical Head', tag: '', img: vrushabhImg },
 ];
 
 const DEV_ROW_2: TeamMember[] = [
+  { id: 'dev-nirbhay', name: 'Nirbhay', role: 'Technical Head', tag: '', img: nirbhayImg },
+  { id: 'dev-hari', name: 'Hari', role: 'Technical Head', tag: '', img: hariImg },
+  { id: 'dev-meet', name: 'Meet', role: 'Technical Head', tag: '', img: meetImg },
+];
+
+const DEV_ROW_3: TeamMember[] = [
   { id: 'dev-6', name: 'Anay', role: '', tag: '', img: anayImg },
   { id: 'dev-7', name: 'Maitri', role: '', tag: '', img: maitriImg },
   { id: 'dev-8', name: 'Parth', role: '', tag: '', img: parthImg },
   { id: 'dev-9', name: 'Rohan', role: '', tag: '', img: rohanImg },
 ];
 
-const DEV_ROW_3: TeamMember[] = [
+const DEV_ROW_4: TeamMember[] = [
   { id: 'dev-10', name: 'Savi', role: '', tag: '', img: saviImg },
   { id: 'dev-11', name: 'Siya', role: '', tag: '', img: siyaImg },
   { id: 'dev-12', name: 'Vernit', role: '', tag: '', img: vernitImg },
@@ -414,8 +419,8 @@ const Contact: React.FC = () => {
               <h3 className={styles.teamGroupTitle}>Development Team</h3>
             </div>
             
-            {/* Row 1: 5 Members (Hari, Vrushabh, Chirag, Nirbhay, Meet) */}
-            <div className={styles.devGridRow5}>
+            {/* Row 1: 3 Technical Heads (Sanika, Chirag, Vrushabh) */}
+            <div className={styles.devGridRow3}>
               {DEV_ROW_1.map((member, i) => (
                 <motion.div
                   key={member.id}
@@ -436,8 +441,8 @@ const Contact: React.FC = () => {
               ))}
             </div>
 
-            {/* Row 2: 4 Members */}
-            <div className={styles.devGridRow4}>
+            {/* Row 2: 3 Technical Heads (Nirbhay, Hari, Meet) */}
+            <div className={styles.devGridRow3}>
               {DEV_ROW_2.map((member, i) => (
                 <motion.div
                   key={member.id}
@@ -461,6 +466,28 @@ const Contact: React.FC = () => {
             {/* Row 3: 4 Members */}
             <div className={styles.devGridRow4}>
               {DEV_ROW_3.map((member, i) => (
+                <motion.div
+                  key={member.id}
+                  className={styles.profileBox}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: i * 0.05 }}
+                  viewport={{ once: true }}
+                >
+                  <div className={styles.avatarCircleWrap}>
+                    <div className={styles.avatarCircle}>
+                      <img src={member.img} alt={member.name} className={styles.avatarImg} />
+                    </div>
+                  </div>
+                  <h4 className={styles.memberName}>{member.name}</h4>
+                  {member.role && <div className={styles.memberRole}>{member.role}</div>}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Row 4: 4 Members */}
+            <div className={styles.devGridRow4}>
+              {DEV_ROW_4.map((member, i) => (
                 <motion.div
                   key={member.id}
                   className={styles.profileBox}

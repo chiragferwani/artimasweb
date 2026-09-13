@@ -267,7 +267,7 @@ export const EVENTS: Event[] = [
         mode: 'Online',
         date: '7 Sept 2026 - 27 Sept 2026',
         time: 'Problem release 11:00 AM (7 Sept); Submission window 26-27 Sept',
-        venue: 'Online / Google Drive',
+        venue: 'Online',
         description:
           'Teams submit an Idea PPT (fixed template) plus a GitHub-based prototype link and explanatory video via Google Drive. Evaluated on innovativeness, tech stack, UI/UX, GitHub maintenance, documentation, and social impact. Top 8 teams per track advance.',
       },
@@ -276,8 +276,8 @@ export const EVENTS: Event[] = [
         title: 'Round 2 (Offline) - Overnight Hackathon',
         mode: 'Offline',
         date: '10 Oct 2026 - 11 Oct 2026',
-        time: 'Kick-off 9:00 AM (10th) through Final Evaluation 11:00 AM (11th)',
-        venue: 'Main Auditorium / Innovation Lab',
+        time: '24 Hours (Overnight) — Kick-off 10th Oct',
+        venue: 'New Reading Hall',
         description:
           'All work done onsite overnight; teams submit a working prototype integrating AI/ML. One winner selected per domain.',
       },
@@ -305,8 +305,8 @@ export const EVENTS: Event[] = [
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1DXl-JMDclFmZ_76ap_zWgzcXygCGyWPu/view?usp=sharing',
     date: '7 Sept – 11 Oct 2026',
-    time: 'Kick-off 9:00 AM (10th) – 11:00 AM (11th)',
-    venue: 'Main Auditorium / Innovation Lab',
+    time: '24 Hours (Overnight)',
+    venue: 'New Reading Hall',
     mythTieIn:
       'In Kaliyuga, technology and code forge the modern battleground of creation. Hackmatrix challenges developers to engineer transformative AI solutions amidst digital chaos.',
     gitaShloka: {
@@ -341,7 +341,7 @@ export const EVENTS: Event[] = [
         mode: 'Online',
         date: '5th Oct 2026',
         time: 'Submission 12:00 PM - 11:59 PM; Results 8th Oct',
-        venue: 'Online Submission',
+        venue: 'Online',
         description:
           'Teams decode 5 pirate-themed riddles, integrate elements with SDG themes into an upgraded AI prompt, and generate an image. Judged on riddle accuracy, prompt quality, image quality, and creativity (100 pts). Top 10 teams qualify.',
       },
@@ -350,8 +350,8 @@ export const EVENTS: Event[] = [
         title: 'Round 2 - Prompt Relay Challenge (Offline)',
         mode: 'Offline',
         date: '10th Oct 2026',
-        time: '9:00 AM Reporting; Relay begins 10:00 AM; Submission 11:00 AM; Results 12:00 PM',
-        venue: 'Labs 6517, 6518, 6519',
+        time: '9:00 AM – 6:00 PM',
+        venue: '6517, 6518, 6519',
         description:
           '3 sequential roles (Observer, Interpreter, Finalizer) relay a description of an image verbally without notes to recreate it via an AI-generated final image, scored on accuracy to 15 target elements (75 pts) and prompt quality (25 pts). Top 6 teams qualify.',
       },
@@ -360,8 +360,8 @@ export const EVENTS: Event[] = [
         title: 'Round 3 - Prompt Duel: Decode, Bid, Generate (Offline)',
         mode: 'Offline',
         date: '10th Oct 2026',
-        time: '1:00 PM - 4:00 PM; Results 5:00 PM',
-        venue: 'Labs 6517, 6518, 6519',
+        time: '9:00 AM – 6:00 PM',
+        venue: '6517, 6518, 6519',
         description:
           'Head-to-head team duels: solve a puzzle, observe a reference image for 10-15 seconds, bid credits for advantages/disadvantages, then generate a prompt-based image from memory. Judged on puzzle solving, prompt quality, visual similarity, creativity, and bidding strategy.',
       },
@@ -387,8 +387,8 @@ export const EVENTS: Event[] = [
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1iQYh2uXFR0Mh9P05klQr1_NSLWVdj4Gw/view?usp=drive_link',
     date: '5th Oct – 10th Oct 2026',
-    time: '09:00 AM – 05:00 PM',
-    venue: 'Seminar Hall, Block A',
+    time: '09:00 AM – 06:00 PM',
+    venue: '6517, 6518, 6519',
     mythTieIn:
       'In Tretayuga, the power of the spoken word and unwavering duty guided legendary heroes. Prompt Relay tests communication and instinct to channel intelligence through words.',
     gitaShloka: {
@@ -421,9 +421,9 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1 - Online Design Aptitude Quiz',
         mode: 'Online',
-        date: '2nd Oct 2026',
-        time: '5:00 PM - 6:00 PM',
-        venue: 'Online Quiz Portal',
+        date: '4th Oct 2026',
+        time: '5:00 PM – 6:00 PM',
+        venue: 'Online',
         description:
           'Quiz on design principles, colour theory, branding, visual communication, and logical reasoning. One submission per team.',
       },
@@ -431,21 +431,21 @@ export const EVENTS: Event[] = [
         roundNumber: 2,
         title: 'Round 2 - Domain Selection & Video Presentation',
         mode: 'Online',
-        date: '3rd Oct – 6th Oct 2026',
-        time: 'Domain selection 9:00-11:00 AM (3rd Oct); Video due 6:00 PM (4th Oct); Shortlist 9:00 AM (6th Oct)',
-        venue: 'Online Submission',
+        date: '10th Oct 2026',
+        time: 'Online Evaluation & Shortlist',
+        venue: 'Online',
         description:
           'Teams pick a domain, research it, and submit a short video pitching a brand idea. Shortlisting is domain-wise.',
       },
       {
         roundNumber: 3,
-        title: 'Round 3 - 12-Hour Brand Building Challenge',
+        title: 'Round 3 - Brand Building Challenge & Pitch',
         mode: 'Offline',
         date: '11th Oct 2026',
-        time: '7:00 AM Reporting - 8:00 PM Event Ends',
-        venue: 'Old Reading Hall, PCCOE',
+        time: '9:00 AM – 7:00 PM',
+        venue: 'Old Reading Hall',
         description:
-          '8-hour development + 4-hour evaluation. Teams build a complete brand (logo, identity, campaign, pricing, growth plan) and deliver a Shark Tank-style final pitch.',
+          'Teams build a complete brand (logo, identity, campaign, pricing, growth plan) and deliver a Shark Tank-style final pitch.',
       },
     ],
     prizes: {
@@ -463,9 +463,9 @@ export const EVENTS: Event[] = [
       'Teams must continue with their Round 2 brand idea; organizers may give on-spot changes.',
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1RaOFfcGKPdt6mWXiOZvHeJCNkYPZbLzw/view?usp=sharing',
-    date: '2nd Oct – 11th Oct 2026',
-    time: '7:00 AM – 8:00 PM',
-    venue: 'Old Reading Hall / Block C',
+    date: '4th Oct – 11th Oct 2026',
+    time: '09:00 AM – 07:00 PM',
+    venue: 'Old Reading Hall',
     mythTieIn:
       'Just as the Vanar Sena constructed Ram Setu across the ocean, Setu Nirman challenges you to bridge vision and reality to build an enduring brand.',
     gitaShloka: {
@@ -498,9 +498,9 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1 (Online)',
         mode: 'Online',
-        date: '6th Oct – 8th Oct 2026',
-        time: 'Submission opens 6:00 PM (6th); closes 6:00 PM (8th)',
-        venue: 'Online (Kaggle)',
+        date: '6th Oct 2026',
+        time: 'Online Submission',
+        venue: 'Online',
         description:
           'Teams build ML models on provided training data and submit predictions on Test.csv via Kaggle; scored on public leaderboard. Max 3 submissions/day. Top 15 teams qualify.',
       },
@@ -509,8 +509,8 @@ export const EVENTS: Event[] = [
         title: 'Round 2 (Offline)',
         mode: 'Offline',
         date: '9th Oct 2026',
-        time: '9:00 AM Reporting - 5:00 PM Ends',
-        venue: 'Labs 6517, 6518, 6519',
+        time: '10:00 AM – 6:00 PM',
+        venue: '6517, 6518, 6519',
         description:
           'Onsite challenge with evolving datasets and surprise task twists; code must be written entirely onsite with no pre-built models.',
       },
@@ -531,8 +531,8 @@ export const EVENTS: Event[] = [
     ],
     rulebookUrl: 'https://drive.google.com/file/d/16Hffq-Jn3Q5RhPzedLmux5Km6E0u2q1U/view?usp=drive_link',
     date: '6th Oct – 9th Oct 2026',
-    time: '09:00 AM – 05:00 PM',
-    venue: 'Data Analytics Lab, Block D',
+    time: '10:00 AM – 06:00 PM',
+    venue: '6517, 6518, 6519',
     mythTieIn:
       'In Satyuga, knowledge and truth were pure and absolute. Datathon puts analytical precision to the test to unravel divine clarity and predictive wisdom from raw data.',
     gitaShloka: {
@@ -565,19 +565,19 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1 - LLM Jailbreak (Online)',
         mode: 'Online',
-        date: 'Saturday, 3rd Oct 2026',
-        time: '10:00 AM - 6:00 PM',
-        venue: 'Online Arena',
+        date: '10th Oct 2026',
+        time: 'Online Arena Challenge',
+        venue: 'Online',
         description:
-          'Teams craft prompts to extract a hidden key from RAG-based LLMs. Scored on speed and accuracy. Top 20 teams on the leaderboard qualify.',
+          'Teams craft prompts to extract a hidden key from RAG-based LLMs. Scored on speed and accuracy. Top 30 teams on the leaderboard qualify.',
       },
       {
         roundNumber: 2,
         title: 'Round 2 - Capture The Flag (Offline)',
         mode: 'Offline',
-        date: 'Sunday, 11th Oct 2026',
-        time: '9:00 AM Reporting - 5:00 PM Ends',
-        venue: 'Seminar Hall, 5th Floor Mech Building, PCCOE',
+        date: '11th Oct 2026',
+        time: '9:00 AM – 7:00 PM',
+        venue: 'Architecture Hall',
         description:
           '10 domains, each with 2-3 ordered sub-questions/flags covering cybersecurity concepts (logic, decoding, file/website analysis). Prize pool ₹15,000.',
       },
@@ -594,12 +594,12 @@ export const EVENTS: Event[] = [
       'Team size 2-4; team composition final after registration; participants must bring own laptops.',
       'Use of AI/LLM tools (ChatGPT, Gemini, Claude) is allowed in Round 1.',
       'Any attempt to manipulate results or bypass evaluation leads to immediate disqualification.',
-      "Only the top 20 teams from Round 1 qualify for Round 2; judges' decisions are final.",
+      "Only the top 30 teams from Round 1 qualify for Round 2; judges' decisions are final.",
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1K8EYvn9FTv9G3cB4R0GuIkzH08GuyG98/view?usp=drive_link',
-    date: '3rd Oct – 11th Oct 2026',
-    time: '10:00 AM – 05:00 PM',
-    venue: 'Seminar Hall, 5th Floor Mech Building',
+    date: '10th Oct – 11th Oct 2026',
+    time: '09:00 AM – 07:00 PM',
+    venue: 'Architecture Hall',
     mythTieIn:
       'Kurukshetra was the legendary battlefield of strategic warfare. In this digital Kurukshetra, offense and defense clash for supreme cyber victory.',
     gitaShloka: {
@@ -635,7 +635,7 @@ export const EVENTS: Event[] = [
         mode: 'Offline',
         date: '10th Oct 2026',
         time: '10:00 AM – 12:00 PM',
-        venue: 'Classroom, Block A',
+        venue: 'Classroom',
         description:
           'An offline aptitude test to assess participants’ analytical thinking, logical reasoning, and problem-solving abilities. The top 12 teams based on their performance will qualify for Round 2.',
       },
@@ -654,8 +654,8 @@ export const EVENTS: Event[] = [
         title: 'Final Escape',
         mode: 'Offline',
         date: '11th Oct 2026',
-        time: '10:00 AM – 3:00 PM (1 hour duration)',
-        venue: 'Rooms 6517, 6518, 6519',
+        time: '10:00 AM – 3:00 PM',
+        venue: '6517, 6518, 6519',
         description:
           'The final 3 teams enter 3 separate escape rooms, where teamwork, observation, and problem-solving will determine who escapes first. With a maximum of 1 hour to complete the challenge, the first team to successfully escape will claim victory and the cash prize.',
       },
@@ -676,8 +676,8 @@ export const EVENTS: Event[] = [
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1fUtDqHNsTI7lPxECRLO7gIcztDA4CpcY/view?usp=sharing',
     date: '10th Oct – 11th Oct 2026',
-    time: '10:00 AM – 03:00 PM',
-    venue: 'Auditorium / Rooms 6517–6519',
+    time: '10:00 AM – 06:00 PM (10th) | 10:00 AM – 03:00 PM (11th)',
+    venue: 'Classroom / Old Reading Hall / 6517–6519',
     mythTieIn:
       'The Chakravyuh was the legendary military labyrinth conceived in the Mahabharata war of Dwaparyuga. Houdini Heist tests your tactical intellect to decode the layers and escape the maze.',
     gitaShloka: {
@@ -705,15 +705,15 @@ export const EVENTS: Event[] = [
       'A real-life adaptation of the game Among Us testing knowledge, aptitude, logical reasoning, and teamwork across three escalating rounds.',
     teamSize: 'Individual only',
     registrationFee: '₹80',
-    numberOfRounds: 3,
+    numberOfRounds: 2,
     rounds: [
       {
         roundNumber: 1,
         title: 'Round 1',
         mode: 'Offline',
         date: '9th Oct 2026',
-        time: '11:00 AM',
-        venue: 'Classroom, Block A',
+        time: '11:00 AM – 1:00 PM',
+        venue: 'Classroom',
         description:
           'Individual test of general awareness, aptitude, and logical/technical reasoning. 1 mark per question. Top 16 advance.',
       },
@@ -722,20 +722,10 @@ export const EVENTS: Event[] = [
         title: 'Round 2',
         mode: 'Offline',
         date: '9th Oct 2026',
-        time: '1:00 PM',
+        time: '2:00 PM – 6:00 PM',
         venue: 'Old Reading Hall',
         description:
-          '16 players randomly split into 4 teams of 4. Teams play a Surprise Round elimination bracket; top 2 teams (8 players) advance.',
-      },
-      {
-        roundNumber: 3,
-        title: 'Round 3 (Final)',
-        mode: 'Offline',
-        date: '9th Oct 2026',
-        time: '3:00 PM (1 hour duration)',
-        venue: 'Main Stage / Open Air Theatre',
-        description:
-          '8 finalists play individually with randomly assigned roles (Sheriff, Crewmates, Impostors). Impostors win by eliminating all others; Crewmates/Sheriff win by voting out impostors or completing tasks.',
+          '16 players randomly split into 4 teams of 4. Teams play a Surprise Round elimination bracket and social deduction finale to unmask the impostors.',
       },
     ],
     prizes: {
@@ -754,8 +744,8 @@ export const EVENTS: Event[] = [
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1vHn59xGK2iUGwnBQu6L-mn7-HB_LCnLF/view?usp=drive_link',
     date: '9th Oct 2026',
-    time: '11:00 AM – 04:00 PM',
-    venue: 'Main Stage / Open Air Theatre',
+    time: '11:00 AM – 06:00 PM',
+    venue: 'Classroom / Old Reading Hall',
     mythTieIn:
       'Kalyug is marked by illusion (Maya) and deception. Mayavi tests your perception to distinguish truth from deceit in an era of shadows.',
     gitaShloka: {

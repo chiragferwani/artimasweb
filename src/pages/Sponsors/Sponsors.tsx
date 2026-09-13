@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Utensils, Cookie } from 'lucide-react';
+import { Crown, Cpu, Utensils, Cookie } from 'lucide-react';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { SwastikChakra } from '../../components/SwastikChakra/SwastikChakra';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Sponsors.module.css';
 
-const shivaVideo = getCloudinaryUrl('src/assets/shiva.mp4');
+const bgVideo = getCloudinaryUrl('src/assets/BG.mp4');
 
 interface SponsorItem {
   alt: string;
@@ -23,13 +23,24 @@ interface SponsorTier {
 
 const sponsorTiers: SponsorTier[] = [
   {
-    id: 'technical',
-    title: 'Technical Sponsors',
-    icon: <Cpu size={16} className={styles.tierIcon} />,
+    id: 'title',
+    title: 'Title Sponsor',
+    icon: <Crown size={16} className={styles.tierIcon} />,
     sponsors: [
       {
         alt: 'Thynqit',
         logo: getCloudinaryUrl('src/assets/sponsors/Thynqit White Wordmark Logo.png'),
+      },
+    ],
+  },
+  {
+    id: 'technical',
+    title: 'Technical Sponsor',
+    icon: <Cpu size={16} className={styles.tierIcon} />,
+    sponsors: [
+      {
+        alt: 'Hematite',
+        logo: getCloudinaryUrl('src/assets/sponsors/hematite.png'),
       },
     ],
   },
@@ -45,6 +56,10 @@ const sponsorTiers: SponsorTier[] = [
       {
         alt: 'Smoked Taxi',
         logo: getCloudinaryUrl('src/assets/sponsors/smoked_taxi_food.jpeg'),
+      },
+      {
+        alt: 'Food Sponsor',
+        logo: getCloudinaryUrl('src/assets/sponsors/foodspons.png'),
       },
     ],
   },
@@ -106,10 +121,11 @@ const Sponsors: React.FC = () => {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
-            {/* Background Video (stops on end screen) */}
+            {/* Background Video */}
             <video
-              src={shivaVideo}
+              src={bgVideo}
               autoPlay
+              loop
               muted
               playsInline
               className={styles.vaultVideoBg}
@@ -154,23 +170,38 @@ const Sponsors: React.FC = () => {
 
                     {/* Sponsor Logos Grid */}
                     <div className={styles.sponsorGrid}>
-                      {tier.sponsors.map((sponsor, idx) => (
-                        <motion.div
-                          key={sponsor.alt + idx}
-                          className={`${styles.logoCard} ${
-                            sponsor.alt === 'Thynqit' ? styles.wordmarkCard : styles.imageCard
-                          } ${tier.id === 'food' ? styles.foodLogoCard : ''}`}
-                          whileHover={{ y: -5, scale: 1.03 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <img
-                            src={sponsor.logo}
-                            alt={sponsor.alt}
-                            className={styles.sponsorLogo}
-                            loading="lazy"
-                          />
-                        </motion.div>
-                      ))}
+                      {tier.sponsors.map((sponsor, idx) => {
+                        const isThynqit = sponsor.alt === 'Thynqit';
+                        const isHematite = sponsor.alt === 'Hematite';
+                        const isFoodSpons = sponsor.alt === 'Food Sponsor' || sponsor.logo.includes('foodspons');
+
+                        let cardClass = styles.imageCard;
+                        if (isThynqit) {
+                          cardClass = styles.wordmarkCard;
+                        } else if (isHematite) {
+                          cardClass = styles.technicalCard;
+                        } else if (isFoodSpons) {
+                          cardClass = styles.whiteBoxCard;
+                        } else if (tier.id === 'food') {
+                          cardClass = `${styles.imageCard} ${styles.foodLogoCard}`;
+                        }
+
+                        return (
+                          <motion.div
+                            key={sponsor.alt + idx}
+                            className={`${styles.logoCard} ${cardClass}`}
+                            whileHover={{ y: -5, scale: 1.03 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <img
+                              src={sponsor.logo}
+                              alt={sponsor.alt}
+                              className={styles.sponsorLogo}
+                              loading="lazy"
+                            />
+                          </motion.div>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}

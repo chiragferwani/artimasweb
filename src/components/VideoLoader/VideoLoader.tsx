@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SkipForward } from 'lucide-react';
 import startAssetPreloading from '../../utils/preloadAssets';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './VideoLoader.module.css';
@@ -137,6 +138,26 @@ const VideoLoader: React.FC<VideoLoaderProps> = ({
                 </svg>
                 <span className={styles.percentText}>{preloadPercent}%</span>
               </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Skip Button (Appears in bottom right once loading 0 to 100 is done) */}
+          <AnimatePresence>
+            {preloadPercent >= 100 && (
+              <motion.button
+                type="button"
+                className={styles.skipBtn}
+                onClick={handleEnded}
+                initial={{ opacity: 0, scale: 0.85, y: 6 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: 6 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                title="Skip Intro"
+                aria-label="Skip Intro"
+              >
+                <span className={styles.skipText}>Skip</span>
+                <SkipForward size={15} className={styles.skipIcon} />
+              </motion.button>
             )}
           </AnimatePresence>
         </motion.div>

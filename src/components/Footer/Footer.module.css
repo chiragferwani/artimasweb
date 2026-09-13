@@ -166,16 +166,27 @@
   flex-wrap: wrap;
 }
 
-.devLink {
-  color: var(--color-orange-light, #FF7733);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 0.2s ease;
+.cfLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-right: 4px;
+  vertical-align: middle;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.devLink:hover {
-  color: #FFFFFF;
+.cfLink:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.cfIcon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  display: block;
 }
 
 .logoMark {

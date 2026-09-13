@@ -10,6 +10,7 @@ const ieeecisLogo = getCloudinaryUrl('src/assets/clubs/ieeecis.png');
 const ieeecsLogo = getCloudinaryUrl('src/assets/clubs/ieeecs.png');
 const innsLogo = getCloudinaryUrl('src/assets/clubs/inns.png');
 const logoImg = getCloudinaryUrl('src/assets/logo.png');
+const cfLogo = getCloudinaryUrl('src/assets/cf.png');
 import styles from './Footer.module.css';
 
 const CLUB_LOGOS = [
@@ -175,15 +176,16 @@ const Footer: React.FC = () => {
         {/* Bottom bar */}
         <div className={styles.bottomBar}>
           <span className={styles.copyright}>
-            © 2026 AiMSA · Department of CSE (AI &amp; ML), PCCOE · Artimas 26-27 · All rights reserved. ·{' '}
             <a
               href="https://chiragferwani.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.devLink}
+              className={styles.cfLink}
+              title="Chirag Ferwani"
             >
-              chiragferwani
+              <img src={cfLogo} alt="CF" className={styles.cfIcon} />
             </a>
+            2026 AiMSA · Department of CSE (AI &amp; ML), PCCOE · Artimas 26-27 · All rights reserved.
           </span>
           <div className={styles.logoMark}>
             <img src={logoImg} alt="Artimas" className={styles.logoImg} />
