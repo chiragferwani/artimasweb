@@ -419,33 +419,33 @@ export const EVENTS: Event[] = [
     rounds: [
       {
         roundNumber: 1,
-        title: 'Round 1 - Online Design Aptitude Quiz',
+        title: 'Round 1 — Design Aptitude Test',
         mode: 'Online',
         date: '4th Oct 2026',
         time: '5:00 PM – 6:00 PM',
         venue: 'Online',
         description:
-          'Quiz on design principles, colour theory, branding, visual communication, and logical reasoning. One submission per team.',
+          'Test your design fundamentals, creativity & visual reasoning.',
       },
       {
         roundNumber: 2,
-        title: 'Round 2 - Domain Selection & Video Presentation',
+        title: 'Round 2 — Research Video Submission',
         mode: 'Online',
         date: '10th Oct 2026',
         time: 'Online Evaluation & Shortlist',
         venue: 'Online',
         description:
-          'Teams pick a domain, research it, and submit a short video pitching a brand idea. Shortlisting is domain-wise.',
+          'Based on the selected problem statement, submit a research video with relevant insights and analysis.',
       },
       {
         roundNumber: 3,
-        title: 'Round 3 - Brand Building Challenge & Pitch',
+        title: 'Round 3 — Brand Building Challenge',
         mode: 'Offline',
         date: '11th Oct 2026',
         time: '9:00 AM – 7:00 PM',
         venue: 'Old Reading Hall',
         description:
-          'Teams build a complete brand (logo, identity, campaign, pricing, growth plan) and deliver a final pitch.',
+          'Based on the selected problem statement and its product/service, build and present a complete brand identity.',
       },
     ],
     prizes: {
