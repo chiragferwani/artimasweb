@@ -410,9 +410,9 @@ export const EVENTS: Event[] = [
     yuga: 'treta',
     tagline: 'Bridge ideas into iconic brands',
     description:
-      'A three-round branding and design competition testing design aptitude, brand strategy research, and a 12-hour brand-building challenge culminating in a Shark Tank-style pitch.',
+      'Brandathon is a 3-round branding challenge testing design, research, strategy, and creativity. Participants begin with a Design Aptitude Test, followed by a research video submission on the given domain. The final round challenges teams to brand a given brand through strategy and visual identity, based on a problem statement.',
     about:
-      'A three-round branding and design competition testing design aptitude, brand strategy research, and a 12-hour brand-building challenge culminating in a Shark Tank-style pitch.',
+      'Brandathon is a 3-round branding challenge testing design, research, strategy, and creativity. Participants begin with a Design Aptitude Test, followed by a research video submission on the given domain. The final round challenges teams to brand a given brand through strategy and visual identity, based on a problem statement.',
     teamSize: 'Teams of 2-4 members',
     registrationFee: '₹100 per team',
     numberOfRounds: 3,
@@ -445,7 +445,7 @@ export const EVENTS: Event[] = [
         time: '9:00 AM – 7:00 PM',
         venue: 'Old Reading Hall',
         description:
-          'Teams build a complete brand (logo, identity, campaign, pricing, growth plan) and deliver a Shark Tank-style final pitch.',
+          'Teams build a complete brand (logo, identity, campaign, pricing, growth plan) and deliver a final pitch.',
       },
     ],
     prizes: {
@@ -565,7 +565,7 @@ export const EVENTS: Event[] = [
         roundNumber: 1,
         title: 'Round 1 - LLM Jailbreak (Online)',
         mode: 'Online',
-        date: '10th Oct 2026',
+        date: '3rd Oct 2026',
         time: 'Online Arena Challenge',
         venue: 'Online',
         description:
@@ -597,7 +597,7 @@ export const EVENTS: Event[] = [
       "Only the top 30 teams from Round 1 qualify for Round 2; judges' decisions are final.",
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1K8EYvn9FTv9G3cB4R0GuIkzH08GuyG98/view?usp=drive_link',
-    date: '10th Oct – 11th Oct 2026',
+    date: '3rd Oct – 11th Oct 2026',
     time: '09:00 AM – 07:00 PM',
     venue: 'Architecture Hall',
     mythTieIn:

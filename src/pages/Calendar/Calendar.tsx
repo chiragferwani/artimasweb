@@ -153,7 +153,7 @@ const SCHEDULE: ScheduleItem[] = [
     date: 'Oct 11, 2026',
     timeSlot: '09:00 AM – 07:00 PM',
     venue: 'Old Reading Hall',
-    description: 'Brandathon building brand identity, marketing strategy, and shark tank pitch.',
+    description: 'Brandathon building brand identity, marketing strategy, and final pitch.',
   },
   {
     id: 's-kurukshetra',
