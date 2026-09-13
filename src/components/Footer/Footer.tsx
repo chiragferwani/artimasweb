@@ -116,8 +116,8 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="mailto:pccoeaimsa2022@gmail.com" className={styles.footerLink}>
-                  <Mail size={14} /> pccoeaimsa2022@gmail.com
+                <a href="mailto:artimaspccoe@gmail.com" className={styles.footerLink}>
+                  <Mail size={14} /> artimaspccoe@gmail.com
                 </a>
               </li>
               <li style={{ marginTop: '6px' }}>

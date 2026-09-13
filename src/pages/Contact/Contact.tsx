@@ -330,11 +330,11 @@ const Contact: React.FC = () => {
               <div className={styles.infoCard}>
                 <h3 className={styles.infoTitle}>Direct Contact</h3>
                 <div className={styles.contactList}>
-                  <a href="mailto:pccoeaimsa2022@gmail.com" className={styles.contactItem}>
+                  <a href="mailto:artimaspccoe@gmail.com" className={styles.contactItem}>
                     <div className={styles.contactIcon}><Mail size={18} /></div>
                     <div>
                       <div className={styles.contactLabel}>Email</div>
-                      <div className={styles.contactValue}>pccoeaimsa2022@gmail.com</div>
+                      <div className={styles.contactValue}>artimaspccoe@gmail.com</div>
                     </div>
                   </a>
                   <a href="tel:+919422001054" className={styles.contactItem}>
