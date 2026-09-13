@@ -713,15 +713,87 @@
 
 @media (max-width: 768px) {
   .multiPrizeGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px 12px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .rank2 {
+    order: 1;
+    flex: 0 1 calc(33.333% - 10px);
+    max-width: 160px;
+  }
+
+  .rank1 {
+    order: 2;
+    flex: 0 1 calc(33.333% - 10px);
+    max-width: 180px;
+  }
+
+  .rank3 {
+    order: 3;
+    flex: 0 1 calc(33.333% - 10px);
+    max-width: 160px;
+  }
+
+  .rank4 {
+    order: 4;
+    flex: 0 1 calc(45% - 10px);
+    max-width: 155px;
+  }
+
+  .rank5 {
+    order: 5;
+    flex: 0 1 calc(45% - 10px);
+    max-width: 155px;
   }
 }
 
 @media (max-width: 480px) {
   .multiPrizeGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 12px 6px;
+    max-width: 380px;
+  }
+
+  .rank2,
+  .rank3 {
+    flex: 0 1 calc(33.333% - 6px);
+    max-width: 110px;
+  }
+
+  .rank1 {
+    flex: 0 1 calc(33.333% - 6px);
+    max-width: 125px;
+  }
+
+  .rank4,
+  .rank5 {
+    flex: 0 1 calc(46% - 6px);
+    max-width: 140px;
+  }
+
+  .multiPrizeGrid .prizeRankValue {
+    font-size: clamp(14px, 4.2vw, 18px);
+  }
+
+  .multiPrizeGrid .goldenPrizeItem .prizeRankValue {
+    font-size: clamp(16px, 4.8vw, 22px);
+  }
+
+  .multiPrizeGrid .prizeRankLabel {
+    font-size: 9px;
+  }
+
+  .multiPrizeGrid .prizeCardBadge {
+    margin-bottom: -14px;
+  }
+
+  .multiPrizeGrid .goldenPrizeItem .prizeCardBadge {
+    margin-bottom: -16px;
   }
 }
 

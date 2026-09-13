@@ -402,8 +402,15 @@ const EventDetail: React.FC = () => {
                           ? silverImg
                           : bronzeImg;
 
+                      const rankOrderClass =
+                        prize.label.includes('1st') ? styles.rank1
+                        : prize.label.includes('2nd') ? styles.rank2
+                        : prize.label.includes('3rd') ? styles.rank3
+                        : prize.label.includes('4th') ? styles.rank4
+                        : styles.rank5;
+
                       return (
-                        <div key={pIdx} className={`${styles.prizeItem} ${itemClass}`}>
+                        <div key={pIdx} className={`${styles.prizeItem} ${itemClass} ${rankOrderClass}`}>
                           <div className={styles.prizeCardBadge}>
                             <span className={styles.prizeRankLabel}>{prize.label}</span>
                             <span className={styles.prizeRankValue}>{prize.amount}</span>
