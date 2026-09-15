@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Crown, Cpu, Utensils, Cookie } from 'lucide-react';
+import { Crown, Gem, Cpu, Handshake, Megaphone, Utensils, Cookie, Popcorn } from 'lucide-react';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { SwastikChakra } from '../../components/SwastikChakra/SwastikChakra';
 import getCloudinaryUrl from '../../utils/cloudinary';
@@ -34,6 +34,17 @@ const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
+    id: 'diamond',
+    title: 'Diamond Sponsor',
+    icon: <Gem size={16} className={styles.tierIcon} />,
+    sponsors: [
+      {
+        alt: 'RMSS - Angel One',
+        logo: getCloudinaryUrl('src/assets/sponsors/angleone.png'),
+      },
+    ],
+  },
+  {
     id: 'technical',
     title: 'Technical Sponsor',
     icon: <Cpu size={16} className={styles.tierIcon} />,
@@ -45,20 +56,50 @@ const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
+    id: 'associate',
+    title: 'Associate Sponsor',
+    icon: <Handshake size={16} className={styles.tierIcon} />,
+    sponsors: [
+      {
+        alt: 'Mad Over Donuts',
+        logo: getCloudinaryUrl('src/assets/sponsors/mod.jpeg'),
+      },
+    ],
+  },
+  {
+    id: 'branding',
+    title: 'Branding & Promotions Partner',
+    icon: <Megaphone size={16} className={styles.tierIcon} />,
+    sponsors: [
+      {
+        alt: 'Gorodok',
+        logo: getCloudinaryUrl('src/assets/sponsors/gorodok.png'),
+      },
+    ],
+  },
+  {
     id: 'food',
     title: 'Food Sponsors',
     icon: <Utensils size={16} className={styles.tierIcon} />,
     sponsors: [
       {
+        alt: 'Cha Time',
+        logo: getCloudinaryUrl('src/assets/sponsors/chatime.jpeg'),
+      },
+      {
+        alt: 'Taco Bell',
+        logo: getCloudinaryUrl('src/assets/sponsors/tacobell.webp'),
+      },
+      {
         alt: 'MyFroyoLand',
         logo: getCloudinaryUrl('src/assets/sponsors/MyFroyoLand_Food.jpeg'),
       },
       {
-        alt: 'Smoked Taxi',
+        alt: 'Smoked BBQ Taxi',
         logo: getCloudinaryUrl('src/assets/sponsors/smoked_taxi_food.jpeg'),
       },
       {
-        alt: 'Food Sponsor',
+        alt: 'The Blends & Brewers Coffee Co. (TBB)',
         logo: getCloudinaryUrl('src/assets/sponsors/foodspons.png'),
       },
     ],
@@ -69,7 +110,7 @@ const sponsorTiers: SponsorTier[] = [
     icon: <Cookie size={16} className={styles.tierIcon} />,
     sponsors: [
       {
-        alt: 'Cookie Sponsor',
+        alt: 'Cookie Man',
         logo: getCloudinaryUrl('src/assets/sponsors/Cookie Sponsor.jpg'),
       },
     ],
@@ -77,7 +118,7 @@ const sponsorTiers: SponsorTier[] = [
   {
     id: 'munching',
     title: 'Munching Partners',
-    icon: <Cookie size={16} className={styles.tierIcon} />,
+    icon: <Popcorn size={16} className={styles.tierIcon} />,
     sponsors: [
       {
         alt: 'Balaji Wafers',
@@ -156,7 +197,7 @@ const Sponsors: React.FC = () => {
                 Honoring the alliances powering technology, dining, and hospitality across the cosmic spectrum.
               </p>
 
-              {/* 3 Tier Groups Inside the Single Block */}
+              {/* Sponsor Tier Groups */}
               <div className={styles.tiersContainer}>
                 {sponsorTiers.map((tier) => (
                   <div key={tier.id} className={styles.tierBlock}>
@@ -169,21 +210,44 @@ const Sponsors: React.FC = () => {
                     </div>
 
                     {/* Sponsor Logos Grid */}
-                    <div className={styles.sponsorGrid}>
+                    <div className={`${styles.sponsorGrid} ${tier.id === 'food' ? styles.foodGrid : ''}`}>
                       {tier.sponsors.map((sponsor, idx) => {
                         const isThynqit = sponsor.alt === 'Thynqit';
+                        const isDiamond = tier.id === 'diamond';
                         const isHematite = sponsor.alt === 'Hematite';
-                        const isFoodSpons = sponsor.alt === 'Food Sponsor' || sponsor.logo.includes('foodspons');
+                        const isAssociate = tier.id === 'associate';
+                        const isBranding = tier.id === 'branding';
+                        const isWhiteBox =
+                          sponsor.alt.includes('Blends & Brewers') ||
+                          sponsor.logo.includes('foodspons') ||
+                          sponsor.alt === 'Taco Bell' ||
+                          sponsor.logo.includes('tacobell') ||
+                          sponsor.alt === 'MyFroyoLand' ||
+                          sponsor.logo.includes('MyFroyoLand') ||
+                          sponsor.alt === 'Cha Time' ||
+                          sponsor.logo.includes('chatime') ||
+                          sponsor.alt === 'Cookie Man' ||
+                          sponsor.logo.includes('Cookie');
 
                         let cardClass = styles.imageCard;
                         if (isThynqit) {
                           cardClass = styles.wordmarkCard;
+                        } else if (isDiamond) {
+                          cardClass = styles.diamondCard;
                         } else if (isHematite) {
                           cardClass = styles.technicalCard;
-                        } else if (isFoodSpons) {
-                          cardClass = styles.whiteBoxCard;
+                        } else if (isAssociate) {
+                          cardClass = styles.associateCard;
+                        } else if (isBranding) {
+                          cardClass = styles.brandingCard;
                         } else if (tier.id === 'food') {
-                          cardClass = `${styles.imageCard} ${styles.foodLogoCard}`;
+                          cardClass = isWhiteBox
+                            ? `${styles.whiteBoxCard} ${styles.foodLogoCard}`
+                            : `${styles.imageCard} ${styles.foodLogoCard}`;
+                        } else if (isWhiteBox) {
+                          cardClass = styles.whiteBoxCard;
+                        } else if (tier.id === 'cookie' || tier.id === 'munching') {
+                          cardClass = `${styles.imageCard} ${styles.munchingLogoCard}`;
                         }
 
                         return (

@@ -175,9 +175,9 @@
 .tiersContainer {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 42px;
   width: 100%;
-  max-width: 920px;
+  max-width: 1140px;
   margin: 0 auto 12px;
 }
 
@@ -189,21 +189,21 @@
 }
 
 .tierHeader {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .tierBadge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 18px;
+  padding: 7px 20px;
   border-radius: 999px;
   background: rgba(245, 215, 110, 0.08);
   border: 1px solid rgba(245, 215, 110, 0.25);
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.1px;
   text-transform: uppercase;
   color: #F5D76E;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -217,16 +217,27 @@
 .sponsorGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 28px;
+  gap: 26px;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
 
+/* Food Sponsors: Exactly One Line on Desktop */
+.foodGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
 /* Logo Card Container */
 .logoCard {
   position: relative;
-  border-radius: 20px;
+  border-radius: 22px;
   overflow: hidden;
   border: 1.5px solid rgba(245, 215, 110, 0.3);
   backdrop-filter: blur(12px);
@@ -237,6 +248,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .imageCard {
@@ -246,35 +258,74 @@
 }
 
 .imageCard .sponsorLogo {
-  height: 120px;
+  height: 130px;
   width: auto;
-  max-width: min(88vw, 300px);
+  max-width: min(88vw, 320px);
   object-fit: contain;
   display: block;
-  border-radius: 18px;
+  border-radius: 20px;
 }
 
-/* Enhanced Food Sponsor Logo Size */
+/* Food Sponsor Specific Cards (160x160px on Desktop) */
+.foodLogoCard {
+  width: 160px;
+  height: 160px;
+  flex: 0 0 160px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+}
+
+.foodLogoCard.imageCard {
+  padding: 0;
+  background: transparent;
+}
+
 .foodLogoCard.imageCard .sponsorLogo {
-  height: 165px;
-  max-width: min(90vw, 360px);
+  width: 100%;
+  height: 100%;
+  max-width: 160px;
+  max-height: 160px;
+  object-fit: contain;
+  display: block;
   border-radius: 20px;
+}
+
+.foodLogoCard.whiteBoxCard {
+  background: #FFFFFF;
+  padding: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 255, 255, 0.12);
+}
+
+.foodLogoCard.whiteBoxCard .sponsorLogo {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
 }
 
 .wordmarkCard {
   background: rgba(255, 255, 255, 0.06);
-  padding: 24px 48px;
+  padding: 24px 56px;
   height: auto;
   min-height: 120px;
   border: 1.5px solid rgba(245, 215, 110, 0.45);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 25px rgba(245, 215, 110, 0.15);
-  border-radius: 22px;
+  border-radius: 24px;
 }
 
 .wordmarkCard .sponsorLogo {
-  height: 92px;
+  height: 95px;
   width: auto;
-  max-width: min(88vw, 440px);
+  max-width: min(88vw, 460px);
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 4px 18px rgba(245, 215, 110, 0.5));
@@ -285,7 +336,7 @@
   background: transparent;
   padding: 0;
   border: 1.5px solid rgba(245, 215, 110, 0.35);
-  border-radius: 20px;
+  border-radius: 22px;
   overflow: hidden;
 }
 
@@ -295,26 +346,86 @@
   max-width: min(90vw, 360px);
   object-fit: contain;
   display: block;
-  border-radius: 18px;
+  border-radius: 20px;
 }
 
-/* White Box Card (for logos needing solid white container background like Food Sponsor) */
+/* White Box Card (for logos needing solid white container background) */
 .whiteBoxCard {
   background: #FFFFFF;
-  padding: 12px 20px;
+  padding: 14px 24px;
   border: 1.5px solid rgba(245, 215, 110, 0.45);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
   overflow: hidden;
 }
 
 .whiteBoxCard .sponsorLogo {
-  height: 155px;
+  height: 145px;
   width: auto;
   max-width: min(90vw, 340px);
   object-fit: contain;
   display: block;
   border-radius: 12px;
+}
+
+/* Diamond Sponsor Card */
+.diamondCard {
+  background: #FFFFFF;
+  padding: 14px 32px;
+  border: 1.5px solid rgba(245, 215, 110, 0.45);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 25px rgba(245, 215, 110, 0.15);
+  border-radius: 24px;
+}
+
+.diamondCard .sponsorLogo {
+  height: 125px;
+  width: auto;
+  max-width: min(88vw, 380px);
+  object-fit: contain;
+  display: block;
+}
+
+/* Associate Sponsor Card */
+.associateCard {
+  background: transparent;
+  padding: 0;
+  border: 1.5px solid rgba(245, 215, 110, 0.35);
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.associateCard .sponsorLogo {
+  height: 165px;
+  width: auto;
+  max-width: min(90vw, 380px);
+  object-fit: contain;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Branding Partner Card */
+.brandingCard {
+  background: transparent;
+  padding: 0;
+  border: 1.5px solid rgba(245, 215, 110, 0.35);
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.brandingCard .sponsorLogo {
+  height: 125px;
+  width: auto;
+  max-width: min(90vw, 380px);
+  object-fit: contain;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Munching Partner Logo Card */
+.munchingLogoCard.imageCard .sponsorLogo {
+  height: 145px;
+  max-width: min(88vw, 320px);
+  border-radius: 20px;
 }
 
 .logoCard:hover {
@@ -327,37 +438,133 @@
 }
 
 /* ══════════ RESPONSIVE ══════════ */
+@media (max-width: 960px) {
+  .foodGrid {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .main { padding-top: 72px; }
   .pageHeader { padding: 24px 0 20px; }
   .vaultSection { padding: 10px 0 48px; }
-  .vaultCard { padding: 36px 20px; border-radius: 24px; }
+  .vaultCard { padding: 32px 16px; border-radius: 24px; }
   .tiersContainer { gap: 32px; margin-bottom: 0; }
-  .imageCard .sponsorLogo { height: 100px; border-radius: 15px; }
-  .foodLogoCard.imageCard .sponsorLogo { height: 135px; border-radius: 16px; }
-  .wordmarkCard { height: auto; min-height: 90px; padding: 18px 32px; border-radius: 18px; }
-  .wordmarkCard .sponsorLogo { height: 72px; max-width: min(88vw, 340px); }
-  .technicalCard { border-radius: 16px; }
-  .technicalCard .sponsorLogo { height: 125px; border-radius: 15px; }
-  .whiteBoxCard { padding: 10px 16px; border-radius: 16px; }
-  .whiteBoxCard .sponsorLogo { height: 125px; }
+  .sponsorGrid { gap: 18px; }
+
+  .foodGrid {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .foodLogoCard {
+    width: 110px;
+    height: 110px;
+    flex: 0 0 110px;
+    border-radius: 18px;
+  }
+
+  .foodLogoCard.imageCard .sponsorLogo {
+    max-width: 110px;
+    max-height: 110px;
+    border-radius: 16px;
+  }
+
+  .foodLogoCard.whiteBoxCard {
+    padding: 10px;
+    border-radius: 18px;
+  }
+
+  .imageCard .sponsorLogo { height: 105px; border-radius: 16px; }
+  .munchingLogoCard.imageCard .sponsorLogo { height: 115px; border-radius: 16px; }
+  
+  .wordmarkCard { height: auto; min-height: 85px; padding: 18px 30px; border-radius: 20px; }
+  .wordmarkCard .sponsorLogo { height: 68px; max-width: min(88vw, 340px); }
+  
+  .diamondCard { padding: 10px 20px; border-radius: 20px; }
+  .diamondCard .sponsorLogo { height: 95px; max-width: min(88vw, 310px); }
+  
+  .associateCard { border-radius: 18px; }
+  .associateCard .sponsorLogo { height: 125px; border-radius: 16px; }
+
+  .brandingCard { border-radius: 18px; }
+  .brandingCard .sponsorLogo { height: 95px; border-radius: 16px; }
+  
+  .technicalCard { border-radius: 18px; }
+  .technicalCard .sponsorLogo { height: 120px; border-radius: 16px; }
+  
+  .whiteBoxCard { padding: 12px 18px; border-radius: 18px; }
+  .whiteBoxCard .sponsorLogo { height: 120px; }
 }
 
 @media (max-width: 480px) {
-  .pageTitle { font-size: clamp(28px, 8vw, 38px); }
-  .pageSubtitle { font-size: 14px; line-height: 22px; margin-bottom: 12px; }
-  .vaultGlow { width: 240px; height: 160px; top: -80px; }
-  .revealTitle { font-size: clamp(24px, 7vw, 36px); }
-  .revealDescription { font-size: 14px; line-height: 22px; margin-bottom: 28px; }
-  .tierBadge { font-size: 11px; padding: 5px 14px; }
-  .imageCard .sponsorLogo { height: 85px; border-radius: 14px; }
-  .foodLogoCard.imageCard .sponsorLogo { height: 110px; border-radius: 14px; }
-  .wordmarkCard { height: auto; min-height: 75px; padding: 14px 22px; border-radius: 16px; }
-  .wordmarkCard .sponsorLogo { height: 56px; max-width: min(88vw, 280px); }
-  .technicalCard { border-radius: 14px; }
-  .technicalCard .sponsorLogo { height: 100px; border-radius: 12px; }
-  .whiteBoxCard { padding: 8px 12px; border-radius: 14px; }
-  .whiteBoxCard .sponsorLogo { height: 100px; }
+  .main { padding-top: 64px; }
+  .pageHeader { padding: 16px 0 12px; }
+  .pageTitle { font-size: clamp(26px, 8vw, 34px); margin-bottom: 10px; }
+  .pageSubtitle { font-size: 13px; line-height: 20px; margin-bottom: 10px; padding: 0 8px; }
+  
+  .vaultSection { padding: 6px 0 36px; }
+  .vaultCard { padding: 24px 12px; border-radius: 18px; }
+  .vaultGlow { width: 220px; height: 140px; top: -70px; }
+  
+  .liveTicker { padding: 4px 12px; margin-bottom: 16px; gap: 6px; }
+  .tickerText { font-size: 9.5px; letter-spacing: 1px; }
+  
+  .chakraWrap { max-width: 180px; margin: -6px auto 6px; }
+  
+  .revealTitle { font-size: clamp(22px, 7vw, 32px); margin-bottom: 8px; }
+  .revealDescription { font-size: 13px; line-height: 19px; margin-bottom: 24px; padding: 0 4px; }
+  
+  .tiersContainer { gap: 26px; }
+  .tierHeader { margin-bottom: 14px; }
+  .tierBadge { font-size: 10.5px; padding: 4px 12px; gap: 6px; }
+  
+  .sponsorGrid { gap: 12px; }
+  
+  .foodGrid {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .foodLogoCard {
+    width: 88px;
+    height: 88px;
+    flex: 0 0 88px;
+    border-radius: 14px;
+  }
+
+  .foodLogoCard.imageCard .sponsorLogo {
+    max-width: 88px;
+    max-height: 88px;
+    border-radius: 12px;
+  }
+
+  .foodLogoCard.whiteBoxCard {
+    padding: 8px;
+    border-radius: 14px;
+  }
+
+  .imageCard .sponsorLogo { height: 80px; border-radius: 12px; }
+  .munchingLogoCard.imageCard .sponsorLogo { height: 90px; border-radius: 12px; }
+  
+  .wordmarkCard { height: auto; min-height: 65px; padding: 12px 20px; border-radius: 16px; }
+  .wordmarkCard .sponsorLogo { height: 48px; max-width: min(88vw, 260px); }
+  
+  .diamondCard { padding: 8px 14px; border-radius: 16px; }
+  .diamondCard .sponsorLogo { height: 68px; max-width: min(88vw, 250px); }
+  
+  .associateCard { border-radius: 16px; }
+  .associateCard .sponsorLogo { height: 95px; border-radius: 14px; }
+
+  .brandingCard { border-radius: 16px; }
+  .brandingCard .sponsorLogo { height: 68px; border-radius: 12px; }
+  
+  .technicalCard { border-radius: 16px; }
+  .technicalCard .sponsorLogo { height: 88px; border-radius: 12px; }
+  
+  .whiteBoxCard { padding: 8px 14px; border-radius: 16px; }
+  .whiteBoxCard .sponsorLogo { height: 88px; }
 }
 
 
