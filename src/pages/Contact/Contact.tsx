@@ -1,31 +1,35 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Send, MapPin, Globe } from 'lucide-react';
-import { Lottie } from 'lottie-react';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import tickAnimationData, { tickAnimationUrl } from '../../data/tickAnimation';
 import styles from './Contact.module.css';
 
-// Development Team Image Assets
-const sanikaImg = getCloudinaryUrl('src/assets/teamaimsa/sanika.png');
-const chiragImg = getCloudinaryUrl('src/assets/team/chiragferwani.png');
-const vrushabhImg = getCloudinaryUrl('src/assets/team/vrushabh.png');
-const nirbhayImg = getCloudinaryUrl('src/assets/team/nirbhay.png');
-const hariImg = getCloudinaryUrl('src/assets/team/hari.png');
-const meetImg = getCloudinaryUrl('src/assets/team/meetr.png');
-const anayImg = getCloudinaryUrl('src/assets/team/anay.jpeg');
-const maitriImg = getCloudinaryUrl('src/assets/team/maitri.jpeg');
-const parthImg = getCloudinaryUrl('src/assets/team/parth.jpeg');
-const rohanImg = getCloudinaryUrl('src/assets/team/rohan.jpeg');
-const saviImg = getCloudinaryUrl('src/assets/team/savi.jpeg');
-const siyaImg = getCloudinaryUrl('src/assets/team/siya.jpeg');
-const vernitImg = getCloudinaryUrl('src/assets/team/vernit.jpeg');
-const shardulImg = getCloudinaryUrl('src/assets/team/shardul.jpeg');
+const LazyLottie = React.lazy(() =>
+  import('lottie-react').then((mod) => ({ default: mod.Lottie }))
+);
+
+// Development Team Image Assets (optimized 200x200 thumbnails)
+const avatarOpts = { width: 200, height: 200, crop: 'fill', quality: 'auto', format: 'auto' };
+const sanikaImg = getCloudinaryUrl('src/assets/teamaimsa/sanika.png', avatarOpts);
+const chiragImg = getCloudinaryUrl('src/assets/team/chiragferwani.png', avatarOpts);
+const vrushabhImg = getCloudinaryUrl('src/assets/team/vrushabh.png', avatarOpts);
+const nirbhayImg = getCloudinaryUrl('src/assets/team/nirbhay.png', avatarOpts);
+const hariImg = getCloudinaryUrl('src/assets/team/hari.png', avatarOpts);
+const meetImg = getCloudinaryUrl('src/assets/team/meetr.png', avatarOpts);
+const anayImg = getCloudinaryUrl('src/assets/team/anay.jpeg', avatarOpts);
+const maitriImg = getCloudinaryUrl('src/assets/team/maitri.jpeg', avatarOpts);
+const parthImg = getCloudinaryUrl('src/assets/team/parth.jpeg', avatarOpts);
+const rohanImg = getCloudinaryUrl('src/assets/team/rohan.jpeg', avatarOpts);
+const saviImg = getCloudinaryUrl('src/assets/team/savi.jpeg', avatarOpts);
+const siyaImg = getCloudinaryUrl('src/assets/team/siya.jpeg', avatarOpts);
+const vernitImg = getCloudinaryUrl('src/assets/team/vernit.jpeg', avatarOpts);
+const shardulImg = getCloudinaryUrl('src/assets/team/shardul.jpeg', avatarOpts);
 
 // Overall Coordinators Image Assets
-const harshilImg = getCloudinaryUrl('src/assets/team/harshil.png');
-const anushkaImg = getCloudinaryUrl('src/assets/team/anushka.png');
+const harshilImg = getCloudinaryUrl('src/assets/team/harshil.png', avatarOpts);
+const anushkaImg = getCloudinaryUrl('src/assets/team/anushka.png', avatarOpts);
 
 interface FormState {
   name: string;
@@ -201,12 +205,14 @@ const Contact: React.FC = () => {
               {submitted ? (
                 <div className={styles.successBox}>
                   <div className={styles.lottieWrap}>
-                    <Lottie
-                      src={tickAnimationUrl || tickAnimationData}
-                      loop={false}
-                      autoplay={true}
-                      className={styles.lottieTick}
-                    />
+                    <React.Suspense fallback={<div className={styles.lottieTick} />}>
+                      <LazyLottie
+                        src={tickAnimationUrl || tickAnimationData}
+                        loop={false}
+                        autoplay={true}
+                        className={styles.lottieTick}
+                      />
+                    </React.Suspense>
                   </div>
                   <h3 className={styles.successTitle}>Message Sent Successfully!</h3>
                   <p className={styles.successText}>
@@ -432,7 +438,7 @@ const Contact: React.FC = () => {
                 >
                   <div className={styles.avatarCircleWrap}>
                     <div className={styles.avatarCircle}>
-                      <img src={member.img} alt={member.name} className={styles.avatarImg} />
+                      <img src={member.img} alt={member.name} className={styles.avatarImg} loading="lazy" decoding="async" />
                     </div>
                   </div>
                   <h4 className={styles.memberName}>{member.name}</h4>
@@ -454,7 +460,7 @@ const Contact: React.FC = () => {
                 >
                   <div className={styles.avatarCircleWrap}>
                     <div className={styles.avatarCircle}>
-                      <img src={member.img} alt={member.name} className={styles.avatarImg} />
+                      <img src={member.img} alt={member.name} className={styles.avatarImg} loading="lazy" decoding="async" />
                     </div>
                   </div>
                   <h4 className={styles.memberName}>{member.name}</h4>
@@ -476,7 +482,7 @@ const Contact: React.FC = () => {
                 >
                   <div className={styles.avatarCircleWrap}>
                     <div className={styles.avatarCircle}>
-                      <img src={member.img} alt={member.name} className={styles.avatarImg} />
+                      <img src={member.img} alt={member.name} className={styles.avatarImg} loading="lazy" decoding="async" />
                     </div>
                   </div>
                   <h4 className={styles.memberName}>{member.name}</h4>
@@ -498,7 +504,7 @@ const Contact: React.FC = () => {
                 >
                   <div className={styles.avatarCircleWrap}>
                     <div className={styles.avatarCircle}>
-                      <img src={member.img} alt={member.name} className={styles.avatarImg} />
+                      <img src={member.img} alt={member.name} className={styles.avatarImg} loading="lazy" decoding="async" />
                     </div>
                   </div>
                   <h4 className={styles.memberName}>{member.name}</h4>
@@ -525,7 +531,7 @@ const Contact: React.FC = () => {
                 >
                   <div className={styles.avatarCircleWrap}>
                     <div className={styles.avatarCircleSenior}>
-                      <img src={member.img} alt={member.name} className={styles.avatarImg} />
+                      <img src={member.img} alt={member.name} className={styles.avatarImg} loading="lazy" decoding="async" />
                     </div>
                   </div>
                   <h4 className={styles.memberName}>{member.name}</h4>

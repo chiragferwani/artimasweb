@@ -10,7 +10,7 @@ import { AppProvider, useApp } from './context/AppContext';
 import './styles/globals.css';
 import { getCloudinaryUrl } from './utils/cloudinary';
 
-const theBackgroundImg = getCloudinaryUrl('src/assets/thebackground.png');
+const theBackgroundImg = getCloudinaryUrl('src/assets/thebackground.png', { width: 1920, quality: 'auto:low', format: 'auto' });
 
 // Lazy-loaded pages for better performance
 const Home = lazy(() => import('./pages/Home/Home'));
@@ -327,7 +327,7 @@ const AppContent: React.FC = () => {
       {/* Fixed background Galaxy animation over bg_image — stays active on all pages */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <Galaxy
-          stars={isMobile ? 35 : 100}
+          stars={isMobile ? 20 : 60}
           speed={1.2}
           spread={5}
           focal={2}

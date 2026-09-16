@@ -1,19 +1,21 @@
 import { getCloudinaryUrl } from './cloudinary';
 
-// Critical above-the-fold images only (very lightweight)
-const CRITICAL_IMAGE_PATHS = [
-  'src/assets/logo.png',
-  'src/assets/artimasnav.png',
-  'src/assets/bg_image.png',
-  'src/assets/pillar.png',
-  'src/assets/newartimas.webp',
-  'src/assets/eventnames/satyug.png',
-  'src/assets/eventnames/tretayug.png',
-  'src/assets/eventnames/dwaparyug.png',
-  'src/assets/eventnames/kalyug.png',
+// Critical above-the-fold images only (very lightweight with size/quality constraints)
+const CRITICAL_IMAGE_CONFIGS: { path: string; width?: number; quality?: string }[] = [
+  { path: 'src/assets/logo.png', width: 250 },
+  { path: 'src/assets/artimasnav.png', width: 350 },
+  { path: 'src/assets/bg_image.png', width: 1920, quality: 'auto:eco' },
+  { path: 'src/assets/pillar.png', width: 1200, quality: 'auto:eco' },
+  { path: 'src/assets/newartimas.webp', width: 800, quality: 'auto:eco' },
+  { path: 'src/assets/eventnames/satyug.png', width: 400 },
+  { path: 'src/assets/eventnames/tretayug.png', width: 400 },
+  { path: 'src/assets/eventnames/dwaparyug.png', width: 400 },
+  { path: 'src/assets/eventnames/kalyug.png', width: 400 },
 ];
 
-const CRITICAL_IMAGE_URLS = CRITICAL_IMAGE_PATHS.map((p) => getCloudinaryUrl(p));
+const CRITICAL_IMAGE_URLS = CRITICAL_IMAGE_CONFIGS.map(({ path, width, quality }) =>
+  getCloudinaryUrl(path, { width, quality: quality || 'auto', format: 'auto' })
+);
 
 let preloadingStarted = false;
 let isPreloaded = false;

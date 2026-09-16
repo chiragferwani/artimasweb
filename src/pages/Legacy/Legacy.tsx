@@ -6,76 +6,64 @@ import styles from './Legacy.module.css';
 const aimsaKutumbhVideo = getCloudinaryUrl('src/assets/Aimsa kutumbh.mp4');
 const yugaHeroImg = getCloudinaryUrl('src/assets/yuga-hero.jpg', { width: 800 });
 
-// Import all 32 Artimas event photos from src/assets/events/artimas/
-const artimas1 = getCloudinaryUrl('src/assets/events/artimas/IMG20260124124014.jpg');
-const artimas2 = getCloudinaryUrl('src/assets/events/artimas/IMG20260124125243.jpg');
-const artimas3 = getCloudinaryUrl('src/assets/events/artimas/IMG20260124135413.jpg');
-const artimas4 = getCloudinaryUrl('src/assets/events/artimas/IMG20260124135614.jpg');
-const artimas5 = getCloudinaryUrl('src/assets/events/artimas/IMG20260124135730.jpg');
-const artimas6 = getCloudinaryUrl('src/assets/events/artimas/IMG_0423.JPG');
-const artimas7 = getCloudinaryUrl('src/assets/events/artimas/IMG_0715.JPG');
-const artimas8 = getCloudinaryUrl('src/assets/events/artimas/IMG_0759.JPG');
-const artimas9 = getCloudinaryUrl('src/assets/events/artimas/IMG_0774.JPG');
-const artimas10 = getCloudinaryUrl('src/assets/events/artimas/IMG_1149.JPG');
-const artimas11 = getCloudinaryUrl('src/assets/events/artimas/IMG_1152.JPG');
-const artimas12 = getCloudinaryUrl('src/assets/events/artimas/IMG_1173.JPG');
-const artimas13 = getCloudinaryUrl('src/assets/events/artimas/IMG_1219.JPG');
-const artimas14 = getCloudinaryUrl('src/assets/events/artimas/IMG_1407.JPG');
-const artimas15 = getCloudinaryUrl('src/assets/events/artimas/IMG_1429.JPG');
-const artimas16 = getCloudinaryUrl('src/assets/events/artimas/IMG_1443.JPG');
-const artimas17 = getCloudinaryUrl('src/assets/events/artimas/IMG_1616.JPG');
-const artimas18 = getCloudinaryUrl('src/assets/events/artimas/IMG_1625.JPG');
-const artimas19 = getCloudinaryUrl('src/assets/events/artimas/IMG_1892.JPG');
-const artimas20 = getCloudinaryUrl('src/assets/events/artimas/IMG_1912.JPG');
-const artimas21 = getCloudinaryUrl('src/assets/events/artimas/IMG_2038.JPG');
-const artimas22 = getCloudinaryUrl('src/assets/events/artimas/IMG_2051.JPG');
-const artimas23 = getCloudinaryUrl('src/assets/events/artimas/IMG_2118.JPG');
-const artimas24 = getCloudinaryUrl('src/assets/events/artimas/IMG_2166.JPG');
-const artimas25 = getCloudinaryUrl('src/assets/events/artimas/IMG_2167.JPG');
-const artimas26 = getCloudinaryUrl('src/assets/events/artimas/IMG_2171.JPG');
-const artimas27 = getCloudinaryUrl('src/assets/events/artimas/IMG_2173.JPG');
-const artimas28 = getCloudinaryUrl('src/assets/events/artimas/IMG_2187.JPG');
-const artimas29 = getCloudinaryUrl('src/assets/events/artimas/IMG_2200.JPG');
-const artimas30 = getCloudinaryUrl('src/assets/events/artimas/IMG_2213.JPG');
-const artimas31 = getCloudinaryUrl('src/assets/events/artimas/IMG_2228.JPG');
-const artimas32 = getCloudinaryUrl('src/assets/events/artimas/IMG_2230.JPG');
+const RAW_GALLERY_PATHS = [
+  'src/assets/events/artimas/IMG20260124124014.jpg',
+  'src/assets/events/artimas/IMG20260124125243.jpg',
+  'src/assets/events/artimas/IMG20260124135413.jpg',
+  'src/assets/events/artimas/IMG20260124135614.jpg',
+  'src/assets/events/artimas/IMG20260124135730.jpg',
+  'src/assets/events/artimas/IMG_0423.JPG',
+  'src/assets/events/artimas/IMG_0715.JPG',
+  'src/assets/events/artimas/IMG_0759.JPG',
+  'src/assets/events/artimas/IMG_0774.JPG',
+  'src/assets/events/artimas/IMG_1149.JPG',
+  'src/assets/events/artimas/IMG_1152.JPG',
+  'src/assets/events/artimas/IMG_1173.JPG',
+  'src/assets/events/artimas/IMG_1219.JPG',
+  'src/assets/events/artimas/IMG_1407.JPG',
+  'src/assets/events/artimas/IMG_1429.JPG',
+  'src/assets/events/artimas/IMG_1443.JPG',
+  'src/assets/events/artimas/IMG_1616.JPG',
+  'src/assets/events/artimas/IMG_1625.JPG',
+  'src/assets/events/artimas/IMG_1892.JPG',
+  'src/assets/events/artimas/IMG_1912.JPG',
+  'src/assets/events/artimas/IMG_2038.JPG',
+  'src/assets/events/artimas/IMG_2051.JPG',
+  'src/assets/events/artimas/IMG_2118.JPG',
+  'src/assets/events/artimas/IMG_2166.JPG',
+  'src/assets/events/artimas/IMG_2167.JPG',
+  'src/assets/events/artimas/IMG_2171.JPG',
+  'src/assets/events/artimas/IMG_2173.JPG',
+  'src/assets/events/artimas/IMG_2187.JPG',
+  'src/assets/events/artimas/IMG_2200.JPG',
+  'src/assets/events/artimas/IMG_2213.JPG',
+  'src/assets/events/artimas/IMG_2228.JPG',
+  'src/assets/events/artimas/IMG_2230.JPG',
+  'src/assets/events/aaai/aaai-01.webp',
+  'src/assets/events/aaai/aaai-02.webp',
+  'src/assets/events/aaai/aaai-03.webp',
+  'src/assets/events/aaai/aaai-04.webp',
+  'src/assets/events/aaai/aaai-05.webp',
+  'src/assets/events/aaai/aaai-06.webp',
+  'src/assets/events/gfg/gfg-01.webp',
+  'src/assets/events/gfg/gfg-02.webp',
+  'src/assets/events/gfg/gfg-03.webp',
+  'src/assets/events/gfg/gfg-04.webp',
+  'src/assets/events/gfg/gfg-05.webp',
+  'src/assets/events/gfg/gfg-06.webp',
+  'src/assets/events/ieee-cis/ieee-cis-01.webp',
+  'src/assets/events/ieee-cis/ieee-cis-02.webp',
+  'src/assets/events/ieee-cis/ieee-cis-03.webp',
+  'src/assets/events/ieee-cis/ieee-cis-04.webp',
+  'src/assets/events/ieee-cs/ieee-cs-01.webp',
+  'src/assets/events/ieee-cs/ieee-cs-02.webp',
+  'src/assets/events/ieee-cs/ieee-cs-03.webp',
+  'src/assets/events/inns/inns-01.webp',
+];
 
-// Import all 21 club event photos from src/assets/events/
-const aaai1 = getCloudinaryUrl('src/assets/events/aaai/aaai-01.webp');
-const aaai2 = getCloudinaryUrl('src/assets/events/aaai/aaai-02.webp');
-const aaai3 = getCloudinaryUrl('src/assets/events/aaai/aaai-03.webp');
-const aaai4 = getCloudinaryUrl('src/assets/events/aaai/aaai-04.webp');
-const aaai5 = getCloudinaryUrl('src/assets/events/aaai/aaai-05.webp');
-const aaai6 = getCloudinaryUrl('src/assets/events/aaai/aaai-06.webp');
-
-const gfg1 = getCloudinaryUrl('src/assets/events/gfg/gfg-01.webp');
-const gfg2 = getCloudinaryUrl('src/assets/events/gfg/gfg-02.webp');
-const gfg3 = getCloudinaryUrl('src/assets/events/gfg/gfg-03.webp');
-const gfg4 = getCloudinaryUrl('src/assets/events/gfg/gfg-04.webp');
-const gfg5 = getCloudinaryUrl('src/assets/events/gfg/gfg-05.webp');
-const gfg6 = getCloudinaryUrl('src/assets/events/gfg/gfg-06.webp');
-
-const ieeeCis1 = getCloudinaryUrl('src/assets/events/ieee-cis/ieee-cis-01.webp');
-const ieeeCis2 = getCloudinaryUrl('src/assets/events/ieee-cis/ieee-cis-02.webp');
-const ieeeCis3 = getCloudinaryUrl('src/assets/events/ieee-cis/ieee-cis-03.webp');
-const ieeeCis4 = getCloudinaryUrl('src/assets/events/ieee-cis/ieee-cis-04.webp');
-
-const ieeeCs1 = getCloudinaryUrl('src/assets/events/ieee-cs/ieee-cs-01.webp');
-const ieeeCs2 = getCloudinaryUrl('src/assets/events/ieee-cs/ieee-cs-02.webp');
-const ieeeCs3 = getCloudinaryUrl('src/assets/events/ieee-cs/ieee-cs-03.webp');
-
-const inns1 = getCloudinaryUrl('src/assets/events/inns/inns-01.webp');
-
-const GALLERY_IMAGES = [
-  artimas1, artimas2, artimas3, artimas4, artimas5, artimas6, artimas7, artimas8,
-  artimas9, artimas10, artimas11, artimas12, artimas13, artimas14, artimas15, artimas16,
-  artimas17, artimas18, artimas19, artimas20, artimas21, artimas22, artimas23, artimas24,
-  artimas25, artimas26, artimas27, artimas28, artimas29, artimas30, artimas31, artimas32,
-  aaai1, aaai2, aaai3, aaai4, aaai5, aaai6,
-  gfg1, gfg2, gfg3, gfg4, gfg5, gfg6,
-  ieeeCis1, ieeeCis2, ieeeCis3, ieeeCis4,
-  ieeeCs1, ieeeCs2, ieeeCs3, inns1,
-].map((url) => getCloudinaryUrl(url, { width: 300 }));
+const GALLERY_IMAGES = RAW_GALLERY_PATHS.map((path) =>
+  getCloudinaryUrl(path, { width: 300, quality: 'auto', format: 'auto' })
+);
 
 const Legacy: React.FC = () => {
   return (

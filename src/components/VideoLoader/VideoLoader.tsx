@@ -17,7 +17,14 @@ const VideoLoader: React.FC<VideoLoaderProps> = ({
   const [isVisible, setIsVisible] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
   const [preloadPercent, setPreloadPercent] = useState(0);
+  const [canSkip, setCanSkip] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Allow skip after a brief 2s timeout regardless of preload progress
+  useEffect(() => {
+    const timer = setTimeout(() => setCanSkip(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Lock body scroll and start preloading ALL app assets immediately on mount
   useEffect(() => {
@@ -141,9 +148,9 @@ const VideoLoader: React.FC<VideoLoaderProps> = ({
             )}
           </AnimatePresence>
 
-          {/* Skip Button (Appears in bottom right once loading 0 to 100 is done) */}
+          {/* Skip Button (Appears once loading is done, video started, or 2s timeout reached) */}
           <AnimatePresence>
-            {preloadPercent >= 100 && (
+            {(canSkip || hasStarted || preloadPercent >= 100) && (
               <motion.button
                 type="button"
                 className={styles.skipBtn}

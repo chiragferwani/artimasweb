@@ -10,9 +10,9 @@ import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Chakra3D.module.css';
 
 const glbUrl = getCloudinaryUrl('src/assets/chakra_medallion.glb');
-const pillarImg = getCloudinaryUrl('src/assets/pillar.png');
-const bgImg = getCloudinaryUrl('src/assets/bg_image.png');
-const newArtimasImg = getCloudinaryUrl('src/assets/newartimas.webp');
+const pillarImg = getCloudinaryUrl('src/assets/pillar.png', { width: 1200, quality: 'auto' });
+const bgImg = getCloudinaryUrl('src/assets/bg_image.png', { width: 1920, quality: 'auto' });
+const newArtimasImg = getCloudinaryUrl('src/assets/newartimas.webp', { width: 800, quality: 'auto' });
 
 interface YugaDefinition {
   id: string;
@@ -436,9 +436,22 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
+    let isContainerVisible = true;
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isContainerVisible = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+    intersectionObserver.observe(container);
+
     // 8. Animation loop with slow clockwise auto-rotation in intro state
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+
+      if (!isContainerVisible || document.hidden) {
+        return;
+      }
 
       // Auto-rotate clockwise slowly in the initial intro state
       if (!hasEnteredRef.current && !isDragging.current) {
@@ -460,6 +473,7 @@ const Chakra3D: React.FC<Chakra3DProps> = ({ className }) => {
       container.removeEventListener('pointerup', onPointerUp);
       container.removeEventListener('pointercancel', onPointerUp);
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
       renderer.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);

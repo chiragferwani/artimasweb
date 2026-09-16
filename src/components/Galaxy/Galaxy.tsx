@@ -86,6 +86,9 @@ export default function Galaxy({
         mouse.current.y = clamp((e.clientY - rect.top) / rect.height, 0, 1);
       }
     };
+    if (followCursor) {
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+    }
 
     let raf = 0;
     let isRunning = true;
@@ -98,8 +101,18 @@ export default function Galaxy({
     };
     document.addEventListener('visibilitychange', onVisibilityChange);
 
-    const animate = () => {
+    let lastFrameTime = 0;
+    const FRAME_INTERVAL = 1000 / 30; // Cap at 30fps for performance
+
+    const animate = (now: number) => {
       if (!isRunning) return;
+
+      const elapsed = now - lastFrameTime;
+      if (elapsed < FRAME_INTERVAL) {
+        raf = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime = now - (elapsed % FRAME_INTERVAL);
 
       const w = canvas.width / DPR;
       const h = canvas.height / DPR;
@@ -148,7 +161,7 @@ export default function Galaxy({
       raf = requestAnimationFrame(animate);
     };
 
-    animate();
+    raf = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(raf);

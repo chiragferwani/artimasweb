@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import { EVENTS, YUGAS } from '../../data/yugas';
 import ParticleField from '../../components/ParticleField/ParticleField';
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
+const RegistrationForm = React.lazy(() => import('../../components/RegistrationForm/RegistrationForm'));
 import getCloudinaryUrl from '../../utils/cloudinary';
 
 const promptrelayName = getCloudinaryUrl('src/assets/eventnames/promptrelay.png');
@@ -613,11 +613,19 @@ const EventDetail: React.FC = () => {
                     exit={{ opacity: 0, rotateY: -6, y: -15 }}
                     transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <RegistrationForm
-                      event={event}
-                      onCancel={() => setIsRegistering(false)}
-                      yugaColor={yuga.colors.primary}
-                    />
+                    <React.Suspense
+                      fallback={
+                        <div style={{ minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-slate)' }}>
+                          Loading registration...
+                        </div>
+                      }
+                    >
+                      <RegistrationForm
+                        event={event}
+                        onCancel={() => setIsRegistering(false)}
+                        yugaColor={yuga.colors.primary}
+                      />
+                    </React.Suspense>
                   </motion.div>
                 )}
               </AnimatePresence>
