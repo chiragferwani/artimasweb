@@ -553,19 +553,35 @@
 .mainContent {}
 
 .block {
+  position: relative;
   margin-bottom: 40px;
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
+  background: radial-gradient(ellipse at 50% 0%, rgba(201, 151, 58, 0.05) 0%, transparent 70%), rgba(15, 12, 25, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 151, 58, 0.35);
   border-radius: 24px;
   padding: 36px;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(201, 151, 58, 0.08);
+  overflow: hidden;
+}
+
+.block::before {
+  content: '✦';
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 13px;
+  line-height: 1;
+  color: rgba(201, 151, 58, 0.45);
+  text-shadow: 0 0 8px rgba(201, 151, 58, 0.6);
+  pointer-events: none;
+  user-select: none;
 }
 
 .aboutBlock {
   min-height: auto;
   padding: 36px 36px 32px;
   border-radius: 24px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -958,16 +974,33 @@
 
 /* ── Competition Rounds & Structure Block ── */
 .roundsBlock {
+  position: relative;
   min-height: auto;
   padding: 48px 44px;
   border-radius: 28px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+  margin-bottom: 40px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201, 151, 58, 0.05) 0%, transparent 70%), rgba(15, 12, 25, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 151, 58, 0.35);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(201, 151, 58, 0.08);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-bottom: 40px;
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
+}
+
+.roundsBlock::before {
+  content: '✦';
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 13px;
+  line-height: 1;
+  color: rgba(201, 151, 58, 0.45);
+  text-shadow: 0 0 8px rgba(201, 151, 58, 0.6);
+  pointer-events: none;
+  user-select: none;
 }
 
 .roundsList {
@@ -1102,11 +1135,22 @@
 }
 
 .roundsToggleWrap {
+  position: relative;
   display: flex;
   justify-content: center;
   margin-top: 24px;
   padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
+}
+
+.roundsToggleWrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 151, 58, 0.6), transparent);
 }
 
 .roundsToggleBtn {
@@ -1137,7 +1181,6 @@
   min-height: auto;
   padding: 36px 36px 32px;
   border-radius: 24px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1151,6 +1194,7 @@
 }
 
 .blockTitle {
+  position: relative;
   font-family: 'Inter', sans-serif;
   font-size: 22px;
   font-weight: 500;
@@ -1158,7 +1202,17 @@
   color: var(--color-ink);
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: none;
+}
+
+.blockTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 151, 58, 0.6), transparent);
 }
 
 .blockText {
@@ -1196,9 +1250,20 @@
 .rulesDownloadWrap {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid var(--color-border);
+  border-top: none;
+  position: relative;
   display: flex;
   justify-content: flex-start;
+}
+
+.rulesDownloadWrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 151, 58, 0.6), transparent);
 }
 
 .rulesSideCard .rulesList {
@@ -1298,11 +1363,28 @@
 }
 
 .sideCard {
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201, 151, 58, 0.05) 0%, transparent 70%), rgba(15, 12, 25, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 151, 58, 0.35);
   border-radius: 24px;
   padding: 28px;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(201, 151, 58, 0.08);
+  overflow: hidden;
+}
+
+.sideCard::before {
+  content: '✦';
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 11px;
+  line-height: 1;
+  color: rgba(201, 151, 58, 0.4);
+  text-shadow: 0 0 8px rgba(201, 151, 58, 0.5);
+  pointer-events: none;
+  user-select: none;
 }
 
 .sideTitle {

@@ -9,6 +9,7 @@ import ScrollToTop from './components/ScrollToTop';
 import { AppProvider, useApp } from './context/AppContext';
 import './styles/globals.css';
 import { getCloudinaryUrl } from './utils/cloudinary';
+import theBackgroundImg from './assets/thebackground.png';
 
 // Lazy-loaded pages for better performance
 const Home = lazy(() => import('./pages/Home/Home'));
@@ -172,7 +173,7 @@ const AnimatedRoutes: React.FC = () => {
                   justifyContent: 'center',
                   gap: '1rem',
                   paddingTop: '80px',
-                  backgroundColor: 'var(--color-canvas)',
+                  backgroundColor: 'transparent',
                 }}
               >
                 <div style={{ fontSize: '4rem', color: 'var(--color-orange)' }}>404</div>
@@ -218,6 +219,8 @@ const useIsMobile = (breakpoint = 768) => {
 const AppContent: React.FC = () => {
   const { isInitialLoaderDone, setInitialLoaderDone } = useApp();
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   const handleLoaderComplete = () => {
     setInitialLoaderDone(true);
@@ -297,6 +300,28 @@ const AppContent: React.FC = () => {
 
   return (
     <>
+      {/* Background for all pages except the home page */}
+      <AnimatePresence>
+        {!isHome && (
+          <motion.div
+            key="page-background"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 0,
+              backgroundImage: `url(${theBackgroundImg})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              pointerEvents: 'none',
+            }}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Fixed background Galaxy animation over bg_image — stays active on all pages */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
