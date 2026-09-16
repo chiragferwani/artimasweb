@@ -25,6 +25,7 @@ const sudarshanImg = getCloudinaryUrl('src/assets/sudarshan.png');
 const silverImg = getCloudinaryUrl('src/assets/silver.png');
 const goldenImg = getCloudinaryUrl('src/assets/golden.png');
 const bronzeImg = getCloudinaryUrl('src/assets/bronze.png');
+const logScrollImg = getCloudinaryUrl('src/assets/log.png');
 
 // ═══════ Event Heads Data ═══════
 // ═══════ Event Heads Data ═══════
@@ -533,7 +534,11 @@ const EventDetail: React.FC = () => {
                         <h2 className={styles.blockTitle}>Competition Rounds &amp; Timeline</h2>
                         <div className={styles.roundsList}>
                           {(expandedRounds ? event.rounds : event.rounds.slice(0, 2)).map((round) => (
-                            <div key={round.roundNumber} className={styles.roundCard}>
+                            <div
+                              key={round.roundNumber}
+                              className={styles.roundCard}
+                              style={{ backgroundImage: `url(${logScrollImg})` }}
+                            >
                               <div className={styles.roundHeader}>
                                 <div className={styles.roundTitleWrap}>
                                   <span className={styles.roundBadge}>
