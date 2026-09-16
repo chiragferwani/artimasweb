@@ -9,7 +9,8 @@ import ScrollToTop from './components/ScrollToTop';
 import { AppProvider, useApp } from './context/AppContext';
 import './styles/globals.css';
 import { getCloudinaryUrl } from './utils/cloudinary';
-import theBackgroundImg from './assets/thebackground.png';
+
+const theBackgroundImg = getCloudinaryUrl('src/assets/thebackground.png');
 
 // Lazy-loaded pages for better performance
 const Home = lazy(() => import('./pages/Home/Home'));
