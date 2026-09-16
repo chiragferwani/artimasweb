@@ -1,4 +1,5 @@
 {
+  "src/assets/Aimsa kutumbh.mp4": "https://res.cloudinary.com/exq0xlou/video/upload/v1789542412/artimasweb/Aimsa_kutumbh.mp4",
   "src/assets/BG.mp4": "https://res.cloudinary.com/kxwxs8yo/video/upload/v1789273282/artimasweb/BG.mp4",
   "src/assets/amongus.png": "https://res.cloudinary.com/exq0xlou/image/upload/v1789483982/artimasweb/amongus.png",
   "src/assets/antaryami.png": "https://res.cloudinary.com/exq0xlou/image/upload/v1789483988/artimasweb/antaryami.png",
@@ -121,7 +122,6 @@
   "src/assets/events/ieee-cs/ieee-cs-03.webp": "https://res.cloudinary.com/kxwxs8yo/image/upload/v1788191267/artimasweb/events/ieee-cs/ieee-cs-03.webp",
   "src/assets/events/inns/inns-01.webp": "https://res.cloudinary.com/kxwxs8yo/image/upload/v1788191271/artimasweb/events/inns/inns-01.webp",
   "src/assets/fight.png": "https://res.cloudinary.com/exq0xlou/image/upload/v1789484024/artimasweb/fight.png",
-  "src/assets/fluteanimation.mp4": "https://res.cloudinary.com/kxwxs8yo/video/upload/v1788340119/artimasweb/fluteanimation.mp4",
   "src/assets/ganesha.png": "https://res.cloudinary.com/exq0xlou/image/upload/v1789484025/artimasweb/ganesha.png",
   "src/assets/ganeshavid.mp4": "https://res.cloudinary.com/kxwxs8yo/video/upload/v1788191282/artimasweb/ganeshavid.mp4",
   "src/assets/golden.png": "https://res.cloudinary.com/kxwxs8yo/image/upload/v1788358948/artimasweb/golden.png",
@@ -230,7 +230,6 @@
   "src/assets/tick.json": "https://res.cloudinary.com/exq0xlou/raw/upload/v1788887893/artimasweb/tick.json",
   "src/assets/vishnu.png": "https://res.cloudinary.com/exq0xlou/image/upload/v1789484095/artimasweb/vishnu.png",
   "src/assets/vite.svg": "https://res.cloudinary.com/exq0xlou/image/upload/v1789484097/artimasweb/vite.svg",
-  "src/assets/waterfall.png": "https://res.cloudinary.com/kxwxs8yo/image/upload/v1788341519/artimasweb/waterfall.png",
   "src/assets/webvideos/dwapar.mp4": "https://res.cloudinary.com/kxwxs8yo/video/upload/v1788864417/artimasweb/webvideos/dwapar.mp4",
   "src/assets/webvideos/kalyug.mp4": "https://res.cloudinary.com/kxwxs8yo/video/upload/v1788864419/artimasweb/webvideos/kalyug.mp4",
   "src/assets/webvideos/satyug.mp4": "https://res.cloudinary.com/kxwxs8yo/video/upload/v1788864413/artimasweb/webvideos/satyug.mp4",

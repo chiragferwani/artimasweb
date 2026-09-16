@@ -3,8 +3,7 @@ import CtaBlock from '../../components/CtaBlock/CtaBlock';
 import getCloudinaryUrl from '../../utils/cloudinary';
 import styles from './Legacy.module.css';
 
-const krishnaVideo = getCloudinaryUrl('src/assets/fluteanimation.mp4');
-const waterfallImg = getCloudinaryUrl('src/assets/waterfall.png');
+const aimsaKutumbhVideo = getCloudinaryUrl('src/assets/Aimsa kutumbh.mp4');
 const yugaHeroImg = getCloudinaryUrl('src/assets/yuga-hero.jpg', { width: 800 });
 
 // Import all 32 Artimas event photos from src/assets/events/artimas/
@@ -77,9 +76,6 @@ const GALLERY_IMAGES = [
   ieeeCis1, ieeeCis2, ieeeCis3, ieeeCis4,
   ieeeCs1, ieeeCs2, ieeeCs3, inns1,
 ].map((url) => getCloudinaryUrl(url, { width: 300 }));
-
-const SINGLE_MAHAMANTRA = "॥ हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे ॥ हरे राम हरे राम राम राम हरे हरे ";
-const MAHAMANTRA_TEXT = SINGLE_MAHAMANTRA.repeat(8);
 
 const Legacy: React.FC = () => {
   return (
@@ -157,62 +153,16 @@ const Legacy: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Central Lord Krishna Illustration with Static Rounded Rectangular Shloka Track */}
+                {/* Central AiMSA Kutumbh Video */}
                 <motion.div
-                  className={styles.krishnaHeroWrap}
+                  className={styles.centerVideoWrap}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.7, delay: 0.2 }}
                 >
-
-
-                  <div className={styles.shlokaRingContainer}>
-                    <div className={styles.clockwiseRing}>
-                      <svg viewBox="0 0 500 500" className={styles.shlokaSvg}>
-                        <defs>
-                          <path
-                            id="krishnaShlokaRectPath"
-                            pathLength="1651"
-                            d="M 250 35 L 425 35 A 40 40 0 0 1 465 75 L 465 425 A 40 40 0 0 1 425 465 L 75 465 A 40 40 0 0 1 35 425 L 35 75 A 40 40 0 0 1 75 35 Z"
-                          />
-                          <linearGradient id="shlokaGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#FFF2A1" />
-                            <stop offset="50%" stopColor="#E8B84B" />
-                            <stop offset="100%" stopColor="#F5D76E" />
-                          </linearGradient>
-                        </defs>
-
-                        {/* Rounded Rectangular Outer and Inner Track Frames */}
-                        <rect x="23" y="23" width="454" height="454" rx="48" ry="48" className={styles.shlokaTrackOuter} />
-                        <rect x="47" y="47" width="406" height="406" rx="30" ry="30" className={styles.shlokaTrackInner} />
-
-                        <text className={styles.shlokaText}>
-                          <textPath
-                            href="#krishnaShlokaRectPath"
-                            startOffset="0%"
-                          >
-                            <animate
-                              attributeName="startOffset"
-                              from="-100%"
-                              to="0%"
-                              dur="35s"
-                              repeatCount="indefinite"
-                            />
-                            {MAHAMANTRA_TEXT}
-                          </textPath>
-                        </text>
-                      </svg>
-                    </div>
-                  </div>
-
-                  <img 
-                    src={waterfallImg} 
-                    alt="Waterfall Background" 
-                    className={styles.waterfallBgImg} 
-                  />
                   <video 
-                    src={krishnaVideo} 
-                    className={styles.krishnaHeroImg} 
+                    src={aimsaKutumbhVideo} 
+                    className={styles.kutumbhVideo} 
                     autoPlay 
                     loop 
                     muted 
